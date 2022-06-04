@@ -13,6 +13,11 @@
   }
 }
 
+.app-body {
+  padding-left: 8%;
+  padding-right: 8%;
+}
+
 .app-header {
   padding-left: 8%;
   padding-right: 8%;
@@ -61,6 +66,25 @@ span.mq-label:hover {
   text-decoration: none;
 }
 
+.app-login {
+  display: flex;
+  justify-content: center;
+}
+
+.app-form {
+  width: 50vw;
+  height: 20vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.app-input {
+  display: block;
+  width: 50vw;
+  height: 4vh;
+}
 
 .App-link {
   color: rgb(112, 76, 182);

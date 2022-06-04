@@ -1,29 +1,31 @@
-import {useTypedSelector} from "../hooks/useTypedSelector";
-import {useEffect} from "react";
+import {useState} from "react";
 import {useDispatch} from "react-redux";
-import {fetchCSRF} from "../fetch_CSRF";
-import {dataStates} from "../store/reducers/loginReducer";
+import {fetchLogin} from "../fetch/fetch_login";
 
 export function Login() {
-    const {csrf, csrfState} = useTypedSelector(state => state.login)
+    function submit() {
+        dispatch(fetchLogin(email, password, true) as any)
+        return false;
+    }
+
     const dispatch = useDispatch()
-    useEffect(() => {
-        if (csrfState === dataStates.notRequested) {
-            dispatch(fetchCSRF() as any)
-        }
-    }, [csrfState])
 
-    if (csrfState === dataStates.requested) {
-        return <div>loading...</div>
-    }
-
-    if (csrfState === dataStates.error) {
-        return <div>error...</div>
-    }
-
+    const [email, changeEmail] = useState('');
+    const [password, changePassword] = useState('')
     return (
-        <div>
-            {csrf}
+        <div className='app-login'>
+            <form className='app-form' onSubmit={submit}>
+                <label>
+                    Email
+                    <input className='app-input' id='email' type='email' value={email}
+                           onChange={(e) => changeEmail(e.target.value)}/>
+                </label>
+                <label>
+                    <input className='app-input' id='password' type='password' value={password}
+                    onChange={(e) => changePassword(e.target.value)}/>
+                </label>
+                <input type='submit'/>
+            </form>
         </div>
     )
 }
