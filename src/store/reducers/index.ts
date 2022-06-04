@@ -1,8 +1,12 @@
 import {combineReducers} from "@reduxjs/toolkit";
-import {UserReducer} from "./userReducer";
+import {userAction, UserReducer} from "./userReducer";
+import {pathAction, PathReducer} from "./pathReducer";
 
 export const rootReducer = combineReducers({
-    user: UserReducer
+    user: UserReducer,
+    path: PathReducer
 })
+
+export type rootActions = userAction | pathAction
 
 export type rootState = ReturnType<typeof rootReducer>

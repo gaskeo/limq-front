@@ -1,15 +1,15 @@
-interface userState {
-    id: number | null,
-    username: string | null,
-    email: string | null,
-    userDataState: dataStates.notRequested | dataStates.requested | dataStates.received | dataStates.error
-}
-
 export enum dataStates  {
     notRequested = 0,
     requested = 1,
     received = 2,
     error = 3
+}
+
+interface userState {
+    id: number | null,
+    username: string | null,
+    email: string | null,
+    userDataState: dataStates.notRequested | dataStates.requested | dataStates.received | dataStates.error
 }
 
 const defaultState: userState = {

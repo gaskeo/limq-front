@@ -14,7 +14,6 @@ export const fetchUser = () => {
             dispatch({type: UserActionTypes.setUserDataState, payload: dataStates.received})
         }
         catch (error) {
-            console.log(error)
             dispatch({type: UserActionTypes.setUserDataState, payload: dataStates.error})
         }
     }
