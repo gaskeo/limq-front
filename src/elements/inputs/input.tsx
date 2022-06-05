@@ -1,4 +1,5 @@
 import {ChangeEvent, Dispatch, SetStateAction, useState} from "react";
+import "./inputs.css";
 
 export function Input(props: {
     label: string,
@@ -21,12 +22,12 @@ export function Input(props: {
 
     return (
         <>
-            <label>
+            <label className='input-label'>
                 {props.label}
-                <input className='app-input' type={props.type} value={props.state} placeholder={props.placeholder}
+                <input className='input' type={props.type} value={props.state} placeholder={props.placeholder}
                        onChange={onChange()}/>
             </label>
-            <p>{text}</p>
+            <p className='error-text'>{text}</p>
         </>
     )
 }

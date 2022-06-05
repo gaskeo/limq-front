@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import './App.css';
 import {Header} from "./header/header";
 import {Login} from "./login/login";
@@ -22,9 +22,16 @@ import {fetchChannels} from "./fetch/fetchChannels";
 
 
 function App() {
+    function toggleTheme() {
+        changeTheme(!lightTheme)
+        document.documentElement.setAttribute("data-theme", lightTheme ? 'light' : 'dark');
+
+    }
     const {id, userDataState} = useTypedSelector(state => state.user)
     const {channelsDataState} = useTypedSelector(state => state.channels)
     const {path, pathId} = useTypedSelector(state => state.path)
+
+    const [lightTheme, changeTheme] = useState(true)
 
     const dispatch = useDispatch()
     const navigate = useNavigate();
@@ -40,7 +47,7 @@ function App() {
         if (channelsDataState === dataStates.notRequested && userDataState === dataStates.received && id) {
             dispatch(fetchChannels() as any)
         }
-    }, [userDataState])
+    }, [userDataState, id])
 
     useEffect(() => {
         if (path) {
@@ -53,7 +60,8 @@ function App() {
             <div className="App">
                 <Header/>
             </div>
-            <div className='app-body'>
+            <button onClick={toggleTheme}>theme</button>
+            <div className={`app-body`}>
                 <Routes>
                     <Route path={routes.index} element={<Body/>}/>
                     <Route path={routes.login} element={<Login/>}/>

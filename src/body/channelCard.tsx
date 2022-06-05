@@ -8,7 +8,7 @@ import {routes} from "../routes/routes";
 export function ChannelCard(props: { channel: channel }) {
     function onClick() {
         return function () {
-            navigate(routes.channelSettings.replace(':channel_id', props.channel.channel_id))
+            navigate(routes.channelSettings.replace(':channelId', props.channel.channel_id))
         }
     }
     const navigate = useNavigate()

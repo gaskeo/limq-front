@@ -17,29 +17,29 @@ export function Register() {
     const [passwordAgain, changePasswordAgain] = useState('')
 
     return (
-        <div className='app-login'>
+        <div className='center'>
             <form className='app-form' onSubmit={submit}>
                 <label>
                     Email
-                    <input className='app-input' id='email' type='email' value={email}
+                    <input className='input' id='email' type='email' value={email}
                            onChange={(e) => changeEmail(e.target.value)}/>
                 </label>
 
                 <label>
                     Username
-                    <input className='app-input' id='username' type='text' value={username}
+                    <input className='input' id='username' type='text' value={username}
                            onChange={(e) => changeUsername(e.target.value)}/>
                 </label>
 
                 <label>
                     Password
-                    <input className='app-input' id='password' type='password' value={password}
+                    <input className='input' id='password' type='password' value={password}
                            onChange={(e) => changePassword(e.target.value)}/>
                 </label>
 
                 <label>
                     Password again
-                    <input className='app-input' id='password-again' type='password' value={passwordAgain}
+                    <input className='input' id='password-again' type='password' value={passwordAgain}
                            onChange={(e) => changePasswordAgain(e.target.value)}/>
                 </label>
 

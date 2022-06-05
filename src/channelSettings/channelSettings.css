@@ -7,9 +7,10 @@
 
 .menu {
     box-sizing: border-box;
-    border: 1px solid #dadada;
+    border: 1px solid var(--third-color);
     border-radius: 5px;
     height: max-content;
+    overflow: hidden;
 }
 
 .channel-settings-block {
@@ -19,7 +20,8 @@
 .menu-tab {
     line-height: 1.3em;
     padding: 15px;
-    border-bottom: 1px solid #dadada;
+    border-bottom: 1px solid var(--third-color);
+    color: var(--second-color);
 }   
 
 .menu-tab:last-child {
@@ -27,7 +29,7 @@
 }
 
 .active {
-    background-color: #dadada;
+    background-color: var(--third-color);
 }
 
 @media screen and (max-width: 600px) {

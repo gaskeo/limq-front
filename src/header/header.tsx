@@ -3,6 +3,7 @@ import {useTypedSelector} from "../hooks/useTypedSelector";
 import {dataStates} from "../store/reducers/consts";
 import {useNavigate} from "react-router-dom";
 import {routes} from "../routes/routes";
+import "./header.css";
 
 function UserButton() {
     function onClick() {
@@ -16,7 +17,7 @@ function UserButton() {
 
     if (userDataState === dataStates.received) {
         if (id) {
-            return <a>{username}</a>
+            return <button className='button'>{username}</button>
         } else {
             return <button onClick={onClick()}>Войти</button>
         }
@@ -28,10 +29,10 @@ function UserButton() {
 export function Header() {
     return (
         <header className="app-header">
-            <div className='lithium-container'>
+            <a href='/' className='lithium-container'>
                 <span className="lithium-label">Lithium</span>
                 <span className="lithium-label mq-label">MQ</span>
-            </div>
+            </a>
             <UserButton/>
         </header>)
 }

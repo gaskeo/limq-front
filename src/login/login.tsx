@@ -15,7 +15,7 @@ export function Login() {
     const [email, changeEmail] = useState('');
     const [password, changePassword] = useState('')
     return (
-        <div className='app-login'>
+        <div className='center'>
             <form className='app-form'>
                 <Input state={email} setState={changeEmail} label='Email' type='email'/>
                 <Input label='Password' state={password} setState={changePassword} type='password'/>

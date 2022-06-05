@@ -1,0 +1,50 @@
+.input {
+    display: block;
+    height: 3rem;
+    width: 100%;
+    box-sizing: border-box;
+    color: var(--second-color);
+    font-family: var(--main-font-family);
+    border-radius: 5px;
+    border: 1px solid var(--third-color);
+    background-color: var(--fourth-color);
+
+    font-size: 1.4em;
+    padding-left: .5rem;
+    transition: background-color .2s;
+}
+
+.input:hover {
+    background-color: var(--third-color);
+}
+
+.input-label {
+    color: var(--second-color);
+    font-family: var(--main-font-family);
+    font-size: 1.2em;
+    width: 100%;
+    line-height: 2em;
+}
+
+.width-100 {
+    width: 100%;
+}
+
+.width-80 {
+    width: 80%;
+}
+
+.submit {
+    width: 100%;
+    outline: none;
+    border: 1px solid var(--third-color);
+    border-radius: 5px;
+    background-color: var(--fourth-color);
+    color: var(--second-color);
+    height: 3rem;
+    transition: background-color .2s;
+}
+
+.submit:hover {
+    background-color: var(--third-color);
+}

@@ -22,7 +22,7 @@ export function MainSettingsBlock(props: { isCurrent: boolean, channel: channel 
     const placeholder = props.channel ? props.channel['channel_name'] : ''
     return (
         <div>
-            <h1>Main settings</h1>
+            <h1 className='header-1'>Main settings</h1>
             <form>
                 <Input label='Name' state={channelName} setState={changeChannelName} placeholder={placeholder}
                        type='text'/>
