@@ -1,4 +1,5 @@
-import {dataStates, userAction, UserActionTypes} from "../store/reducers/userReducer";
+import {userAction, UserActionTypes} from "../store/reducers/userReducer";
+import {dataStates} from "../store/reducers/consts";
 import {Dispatch} from "@reduxjs/toolkit";
 import axios from "axios";
 

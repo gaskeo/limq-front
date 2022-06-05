@@ -1,9 +1,4 @@
-export enum dataStates  {
-    notRequested = 0,
-    requested = 1,
-    received = 2,
-    error = 3
-}
+import {dataStates} from "./consts";
 
 interface userState {
     id: number | null,

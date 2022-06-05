@@ -10,11 +10,12 @@ import {
 } from "react-router-dom";
 import {useTypedSelector} from "./hooks/useTypedSelector";
 import {useDispatch} from "react-redux";
-import {dataStates} from "./store/reducers/userReducer";
-import {fetchUser} from "./fetch/fetch_user";
+import {dataStates} from "./store/reducers/consts";
+import {fetchUser} from "./fetch/fetchUser";
 import {Register} from "./register/register";
 import {routes} from "./routes/routes";
 import {redirect} from "./routes/redirect";
+import { Body } from './body/body';
 
 
 function App() {
@@ -31,11 +32,12 @@ function App() {
         }
     }, [userDataState])
 
-    if (path) {
-        if (redirect(path, navigate, location)) {
-            return null
+    useEffect(() => {
+        if (path) {
+            redirect(path, navigate, location)
         }
-    }
+    }, [path])
+
 
     return (
         <>
@@ -44,7 +46,7 @@ function App() {
             </div>
             <div className='app-body'>
                 <Routes>
-                    <Route path={routes.index} element={<div>123</div>}/>
+                    <Route path={routes.index} element={<Body/>}/>
                     <Route path={routes.login} element={<Login/>}/>
                     <Route path={routes.register} element={<Register/>}/>
                 </Routes>

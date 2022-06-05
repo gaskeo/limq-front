@@ -14,8 +14,10 @@
 }
 
 .app-body {
-  padding-left: 8%;
-  padding-right: 8%;
+  display: flex;
+  justify-content: center;
+  padding-left: 8vw;
+  padding-right: 8vw;
 }
 
 .app-header {

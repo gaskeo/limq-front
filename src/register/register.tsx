@@ -1,6 +1,6 @@
 import {useDispatch} from "react-redux";
 import {useState} from "react";
-import {fetchRegister} from "../fetch/fetch_register";
+import {fetchRegister} from "../fetch/fetchRegister";
 
 export function Register() {
     function submit() {

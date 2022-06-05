@@ -1,0 +1,91 @@
+.channels-container {
+    display: flex;
+    justify-content: stretch;
+    flex-wrap: wrap;
+    gap: 1rem;
+    list-style: none;
+
+}
+
+.channel-card {
+    box-shadow: 0 0 4px 2px #dadada;
+    border-radius: 5px;
+    padding: 15px 20px 10px;
+    overflow-x: hidden;
+}
+
+.channel-card-header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.channel-card-header {
+    margin-top: 0;
+    font-size: 1.3em;
+    margin-bottom: 8px;
+}
+
+.channel-card-settings-icon {
+    width: 16px;
+    height: 16px;
+    margin-bottom: 8px;
+}
+
+.channel-card-settings-icon:hover {
+    fill: grey;
+}
+
+.channel-card-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.channel-card-id {
+    display: block;
+    color: grey;
+    margin-bottom: 16px;
+}
+
+.channel-card-status {
+    display: flex;
+    justify-content: left;
+    gap: 7px;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+.channel-card-keys-container {
+    max-width: 100px;
+    display: flex;
+    gap: 4px;
+    justify-content: space-between;
+}
+
+.channel-card-key-icon {
+    width: 16px !important;
+    height: 16px !important;
+}
+
+@media screen and (max-width: 600px) {
+    .channel-card {
+        width: 100%;
+    }
+
+}
+@media screen and (min-width: 601px) and (max-width: 800px) {
+    .channel-card {
+        width: 35vw;
+    }
+}
+
+@media screen and (min-width: 801px) {
+    .channels-container{
+        justify-content: space-between;
+    }
+    .channel-card {
+        width: 20vw;
+        max-width: 400px;
+    }
+}

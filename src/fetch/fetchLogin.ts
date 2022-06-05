@@ -1,8 +1,10 @@
 import {Dispatch} from "@reduxjs/toolkit";
-import {dataStates, UserActionTypes} from "../store/reducers/userReducer";
+import {UserActionTypes} from "../store/reducers/userReducer";
+
 import axios, {AxiosError} from "axios";
 import {rootActions} from "../store/reducers";
 import {PathActionTypes} from "../store/reducers/pathReducer";
+import {dataStates} from "../store/reducers/consts";
 
 function createForm(email: string, password: string, rememberMe: boolean): FormData {
     const form = new FormData();

@@ -1,6 +1,6 @@
 import React from 'react'
 import {useTypedSelector} from "../hooks/useTypedSelector";
-import {dataStates} from "../store/reducers/userReducer";
+import {dataStates} from "../store/reducers/consts";
 import {useNavigate} from "react-router-dom";
 import {routes} from "../routes/routes";
 

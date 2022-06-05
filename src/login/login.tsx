@@ -1,6 +1,6 @@
 import {useState} from "react";
 import {useDispatch} from "react-redux";
-import {fetchLogin} from "../fetch/fetch_login";
+import {fetchLogin} from "../fetch/fetchLogin";
 
 export function Login() {
     function submit() {
@@ -14,7 +14,7 @@ export function Login() {
     const [password, changePassword] = useState('')
     return (
         <div className='app-login'>
-            <form className='app-form' onSubmit={submit}>
+            <form className='app-form'>
                 <label>
                     Email
                     <input className='app-input' id='email' type='email' value={email}
@@ -24,7 +24,7 @@ export function Login() {
                     <input className='app-input' id='password' type='password' value={password}
                     onChange={(e) => changePassword(e.target.value)}/>
                 </label>
-                <input type='submit'/>
+                <input type='submit' onClick={submit}/>
             </form>
         </div>
     )
