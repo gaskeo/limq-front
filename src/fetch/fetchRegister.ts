@@ -22,6 +22,7 @@ export const fetchRegister = (email: string, username: string, password: string,
             })
 
             if (response.data['status']) {
+                dispatch({type: PathActionTypes.deletePath})
                 dispatch({type: PathActionTypes.setPath, payload: response.data['path']})
             }
         }

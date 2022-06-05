@@ -24,6 +24,7 @@ const defaultState: channelsState = {
 
 export enum ChannelsActionTypes {
     setChannels = 'setChannels',
+    addChannel = 'addChannel',
     deleteChannel = 'deleteChannel',
     setChannelsDataState = 'setChannelsDataState'
 }
@@ -31,6 +32,11 @@ export enum ChannelsActionTypes {
 interface setChannelsAction {
     type: ChannelsActionTypes.setChannels,
     payload: channel[]
+}
+
+interface addChannelAction {
+    type: ChannelsActionTypes.addChannel,
+    payload: channel
 }
 
 type ChannelId = string
@@ -45,12 +51,14 @@ interface setChannelsDataAction {
     payload: dataStates.notRequested | dataStates.requested | dataStates.received | dataStates.error
 }
 
-export type channelAction = setChannelsAction | deleteChannelAction | setChannelsDataAction
+export type channelAction = setChannelsAction | deleteChannelAction | setChannelsDataAction | addChannelAction
 
-export function ChannelsReducer(state = defaultState, action: channelAction):channelsState {
+export function ChannelsReducer(state = defaultState, action: channelAction): channelsState {
     switch (action.type) {
         case ChannelsActionTypes.setChannels:
             return {...state, channels: action.payload}
+        case ChannelsActionTypes.addChannel:
+            return {...state, channels: state.channels.concat([action.payload])}
         case ChannelsActionTypes.deleteChannel:
             return {...state, channels: state.channels.filter(channel => channel.channel_id !== action.payload)}
         case ChannelsActionTypes.setChannelsDataState:

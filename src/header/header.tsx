@@ -5,13 +5,20 @@ import {useNavigate} from "react-router-dom";
 import {routes} from "../routes/routes";
 
 function UserButton() {
+    function onClick() {
+        return function () {
+            navigate(routes.login)
+        }
+    }
+
     const {id, username, userDataState} = useTypedSelector(state => state.user)
     const navigate = useNavigate()
+
     if (userDataState === dataStates.received) {
         if (id) {
             return <a>{username}</a>
         } else {
-            return <button onClick={() => navigate(routes.login)}>Войти</button>
+            return <button onClick={onClick()}>Войти</button>
         }
     }
     return <a/>

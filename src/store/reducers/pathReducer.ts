@@ -1,9 +1,11 @@
 interface pathState {
     path: null | string
+    pathId: number
 }
 
 const defaultState: pathState = {
-    path: null
+    path: null,
+    pathId: 0
 }
 
 
@@ -26,7 +28,7 @@ export type pathAction = setPathAction | deletePathAction
 export function PathReducer(state = defaultState, action: pathAction):pathState {
     switch (action.type) {
         case PathActionTypes.setPath:
-            return {...state, path: action.payload}
+            return {...state, path: action.payload, pathId: state.pathId + 1}
         case PathActionTypes.deletePath:
             return {...state, path: null}
         default:

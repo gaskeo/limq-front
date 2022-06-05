@@ -28,6 +28,8 @@ export const fetchLogin = (email: string, password: string, rememberMe: boolean)
             }
 
             dispatch({type: UserActionTypes.setUserDataState, payload: dataStates.received})
+
+            dispatch({type: PathActionTypes.deletePath})
             dispatch({type: PathActionTypes.setPath, payload: response.data['path']})
         }
         catch (error: AxiosError | any) {

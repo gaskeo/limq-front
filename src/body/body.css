@@ -1,17 +1,46 @@
 .channels-container {
-    display: flex;
-    justify-content: stretch;
-    flex-wrap: wrap;
-    gap: 1rem;
-    list-style: none;
+    display: grid; /* 1 */
+    grid-gap: 1rem; /* 3 */
+    justify-content: center; /* 4 */
+    width: 84vw;
 
 }
 
 .channel-card {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     box-shadow: 0 0 4px 2px #dadada;
     border-radius: 5px;
     padding: 15px 20px 10px;
     overflow-x: hidden;
+    min-height: 140px;
+}
+
+.add-channel-card {
+    padding: 0;
+    flex-direction: row;
+    justify-content: center;
+    transition: background-color .2s;
+    cursor: pointer;
+}
+
+.add-channel-card:hover {
+    background-color: #dadada;
+}
+
+.add-channel-card-text {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.channel-card-add-icon {
+    width: 16px;
+    height: 16px;
+    margin-bottom: 8px;
+    margin-right: 5px;
 }
 
 .channel-card-header-container {
@@ -24,21 +53,26 @@
     margin-top: 0;
     font-size: 1.3em;
     margin-bottom: 8px;
+    max-width: calc(100% - 20px);
+    overflow-x: hidden;
 }
 
 .channel-card-settings-icon {
     width: 16px;
     height: 16px;
     margin-bottom: 8px;
+    transition: fill .2s;
 }
 
 .channel-card-settings-icon:hover {
-    fill: grey;
+    fill: #858585;
 }
 
 .channel-card-info {
     display: flex;
     flex-direction: column;
+    align-items: stretch;
+    bottom: 0;
     gap: 4px;
 }
 
@@ -69,23 +103,34 @@
 }
 
 @media screen and (max-width: 600px) {
+    .channels-container {
+        grid-template-columns: 1fr;
+    }
+
     .channel-card {
-        width: 100%;
+        width: 84vw;
     }
 
 }
+
 @media screen and (min-width: 601px) and (max-width: 800px) {
+    .channels-container {
+        grid-template-columns: repeat(auto-fill, 40vw);
+    }
+
     .channel-card {
-        width: 35vw;
+        width: 40vw;
     }
 }
 
 @media screen and (min-width: 801px) {
-    .channels-container{
-        justify-content: space-between;
+    .channels-container {
+        grid-template-columns: repeat(auto-fill, clamp(200px, 26vw, 400px));
+
     }
+
     .channel-card {
-        width: 20vw;
+        width: 26vw;
         max-width: 400px;
     }
 }

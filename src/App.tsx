@@ -16,11 +16,15 @@ import {Register} from "./register/register";
 import {routes} from "./routes/routes";
 import {redirect} from "./routes/redirect";
 import { Body } from './body/body';
+import {CreateChannel} from "./createChannel/createChannel";
+import {ChannelSettings} from "./channelSettings/channelSettings";
+import {fetchChannels} from "./fetch/fetchChannels";
 
 
 function App() {
-    const {userDataState} = useTypedSelector(state => state.user)
-    const {path} = useTypedSelector(state => state.path)
+    const {id, userDataState} = useTypedSelector(state => state.user)
+    const {channelsDataState} = useTypedSelector(state => state.channels)
+    const {path, pathId} = useTypedSelector(state => state.path)
 
     const dispatch = useDispatch()
     const navigate = useNavigate();
@@ -33,11 +37,16 @@ function App() {
     }, [userDataState])
 
     useEffect(() => {
+        if (channelsDataState === dataStates.notRequested && userDataState === dataStates.received && id) {
+            dispatch(fetchChannels() as any)
+        }
+    }, [userDataState])
+
+    useEffect(() => {
         if (path) {
             redirect(path, navigate, location)
         }
-    }, [path])
-
+    }, [pathId])
 
     return (
         <>
@@ -49,6 +58,8 @@ function App() {
                     <Route path={routes.index} element={<Body/>}/>
                     <Route path={routes.login} element={<Login/>}/>
                     <Route path={routes.register} element={<Register/>}/>
+                    <Route path={routes.addChannel} element={<CreateChannel/>}/>
+                    <Route path={routes.channelSettings} element={<ChannelSettings/>}/>
                 </Routes>
             </div>
         </>

@@ -8,6 +8,7 @@ export function redirect(path: string, navigate: NavigateFunction, location: Loc
     if (!Object.values(routes).includes(path)) {
         return false
     }
+
     if (path !== location.pathname) {
         navigate(path)
         return true
