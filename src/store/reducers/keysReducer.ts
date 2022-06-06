@@ -3,12 +3,16 @@ import {dataStates} from "./consts";
 export interface key {
     key: string,
     name: string,
-    perm: 1 | 2,
-    created: string
+    read: number,
+    write: number,
+    channel: string
+    created: string,
+    active: boolean,
+    info: boolean
 }
 
 interface keysState {
-    keys: {
+    keysData: {
         [channelId: string]:
             {
                 keys: key[],
@@ -18,14 +22,15 @@ interface keysState {
 }
 
 const defaultState: keysState = {
-    keys: {},
+    keysData: {},
 }
 
 export enum KeyActionTypes {
     setKeys = 'setKeys',
     addKey = 'addKey',
     deleteKey = 'deleteKey',
-    setKeysDataState = 'setKeysDataState'
+    setKeysDataState = 'setKeysDataState',
+    replaceKey = 'replaceKey'
 }
 
 type ChannelId = string
@@ -51,37 +56,47 @@ interface setKeysDataAction {
     payload: { channelId: ChannelId, dataState: dataStates.notRequested | dataStates.requested | dataStates.received | dataStates.error }
 }
 
-export type keyAction = setKeysAction | addKeyAction | deleteKeyAction | setKeysDataAction
+interface replaceKey {
+    type: KeyActionTypes.replaceKey,
+    payload: {channelId: ChannelId, key: key}
+}
+
+export type keyAction = setKeysAction | addKeyAction | deleteKeyAction | setKeysDataAction | replaceKey
 
 export function KeysReducer(state = defaultState, action: keyAction): keysState {
     const channelId = action.payload?.channelId;
-    const keys = state.keys
+    const keys = state.keysData
     let dataState, newKeys
     switch (action.type) {
         case KeyActionTypes.setKeys:
             newKeys = action.payload.keys
             dataState = keys[channelId] ? keys[channelId].keysDataState : dataStates.notRequested
 
-            return {...state, keys: {...keys, [channelId]: {keys: newKeys, keysDataState: dataState}}}
+            return {...state, keysData: {...keys, [channelId]: {keys: newKeys, keysDataState: dataState}}}
 
         case KeyActionTypes.addKey:
             dataState = keys[channelId].keysDataState
             newKeys = [...keys[channelId].keys, action.payload.key]
 
-            return {...state, keys: {...keys, [channelId]: {keys: newKeys, keysDataState: dataState}}}
+            return {...state, keysData: {...keys, [channelId]: {keys: newKeys, keysDataState: dataState}}}
 
         case KeyActionTypes.deleteKey:
             newKeys = keys[channelId].keys.filter(key => key.key !== action.payload.keyId)
             dataState = keys[channelId].keysDataState
 
-            return {...state, keys: {...keys, [channelId]: {keys: newKeys, keysDataState: dataState}}}
+            return {...state, keysData: {...keys, [channelId]: {keys: newKeys, keysDataState: dataState}}}
 
         case KeyActionTypes.setKeysDataState:
             newKeys = keys[channelId] ? keys[channelId].keys : []
             dataState = action.payload.dataState
 
-            return {...state, keys: {...keys, [channelId]: {keys: newKeys, keysDataState: dataState}}}
+            return {...state, keysData: {...keys, [channelId]: {keys: newKeys, keysDataState: dataState}}}
 
+        case KeyActionTypes.replaceKey:
+            newKeys = keys[channelId].keys.map(key => key.key !== action.payload.key.key ? key : action.payload.key)
+            dataState = keys[channelId].keysDataState
+
+            return {...state, keysData: {...keys, [channelId]: {keys: newKeys, keysDataState: dataState}}}
         default:
             return state
     }

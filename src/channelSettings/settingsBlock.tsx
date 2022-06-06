@@ -7,17 +7,17 @@ import {fetchGetKeys} from "../fetch/fetchGetKeys";
 
 export function SettingsBlock(props: { channelId: string | undefined, currentTab: string | null }) {
     const {channels} = useTypedSelector(state => state.channels)
-    const {keys} = useTypedSelector(state => state.keys)
+    const {keysData} = useTypedSelector(state => state.keys)
     const currentChannel = channels.filter(channel => channel['channel_id'] === props.channelId)[0]
 
     useEffect(() => {
         if (!currentChannel) {
             return;
         }
-        if (keys[currentChannel['channel_id']] && keys[currentChannel['channel_id']].keysDataState === dataStates.requested) {
+        if (keysData[currentChannel['channel_id']] && keysData[currentChannel['channel_id']].keysDataState === dataStates.requested) {
             return
         }
-        if (!keys[currentChannel['channel_id']] || keys[currentChannel['channel_id']].keysDataState === dataStates.notRequested) {
+        if (!keysData[currentChannel['channel_id']] || keysData[currentChannel['channel_id']].keysDataState === dataStates.notRequested) {
             dispatch(fetchGetKeys(currentChannel['channel_id']) as any)
         }
 

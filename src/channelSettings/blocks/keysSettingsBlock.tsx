@@ -8,9 +8,25 @@ import {fetchCreateKey} from "../../fetch/fetchCreateKey";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {dataStates} from "../../store/reducers/consts";
 import {key} from "../../store/reducers/keysReducer"
+import {fetchToggleKeyActive} from "../../fetch/fetchToggleKeyActive";
+import {fetchDeleteKey} from "../../fetch/fetchDeleteKey";
 
 function KeyCard(props: { channelKey: key }) {
-    const perm = props.channelKey.perm === 1 ? 'read' : 'write'
+    function toggleActiveKey() {
+        dispatch(fetchToggleKeyActive(props.channelKey.channel, props.channelKey.key) as any)
+    }
+
+    function deleteKey() {
+        if (window.confirm('Delete key?')) {
+            dispatch(fetchDeleteKey(props.channelKey.channel, props.channelKey.key) as any)
+        }
+    }
+
+    const perm = props.channelKey.read ? 'Read' : 'write'
+
+    const pauseResume = props.channelKey.active ? 'Pause' : 'Resume'
+    const dispatch = useDispatch()
+
     return (
         <div className='card card-100 horizontal-scroll'>
             <div className='card-header-container'>
@@ -20,8 +36,8 @@ function KeyCard(props: { channelKey: key }) {
                 <p className='card-text grey-text'>{perm}, {props.channelKey.created}</p>
                 <code className='card-code card-background-text'>{props.channelKey.key}</code>
                 <div className='card-inline-block'>
-                    <button className='button mini-button warning'>Pause</button>
-                    <button className='button mini-button error'>Delete</button>
+                    <button className='button mini-button warning' onClick={toggleActiveKey}>{pauseResume}</button>
+                    <button className='button mini-button error' onClick={deleteKey}>Delete</button>
                 </div>
             </div>
         </div>
@@ -35,8 +51,8 @@ export function KeysSettingsBlock(props: { isCurrent: boolean, channel: channel 
         }
     }
 
-    const {keys} = useTypedSelector(state => state.keys)
-    const currentKeys = keys[props.channel ? props.channel['channel_id'] : '']
+    const {keysData} = useTypedSelector(state => state.keys)
+    const currentKeys = keysData[props.channel ? props.channel['channel_id'] : '']
 
     const [keyName, changeKeyName] = useState('')
     const [keyType, changeKeyType] = useState('0')

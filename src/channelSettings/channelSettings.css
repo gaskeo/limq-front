@@ -11,6 +11,7 @@
     border-radius: 5px;
     height: max-content;
     overflow: hidden;
+    cursor: pointer;
 }
 
 .channel-settings-block {
