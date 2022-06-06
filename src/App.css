@@ -5,7 +5,9 @@
     --fourth-color: #f8f9fa; /* element's background color */
     --fifth-color: #d3c3c3;
     --error-color: #e83f36;
-
+    --error-color-2: #dc3545;
+    --warning-color: #ffc107;
+    --warning-color-2: #cca324;
 }
 
 [data-theme="dark"] {
@@ -75,6 +77,30 @@ body {
 
 .button:hover {
     background-color: var(--third-color);
+}
+
+.mini-button {
+    width: max-content;
+    padding: 8px 25px;
+}
+
+.warning {
+    background-color: var(--warning-color);
+    color: black;
+}
+
+.warning:hover {
+    background-color: var(--warning-color-2);
+}
+
+.error {
+    background-color: var(--error-color);
+    color: var(--main-color);
+}
+
+.error:hover {
+    background-color: var(--error-color-2);
+    color: var(--main-color);
 }
 
 @media screen and (max-width: 600px) {

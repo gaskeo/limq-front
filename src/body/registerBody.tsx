@@ -8,7 +8,7 @@ export function RegisterBody() {
     return (
         <div>
             <h1 className='header-1'>Channels</h1>
-            <div className='channels-container'>
+            <div className='card-container'>
                 {channels.map(channel => <ChannelCard key={channel.channel_id} channel={channel}/>)}
                 <CreateChannelCard/>
             </div>

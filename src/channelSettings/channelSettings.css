@@ -17,6 +17,14 @@
     width: 100%;
 }
 
+.channel-settings-radio-container {
+    font-family: var(--main-font-family);
+    display: block;
+}
+.channel-settings-radio-container > * {
+    display: block;
+}
+
 .menu-tab {
     line-height: 1.3em;
     padding: 15px;

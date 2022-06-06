@@ -13,10 +13,10 @@ export function CreateChannelCard() {
 
     return (
         <div onClick={onClick()}
-             className='channel-card add-channel-card'>
+             className='card add-channel-card'>
             <div className='add-channel-card-text'>
                 <span className='channel-card-add-icon'><Plus/></span>
-                <h1 className='channel-card-header'>Add channel</h1>
+                <h1 className='card-header'>Add channel</h1>
             </div>
         </div>
     )

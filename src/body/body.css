@@ -1,11 +1,11 @@
-.channels-container {
+.card-container {
     display: grid;
     grid-gap: 1rem;
     justify-content: center;
     width: 84vw;
 }
 
-.channel-card {
+.card {
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -44,13 +44,13 @@
     margin-right: 5px;
 }
 
-.channel-card-header-container {
+.card-header-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.channel-card-header {
+.card-header {
     font: var(--header-font-family);
     color: var(--second-color);
     margin-top: 0;
@@ -60,7 +60,7 @@
     overflow-x: hidden;
 }
 
-.channel-card-settings-icon {
+.card-icon-near-header {
     fill: var(--second-color);
     width: 16px;
     height: 16px;
@@ -68,11 +68,11 @@
     transition: fill .2s;
 }
 
-.channel-card-settings-icon:hover {
+.card-icon-near-header:hover {
     fill: var(--fifth-color);
 }
 
-.channel-card-info {
+.card-info-container {
     font-family: var(--main-font-family);
     display: flex;
     flex-direction: column;
@@ -81,13 +81,13 @@
     gap: 4px;
 }
 
-.channel-card-id {
+.card-code {
     display: block;
     color: var(--fifth-color);
     margin-bottom: 16px;
 }
 
-.channel-card-status {
+.card-icon-and-text-container {
     color: var(--second-color);
     display: flex;
     justify-content: left;
@@ -110,35 +110,88 @@
     height: 16px !important;
 }
 
+.card-background-text {
+    background-color: var(--fifth-color);
+    width: max-content;
+    padding: 10px;
+    border-radius: 5px;
+    color: var(--second-color);
+}
+
+.card-text {
+    color: var(--second-color);
+    font-family: var(--main-font-family);
+    font-size: .9em;
+}
+
+.card-inline-block {
+    display: flex;
+    gap: .5rem;
+}
+
+.grey-text {
+    color: var(--fifth-color)
+}
+
 @media screen and (max-width: 600px) {
-    .channels-container {
+    .card-container {
         grid-template-columns: 1fr;
     }
 
-    .channel-card {
+    .card {
         width: 84vw;
     }
 
 }
 
 @media screen and (min-width: 601px) and (max-width: 800px) {
-    .channels-container {
+    .card-container {
         grid-template-columns: repeat(auto-fill, 40vw);
     }
 
-    .channel-card {
+    .card {
         width: 40vw;
     }
 }
 
 @media screen and (min-width: 801px) {
-    .channels-container {
+    .card-container {
         grid-template-columns: repeat(auto-fill, clamp(200px, 26vw, 400px));
 
     }
 
-    .channel-card {
+    .card {
         width: 26vw;
         max-width: 400px;
     }
 }
+
+.card-100-container {
+    display: grid;
+    justify-content: space-between;
+    grid-template-columns: 1fr;
+    width: 100%;
+    grid-gap: 1rem
+}
+
+.card-100 {
+    width: 100%;
+    max-width: none;
+}
+
+.horizontal-scroll {
+    -ms-overflow-style: none; /* for Internet Explorer, Edge */
+    scrollbar-width: none; /* for Firefox */
+    overflow-x: scroll;
+}
+
+.horizontal-scroll::-webkit-scrollbar {
+    display: none; /* for Chrome, Safari, and Opera */
+}
+
+.gap {
+    display: block;
+    margin-bottom: 2rem;
+}
+
+

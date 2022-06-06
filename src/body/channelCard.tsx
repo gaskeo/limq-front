@@ -16,14 +16,14 @@ export function ChannelCard(props: { channel: channel }) {
     const activeChannel = Boolean(props.channel.write_keys.active || props.channel.read_keys.active)
 
     return (
-        <div className='channel-card'>
-            <div className='channel-card-header-container'>
-                <h1 className='channel-card-header'>{props.channel.channel_name}</h1>
-                <span className='channel-card-settings-icon' onClick={onClick()}><Settings/></span>
+        <div className='card'>
+            <div className='card-header-container'>
+                <h1 className='card-header'>{props.channel.channel_name}</h1>
+                <span className='card-icon-near-header' onClick={onClick()}><Settings/></span>
             </div>
-            <div className='channel-card-info'>
-                <code className='channel-card-id'>#{props.channel.channel_id}</code>
-                <div className='channel-card-status'>
+            <div className='card-info-container'>
+                <code className='card-code'>#{props.channel.channel_id}</code>
+                <div className='card-icon-and-text-container'>
                     <Circle active={activeChannel}/>
 
                     <span>{activeChannel ? 'Active' : 'Inactive'}</span>
