@@ -4,6 +4,8 @@ import {dataStates} from "../store/reducers/consts";
 import {useNavigate} from "react-router-dom";
 import {routes} from "../routes/routes";
 import "./header.css";
+import {useDispatch} from "react-redux";
+import {fetchLogout} from "../fetch/fetchLogout";
 
 function UserButton() {
     function onClickRoute(route: string) {
@@ -15,6 +17,7 @@ function UserButton() {
 
     function exit() {
         return function () {
+            dispatch(fetchLogout() as any)
             changeOpen(false)
             return null
         }
@@ -22,6 +25,7 @@ function UserButton() {
 
     const {username} = useTypedSelector(state => state.user)
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     const [buttonOpen, changeOpen] = useState(false)
 
     return (
@@ -55,6 +59,6 @@ export function Header() {
                 <span className="lithium-label mq-label">MQ</span>
             </a>
             {userDataState === dataStates.received && id ? <UserButton/> :
-                <button onClick={onClick(routes.login)}>Войти</button>}
+                <button className='button mini-button' onClick={onClick(routes.login)}>Войти</button>}
         </header>)
 }
