@@ -1,5 +1,5 @@
 import {useParams, useSearchParams} from "react-router-dom";
-import {Menu} from "./menu";
+import {Menu} from "../elements/menu/menu";
 import {SettingsBlock} from "./settingsBlock";
 import {channel} from "../store/reducers/channelsReducer";
 import "./channelSettings.css"
@@ -35,7 +35,7 @@ export function ChannelSettings() {
     }, [])
 
     return (
-        <div className='channel-settings'>
+        <div className='settings'>
             <Menu active={searchParams.get('tab')} onClick={changeTab} tabs={menuTabs}/>
             <SettingsBlock channelId={channelId} currentTab={searchParams.get('tab')}/>
         </div>

@@ -44,7 +44,7 @@ export function SettingsBlock(props: { channelId: string | undefined, currentTab
     if (!currentChannel) {
         return null
     }
-    return <div className='channel-settings-block'>
+    return <div className='settings-block'>
         {menuTabs.map(tab => tab.block()(tab.parameterName === props.currentTab, currentChannel))}
     </div>
 }

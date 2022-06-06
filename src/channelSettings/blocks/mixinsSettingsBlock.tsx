@@ -2,7 +2,7 @@ import {channel} from "../../store/reducers/channelsReducer";
 import {Input} from "../../elements/inputs/input";
 import {Submit} from "../../elements/inputs/submit";
 import {useState} from "react";
-import {Menu} from "../menu";
+import {Menu} from "../../elements/menu/menu";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {dataStates} from "../../store/reducers/consts";
 import {fetchCreateMixin} from "../../fetch/fetchCreateMixin";
@@ -46,6 +46,10 @@ function MixinsContainer(props: { isCurrent: boolean, channel: channel | undefin
 
     if (currentMixins && currentMixins.mixinsDataState === dataStates.requested) {
         return <div>loading...</div>
+    }
+    if (currentMixins && currentMixins.mixinsDataState === dataStates.received &&
+        currentMixins[props.mixinType].length === 0) {
+        return <div>you haven't mixins</div>
     }
 
     return <div className='card-container card-100-container'>
@@ -92,7 +96,7 @@ export function MixinsSettingsBlock(props: { isCurrent: boolean, channel: channe
         <div>
             <h1 className='header-1'>Create mixin</h1>
             <form>
-                <Input label='Read key' state={keyId} setState={changeKeyId} type='text' placeholder={'X'.repeat(32)}/>
+                <Input label='Read key' state={keyId} setState={changeKeyId} type='text' placeholder={'x'.repeat(32)}/>
                 <Submit label='Submit' submit={submit}/>
             </form>
             <span className='gap'/>

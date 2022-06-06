@@ -3,5 +3,6 @@ export const routes = {
     login: '/login',
     register: '/register',
     addChannel: '/addChannel',
-    channelSettings: '/settings/:channelId'
+    channelSettings: '/settings/:channelId',
+    userSettings: '/userSettings'
 }

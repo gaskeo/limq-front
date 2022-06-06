@@ -46,3 +46,37 @@ span.mq-label {
 span.mq-label:hover {
     text-decoration: none;
 }
+
+.button-container {
+    position: relative;
+}
+
+.dropdown {
+    display: none;
+    position: absolute;
+}
+
+.show {
+    display: grid;
+    width: 100%;
+}
+
+.dropdown-item {
+    position: relative;
+    border-radius: 0;
+    display: block;
+    width: 100%;
+    border-bottom: none;
+}
+
+.dropdown-item:last-child {
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom: 1px solid var(--third-color);
+}
+
+.button-opened {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom: none;
+}

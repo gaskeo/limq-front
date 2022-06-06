@@ -19,6 +19,7 @@ import { Body } from './body/body';
 import {CreateChannel} from "./createChannel/createChannel";
 import {ChannelSettings} from "./channelSettings/channelSettings";
 import {fetchChannels} from "./fetch/fetchChannels";
+import {UserSettings} from "./userSettings/userSettings";
 
 
 function App() {
@@ -68,6 +69,7 @@ function App() {
                     <Route path={routes.register} element={<Register/>}/>
                     <Route path={routes.addChannel} element={<CreateChannel/>}/>
                     <Route path={routes.channelSettings} element={<ChannelSettings/>}/>
+                    <Route path={routes.userSettings} element={<UserSettings/>}/>
                 </Routes>
             </div>
         </>
