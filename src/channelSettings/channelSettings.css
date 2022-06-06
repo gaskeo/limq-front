@@ -47,12 +47,15 @@
         grid-template-rows: 1fr auto;
     }
     .menu {
-        display: flex;
+        display: grid;
+        grid-auto-columns: 1fr;
+        grid-auto-flow: column;
     }
 
     .menu-tab {
+        border-right: 1px solid var(--third-color);
+        border-bottom: none;
         text-align: center;
-        width: 33%;
     }
 }
 
@@ -66,4 +69,16 @@
     .channel-settings {
         grid-template-columns: 1fr 3fr;
     }
+}
+
+.menu-horizontal {
+    display: grid;
+    grid-auto-columns: 1fr;
+    grid-auto-flow: column;
+}
+
+.menu-tab-horizontal {
+    border-right: 1px solid var(--third-color);
+    border-bottom: none;
+    text-align: center;
 }
