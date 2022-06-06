@@ -13,9 +13,9 @@ export function NameBlock(props: {isCurrent: boolean}) {
     }
 
     const {id, username} = useTypedSelector(state => state.user)
-
     const [newUsername, changeNewUsername] = useState('')
     const dispatch = useDispatch()
+
     if (!props.isCurrent) {
         return null
     }

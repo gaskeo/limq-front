@@ -26,10 +26,13 @@ function UserButton() {
 
     return (
         <div className='button-container'>
-            <button className={'button mini-button ' + (buttonOpen ? 'button-opened' : '')} onClick={() => changeOpen(!buttonOpen)}>{username}</button>
+            <button className={'button mini-button ' + (buttonOpen ? 'button-opened' : '')}
+                    onClick={() => changeOpen(!buttonOpen)}>{username}</button>
             <div className={'dropdown ' + (buttonOpen ? 'show' : '')}>
-            <button className='button mini-button dropdown-item' onClick={onClickRoute(routes.userSettings)}>Settings</button>
-            <button className='button mini-button dropdown-item' onClick={exit()}>Exit</button>
+                <button className='button mini-button dropdown-item'
+                        onClick={onClickRoute(routes.userSettings)}>Settings
+                </button>
+                <button className='button mini-button dropdown-item' onClick={exit()}>Exit</button>
             </div>
         </div>
     )

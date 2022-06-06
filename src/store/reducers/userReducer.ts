@@ -34,7 +34,7 @@ export type userAction = setUserAction | setUserDataAction
 export function UserReducer(state: userState = defaultState, action: userAction):userState {
     switch (action.type) {
         case UserActionTypes.setUser:
-            return {...state, id: action.payload.id, username: action.payload.username}
+            return {...state, id: action.payload.id, username: action.payload.username, email: action.payload.email}
         case UserActionTypes.setUserDataState:
             return {...state, userDataState: action.payload}
         default:
