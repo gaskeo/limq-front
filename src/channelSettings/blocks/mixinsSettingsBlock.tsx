@@ -5,23 +5,37 @@ import {useState} from "react";
 import {Menu} from "../menu";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {dataStates} from "../../store/reducers/consts";
+import {fetchCreateMixin} from "../../fetch/fetchCreateMixin";
+import {useDispatch} from "react-redux";
+import {MixinTypeStates} from "../../store/reducers/mixinsReducer";
+import {useParams} from "react-router-dom";
+import {fetchDeleteMixin} from "../../fetch/fetchDeleteMixin";
 
 
-function MixinCard(props: {channel: channel}) {
+function MixinCard(props: { channel: channel, mixinType: MixinTypeStates }) {
+    function deleteMixin() {
+        if (channelId && window.confirm('Delete key?')) {
+            dispatch(fetchDeleteMixin(channelId, props.channel['channel_id'], props.mixinType) as any)
+        }
+    }
+
+    const {channelId} = useParams()
+    const dispatch = useDispatch()
+
     return (
-        <div className='card card-100'>
+        <div className='card card-100' key={props.channel["channel_id"]}>
             <div className='card-header-container'>
                 <div className='card-header'>{props.channel['channel_name']}</div>
             </div>
             <div className='card-info-container'>
                 <code className='card-code card-background-text'>{props.channel['channel_id']}</code>
-                <button className='button mini-button error'>Delete</button>
+                <button className='button mini-button error' onClick={deleteMixin}>Delete</button>
             </div>
         </div>
     )
 }
 
-function MixinsContainer(props: { isCurrent: boolean, channel: channel | undefined, mixinType: 'in' | 'out' }) {
+function MixinsContainer(props: { isCurrent: boolean, channel: channel | undefined, mixinType: MixinTypeStates }) {
     const {mixinsData} = useTypedSelector(state => state.mixins)
 
     if (!props.isCurrent) {
@@ -36,7 +50,7 @@ function MixinsContainer(props: { isCurrent: boolean, channel: channel | undefin
 
     return <div className='card-container card-100-container'>
         {currentMixins && currentMixins[props.mixinType]
-        .map(channel => <MixinCard key={channel['channel_id']} channel={channel}/>)}
+            .map(channel => <MixinCard key={channel['channel_id']} channel={channel} mixinType={props.mixinType}/>)}
     </div>
 }
 
@@ -44,12 +58,12 @@ export const mixinTabs = [
     {
         name: 'In', parameterName: 'in',
         id: 1, block: () => ((isCurrent: boolean, channel: channel | undefined) =>
-            <MixinsContainer key='1' isCurrent={isCurrent} channel={channel} mixinType='in'/>)
+            <MixinsContainer key='1' isCurrent={isCurrent} channel={channel} mixinType={MixinTypeStates.in}/>)
     },
     {
         name: 'Out', parameterName: 'keys',
         id: 2, block: () => ((isCurrent: boolean, channel: channel | undefined) =>
-            <MixinsContainer key='2' isCurrent={isCurrent} channel={channel} mixinType='out'/>)
+            <MixinsContainer key='2' isCurrent={isCurrent} channel={channel} mixinType={MixinTypeStates.out}/>)
     },
 ]
 
@@ -61,11 +75,14 @@ export function MixinsSettingsBlock(props: { isCurrent: boolean, channel: channe
     }
 
     function submit() {
-
+        if (props.channel) {
+            dispatch(fetchCreateMixin(props.channel['channel_id'], keyId) as any)
+        }
     }
 
     const [keyId, changeKeyId] = useState('')
     const [activeTab, changeActiveTab] = useState(mixinTabs[0].parameterName)
+    const dispatch = useDispatch()
 
     if (!props.isCurrent) {
         return null

@@ -27,7 +27,12 @@ export enum MixinActionTypes {
 
 type ChannelId = string
 type MixinId = string
-type MixinType = 'in' | 'out'
+
+export enum MixinTypeStates {
+    in = 'in',
+    out = 'out'
+}
+type MixinType = MixinTypeStates.in | MixinTypeStates.out
 
 interface setMixinsAction {
     type: MixinActionTypes.setMixins,
