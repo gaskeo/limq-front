@@ -27,6 +27,10 @@ export function checkUsernameLength(username: string): boolean {
     return username.length <= 32
 }
 
+export function checkPasswordsMatch(password: string, passwordAgain: string) {
+    return password === passwordAgain
+}
+
 export function Register() {
     function submit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault()
@@ -64,7 +68,7 @@ export function Register() {
     }
 
     function checkPasswordAgain(passwordAgain: string) {
-        if (password === passwordAgain) {
+        if (checkPasswordsMatch(password, passwordAgain)) {
             return changeErrors({...errors, passwordAgain: ''})
         }
     }

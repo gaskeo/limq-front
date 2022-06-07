@@ -4,26 +4,44 @@ import {useDispatch} from "react-redux";
 import {Input} from "../../elements/inputs/input";
 import {Submit} from "../../elements/inputs/submit";
 import {fetchChangePassword} from "../../fetch/fetchChangePassword";
+import {dataStates} from "../../store/reducers/consts";
+import {checkPasswordLength, checkPasswordsMatch} from "../../register/register";
 
-export function PasswordBlock(props: {isCurrent: boolean}) {
-    function submit() {
-        if (id && checkPasswordsMatch(newPasswordAgain).length === 0 && checkPasswordLength(oldPassword).length === 0) {
+export function PasswordBlock(props: { isCurrent: boolean }) {
+    function submit(event: React.FormEvent<HTMLFormElement>) {
+        event.preventDefault()
+        let newErrors = {...errors}
+
+        newErrors.oldPassword = !checkPasswordLength(oldPassword) ? 'Password too short' : ''
+        newErrors.newPassword = !checkPasswordLength(newPassword) ? 'New password too short' : ''
+        newErrors.newPasswordAgain = !checkPasswordsMatch(newPassword, newPasswordAgain)
+            ? "Passwords don't match" : ''
+        changeErrors(newErrors)
+        if (newErrors.oldPassword || newErrors.newPasswordAgain || newErrors.newPasswordAgain) {
+            return
+        }
+
+        if (id) {
             dispatch(fetchChangePassword(oldPassword, newPassword) as any)
         }
     }
 
-    function checkPasswordsMatch(newPasswordAgainForm: string) {
-        if (newPasswordAgainForm !== newPassword) {
-            return "Passwords do not match"
+    function checkOldPassword(password: string) {
+        if (checkPasswordLength(password)) {
+            return changeErrors({...errors, oldPassword: ''})
         }
-        return ""
     }
 
-    function checkPasswordLength(password: string) {
-        if (password.length < 8) {
-            return "minimum 8 symbols"
+    function checkPassword(password: string) {
+        if (checkPasswordLength(password)) {
+            return changeErrors({...errors, newPassword: ''})
         }
-        return ""
+    }
+
+    function checkPasswordAgain(passwordAgain: string) {
+        if (checkPasswordsMatch(newPassword, passwordAgain)) {
+            return changeErrors({...errors, newPasswordAgain: ''})
+        }
     }
 
     const {id} = useTypedSelector(state => state.user)
@@ -33,22 +51,43 @@ export function PasswordBlock(props: {isCurrent: boolean}) {
 
     const dispatch = useDispatch()
 
+    const [errors, changeErrors] = useState({oldPassword: '', newPassword: '', newPasswordAgain: ''})
+
+    const {states} = useTypedSelector(state => state.fetch)
+    const changePasswordState = states['changePassword']
+
+    const requested = changePasswordState && changePasswordState.dataState === dataStates.requested
+    const hasError = changePasswordState && changePasswordState.status !== 200
+
     if (!props.isCurrent) {
         return null
     }
 
     return (
         <div>
-            <h1 className='header-1'>Change email</h1>
-            <form>
-                <Input label='Old password' state={oldPassword} setState={changeOldPassword} type='password'
-                       onChange={checkPasswordLength}/>
-                <Input label='New password' state={newPassword} setState={changeNewPassword} type='password'/>
-                <Input label='New password again' state={newPasswordAgain} setState={changeNewPasswordAgain}
-                       onChange={checkPasswordsMatch}
+            <h1 className='header-1'>Change password</h1>
+            <form onSubmit={submit}>
+                <Input label='Old password'
+                       state={oldPassword}
+                       setState={changeOldPassword}
+                       type='password'
+                       onChange={checkOldPassword}
+                errorText={errors.oldPassword}/>
+                <Input label='New password'
+                       state={newPassword}
+                       setState={changeNewPassword}
+                       type='password'
+                       onChange={checkPassword}
+                errorText={errors.newPassword}/>
+                <Input label='New password again'
+                       state={newPasswordAgain}
+                       setState={changeNewPasswordAgain}
+                       onChange={checkPasswordAgain}
+                       errorText={errors.newPasswordAgain}
                        type='password'/>
+                <p className='error-text'>{hasError && changePasswordState.message}</p>
 
-                <Submit label='Submit' submit={submit}/>
+                <Submit label={requested ? 'Loading...' : 'Submit'}/>
             </form>
         </div>
     )
