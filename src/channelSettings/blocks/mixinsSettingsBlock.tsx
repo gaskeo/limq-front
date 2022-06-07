@@ -1,7 +1,7 @@
 import {channel} from "../../store/reducers/channelsReducer";
 import {Input} from "../../elements/inputs/input";
 import {Submit} from "../../elements/inputs/submit";
-import {useState} from "react";
+import React, {useState} from "react";
 import {Menu} from "../../elements/menu/menu";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {dataStates} from "../../store/reducers/consts";
@@ -10,6 +10,10 @@ import {useDispatch} from "react-redux";
 import {MixinTypeStates} from "../../store/reducers/mixinsReducer";
 import {useParams} from "react-router-dom";
 import {fetchDeleteMixin} from "../../fetch/fetchDeleteMixin";
+
+export function checkMixinLength(mixin: string) {
+    return mixin.length === 32
+}
 
 
 function MixinCard(props: { channel: channel, mixinType: MixinTypeStates }) {
@@ -78,15 +82,43 @@ export function MixinsSettingsBlock(props: { isCurrent: boolean, channel: channe
         }
     }
 
-    function submit() {
+    function submit(event: React.FormEvent<HTMLFormElement>) {
+        event.preventDefault()
+
+        if (!props.channel) {
+            return
+        }
+
+        let newErrors = {...errors}
+        newErrors.mixin = !checkMixinLength(keyId) ? 'wrong key' : ''
+        changeErrors(newErrors)
+        if (newErrors.mixin) {
+            return
+        }
         if (props.channel) {
             dispatch(fetchCreateMixin(props.channel['channel_id'], keyId) as any)
+
         }
     }
 
+    function checkMixin(mixin: string) {
+        if (checkMixinLength(mixin)) {
+            return changeErrors({...errors, mixin: ''})
+        }
+    }
+
+    const dispatch = useDispatch()
+
     const [keyId, changeKeyId] = useState('')
     const [activeTab, changeActiveTab] = useState(mixinTabs[0].parameterName)
-    const dispatch = useDispatch()
+
+    const [errors, changeErrors] = useState({mixin: ''})
+
+    const {states} = useTypedSelector(state => state.fetch)
+    const createMixinState = states['createMixin']
+
+    const requested = createMixinState && createMixinState.dataState === dataStates.requested
+    const hasError = createMixinState && createMixinState.status !== 200
 
     if (!props.isCurrent) {
         return null
@@ -95,9 +127,17 @@ export function MixinsSettingsBlock(props: { isCurrent: boolean, channel: channe
     return (
         <div>
             <h1 className='header-1'>Create mixin</h1>
-            <form>
-                <Input label='Read key' state={keyId} setState={changeKeyId} type='text' placeholder={'x'.repeat(32)}/>
-                <Submit label='Submit' submit={submit}/>
+            <form onSubmit={submit}>
+                <Input state={keyId}
+                       setState={changeKeyId}
+                       label='Read key'
+                       type='text'
+                       errorText={errors.mixin}
+                       onChange={checkMixin}
+                       placeholder={'x'.repeat(32)}/>
+                <p className='error-text'>{hasError && createMixinState.message}</p>
+
+                <Submit label={requested ? 'Loading...' : 'Submit'}/>
             </form>
             <span className='gap'/>
             <h1 className='header-1'>Your mixins</h1>

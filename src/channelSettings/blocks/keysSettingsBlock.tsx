@@ -53,14 +53,14 @@ export function KeysSettingsBlock(props: { isCurrent: boolean, channel: channel 
     function submit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault()
 
-        if (!props.channel) {
-            return
-        }
-
         let newErrors = {...errors}
         newErrors.name = !checkKeyLength(keyName) ? 'Key name too long' : ''
         changeErrors(newErrors)
         if (newErrors.name) {
+            return
+        }
+
+        if (!props.channel) {
             return
         }
 
@@ -77,7 +77,6 @@ export function KeysSettingsBlock(props: { isCurrent: boolean, channel: channel 
     const [keyType, changeKeyType] = useState('0')
     const [allowInfo, changeAllowInfo] = useState(false)
     const [errors, changeErrors] = useState({name: ''})
-
 
     const {states} = useTypedSelector(state => state.fetch)
     const createKeyState = states['createKey']
