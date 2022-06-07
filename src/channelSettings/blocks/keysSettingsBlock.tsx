@@ -1,7 +1,7 @@
 import {channel} from "../../store/reducers/channelsReducer";
 import {Input} from "../../elements/inputs/input";
 import {Submit} from "../../elements/inputs/submit";
-import {useState} from "react";
+import React, {useState} from "react";
 import {useDispatch} from "react-redux";
 import {Radio} from "../../elements/inputs/radio";
 import {fetchCreateKey} from "../../fetch/fetchCreateKey";
@@ -10,6 +10,11 @@ import {dataStates} from "../../store/reducers/consts";
 import {key} from "../../store/reducers/keysReducer"
 import {fetchToggleKeyActive} from "../../fetch/fetchToggleKeyActive";
 import {fetchDeleteKey} from "../../fetch/fetchDeleteKey";
+import {Checkbox} from "../../elements/inputs/checkbox";
+
+export function checkKeyLength(key: string) {
+    return key.length <= 32
+}
 
 function KeyCard(props: { channelKey: key }) {
     function toggleActiveKey() {
@@ -45,18 +50,40 @@ function KeyCard(props: { channelKey: key }) {
 }
 
 export function KeysSettingsBlock(props: { isCurrent: boolean, channel: channel | undefined }) {
-    function submit() {
-        if (props.channel) {
-            dispatch(fetchCreateKey(keyName, keyType, props.channel['channel_id']) as any)
+    function submit(event: React.FormEvent<HTMLFormElement>) {
+        event.preventDefault()
+
+        if (!props.channel) {
+            return
         }
+
+        let newErrors = {...errors}
+        newErrors.name = !checkKeyLength(keyName) ? 'Key name too long' : ''
+        changeErrors(newErrors)
+        if (newErrors.name) {
+            return
+        }
+
+        dispatch(fetchCreateKey(keyName, keyType, props.channel['channel_id'], allowInfo) as any)
+
     }
+
+    const dispatch = useDispatch()
 
     const {keysData} = useTypedSelector(state => state.keys)
     const currentKeys = keysData[props.channel ? props.channel['channel_id'] : '']
 
     const [keyName, changeKeyName] = useState('')
     const [keyType, changeKeyType] = useState('0')
-    const dispatch = useDispatch()
+    const [allowInfo, changeAllowInfo] = useState(false)
+    const [errors, changeErrors] = useState({name: ''})
+
+
+    const {states} = useTypedSelector(state => state.fetch)
+    const createKeyState = states['createKey']
+
+    const requested = createKeyState && createKeyState.dataState === dataStates.requested
+    const hasError = createKeyState && createKeyState.status !== 200
 
     if (!props.isCurrent) {
         return null
@@ -65,14 +92,28 @@ export function KeysSettingsBlock(props: { isCurrent: boolean, channel: channel 
     return (
         <div>
             <h1 className='header-1'>Create key</h1>
-            <form>
-                <Input label='Name' state={keyName} setState={changeKeyName} type='text'/>
+            <form onSubmit={submit}>
+                <Input label='Name' state={keyName} setState={changeKeyName} type='text' errorText={errors.name}/>
                 <div className='channel-settings-radio-container'>
-                    <Radio label='Read' checked={keyType === '0'} setData='0'
-                           name='key-type' state={keyType} setState={changeKeyType}/>
+                    <div className='horizontal justify-left'>
+                    <Radio label='Read'
+                           checked={keyType === '0'}
+                           setData='0'
+                           name='key-type'
+                           state={keyType}
+                           setState={changeKeyType}/>
+
+                    {keyType === "0" && <>
+                        <div className='horizontal-gap'/>
+                        <Checkbox label='Allow info' state={allowInfo} setState={changeAllowInfo}/>
+                    </>}
+
+                    </div>
                     <Radio label='Write' setData='1' name='key-type' state={keyType} setState={changeKeyType}/>
                 </div>
-                <Submit label='Submit' submit={submit}/>
+                <p className='error-text'>{hasError && createKeyState.message}</p>
+
+                <Submit label={requested ? 'Loading...' : 'Submit'}/>
             </form>
             <span className='gap'/>
             <h1 className='header-1'>Your keys</h1>

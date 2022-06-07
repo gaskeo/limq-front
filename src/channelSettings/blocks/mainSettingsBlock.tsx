@@ -1,32 +1,69 @@
 import {Input} from "../../elements/inputs/input";
-import {useState} from "react";
+import React, {useState} from "react";
 import {Submit} from "../../elements/inputs/submit";
 import {channel} from "../../store/reducers/channelsReducer";
 import {useDispatch} from "react-redux";
-import {fetchChangeChannelName} from "../../fetch/fetchChangeChannelName";
+import {fetchRenameChannel} from "../../fetch/fetchRenameChannel";
+import {useTypedSelector} from "../../hooks/useTypedSelector";
+import {checkChannelLength} from "../../createChannel/createChannel";
+import {dataStates} from "../../store/reducers/consts";
 
 export function MainSettingsBlock(props: { isCurrent: boolean, channel: channel | undefined }) {
-    function submit() {
-        if (props.channel) {
-            dispatch(fetchChangeChannelName(props.channel['channel_id'], channelName) as any)
+    function submit(event: React.FormEvent<HTMLFormElement>) {
+        event.preventDefault()
+
+        if (!props.channel) {
+            return
+        }
+
+        let newErrors = {...errors}
+
+        newErrors.name = !checkChannelLength(channelName) ? 'Channel name too long' : ''
+        changeErrors(newErrors)
+        if (newErrors.name) {
+            return
+        }
+
+        dispatch(fetchRenameChannel(props.channel['channel_id'], channelName) as any)
+    }
+
+    function checkChannelName(name: string) {
+        if (checkChannelLength(name)) {
+            return changeErrors({...errors, name: ''})
         }
     }
 
+    const dispatch = useDispatch()
 
     const [channelName, changeChannelName] = useState('')
-    const dispatch = useDispatch()
+    const [errors, changeErrors] = useState({name: ''})
+
+    const {states} = useTypedSelector(state => state.fetch)
+    const createChannelState = states['renameChannel']
+
+    const requested = createChannelState && createChannelState.dataState === dataStates.requested
+    const hasError = createChannelState && createChannelState.status !== 200
+
     if (!props.isCurrent) {
         return null
     }
 
     const placeholder = props.channel ? props.channel['channel_name'] : ''
+
     return (
         <div>
             <h1 className='header-1'>Main settings</h1>
-            <form>
-                <Input label='Name' state={channelName} setState={changeChannelName} placeholder={placeholder}
-                       type='text'/>
-                <Submit label='Submit' submit={submit}/>
+            <form onSubmit={submit}>
+                <Input state={channelName}
+                       setState={changeChannelName}
+                       label='Name'
+                       type='text'
+                       errorText={errors.name}
+                       onChange={checkChannelName}
+                       placeholder={placeholder}/>
+                <p className='error-text'>{hasError && createChannelState.message}</p>
+
+                <Submit label={requested ? 'Loading...' : 'Submit'}/>
             </form>
         </div>
     )

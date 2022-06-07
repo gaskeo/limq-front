@@ -80,6 +80,14 @@
     grid-auto-flow: column;
 }
 
+.justify-left {
+    justify-content: left;
+}
+
+.horizontal {
+    display: flex;
+}
+
 .menu-tab-horizontal {
     border-right: 1px solid var(--third-color);
     border-bottom: none;

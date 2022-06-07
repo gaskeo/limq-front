@@ -42,10 +42,10 @@ export function PasswordBlock(props: {isCurrent: boolean}) {
             <h1 className='header-1'>Change email</h1>
             <form>
                 <Input label='Old password' state={oldPassword} setState={changeOldPassword} type='password'
-                       checkData={checkPasswordLength}/>
+                       onChange={checkPasswordLength}/>
                 <Input label='New password' state={newPassword} setState={changeNewPassword} type='password'/>
                 <Input label='New password again' state={newPasswordAgain} setState={changeNewPasswordAgain}
-                       checkData={checkPasswordsMatch}
+                       onChange={checkPasswordsMatch}
                        type='password'/>
 
                 <Submit label='Submit' submit={submit}/>

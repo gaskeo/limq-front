@@ -4,10 +4,11 @@ import axios, {AxiosError} from "axios";
 import {rootActions} from "../store/reducers";
 import {MixinActionTypes, MixinTypeStates} from "../store/reducers/mixinsReducer";
 
-function createForm(subject: string, channelId: string): FormData {
+function createForm(subject: string, channelId: string, mixinType: MixinTypeStates): FormData {
     const form = new FormData();
     form.append('subject', subject)
     form.append('channel', channelId)
+    form.append('mixin_type', mixinType)
 
     return form
 }
@@ -15,10 +16,9 @@ function createForm(subject: string, channelId: string): FormData {
 export const fetchDeleteMixin = (subject: string, channelId: string, mixinType: MixinTypeStates) => {
     return async (dispatch: Dispatch<rootActions>) => {
         try {
-            const form = createForm(subject, channelId)
+            const form = createForm(subject, channelId, mixinType)
 
-            const response = await axios.post(
-                mixinType === MixinTypeStates.in ? '/do/restrict_in_mx' : '/do/restrict_out_mx', form, {
+            const response = await axios.post('/do/restrict_mx', form, {
                 headers: {"Content-Type": "multipart/form-data"},
             })
 

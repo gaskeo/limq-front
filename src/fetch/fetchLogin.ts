@@ -5,6 +5,7 @@ import axios, {AxiosError} from "axios";
 import {rootActions} from "../store/reducers";
 import {PathActionTypes} from "../store/reducers/pathReducer";
 import {dataStates} from "../store/reducers/consts";
+import {FetchActionTypes} from "../store/reducers/fetchReducer";
 
 function createForm(email: string, password: string, rememberMe: boolean): FormData {
     const form = new FormData();
@@ -18,6 +19,8 @@ export const fetchLogin = (email: string, password: string, rememberMe: boolean)
     return async (dispatch: Dispatch<rootActions>) => {
         try {
             const form = createForm(email, password, rememberMe)
+            dispatch({type: FetchActionTypes.setFetch,
+                payload: {identifier: 'login', state: {status: 200, message: '', dataState: dataStates.requested}}})
 
             const response = await axios.post('/do/login', form, {
                 headers: {"Content-Type": "multipart/form-data"},
@@ -31,10 +34,14 @@ export const fetchLogin = (email: string, password: string, rememberMe: boolean)
 
             dispatch({type: PathActionTypes.deletePath})
             dispatch({type: PathActionTypes.setPath, payload: response.data['path']})
+            dispatch({type: FetchActionTypes.setFetch,
+                payload: {identifier: 'login', state: {status: 200, message: '', dataState: dataStates.received}}})
         }
         catch (error: AxiosError | any) {
-            console.log(error.message)
-            dispatch({type: UserActionTypes.setUserDataState, payload: dataStates.error})
+            dispatch({type: UserActionTypes.setUserDataState, payload: dataStates.notRequested})
+            dispatch({type: FetchActionTypes.setFetch,
+                payload: {identifier: 'login', state: {status: error.status, message: error.response.data.message,
+                        dataState: dataStates.error}}})
         }
     }
 }

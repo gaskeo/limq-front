@@ -2,20 +2,23 @@ import {Dispatch} from "@reduxjs/toolkit";
 import {PathActionTypes} from "../store/reducers/pathReducer";
 import axios, {AxiosError} from "axios";
 import {rootActions} from "../store/reducers";
+import {FetchActionTypes} from "../store/reducers/fetchReducer";
+import {dataStates} from "../store/reducers/consts";
 
-function createForm(email: string, password: string, passwordAgain: string): FormData {
+function createForm(email: string, username: string, password: string): FormData {
     const form = new FormData();
     form.append('email', email)
-    form.append('username', email)
+    form.append('username', username)
     form.append('password', password)
-    form.append('password_again', passwordAgain)
     return form
 }
 
-export const fetchRegister = (email: string, username: string, password: string, passwordAgain: string) => {
+export const fetchRegister = (email: string, username: string, password: string) => {
     return async (dispatch: Dispatch<rootActions>) => {
         try {
-            const form = createForm(email, password, passwordAgain)
+            const form = createForm(email, username, password)
+            dispatch({type: FetchActionTypes.setFetch,
+                payload: {identifier: 'register', state: {status: 0, message: '', dataState: dataStates.requested}}})
 
             const response = await axios.post('/do/register', form, {
                 headers: {"Content-Type": "multipart/form-data"},
@@ -27,7 +30,9 @@ export const fetchRegister = (email: string, username: string, password: string,
             }
         }
         catch (error: AxiosError | any) {
-            console.log(error.message)
+            dispatch({type: FetchActionTypes.setFetch,
+                payload: {identifier: 'register', state: {status: error.status, message: error.response.data.message,
+                        dataState: dataStates.error}}})
         }
     }
 }

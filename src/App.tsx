@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import './App.css';
 import {Header} from "./header/header";
 import {Login} from "./login/login";
@@ -14,25 +14,24 @@ import {dataStates} from "./store/reducers/consts";
 import {fetchUser} from "./fetch/fetchUser";
 import {Register} from "./register/register";
 import {routes} from "./routes/routes";
-import {redirect} from "./routes/redirect";
+import {Redirect} from "./routes/redirect";
 import { Body } from './body/body';
 import {CreateChannel} from "./createChannel/createChannel";
 import {ChannelSettings} from "./channelSettings/channelSettings";
 import {fetchChannels} from "./fetch/fetchChannels";
 import {UserSettings} from "./userSettings/userSettings";
+import {FetchActionTypes} from "./store/reducers/fetchReducer";
 
 
 function App() {
     function toggleTheme() {
-        changeTheme(!lightTheme)
-        document.documentElement.setAttribute("data-theme", lightTheme ? 'light' : 'dark');
+        const currentTheme = document.documentElement.getAttribute("data-theme")
+        document.documentElement.setAttribute("data-theme", currentTheme === 'dark' ? 'light' : 'dark');
 
     }
     const {id, userDataState} = useTypedSelector(state => state.user)
     const {channelsDataState} = useTypedSelector(state => state.channels)
     const {path, pathId} = useTypedSelector(state => state.path)
-
-    const [lightTheme, changeTheme] = useState(true)
 
     const dispatch = useDispatch()
     const navigate = useNavigate();
@@ -52,7 +51,9 @@ function App() {
 
     useEffect(() => {
         if (path) {
-            redirect(path, navigate, location)
+            dispatch({type: FetchActionTypes.deleteFetches})
+
+            Redirect(path, navigate, location)
         }
     }, [pathId])
 

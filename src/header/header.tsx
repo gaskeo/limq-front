@@ -1,16 +1,16 @@
 import React, {useState} from 'react'
 import {useTypedSelector} from "../hooks/useTypedSelector";
 import {dataStates} from "../store/reducers/consts";
-import {useNavigate} from "react-router-dom";
 import {routes} from "../routes/routes";
 import "./header.css";
 import {useDispatch} from "react-redux";
 import {fetchLogout} from "../fetch/fetchLogout";
+import {PathActionTypes} from "../store/reducers/pathReducer";
 
 function UserButton() {
     function onClickRoute(route: string) {
         return function () {
-            navigate(route)
+            dispatch({type: PathActionTypes.setPath, payload: route})
             changeOpen(false)
         }
     }
@@ -24,7 +24,6 @@ function UserButton() {
     }
 
     const {username} = useTypedSelector(state => state.user)
-    const navigate = useNavigate()
     const dispatch = useDispatch()
     const [buttonOpen, changeOpen] = useState(false)
 
@@ -45,12 +44,12 @@ function UserButton() {
 export function Header() {
     function onClick(route: string) {
         return function () {
-            navigate(route)
+            dispatch({type: PathActionTypes.setPath, payload: route})
         }
     }
 
     const {id, userDataState} = useTypedSelector(state => state.user)
-    const navigate = useNavigate()
+    const dispatch = useDispatch()
 
     return (
         <header className="app-header">
