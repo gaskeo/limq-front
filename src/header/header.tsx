@@ -6,6 +6,8 @@ import "./header.css";
 import {useDispatch} from "react-redux";
 import {fetchLogout} from "../fetch/fetchLogout";
 import {PathActionTypes} from "../store/reducers/pathReducer";
+import {getTheme, toggleTheme} from "../theme";
+import {Theme} from "../svg/theme"
 
 function UserButton() {
     function onClickRoute(route: string) {
@@ -51,13 +53,22 @@ export function Header() {
     const {id, userDataState} = useTypedSelector(state => state.user)
     const dispatch = useDispatch()
 
+    const theme = getTheme()
+
     return (
         <header className="app-header">
             <div onClick={onClick(routes.index)} className='lithium-container'>
                 <span className="lithium-label">Lithium</span>
                 <span className="lithium-label mq-label">MQ</span>
             </div>
-            {userDataState === dataStates.received && id ? <UserButton/> :
-                <button className='button mini-button' onClick={onClick(routes.login)}>Login</button>}
+            <div>
+                <div className='horizontal'>
+                    <div onClick={toggleTheme}
+                         className={`theme-icon theme-toggle ${theme}`}><Theme/></div>
+                    <div className='horizontal-gap'/>
+                    {userDataState === dataStates.received && id ? <UserButton/> :
+                        <button className='button mini-button' onClick={onClick(routes.login)}>Login</button>}
+                </div>
+            </div>
         </header>)
 }

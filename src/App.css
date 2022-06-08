@@ -103,6 +103,23 @@ body {
     color: var(--main-color);
 }
 
+.theme-icon {
+    width: 20px;
+    height: 20px;
+    fill: var(--second-color);
+    transition: fill .2s, all .5s;
+}
+
+[data-theme="dark"] .theme-icon {
+    transform: rotate(180deg);
+
+}
+
+
+.theme-icon:hover {
+    fill: var(--fifth-color)
+}
+
 @media screen and (max-width: 600px) {
     .app-form {
         width: 84vw;

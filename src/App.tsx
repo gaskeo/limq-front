@@ -24,11 +24,6 @@ import {FetchActionTypes} from "./store/reducers/fetchReducer";
 
 
 function App() {
-    function toggleTheme() {
-        const currentTheme = document.documentElement.getAttribute("data-theme")
-        document.documentElement.setAttribute("data-theme", currentTheme === 'dark' ? 'light' : 'dark');
-
-    }
     const {id, userDataState} = useTypedSelector(state => state.user)
     const {channelsDataState} = useTypedSelector(state => state.channels)
     const {path} = useTypedSelector(state => state.path)
@@ -62,7 +57,6 @@ function App() {
             <div className="App">
                 <Header/>
             </div>
-            <button onClick={toggleTheme}>theme</button>
             <div className={`app-body`}>
                 <Routes>
                     <Route path={routes.index} element={<Body/>}/>

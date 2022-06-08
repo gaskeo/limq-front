@@ -86,6 +86,7 @@
 
 .horizontal {
     display: flex;
+    align-items: center;
 }
 
 .menu-tab-horizontal {
