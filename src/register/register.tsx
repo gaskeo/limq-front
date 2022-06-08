@@ -5,6 +5,7 @@ import {Input} from "../elements/inputs/input";
 import {Submit} from "../elements/inputs/submit";
 import {dataStates} from "../store/reducers/consts";
 import {useTypedSelector} from "../hooks/useTypedSelector";
+import {ApiRoutes} from "../fetch/apiRoutes";
 
 export function confirmEmail(email: string): boolean {
     if (!email.includes("@") || !email.includes(".")) {
@@ -82,7 +83,7 @@ export function Register() {
     const [errors, changeErrors] = useState({email: '', password: '', username: '', passwordAgain: ''})
 
     const {states} = useTypedSelector(state => state.fetch)
-    const registerState = states['register']
+    const registerState = states[ApiRoutes.Register]
 
     const requested = registerState && registerState.dataState === dataStates.requested
     const hasError = registerState && registerState.status !== 200

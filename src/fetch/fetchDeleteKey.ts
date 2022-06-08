@@ -3,6 +3,7 @@ import {Dispatch} from "@reduxjs/toolkit";
 import axios, {AxiosError} from "axios";
 import {rootActions} from "../store/reducers";
 import {KeyActionTypes} from "../store/reducers/keysReducer";
+import {ApiRoutes} from "./apiRoutes";
 
 function createForm(keyId: string): FormData {
     const form = new FormData();
@@ -15,7 +16,7 @@ export const fetchDeleteKey = (channelId: string, keyId: string) => {
         try {
             const form = createForm(keyId)
 
-            const response = await axios.post('/do/toggle_key_active', form, {
+            const response = await axios.post(ApiRoutes.DeleteKey, form, {
                 headers: {"Content-Type": "multipart/form-data"},
             })
 

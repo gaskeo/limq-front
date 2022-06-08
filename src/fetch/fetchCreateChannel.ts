@@ -6,6 +6,7 @@ import {PathActionTypes} from "../store/reducers/pathReducer";
 import {ChannelsActionTypes} from "../store/reducers/channelsReducer";
 import {FetchActionTypes} from "../store/reducers/fetchReducer";
 import {dataStates} from "../store/reducers/consts";
+import {ApiRoutes} from "./apiRoutes";
 
 function createForm(name: string): FormData {
     const form = new FormData();
@@ -20,12 +21,12 @@ export const fetchCreateChannel = (channelName: string) => {
             dispatch({
                 type: FetchActionTypes.setFetch,
                 payload: {
-                    identifier: 'createChannel',
+                    identifier: ApiRoutes.CreateChannel,
                     state: {status: 200, message: '', dataState: dataStates.requested}
                 }
             })
 
-            const response = await axios.post('/do/create_channel', form, {
+            const response = await axios.post(ApiRoutes.CreateChannel, form, {
                 headers: {"Content-Type": "multipart/form-data"},
             })
 
@@ -38,7 +39,7 @@ export const fetchCreateChannel = (channelName: string) => {
             dispatch({
                 type: FetchActionTypes.setFetch,
                 payload: {
-                    identifier: 'createChannel',
+                    identifier: ApiRoutes.CreateChannel,
                     state: {status: 200, message: '', dataState: dataStates.received}
                 }
             })
@@ -46,7 +47,7 @@ export const fetchCreateChannel = (channelName: string) => {
             dispatch({
                 type: FetchActionTypes.setFetch,
                 payload: {
-                    identifier: 'createChannel', state: {
+                    identifier: ApiRoutes.CreateChannel, state: {
                         status: error.status, message: error.response.data.message,
                         dataState: dataStates.error
                     }

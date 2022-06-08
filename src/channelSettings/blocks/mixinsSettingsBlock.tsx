@@ -9,7 +9,8 @@ import {fetchCreateMixin} from "../../fetch/fetchCreateMixin";
 import {useDispatch} from "react-redux";
 import {MixinTypeStates} from "../../store/reducers/mixinsReducer";
 import {useParams} from "react-router-dom";
-import {fetchDeleteMixin} from "../../fetch/fetchDeleteMixin";
+import {fetchRestrictMixin} from "../../fetch/fetchRestrictMixin";
+import {FetchActionTypes} from "../../store/reducers/fetchReducer";
 
 export function checkMixinLength(mixin: string) {
     return mixin.length === 32
@@ -19,7 +20,7 @@ export function checkMixinLength(mixin: string) {
 function MixinCard(props: { channel: channel, mixinType: MixinTypeStates }) {
     function deleteMixin() {
         if (channelId && window.confirm('Delete key?')) {
-            dispatch(fetchDeleteMixin(channelId, props.channel['channel_id'], props.mixinType) as any)
+            dispatch(fetchRestrictMixin(channelId, props.channel['channel_id'], props.mixinType) as any)
         }
     }
 
@@ -115,7 +116,7 @@ export function MixinsSettingsBlock(props: { isCurrent: boolean, channel: channe
     const [errors, changeErrors] = useState({mixin: ''})
 
     const {states} = useTypedSelector(state => state.fetch)
-    const createMixinState = states['createMixin']
+    const createMixinState = states[FetchActionTypes.setFetch]
 
     const requested = createMixinState && createMixinState.dataState === dataStates.requested
     const hasError = createMixinState && createMixinState.status !== 200

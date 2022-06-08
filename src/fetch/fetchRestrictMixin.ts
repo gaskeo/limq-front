@@ -3,6 +3,7 @@ import {Dispatch} from "@reduxjs/toolkit";
 import axios, {AxiosError} from "axios";
 import {rootActions} from "../store/reducers";
 import {MixinActionTypes, MixinTypeStates} from "../store/reducers/mixinsReducer";
+import {ApiRoutes} from "./apiRoutes";
 
 function createForm(subject: string, channelId: string, mixinType: MixinTypeStates): FormData {
     const form = new FormData();
@@ -13,21 +14,24 @@ function createForm(subject: string, channelId: string, mixinType: MixinTypeStat
     return form
 }
 
-export const fetchDeleteMixin = (subject: string, channelId: string, mixinType: MixinTypeStates) => {
+export const fetchRestrictMixin = (subject: string, channelId: string, mixinType: MixinTypeStates) => {
     return async (dispatch: Dispatch<rootActions>) => {
         try {
             const form = createForm(subject, channelId, mixinType)
 
-            const response = await axios.post('/do/restrict_mx', form, {
+            const response = await axios.post(ApiRoutes.RestrictMixin, form, {
                 headers: {"Content-Type": "multipart/form-data"},
             })
 
             if (response.data && response.data['mixin']) {
-                dispatch({type: MixinActionTypes.deleteMixin, payload: {channelId: subject,
-                        mixinId: response.data['mixin'], mixinType: mixinType}})
+                dispatch({
+                    type: MixinActionTypes.deleteMixin, payload: {
+                        channelId: subject,
+                        mixinId: response.data['mixin'], mixinType: mixinType
+                    }
+                })
             }
-        }
-        catch (error: AxiosError | any) {
+        } catch (error: AxiosError | any) {
             console.log(error)
         }
     }

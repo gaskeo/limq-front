@@ -5,6 +5,7 @@ import {useDispatch} from "react-redux";
 import {fetchCreateChannel} from "../fetch/fetchCreateChannel";
 import {useTypedSelector} from "../hooks/useTypedSelector";
 import {dataStates} from "../store/reducers/consts";
+import {ApiRoutes} from "../fetch/apiRoutes";
 
 export function checkChannelLength(name: string) {
     return name.length <= 32
@@ -36,7 +37,7 @@ export function CreateChannel() {
     const [errors, changeErrors] = useState({name: ''})
 
     const {states} = useTypedSelector(state => state.fetch)
-    const createChannelState = states['createChannel']
+    const createChannelState = states[ApiRoutes.CreateChannel]
 
     const requested = createChannelState && createChannelState.dataState === dataStates.requested
     const hasError = createChannelState && createChannelState.status !== 200

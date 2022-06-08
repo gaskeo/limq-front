@@ -6,6 +6,7 @@ import {Submit} from "../../elements/inputs/submit";
 import {fetchChangeEmail} from "../../fetch/fetchChangeEmail";
 import {dataStates} from "../../store/reducers/consts";
 import {checkPasswordLength, confirmEmail} from "../../register/register";
+import {ApiRoutes} from "../../fetch/apiRoutes";
 
 function hideEmail(email: string) {
     if (email.length < 3) {
@@ -59,7 +60,7 @@ export function EmailBlock(props: { isCurrent: boolean }) {
     const [errors, changeErrors] = useState({email: '', password: ''})
 
     const {states} = useTypedSelector(state => state.fetch)
-    const changeEmail = states['changeEmail']
+    const changeEmail = states[ApiRoutes.ChangeEmail]
 
     const requested = changeEmail && changeEmail.dataState === dataStates.requested
     const hasError = changeEmail && changeEmail.status !== 200

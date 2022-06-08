@@ -5,6 +5,7 @@ import {rootActions} from "../store/reducers";
 import {UserActionTypes} from "../store/reducers/userReducer";
 import {FetchActionTypes} from "../store/reducers/fetchReducer";
 import {dataStates} from "../store/reducers/consts";
+import {ApiRoutes} from "./apiRoutes";
 
 function createForm(oldPassword: string, password: string): FormData {
     const form = new FormData();
@@ -18,23 +19,39 @@ export const fetchChangePassword = (oldPassword: string, password: string) => {
         try {
             const form = createForm(oldPassword, password)
 
-            dispatch({type: FetchActionTypes.setFetch,
-                payload: {identifier: 'changePassword', state: {status: 200, message: '', dataState: dataStates.requested}}})
+            dispatch({
+                type: FetchActionTypes.setFetch,
+                payload: {
+                    identifier: ApiRoutes.ChangePassword,
+                    state: {status: 200, message: '', dataState: dataStates.requested}
+                }
+            })
 
-            const response = await axios.post('/do/change_password', form, {
+            const response = await axios.post(ApiRoutes.ChangePassword, form, {
                 headers: {"Content-Type": "multipart/form-data"},
             })
 
             if (response.data['auth']) {
                 dispatch({type: UserActionTypes.setUser, payload: response.data['user']})
-                dispatch({type: FetchActionTypes.setFetch,
-                    payload: {identifier: 'changePassword', state: {status: 200, message: '', dataState: dataStates.received}}})
+                dispatch({
+                    type: FetchActionTypes.setFetch,
+                    payload: {
+                        identifier: ApiRoutes.ChangePassword,
+                        state: {status: 200, message: '', dataState: dataStates.received}
+                    }
+                })
             }
-        }
-        catch (error: AxiosError | any) {
-            dispatch({type: FetchActionTypes.setFetch,
-                payload: {identifier: 'changePassword', state: {status: error.status, message:
-                        error.response.data.message, dataState: dataStates.received}}})
+
+        } catch (error: AxiosError | any) {
+            dispatch({
+                type: FetchActionTypes.setFetch,
+                payload: {
+                    identifier: ApiRoutes.ChangePassword, state: {
+                        status: error.status, message:
+                        error.response.data.message, dataState: dataStates.received
+                    }
+                }
+            })
         }
     }
 }

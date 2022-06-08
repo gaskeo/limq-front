@@ -6,6 +6,7 @@ import {Submit} from "../elements/inputs/submit";
 import {checkPasswordLength, confirmEmail} from "../register/register";
 import {useTypedSelector} from "../hooks/useTypedSelector";
 import {dataStates} from "../store/reducers/consts";
+import {ApiRoutes} from "../fetch/apiRoutes";
 
 export function Login() {
     function submit(event: React.FormEvent<HTMLFormElement>) {
@@ -43,7 +44,7 @@ export function Login() {
     const [errors, changeErrors] = useState({email: '', password: ''})
 
     const {states} = useTypedSelector(state => state.fetch)
-    const loginState = states['login']
+    const loginState = states[ApiRoutes.Login]
 
     const requested = loginState && loginState.dataState === dataStates.requested
     const hasError = loginState && loginState.status !== 200

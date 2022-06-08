@@ -7,27 +7,25 @@ import {FetchActionTypes} from "../store/reducers/fetchReducer";
 import {dataStates} from "../store/reducers/consts";
 import {ApiRoutes} from "./apiRoutes";
 
-function createForm(newEmail: string, password: string): FormData {
+function createForm(newUsername: string): FormData {
     const form = new FormData();
-    form.append('new_email', newEmail)
-    form.append('password', password)
+    form.append('new_username', newUsername)
     return form
 }
 
-export const fetchChangeEmail = (newEmail: string, password: string) => {
+export const fetchRenameUser = (newUsername: string) => {
     return async (dispatch: Dispatch<rootActions>) => {
         try {
-            const form = createForm(newEmail, password)
+            const form = createForm(newUsername)
 
             dispatch({
                 type: FetchActionTypes.setFetch,
                 payload: {
-                    identifier: ApiRoutes.ChangeEmail,
+                    identifier: ApiRoutes.RenameUser,
                     state: {status: 200, message: '', dataState: dataStates.requested}
                 }
             })
-
-            const response = await axios.post(ApiRoutes.ChangeEmail, form, {
+            const response = await axios.post(ApiRoutes.RenameUser, form, {
                 headers: {"Content-Type": "multipart/form-data"},
             })
 
@@ -36,7 +34,7 @@ export const fetchChangeEmail = (newEmail: string, password: string) => {
                 dispatch({
                     type: FetchActionTypes.setFetch,
                     payload: {
-                        identifier: ApiRoutes.ChangeEmail,
+                        identifier: ApiRoutes.RenameUser,
                         state: {status: 200, message: '', dataState: dataStates.received}
                     }
                 })
@@ -45,7 +43,7 @@ export const fetchChangeEmail = (newEmail: string, password: string) => {
             dispatch({
                 type: FetchActionTypes.setFetch,
                 payload: {
-                    identifier: ApiRoutes.ChangeEmail, state: {
+                    identifier: ApiRoutes.RenameUser, state: {
                         status: error.status, message:
                         error.response.data.message, dataState: dataStates.received
                     }

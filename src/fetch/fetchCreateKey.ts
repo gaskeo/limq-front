@@ -5,6 +5,7 @@ import {rootActions} from "../store/reducers";
 import {KeyActionTypes} from "../store/reducers/keysReducer";
 import {FetchActionTypes} from "../store/reducers/fetchReducer";
 import {dataStates} from "../store/reducers/consts";
+import {ApiRoutes} from "./apiRoutes";
 
 function createForm(name: string, permission: string, channelId: string, allowInfo: boolean): FormData {
     const form = new FormData();
@@ -21,23 +22,38 @@ export const fetchCreateKey = (keyName: string, permission: string, channelId: s
         try {
             const form = createForm(keyName, permission, channelId, allowInfo)
 
-            dispatch({type: FetchActionTypes.setFetch,
-                payload: {identifier: 'createKey', state: {status: 200, message: '', dataState: dataStates.requested}}})
+            dispatch({
+                type: FetchActionTypes.setFetch,
+                payload: {
+                    identifier: ApiRoutes.Grant,
+                    state: {status: 200, message: '', dataState: dataStates.requested}
+                }
+            })
 
-            const response = await axios.post('/do/grant', form, {
+            const response = await axios.post(ApiRoutes.Grant, form, {
                 headers: {"Content-Type": "multipart/form-data"},
             })
 
             if (response.data) {
                 dispatch({type: KeyActionTypes.addKey, payload: {channelId: channelId, key: response.data}})
-                dispatch({type: FetchActionTypes.setFetch,
-                    payload: {identifier: 'createKey', state: {status: 200, message: '', dataState: dataStates.received}}})
+                dispatch({
+                    type: FetchActionTypes.setFetch,
+                    payload: {
+                        identifier: ApiRoutes.Grant,
+                        state: {status: 200, message: '', dataState: dataStates.received}
+                    }
+                })
             }
-        }
-        catch (error: AxiosError | any) {
-            dispatch({type: FetchActionTypes.setFetch,
-                payload: {identifier: 'createKey', state: {status: error.status, message: error.response.data.message,
-                        dataState: dataStates.error}}})
+        } catch (error: AxiosError | any) {
+            dispatch({
+                type: FetchActionTypes.setFetch,
+                payload: {
+                    identifier: ApiRoutes.Grant, state: {
+                        status: error.status, message: error.response.data.message,
+                        dataState: dataStates.error
+                    }
+                }
+            })
         }
     }
 }

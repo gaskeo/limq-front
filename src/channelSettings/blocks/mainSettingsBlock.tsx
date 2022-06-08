@@ -7,6 +7,7 @@ import {fetchRenameChannel} from "../../fetch/fetchRenameChannel";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {checkChannelLength} from "../../createChannel/createChannel";
 import {dataStates} from "../../store/reducers/consts";
+import {ApiRoutes} from "../../fetch/apiRoutes";
 
 export function MainSettingsBlock(props: { isCurrent: boolean, channel: channel | undefined }) {
     function submit(event: React.FormEvent<HTMLFormElement>) {
@@ -39,7 +40,7 @@ export function MainSettingsBlock(props: { isCurrent: boolean, channel: channel 
     const [errors, changeErrors] = useState({name: ''})
 
     const {states} = useTypedSelector(state => state.fetch)
-    const createChannelState = states['renameChannel']
+    const createChannelState = states[ApiRoutes.RenameChannel]
 
     const requested = createChannelState && createChannelState.dataState === dataStates.requested
     const hasError = createChannelState && createChannelState.status !== 200

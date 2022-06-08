@@ -6,6 +6,7 @@ import {Submit} from "../../elements/inputs/submit";
 import {fetchChangePassword} from "../../fetch/fetchChangePassword";
 import {dataStates} from "../../store/reducers/consts";
 import {checkPasswordLength, checkPasswordsMatch} from "../../register/register";
+import {ApiRoutes} from "../../fetch/apiRoutes";
 
 export function PasswordBlock(props: { isCurrent: boolean }) {
     function submit(event: React.FormEvent<HTMLFormElement>) {
@@ -54,7 +55,7 @@ export function PasswordBlock(props: { isCurrent: boolean }) {
     const [errors, changeErrors] = useState({oldPassword: '', newPassword: '', newPasswordAgain: ''})
 
     const {states} = useTypedSelector(state => state.fetch)
-    const changePasswordState = states['changePassword']
+    const changePasswordState = states[ApiRoutes.ChangePassword]
 
     const requested = changePasswordState && changePasswordState.dataState === dataStates.requested
     const hasError = changePasswordState && changePasswordState.status !== 200

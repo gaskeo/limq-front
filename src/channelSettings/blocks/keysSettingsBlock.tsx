@@ -8,9 +8,10 @@ import {fetchCreateKey} from "../../fetch/fetchCreateKey";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {dataStates} from "../../store/reducers/consts";
 import {key} from "../../store/reducers/keysReducer"
-import {fetchToggleKeyActive} from "../../fetch/fetchToggleKeyActive";
+import {fetchToggleKey} from "../../fetch/fetchToggleKey";
 import {fetchDeleteKey} from "../../fetch/fetchDeleteKey";
 import {Checkbox} from "../../elements/inputs/checkbox";
+import {ApiRoutes} from "../../fetch/apiRoutes";
 
 export function checkKeyLength(key: string) {
     return key.length <= 32
@@ -18,7 +19,7 @@ export function checkKeyLength(key: string) {
 
 function KeyCard(props: { channelKey: key }) {
     function toggleActiveKey() {
-        dispatch(fetchToggleKeyActive(props.channelKey.channel, props.channelKey.key) as any)
+        dispatch(fetchToggleKey(props.channelKey.channel, props.channelKey.key) as any)
     }
 
     function deleteKey() {
@@ -79,7 +80,7 @@ export function KeysSettingsBlock(props: { isCurrent: boolean, channel: channel 
     const [errors, changeErrors] = useState({name: ''})
 
     const {states} = useTypedSelector(state => state.fetch)
-    const createKeyState = states['createKey']
+    const createKeyState = states[ApiRoutes.Grant]
 
     const requested = createKeyState && createKeyState.dataState === dataStates.requested
     const hasError = createKeyState && createKeyState.status !== 200

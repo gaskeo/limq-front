@@ -6,6 +6,7 @@ import {rootActions} from "../store/reducers";
 import {PathActionTypes} from "../store/reducers/pathReducer";
 import {dataStates} from "../store/reducers/consts";
 import {FetchActionTypes} from "../store/reducers/fetchReducer";
+import {ApiRoutes} from "./apiRoutes";
 
 function createForm(email: string, password: string, rememberMe: boolean): FormData {
     const form = new FormData();
@@ -19,10 +20,15 @@ export const fetchLogin = (email: string, password: string, rememberMe: boolean)
     return async (dispatch: Dispatch<rootActions>) => {
         try {
             const form = createForm(email, password, rememberMe)
-            dispatch({type: FetchActionTypes.setFetch,
-                payload: {identifier: 'login', state: {status: 200, message: '', dataState: dataStates.requested}}})
+            dispatch({
+                type: FetchActionTypes.setFetch,
+                payload: {
+                    identifier: ApiRoutes.Login,
+                    state: {status: 200, message: '', dataState: dataStates.requested}
+                }
+            })
 
-            const response = await axios.post('/do/login', form, {
+            const response = await axios.post(ApiRoutes.Login, form, {
                 headers: {"Content-Type": "multipart/form-data"},
             })
 
@@ -34,14 +40,24 @@ export const fetchLogin = (email: string, password: string, rememberMe: boolean)
 
             dispatch({type: PathActionTypes.deletePath})
             dispatch({type: PathActionTypes.setPath, payload: response.data['path']})
-            dispatch({type: FetchActionTypes.setFetch,
-                payload: {identifier: 'login', state: {status: 200, message: '', dataState: dataStates.received}}})
-        }
-        catch (error: AxiosError | any) {
+            dispatch({
+                type: FetchActionTypes.setFetch,
+                payload: {
+                    identifier: ApiRoutes.Login,
+                    state: {status: 200, message: '', dataState: dataStates.received}
+                }
+            })
+        } catch (error: AxiosError | any) {
             dispatch({type: UserActionTypes.setUserDataState, payload: dataStates.notRequested})
-            dispatch({type: FetchActionTypes.setFetch,
-                payload: {identifier: 'login', state: {status: error.status, message: error.response.data.message,
-                        dataState: dataStates.error}}})
+            dispatch({
+                type: FetchActionTypes.setFetch,
+                payload: {
+                    identifier: ApiRoutes.Login, state: {
+                        status: error.status, message: error.response.data.message,
+                        dataState: dataStates.error
+                    }
+                }
+            })
         }
     }
 }
