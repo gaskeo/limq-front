@@ -7,6 +7,7 @@ import {checkPasswordLength, confirmEmail} from "../register/register";
 import {useTypedSelector} from "../hooks/useTypedSelector";
 import {dataStates} from "../store/reducers/consts";
 import {ApiRoutes} from "../fetch/apiRoutes";
+import {Checkbox} from "../elements/inputs/checkbox";
 
 export function Login() {
     function submit(event: React.FormEvent<HTMLFormElement>) {
@@ -21,7 +22,7 @@ export function Login() {
             return
         }
 
-        dispatch(fetchLogin(email, password, true) as any)
+        dispatch(fetchLogin(email, password, rememberMe) as any)
         return false;
     }
 
@@ -41,6 +42,7 @@ export function Login() {
 
     const [email, changeEmail] = useState('');
     const [password, changePassword] = useState('')
+    const [rememberMe, changeRememberMe] = useState(true)
     const [errors, changeErrors] = useState({email: '', password: ''})
 
     const {states} = useTypedSelector(state => state.fetch)
@@ -65,6 +67,8 @@ export function Login() {
                        type='password'
                        errorText={errors.password}
                        onChange={checkPassword}/>
+
+                <Checkbox label='Remember me' state={rememberMe} setState={changeRememberMe}/>
                 <p className='error-text'>{hasError && loginState.message}</p>
 
                 <Submit label={requested ? 'Loading...' : 'Submit'}/>
