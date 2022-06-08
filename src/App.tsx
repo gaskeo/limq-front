@@ -26,7 +26,7 @@ import {FetchActionTypes} from "./store/reducers/fetchReducer";
 function App() {
     const {id, userDataState} = useTypedSelector(state => state.user)
     const {channelsDataState} = useTypedSelector(state => state.channels)
-    const {path} = useTypedSelector(state => state.path)
+    const {path, pathId} = useTypedSelector(state => state.path)
 
     const dispatch = useDispatch()
     const navigate = useNavigate();
@@ -50,7 +50,7 @@ function App() {
 
             Redirect(path, navigate, location)
         }
-    })
+    }, [pathId])
 
     return (
         <>
