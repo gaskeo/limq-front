@@ -53,11 +53,11 @@ export function Header() {
 
     return (
         <header className="app-header">
-            <a onClick={onClick(routes.index)} className='lithium-container'>
+            <div onClick={onClick(routes.index)} className='lithium-container'>
                 <span className="lithium-label">Lithium</span>
                 <span className="lithium-label mq-label">MQ</span>
-            </a>
+            </div>
             {userDataState === dataStates.received && id ? <UserButton/> :
-                <button className='button mini-button' onClick={onClick(routes.login)}>Войти</button>}
+                <button className='button mini-button' onClick={onClick(routes.login)}>Login</button>}
         </header>)
 }

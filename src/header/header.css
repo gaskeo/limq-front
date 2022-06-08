@@ -16,7 +16,7 @@
     align-items: center;
     justify-content: center;
     font-family: 'Open Sans', sans-serif;
-
+    cursor: pointer;
 }
 
 
@@ -45,6 +45,7 @@ span.mq-label {
 
 span.mq-label:hover {
     text-decoration: none;
+    color: white;
 }
 
 .button-container {

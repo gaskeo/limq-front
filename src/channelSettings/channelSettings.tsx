@@ -32,7 +32,7 @@ export function ChannelSettings() {
         if (!searchParams.get('tab')) {
             changeTab(menuTabs[0].parameterName)()
         }
-    }, [])
+    })
 
     return (
         <div className='settings'>

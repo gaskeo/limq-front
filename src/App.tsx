@@ -31,7 +31,7 @@ function App() {
     }
     const {id, userDataState} = useTypedSelector(state => state.user)
     const {channelsDataState} = useTypedSelector(state => state.channels)
-    const {path, pathId} = useTypedSelector(state => state.path)
+    const {path} = useTypedSelector(state => state.path)
 
     const dispatch = useDispatch()
     const navigate = useNavigate();
@@ -41,13 +41,13 @@ function App() {
         if (userDataState === dataStates.notRequested) {
             dispatch(fetchUser() as any)
         }
-    }, [userDataState])
+    })
 
     useEffect(() => {
         if (channelsDataState === dataStates.notRequested && userDataState === dataStates.received && id) {
             dispatch(fetchChannels() as any)
         }
-    }, [userDataState, id])
+    })
 
     useEffect(() => {
         if (path) {
@@ -55,7 +55,7 @@ function App() {
 
             Redirect(path, navigate, location)
         }
-    }, [pathId])
+    })
 
     return (
         <>
