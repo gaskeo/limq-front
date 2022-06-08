@@ -12,6 +12,7 @@ import {fetchToggleKey} from "../../fetch/fetchToggleKey";
 import {fetchDeleteKey} from "../../fetch/fetchDeleteKey";
 import {Checkbox} from "../../elements/inputs/checkbox";
 import {ApiRoutes} from "../../fetch/apiRoutes";
+import {Loading} from "../../elements/loading/loading";
 
 export function checkKeyLength(key: string) {
     return key.length <= 32
@@ -45,6 +46,17 @@ function KeyCard(props: { channelKey: key }) {
                     <button className='button mini-button warning' onClick={toggleActiveKey}>{pauseResume}</button>
                     <button className='button mini-button error' onClick={deleteKey}>Delete</button>
                 </div>
+            </div>
+        </div>
+    )
+}
+
+
+function LoadingKeyCard() {
+    return (
+        <div className='card card-100 horizontal-scroll'>
+            <div className='center height-100'>
+                <Loading/>
             </div>
         </div>
     )
@@ -113,13 +125,13 @@ export function KeysSettingsBlock(props: { isCurrent: boolean, channel: channel 
                 </div>
                 <p className='error-text'>{hasError && createKeyState.message}</p>
 
-                <Submit label={requested ? 'Loading...' : 'Submit'}/>
+                <Submit label={requested ? <Loading/> : 'Create'}/>
             </form>
             <span className='gap'/>
             <h1 className='header-1'>Your keys</h1>
 
-            {currentKeys?.keysDataState === dataStates.requested && <div>loading...</div>}
             <div className='card-100-container'>
+                {currentKeys?.keysDataState === dataStates.requested && <LoadingKeyCard/>}
                 {currentKeys?.keys && currentKeys.keys.length > 0 && currentKeys.keys.map(key => <KeyCard key={key.key}
                                                                                                           channelKey={key}/>)}
             </div>

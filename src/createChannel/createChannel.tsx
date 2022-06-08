@@ -6,6 +6,7 @@ import {fetchCreateChannel} from "../fetch/fetchCreateChannel";
 import {useTypedSelector} from "../hooks/useTypedSelector";
 import {dataStates} from "../store/reducers/consts";
 import {ApiRoutes} from "../fetch/apiRoutes";
+import {Loading} from "../elements/loading/loading";
 
 export function checkChannelLength(name: string) {
     return name.length <= 32
@@ -53,7 +54,7 @@ export function CreateChannel() {
                        onChange={checkChannelName}/>
                 <p className='error-text'>{hasError && createChannelState.message}</p>
 
-                <Submit label={requested ? 'Loading...' : 'Submit'}/>
+                <Submit label={requested ? <Loading/> : 'Create'}/>
             </form>
         </div>
     )

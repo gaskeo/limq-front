@@ -20,6 +20,7 @@
 }
 
 body {
+    transition: all .2s;
     --header-font-family: 'Arial';
     --main-font-family: 'Roboto';
     background-color: var(--main-color);
@@ -30,7 +31,6 @@ body {
     justify-content: center;
     margin-left: 8vw;
     margin-right: 8vw;
-    background-color: var(--main-color);
 }
 
 .header-1 {
@@ -42,6 +42,18 @@ body {
 .center {
     display: flex;
     justify-content: center;
+    align-items: center;
+}
+
+.height-100 {
+    height: 100%;
+}
+
+.vertical-center {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    height: 100vh;
 }
 
 .app-form {

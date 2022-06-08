@@ -1,5 +1,5 @@
-import {Plus} from "../svg/plus";
-import {routes} from "../routes/routes";
+import {Plus} from "../../svg/plus";
+import {routes} from "../../routes/routes";
 import {useNavigate} from "react-router-dom";
 
 export function CreateChannelCard() {

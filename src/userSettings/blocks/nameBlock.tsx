@@ -7,6 +7,7 @@ import {fetchRenameUser} from "../../fetch/fetchRenameUser";
 import {dataStates} from "../../store/reducers/consts";
 import {checkChannelLength} from "../../createChannel/createChannel";
 import {ApiRoutes} from "../../fetch/apiRoutes";
+import {Loading} from "../../elements/loading/loading";
 
 export function checkUsernameLength(name: string) {
     return name.length <= 32
@@ -63,7 +64,7 @@ export function NameBlock(props: {isCurrent: boolean}) {
                        type='text'/>
                 <p className='error-text'>{hasError && renameUserState.message}</p>
 
-                <Submit label={requested ? 'Loading...' : 'Submit'}/>
+                <Submit label={requested ? <Loading/> : 'Rename'}/>
             </form>
         </div>
     )

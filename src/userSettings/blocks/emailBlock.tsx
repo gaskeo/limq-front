@@ -7,6 +7,7 @@ import {fetchChangeEmail} from "../../fetch/fetchChangeEmail";
 import {dataStates} from "../../store/reducers/consts";
 import {checkPasswordLength, confirmEmail} from "../../register/register";
 import {ApiRoutes} from "../../fetch/apiRoutes";
+import {Loading} from "../../elements/loading/loading";
 
 function hideEmail(email: string) {
     if (email.length < 3) {
@@ -89,7 +90,7 @@ export function EmailBlock(props: { isCurrent: boolean }) {
                        type='password'/>
                 <p className='error-text'>{hasError && changeEmail.message}</p>
 
-                <Submit label={requested ? 'Loading...' : 'Submit'}/>
+                <Submit label={requested ? <Loading/> : 'Change Email'}/>
             </form>
         </div>
     )

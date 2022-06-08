@@ -8,6 +8,7 @@ import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {checkChannelLength} from "../../createChannel/createChannel";
 import {dataStates} from "../../store/reducers/consts";
 import {ApiRoutes} from "../../fetch/apiRoutes";
+import {Loading} from "../../elements/loading/loading";
 
 export function MainSettingsBlock(props: { isCurrent: boolean, channel: channel | undefined }) {
     function submit(event: React.FormEvent<HTMLFormElement>) {
@@ -64,7 +65,7 @@ export function MainSettingsBlock(props: { isCurrent: boolean, channel: channel 
                        placeholder={placeholder}/>
                 <p className='error-text'>{hasError && createChannelState.message}</p>
 
-                <Submit label={requested ? 'Loading...' : 'Submit'}/>
+                <Submit label={requested ? <Loading/> : 'Rename'}/>
             </form>
         </div>
     )

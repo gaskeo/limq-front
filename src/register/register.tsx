@@ -6,6 +6,7 @@ import {Submit} from "../elements/inputs/submit";
 import {dataStates} from "../store/reducers/consts";
 import {useTypedSelector} from "../hooks/useTypedSelector";
 import {ApiRoutes} from "../fetch/apiRoutes";
+import {Loading} from "../elements/loading/loading";
 
 export function confirmEmail(email: string): boolean {
     if (!email.includes("@") || !email.includes(".")) {
@@ -120,7 +121,7 @@ export function Register() {
                        onChange={checkPasswordAgain}/>
                 <p className='error-text'>{hasError && registerState.message}</p>
 
-                <Submit label={requested ? 'Loading...' : 'Submit'}/>
+                <Submit label={requested ? <Loading/> : 'Register'}/>
             </form>
         </div>
     )

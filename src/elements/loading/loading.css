@@ -1,0 +1,69 @@
+.loading {
+    display: flex;
+    position: relative;
+    --diameter: 15px;
+    --gap: 3;
+    width: calc(var(--diameter) * 3 + 2 * var(--diameter) / var(--gap));
+    height: calc(var(--diameter));
+}
+
+.circle {
+    position: absolute;
+    display: inline-block;
+    background-color: var(--second-color);
+    border-radius: 50%;
+    width: var(--diameter);
+    height: var(--diameter);
+    margin-right: calc(var(--diameter) / var(--gap));
+    animation-duration: .6s;
+    animation-iteration-count: infinite;
+}
+
+.circle:last-child {
+    margin-right: 0;
+}
+
+.circle-1 {
+    left: 0;
+    animation-name: circle-animate-1;
+}
+
+.circle-2 {
+    left: calc(var(--diameter) + var(--diameter) / var(--gap));
+    animation-name: circle-animate-2;
+}
+
+.circle-3 {
+    left: calc(2 * (var(--diameter) + var(--diameter) / var(--gap)));
+    animation-name: circle-animate-3;
+ }
+
+
+@keyframes circle-animate-1 {
+    from {
+        transform: scale(1);
+    }
+    to {
+        background-color: var(--fifth-color);
+        transform: scale(0);
+    }
+}
+
+@keyframes circle-animate-2 {
+    from {
+        background-color: var(--second-color);
+    }
+    to {
+        transform: translateX(calc(-1 * var(--diameter) - var(--diameter) / var(--gap)));
+    }
+}
+
+@keyframes circle-animate-3 {
+    from {
+        background-color: var(--fifth-color);
+        transform: scale(0);
+    }
+    to {
+        transform: scale(1) translateX(calc(-1 * var(--diameter) - var(--diameter) / var(--gap)));
+    }
+}

@@ -8,6 +8,7 @@ import {useTypedSelector} from "../hooks/useTypedSelector";
 import {dataStates} from "../store/reducers/consts";
 import {ApiRoutes} from "../fetch/apiRoutes";
 import {Checkbox} from "../elements/inputs/checkbox";
+import {Loading} from "../elements/loading/loading";
 
 export function Login() {
     function submit(event: React.FormEvent<HTMLFormElement>) {
@@ -71,7 +72,7 @@ export function Login() {
                 <Checkbox label='Remember me' state={rememberMe} setState={changeRememberMe}/>
                 <p className='error-text'>{hasError && loginState.message}</p>
 
-                <Submit label={requested ? 'Loading...' : 'Submit'}/>
+                <Submit label={requested ? <Loading/> : 'Login'}/>
             </form>
         </div>
     )

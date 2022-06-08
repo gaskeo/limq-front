@@ -11,6 +11,7 @@ import {MixinTypeStates} from "../../store/reducers/mixinsReducer";
 import {useParams} from "react-router-dom";
 import {fetchRestrictMixin} from "../../fetch/fetchRestrictMixin";
 import {FetchActionTypes} from "../../store/reducers/fetchReducer";
+import {Loading} from "../../elements/loading/loading";
 
 export function checkMixinLength(mixin: string) {
     return mixin.length === 32
@@ -40,6 +41,26 @@ function MixinCard(props: { channel: channel, mixinType: MixinTypeStates }) {
     )
 }
 
+function LoadingMixinCard() {
+    return (
+        <div className='card card-100 horizontal-scroll'>
+            <div className='center height-100'>
+                <Loading/>
+            </div>
+        </div>
+    )
+}
+
+function NoMixinsCard(props: {mixinType: string}) {
+    return (
+        <div className='card add-channel-card card-100 horizontal-scroll'>
+            <div className='add-channel-card-text width-100 center'>
+                <h1 className='card-header'>You haven't {props.mixinType} mixins</h1>
+            </div>
+        </div>
+    )
+}
+
 function MixinsContainer(props: { isCurrent: boolean, channel: channel | undefined, mixinType: MixinTypeStates }) {
     const {mixinsData} = useTypedSelector(state => state.mixins)
 
@@ -50,11 +71,11 @@ function MixinsContainer(props: { isCurrent: boolean, channel: channel | undefin
     const currentMixins = mixinsData[props.channel ? props.channel['channel_id'] : '']
 
     if (currentMixins && currentMixins.mixinsDataState === dataStates.requested) {
-        return <div>loading...</div>
+        return <div className='card-container card-100-container'><LoadingMixinCard/></div>
     }
     if (currentMixins && currentMixins.mixinsDataState === dataStates.received &&
         currentMixins[props.mixinType].length === 0) {
-        return <div>you haven't mixins</div>
+        return <div className='card-container card-100-container'><NoMixinsCard mixinType={props.mixinType}/></div>
     }
 
     return <div className='card-container card-100-container'>
@@ -138,7 +159,7 @@ export function MixinsSettingsBlock(props: { isCurrent: boolean, channel: channe
                        placeholder={'x'.repeat(32)}/>
                 <p className='error-text'>{hasError && createMixinState.message}</p>
 
-                <Submit label={requested ? 'Loading...' : 'Submit'}/>
+                <Submit label={requested ? <Loading/> : 'Create'}/>
             </form>
             <span className='gap'/>
             <h1 className='header-1'>Your mixins</h1>
