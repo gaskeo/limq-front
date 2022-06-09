@@ -7,59 +7,14 @@ import {Radio} from "../../elements/inputs/radio";
 import {fetchCreateKey} from "../../fetch/fetchCreateKey";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {dataStates} from "../../store/reducers/consts";
-import {key} from "../../store/reducers/keysReducer"
-import {fetchToggleKey} from "../../fetch/fetchToggleKey";
-import {fetchDeleteKey} from "../../fetch/fetchDeleteKey";
 import {Checkbox} from "../../elements/inputs/checkbox";
 import {ApiRoutes} from "../../fetch/apiRoutes";
 import {Loading} from "../../elements/loading/loading";
+import {KeyCard} from "./keyCard/keyCard";
+import {LoadingKeyCard} from "./keyCard/loadingCard";
 
 export function checkKeyLength(key: string) {
     return key.length <= 32
-}
-
-function KeyCard(props: { channelKey: key }) {
-    function toggleActiveKey() {
-        dispatch(fetchToggleKey(props.channelKey.channel, props.channelKey.key) as any)
-    }
-
-    function deleteKey() {
-        if (window.confirm('Delete key?')) {
-            dispatch(fetchDeleteKey(props.channelKey.channel, props.channelKey.key) as any)
-        }
-    }
-
-    const perm = props.channelKey.read ? 'Read' : 'write'
-
-    const pauseResume = props.channelKey.active ? 'Pause' : 'Resume'
-    const dispatch = useDispatch()
-
-    return (
-        <div className='card card-100 horizontal-scroll'>
-            <div className='card-header-container'>
-                <h1 className='card-header'>{props.channelKey.name}</h1>
-            </div>
-            <div className='card-info-container'>
-                <p className='card-text grey-text'>{perm}, {props.channelKey.created}</p>
-                <code className='card-code card-background-text'>{props.channelKey.key}</code>
-                <div className='card-inline-block'>
-                    <button className='button mini-button warning' onClick={toggleActiveKey}>{pauseResume}</button>
-                    <button className='button mini-button error' onClick={deleteKey}>Delete</button>
-                </div>
-            </div>
-        </div>
-    )
-}
-
-
-function LoadingKeyCard() {
-    return (
-        <div className='card card-100 horizontal-scroll'>
-            <div className='center height-100'>
-                <Loading/>
-            </div>
-        </div>
-    )
 }
 
 export function KeysSettingsBlock(props: { isCurrent: boolean, channel: channel | undefined }) {
@@ -78,7 +33,6 @@ export function KeysSettingsBlock(props: { isCurrent: boolean, channel: channel 
         }
 
         dispatch(fetchCreateKey(keyName, keyType, props.channel['channel_id'], allowInfo) as any)
-
     }
 
     const dispatch = useDispatch()
@@ -108,17 +62,17 @@ export function KeysSettingsBlock(props: { isCurrent: boolean, channel: channel 
                 <Input label='Name' state={keyName} setState={changeKeyName} type='text' errorText={errors.name}/>
                 <div className='channel-settings-radio-container'>
                     <div className='horizontal justify-left'>
-                    <Radio label='Read'
-                           checked={keyType === '0'}
-                           setData='0'
-                           name='key-type'
-                           state={keyType}
-                           setState={changeKeyType}/>
+                        <Radio label='Read'
+                               checked={keyType === '0'}
+                               setData='0'
+                               name='key-type'
+                               state={keyType}
+                               setState={changeKeyType}/>
 
-                    {keyType === "0" && <>
-                        <div className='horizontal-gap'/>
-                        <Checkbox label='Allow info' state={allowInfo} setState={changeAllowInfo}/>
-                    </>}
+                        {keyType === "0" && <>
+                            <div className='horizontal-gap'/>
+                            <Checkbox label='Allow info' state={allowInfo} setState={changeAllowInfo}/>
+                        </>}
 
                     </div>
                     <Radio label='Write' setData='1' name='key-type' state={keyType} setState={changeKeyType}/>

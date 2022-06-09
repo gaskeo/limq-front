@@ -1,4 +1,4 @@
-:root {
+[data-theme="light"] {
     --main-color: white; /* background color */
     --second-color: black; /* text color */
     --third-color: #f2edf8; /* element's border color and hover */
@@ -16,7 +16,10 @@
     --third-color: #212734;
     --fourth-color: #272727;
     --fifth-color: #575757;
-    --error-color: #ff5f3a
+    --error-color: #ff5f3a;
+    --error-color-2: #dc3545;
+    --warning-color: #ffc107;
+    --warning-color-2: #cca324;
 }
 
 body {
@@ -47,6 +50,13 @@ body {
 
 .height-100 {
     height: 100%;
+}
+
+.grey-window {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: grey;
 }
 
 .vertical-center {

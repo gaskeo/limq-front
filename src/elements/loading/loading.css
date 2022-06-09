@@ -51,7 +51,6 @@
 
 @keyframes circle-animate-2 {
     from {
-        background-color: var(--second-color);
     }
     to {
         transform: translateX(calc(-1 * var(--diameter) - var(--diameter) / var(--gap)));

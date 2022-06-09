@@ -3,11 +3,7 @@ import './App.css';
 import {Header} from "./header/header";
 import {Login} from "./login/login";
 
-import {
-    Route,
-    Routes, useLocation,
-    useNavigate
-} from "react-router-dom";
+import {Route, Routes, useLocation, useNavigate} from "react-router-dom";
 import {useTypedSelector} from "./hooks/useTypedSelector";
 import {useDispatch} from "react-redux";
 import {dataStates} from "./store/reducers/consts";
@@ -15,12 +11,13 @@ import {fetchUser} from "./fetch/fetchUser";
 import {Register} from "./register/register";
 import {routes} from "./routes/routes";
 import {Redirect} from "./routes/redirect";
-import { Body } from './body/body';
+import {Body} from './body/body';
 import {CreateChannel} from "./createChannel/createChannel";
 import {ChannelSettings} from "./channelSettings/channelSettings";
 import {fetchChannels} from "./fetch/fetchChannels";
 import {UserSettings} from "./userSettings/userSettings";
 import {FetchActionTypes} from "./store/reducers/fetchReducer";
+import {Loading} from "./elements/loading/loading";
 
 function App() {
     const {id, userDataState} = useTypedSelector(state => state.user)
@@ -50,6 +47,10 @@ function App() {
             Redirect(path, navigate, location)
         }
     }, [pathId])
+
+    if (![dataStates.received, dataStates.error].includes(userDataState)) {
+        return <div className='grey-window'><Loading/></div>
+    }
 
     return (
         <>
