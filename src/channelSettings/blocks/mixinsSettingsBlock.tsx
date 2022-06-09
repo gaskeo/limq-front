@@ -69,6 +69,7 @@ function MixinsContainer(props: { isCurrent: boolean, channel: channel | undefin
     }
 
     const currentMixins = mixinsData[props.channel ? props.channel['channel_id'] : '']
+    const reversedMixins = currentMixins[props.mixinType] ? [...currentMixins[props.mixinType]] : []
 
     if (currentMixins && currentMixins.mixinsDataState === dataStates.requested) {
         return <div className='card-container card-100-container'><LoadingMixinCard/></div>
@@ -79,8 +80,7 @@ function MixinsContainer(props: { isCurrent: boolean, channel: channel | undefin
     }
 
     return <div className='card-container card-100-container'>
-        {currentMixins && currentMixins[props.mixinType]
-            .map(channel => <MixinCard key={channel['channel_id']} channel={channel} mixinType={props.mixinType}/>)}
+        {currentMixins && reversedMixins.map(channel => <MixinCard key={channel['channel_id']} channel={channel} mixinType={props.mixinType}/>)}
     </div>
 }
 

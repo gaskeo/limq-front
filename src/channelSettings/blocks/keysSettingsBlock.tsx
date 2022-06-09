@@ -51,6 +51,8 @@ export function KeysSettingsBlock(props: { isCurrent: boolean, channel: channel 
     const requested = createKeyState && createKeyState.dataState === dataStates.requested
     const hasError = createKeyState && createKeyState.status !== 200
 
+    const reversedKeys = currentKeys?.keys ? [...currentKeys.keys].reverse() : []
+
     if (!props.isCurrent) {
         return null
     }
@@ -86,7 +88,7 @@ export function KeysSettingsBlock(props: { isCurrent: boolean, channel: channel 
 
             <div className='card-100-container'>
                 {currentKeys?.keysDataState === dataStates.requested && <LoadingKeyCard/>}
-                {currentKeys?.keys && currentKeys.keys.length > 0 && currentKeys.keys.map(key => <KeyCard key={key.key}
+                {currentKeys?.keys && currentKeys.keys.length > 0 && reversedKeys.map(key => <KeyCard key={key.key}
                                                                                                           channelKey={key}/>)}
             </div>
         </div>

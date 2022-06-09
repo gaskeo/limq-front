@@ -62,6 +62,7 @@
 
 .card-icon-near-header {
     fill: var(--second-color);
+    cursor: pointer;
     width: 16px;
     height: 16px;
     margin-bottom: 8px;
