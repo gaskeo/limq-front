@@ -22,7 +22,6 @@ import {fetchChannels} from "./fetch/fetchChannels";
 import {UserSettings} from "./userSettings/userSettings";
 import {FetchActionTypes} from "./store/reducers/fetchReducer";
 
-
 function App() {
     const {id, userDataState} = useTypedSelector(state => state.user)
     const {channelsDataState} = useTypedSelector(state => state.channels)

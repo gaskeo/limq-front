@@ -27,7 +27,7 @@ export const fetchRenameChannel = (channelId: string, newChannelName: string) =>
                 }
             })
 
-            const response = await axios.post(ApiRoutes.RenameChannel, form, {
+            const response = await axios.put(ApiRoutes.RenameChannel, form, {
                 headers: {"Content-Type": "multipart/form-data"},
             })
 

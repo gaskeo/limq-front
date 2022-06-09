@@ -16,7 +16,7 @@ export const fetchToggleKey = (channelId: string, keyId: string) => {
         try {
             const form = createForm(keyId)
 
-            const response = await axios.post(ApiRoutes.ToggleKey, form, {
+            const response = await axios.put(ApiRoutes.ToggleKey, form, {
                 headers: {"Content-Type": "multipart/form-data"},
             })
 

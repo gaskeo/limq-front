@@ -27,7 +27,7 @@ export const fetchChangePassword = (oldPassword: string, password: string) => {
                 }
             })
 
-            const response = await axios.post(ApiRoutes.ChangePassword, form, {
+            const response = await axios.put(ApiRoutes.ChangePassword, form, {
                 headers: {"Content-Type": "multipart/form-data"},
             })
 

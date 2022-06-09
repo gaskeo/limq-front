@@ -25,7 +25,7 @@ export const fetchRenameUser = (newUsername: string) => {
                     state: {status: 200, message: '', dataState: dataStates.requested}
                 }
             })
-            const response = await axios.post(ApiRoutes.RenameUser, form, {
+            const response = await axios.put(ApiRoutes.RenameUser, form, {
                 headers: {"Content-Type": "multipart/form-data"},
             })
 

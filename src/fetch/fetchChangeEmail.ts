@@ -27,7 +27,7 @@ export const fetchChangeEmail = (newEmail: string, password: string) => {
                 }
             })
 
-            const response = await axios.post(ApiRoutes.ChangeEmail, form, {
+            const response = await axios.put(ApiRoutes.ChangeEmail, form, {
                 headers: {"Content-Type": "multipart/form-data"},
             })
 
