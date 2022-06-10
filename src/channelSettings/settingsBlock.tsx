@@ -1,10 +1,8 @@
 import {useTypedSelector} from "../hooks/useTypedSelector";
-import {useDispatch} from "react-redux";
 import {useEffect} from "react";
 import {dataStates} from "../store/reducers/consts";
-import {fetchGetKeys} from "../fetch/fetchGetKeys";
-import {fetchGetMixins} from "../fetch/fetchGetMixins";
 import {menuTabs} from "./channelSettings";
+import {useActions} from "../hooks/useActions";
 
 
 export function SettingsBlock(props: { channelId: string | undefined, currentTab: string | null }) {
@@ -21,7 +19,7 @@ export function SettingsBlock(props: { channelId: string | undefined, currentTab
             return
         }
         if (!keysData[currentChannel['channel_id']] || keysData[currentChannel['channel_id']].keysDataState === dataStates.notRequested) {
-            dispatch(fetchGetKeys(currentChannel['channel_id']) as any)
+            fetchGetKeys(currentChannel['channel_id'])
         }
 
     })
@@ -34,12 +32,12 @@ export function SettingsBlock(props: { channelId: string | undefined, currentTab
             return
         }
         if (!mixinsData[currentChannel['channel_id']] || mixinsData[currentChannel['channel_id']].mixinsDataState === dataStates.notRequested) {
-            dispatch(fetchGetMixins(currentChannel['channel_id']) as any)
+            fetchGetMixins(currentChannel['channel_id'])
         }
 
     })
 
-    const dispatch = useDispatch()
+    const {fetchGetKeys, fetchGetMixins} = useActions()
 
     if (!currentChannel) {
         return null

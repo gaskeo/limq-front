@@ -5,14 +5,13 @@ import React, {useState} from "react";
 import {Menu} from "../../elements/menu/menu";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {dataStates} from "../../store/reducers/consts";
-import {fetchCreateMixin} from "../../fetch/fetchCreateMixin";
-import {useDispatch} from "react-redux";
 import {MixinTypeStates} from "../../store/reducers/mixinsReducer";
 import {FetchActionTypes} from "../../store/reducers/fetchReducer";
 import {Loading} from "../../elements/loading/loading";
 import {LoadingMixinCard} from "./mixinCard/loadingMixinCard";
 import {NoMixinsCard} from "./mixinCard/noMixinsCard";
 import {MixinCard} from "./mixinCard/mixinCard";
+import {useActions} from "../../hooks/useActions";
 
 export function checkMixinLength(mixin: string) {
     return mixin.length === 32
@@ -76,8 +75,7 @@ export function MixinsSettingsBlock(props: { isCurrent: boolean, channel: Channe
             return
         }
         if (props.channel) {
-            dispatch(fetchCreateMixin(props.channel['channel_id'], keyId) as any)
-
+            fetchCreateMixin(props.channel['channel_id'], keyId)
         }
     }
 
@@ -87,7 +85,7 @@ export function MixinsSettingsBlock(props: { isCurrent: boolean, channel: Channe
         }
     }
 
-    const dispatch = useDispatch()
+    const {fetchCreateMixin} = useActions()
 
     const [keyId, changeKeyId] = useState('')
     const [activeTab, changeActiveTab] = useState(mixinTabs[0].parameterName)

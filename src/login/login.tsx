@@ -1,14 +1,14 @@
 import React, {useState} from "react";
 import {useDispatch} from "react-redux";
-import {fetchLogin} from "../fetch/fetchLogin";
 import {Input} from "../elements/inputs/input";
 import {Submit} from "../elements/inputs/submit";
 import {checkPasswordLength, confirmEmail} from "../register/register";
 import {useTypedSelector} from "../hooks/useTypedSelector";
 import {dataStates} from "../store/reducers/consts";
-import {ApiRoutes} from "../fetch/apiRoutes";
+import {ApiRoutes} from "../store/actionCreators/apiRoutes";
 import {Checkbox} from "../elements/inputs/checkbox";
 import {Loading} from "../elements/loading/loading";
+import {useActions} from "../hooks/useActions";
 
 export function Login() {
     function submit(event: React.FormEvent<HTMLFormElement>) {
@@ -23,7 +23,7 @@ export function Login() {
             return
         }
 
-        dispatch(fetchLogin(email, password, rememberMe) as any)
+        fetchLogin(email, password, rememberMe)
         return false;
     }
 
@@ -39,7 +39,7 @@ export function Login() {
         }
     }
 
-    const dispatch = useDispatch()
+    const {fetchLogin} = useActions()
 
     const [email, changeEmail] = useState('');
     const [password, changePassword] = useState('')

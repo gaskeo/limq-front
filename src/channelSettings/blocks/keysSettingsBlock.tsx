@@ -2,16 +2,15 @@ import {Channel} from "../../store/reducers/channelsReducer";
 import {Input} from "../../elements/inputs/input";
 import {Submit} from "../../elements/inputs/submit";
 import React, {useState} from "react";
-import {useDispatch} from "react-redux";
 import {Radio} from "../../elements/inputs/radio";
-import {fetchCreateKey} from "../../fetch/fetchCreateKey";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {dataStates} from "../../store/reducers/consts";
 import {Checkbox} from "../../elements/inputs/checkbox";
-import {ApiRoutes} from "../../fetch/apiRoutes";
+import {ApiRoutes} from "../../store/actionCreators/apiRoutes";
 import {Loading} from "../../elements/loading/loading";
 import {KeyCard} from "./keyCard/keyCard";
 import {LoadingKeyCard} from "./keyCard/loadingCard";
+import {useActions} from "../../hooks/useActions";
 
 export function checkKeyLength(key: string) {
     return key.length <= 32
@@ -32,10 +31,10 @@ export function KeysSettingsBlock(props: { isCurrent: boolean, channel: Channel 
             return
         }
 
-        dispatch(fetchCreateKey(keyName, keyType, props.channel['channel_id'], allowInfo) as any)
+        fetchCreateKey(keyName, keyType, props.channel['channel_id'], allowInfo)
     }
 
-    const dispatch = useDispatch()
+    const {fetchCreateKey} = useActions()
 
     const {keysData} = useTypedSelector(state => state.keys)
     const currentKeys = keysData[props.channel ? props.channel['channel_id'] : '']

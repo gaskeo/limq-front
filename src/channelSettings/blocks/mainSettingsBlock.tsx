@@ -2,13 +2,12 @@ import {Input} from "../../elements/inputs/input";
 import React, {useState} from "react";
 import {Submit} from "../../elements/inputs/submit";
 import {Channel} from "../../store/reducers/channelsReducer";
-import {useDispatch} from "react-redux";
-import {fetchRenameChannel} from "../../fetch/fetchRenameChannel";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {checkChannelLength} from "../../createChannel/createChannel";
 import {dataStates} from "../../store/reducers/consts";
-import {ApiRoutes} from "../../fetch/apiRoutes";
+import {ApiRoutes} from "../../store/actionCreators/apiRoutes";
 import {Loading} from "../../elements/loading/loading";
+import {useActions} from "../../hooks/useActions";
 
 export function MainSettingsBlock(props: { isCurrent: boolean, channel: Channel | undefined }) {
     function submit(event: React.FormEvent<HTMLFormElement>) {
@@ -26,7 +25,7 @@ export function MainSettingsBlock(props: { isCurrent: boolean, channel: Channel 
             return
         }
 
-        dispatch(fetchRenameChannel(props.channel['channel_id'], channelName) as any)
+        fetchRenameChannel(props.channel['channel_id'], channelName)
     }
 
     function checkChannelName(name: string) {
@@ -35,7 +34,7 @@ export function MainSettingsBlock(props: { isCurrent: boolean, channel: Channel 
         }
     }
 
-    const dispatch = useDispatch()
+    const {fetchRenameChannel} = useActions()
 
     const [channelName, changeChannelName] = useState('')
     const [errors, changeErrors] = useState({name: ''})

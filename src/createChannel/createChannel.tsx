@@ -1,12 +1,11 @@
 import {Input} from "../elements/inputs/input";
 import React, {useState} from "react";
 import {Submit} from "../elements/inputs/submit";
-import {useDispatch} from "react-redux";
-import {fetchCreateChannel} from "../fetch/fetchCreateChannel";
 import {useTypedSelector} from "../hooks/useTypedSelector";
 import {dataStates} from "../store/reducers/consts";
-import {ApiRoutes} from "../fetch/apiRoutes";
+import {ApiRoutes} from "../store/actionCreators/apiRoutes";
 import {Loading} from "../elements/loading/loading";
+import {useActions} from "../hooks/useActions";
 
 export function checkChannelLength(name: string) {
     return name.length <= 32
@@ -23,7 +22,7 @@ export function CreateChannel() {
             return
         }
 
-        dispatch(fetchCreateChannel(channelName) as any)
+        fetchCreateChannel(channelName)
     }
 
     function checkChannelName(name: string) {
@@ -32,8 +31,7 @@ export function CreateChannel() {
         }
     }
 
-    const dispatch = useDispatch()
-
+    const {fetchCreateChannel} = useActions()
     const [channelName, changeChannelName] = useState('')
     const [errors, changeErrors] = useState({name: ''})
 

@@ -1,13 +1,12 @@
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 import React, {useState} from "react";
-import {useDispatch} from "react-redux";
 import {Input} from "../../elements/inputs/input";
 import {Submit} from "../../elements/inputs/submit";
-import {fetchChangePassword} from "../../fetch/fetchChangePassword";
 import {dataStates} from "../../store/reducers/consts";
 import {checkPasswordLength, checkPasswordsMatch} from "../../register/register";
-import {ApiRoutes} from "../../fetch/apiRoutes";
+import {ApiRoutes} from "../../store/actionCreators/apiRoutes";
 import {Loading} from "../../elements/loading/loading";
+import {useActions} from "../../hooks/useActions";
 
 export function PasswordBlock(props: { isCurrent: boolean }) {
     function submit(event: React.FormEvent<HTMLFormElement>) {
@@ -24,7 +23,7 @@ export function PasswordBlock(props: { isCurrent: boolean }) {
         }
 
         if (id) {
-            dispatch(fetchChangePassword(oldPassword, newPassword) as any)
+            fetchChangePassword(oldPassword, newPassword)
         }
     }
 
@@ -51,7 +50,7 @@ export function PasswordBlock(props: { isCurrent: boolean }) {
     const [newPassword, changeNewPassword] = useState('')
     const [newPasswordAgain, changeNewPasswordAgain] = useState('')
 
-    const dispatch = useDispatch()
+    const {fetchChangePassword} = useActions()
 
     const [errors, changeErrors] = useState({oldPassword: '', newPassword: '', newPasswordAgain: ''})
 

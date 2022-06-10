@@ -5,45 +5,44 @@ import {Login} from "./login/login";
 
 import {Route, Routes, useLocation, useNavigate} from "react-router-dom";
 import {useTypedSelector} from "./hooks/useTypedSelector";
-import {useDispatch} from "react-redux";
 import {dataStates} from "./store/reducers/consts";
-import {fetchUser} from "./fetch/fetchUser";
 import {Register} from "./register/register";
 import {routes} from "./routes/routes";
 import {Redirect} from "./routes/redirect";
 import {Body} from './body/body';
 import {CreateChannel} from "./createChannel/createChannel";
 import {ChannelSettings} from "./channelSettings/channelSettings";
-import {fetchChannels} from "./fetch/fetchChannels";
 import {UserSettings} from "./userSettings/userSettings";
 import {FetchActionTypes} from "./store/reducers/fetchReducer";
 import {Loading} from "./elements/loading/loading";
+import {useActions} from "./hooks/useActions";
+import {useDispatch} from "react-redux";
 
 function App() {
     const {id, userDataState} = useTypedSelector(state => state.user)
     const {channelsDataState} = useTypedSelector(state => state.channels)
     const {path, pathId} = useTypedSelector(state => state.path)
 
+    const {fetchUser, fetchChannels} = useActions()
     const dispatch = useDispatch()
     const navigate = useNavigate();
     const location = useLocation();
 
     useEffect(() => {
         if (userDataState === dataStates.notRequested) {
-            dispatch(fetchUser() as any)
+            fetchUser()
         }
     })
 
     useEffect(() => {
         if (channelsDataState === dataStates.notRequested && userDataState === dataStates.received && id) {
-            dispatch(fetchChannels() as any)
+            fetchChannels()
         }
     })
 
     useEffect(() => {
         if (path) {
             dispatch({type: FetchActionTypes.deleteFetches})
-
             Redirect(path, navigate, location)
         }
     }, [pathId])

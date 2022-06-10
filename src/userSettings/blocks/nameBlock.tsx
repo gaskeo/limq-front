@@ -1,13 +1,12 @@
 import React, {useState} from "react";
-import {useDispatch} from "react-redux";
 import {Input} from "../../elements/inputs/input";
 import {Submit} from "../../elements/inputs/submit";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
-import {fetchRenameUser} from "../../fetch/fetchRenameUser";
 import {dataStates} from "../../store/reducers/consts";
 import {checkChannelLength} from "../../createChannel/createChannel";
-import {ApiRoutes} from "../../fetch/apiRoutes";
+import {ApiRoutes} from "../../store/actionCreators/apiRoutes";
 import {Loading} from "../../elements/loading/loading";
+import {useActions} from "../../hooks/useActions";
 
 export function checkUsernameLength(name: string) {
     return name.length <= 32
@@ -24,7 +23,7 @@ export function NameBlock(props: {isCurrent: boolean}) {
         }
 
         if (id) {
-            dispatch(fetchRenameUser(newUsername) as any)
+            fetchRenameUser(newUsername)
         }
     }
 
@@ -36,7 +35,7 @@ export function NameBlock(props: {isCurrent: boolean}) {
 
     const {id, username} = useTypedSelector(state => state.user)
     const [newUsername, changeNewUsername] = useState('')
-    const dispatch = useDispatch()
+    const {fetchRenameUser} = useActions()
 
     const [errors, changeErrors] = useState({name: ''})
 

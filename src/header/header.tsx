@@ -4,12 +4,12 @@ import {dataStates} from "../store/reducers/consts";
 import {routes} from "../routes/routes";
 import "./header.css";
 import {useDispatch} from "react-redux";
-import {fetchLogout} from "../fetch/fetchLogout";
 import {PathActionTypes} from "../store/reducers/pathReducer";
-import {getTheme, toggleTheme} from "../theme";
+import {toggleTheme} from "../theme";
 import {Theme} from "../svg/theme"
 import {Link} from "react-router-dom";
 import {User} from "../svg/user";
+import {useActions} from "../hooks/useActions";
 
 function UserButton() {
     function checkOutsideClick(event: Event):any {
@@ -20,14 +20,14 @@ function UserButton() {
 
     function exit() {
         return function () {
-            dispatch(fetchLogout() as any)
+            fetchLogout()
             changeOpen(false)
             return null
         }
     }
 
+    const {fetchLogout} = useActions()
     const {username} = useTypedSelector(state => state.user)
-    const dispatch = useDispatch()
     const [buttonOpen, changeOpen] = useState(false)
     document.addEventListener("mousedown", checkOutsideClick);
 

@@ -3,11 +3,11 @@ import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {useDispatch} from "react-redux";
 import {Input} from "../../elements/inputs/input";
 import {Submit} from "../../elements/inputs/submit";
-import {fetchChangeEmail} from "../../fetch/fetchChangeEmail";
 import {dataStates} from "../../store/reducers/consts";
 import {checkPasswordLength, confirmEmail} from "../../register/register";
-import {ApiRoutes} from "../../fetch/apiRoutes";
+import {ApiRoutes} from "../../store/actionCreators/apiRoutes";
 import {Loading} from "../../elements/loading/loading";
+import {useActions} from "../../hooks/useActions";
 
 function hideEmail(email: string) {
     if (email.length < 3) {
@@ -34,7 +34,7 @@ export function EmailBlock(props: { isCurrent: boolean }) {
         }
 
         if (id) {
-            dispatch(fetchChangeEmail(newEmail, password) as any)
+            changeEmail(newEmail, password)
             changePassword('')
         }
     }
@@ -56,15 +56,15 @@ export function EmailBlock(props: { isCurrent: boolean }) {
     const [newEmail, changeNewEmail] = useState('')
     const [password, changePassword] = useState('')
 
-    const dispatch = useDispatch()
+    const {changeEmail} = useActions()
 
     const [errors, changeErrors] = useState({email: '', password: ''})
 
     const {states} = useTypedSelector(state => state.fetch)
-    const changeEmail = states[ApiRoutes.ChangeEmail]
+    const changeEmailState = states[ApiRoutes.ChangeEmail]
 
-    const requested = changeEmail && changeEmail.dataState === dataStates.requested
-    const hasError = changeEmail && changeEmail.status !== 200
+    const requested = changeEmailState && changeEmailState.dataState === dataStates.requested
+    const hasError = changeEmailState && changeEmailState.status !== 200
 
     if (!props.isCurrent) {
         return null
@@ -88,7 +88,7 @@ export function EmailBlock(props: { isCurrent: boolean }) {
                        onChange={checkPassword}
                        setState={changePassword}
                        type='password'/>
-                <p className='error-text'>{hasError && changeEmail.message}</p>
+                <p className='error-text'>{hasError && changeEmailState.message}</p>
 
                 <Submit label={requested ? <Loading/> : 'Change Email'}/>
             </form>

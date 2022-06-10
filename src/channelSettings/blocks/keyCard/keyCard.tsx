@@ -1,24 +1,23 @@
 import {key} from "../../../store/reducers/keysReducer";
-import {fetchToggleKey} from "../../../fetch/fetchToggleKey";
-import {fetchDeleteKey} from "../../../fetch/fetchDeleteKey";
-import {useDispatch} from "react-redux";
 import React from "react";
 import {useTypedSelector} from "../../../hooks/useTypedSelector";
-import {ApiRoutes} from "../../../fetch/apiRoutes";
+import {ApiRoutes} from "../../../store/actionCreators/apiRoutes";
 import {dataStates} from "../../../store/reducers/consts";
 import {Loading} from "../../../elements/loading/loading";
+import {useActions} from "../../../hooks/useActions";
 
 export function KeyCard(props: { channelKey: key }) {
     function toggleActiveKey() {
-        dispatch(fetchToggleKey(props.channelKey.channel, props.channelKey.key) as any)
+        fetchToggleKey(props.channelKey.channel, props.channelKey.key)
     }
 
     function deleteKey() {
         if (window.confirm('Delete key?')) {
-            dispatch(fetchDeleteKey(props.channelKey.channel, props.channelKey.key) as any)
+            fetchDeleteKey(props.channelKey.channel, props.channelKey.key)
         }
     }
 
+    const {fetchDeleteKey, fetchToggleKey} = useActions()
     const perm = props.channelKey.read ? 'Read' : 'write'
 
     const {states} = useTypedSelector(state => state.fetch)
@@ -27,8 +26,6 @@ export function KeyCard(props: { channelKey: key }) {
     const requested = toggleKey && toggleKey.dataState === dataStates.requested
 
     const pauseResume = requested ? <div className='warning-loading'><Loading diameter='10px'/></div> : (props.channelKey.active ? 'Pause' : 'Resume')
-
-    const dispatch = useDispatch()
 
     return (
         <div className='card card-100 horizontal-scroll'>

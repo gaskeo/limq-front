@@ -1,12 +1,11 @@
-import {useDispatch} from "react-redux";
 import React, {useState} from "react";
-import {fetchRegister} from "../fetch/fetchRegister";
 import {Input} from "../elements/inputs/input";
 import {Submit} from "../elements/inputs/submit";
 import {dataStates} from "../store/reducers/consts";
 import {useTypedSelector} from "../hooks/useTypedSelector";
-import {ApiRoutes} from "../fetch/apiRoutes";
+import {ApiRoutes} from "../store/actionCreators/apiRoutes";
 import {Loading} from "../elements/loading/loading";
+import {useActions} from "../hooks/useActions";
 
 export function confirmEmail(email: string): boolean {
     if (!email.includes("@") || !email.includes(".")) {
@@ -47,7 +46,7 @@ export function Register() {
         if (newErrors.email || newErrors.username || newErrors.password || newErrors.passwordAgain) {
             return
         }
-        dispatch(fetchRegister(email, username, password) as any)
+        fetchRegister(email, username, password)
         return false;
     }
 
@@ -75,7 +74,7 @@ export function Register() {
         }
     }
 
-    const dispatch = useDispatch()
+    const {fetchRegister} = useActions()
 
     const [email, changeEmail] = useState('');
     const [username, changeUsername] = useState('');
