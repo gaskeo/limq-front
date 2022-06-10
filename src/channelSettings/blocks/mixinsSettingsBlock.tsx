@@ -1,4 +1,4 @@
-import {channel} from "../../store/reducers/channelsReducer";
+import {Channel} from "../../store/reducers/channelsReducer";
 import {Input} from "../../elements/inputs/input";
 import {Submit} from "../../elements/inputs/submit";
 import React, {useState} from "react";
@@ -8,60 +8,17 @@ import {dataStates} from "../../store/reducers/consts";
 import {fetchCreateMixin} from "../../fetch/fetchCreateMixin";
 import {useDispatch} from "react-redux";
 import {MixinTypeStates} from "../../store/reducers/mixinsReducer";
-import {useParams} from "react-router-dom";
-import {fetchRestrictMixin} from "../../fetch/fetchRestrictMixin";
 import {FetchActionTypes} from "../../store/reducers/fetchReducer";
 import {Loading} from "../../elements/loading/loading";
+import {LoadingMixinCard} from "./mixinCard/loadingMixinCard";
+import {NoMixinsCard} from "./mixinCard/noMixinsCard";
+import {MixinCard} from "./mixinCard/mixinCard";
 
 export function checkMixinLength(mixin: string) {
     return mixin.length === 32
 }
 
-
-function MixinCard(props: { channel: channel, mixinType: MixinTypeStates }) {
-    function deleteMixin() {
-        if (channelId && window.confirm('Delete key?')) {
-            dispatch(fetchRestrictMixin(channelId, props.channel['channel_id'], props.mixinType) as any)
-        }
-    }
-
-    const {channelId} = useParams()
-    const dispatch = useDispatch()
-
-    return (
-        <div className='card card-100' key={props.channel["channel_id"]}>
-            <div className='card-header-container'>
-                <div className='card-header'>{props.channel['channel_name']}</div>
-            </div>
-            <div className='card-info-container'>
-                <code className='card-code card-background-text'>{props.channel['channel_id']}</code>
-                <button className='button mini-button error' onClick={deleteMixin}>Delete</button>
-            </div>
-        </div>
-    )
-}
-
-function LoadingMixinCard() {
-    return (
-        <div className='card card-100 horizontal-scroll'>
-            <div className='center height-100'>
-                <Loading/>
-            </div>
-        </div>
-    )
-}
-
-function NoMixinsCard(props: {mixinType: string}) {
-    return (
-        <div className='card add-channel-card card-100 horizontal-scroll'>
-            <div className='add-channel-card-text width-100 center'>
-                <h1 className='card-header'>You haven't {props.mixinType} mixins</h1>
-            </div>
-        </div>
-    )
-}
-
-function MixinsContainer(props: { isCurrent: boolean, channel: channel | undefined, mixinType: MixinTypeStates }) {
+function MixinsContainer(props: { isCurrent: boolean, channel: Channel | undefined, mixinType: MixinTypeStates }) {
     const {mixinsData} = useTypedSelector(state => state.mixins)
 
     if (!props.isCurrent) {
@@ -69,7 +26,7 @@ function MixinsContainer(props: { isCurrent: boolean, channel: channel | undefin
     }
 
     const currentMixins = mixinsData[props.channel ? props.channel['channel_id'] : '']
-    const reversedMixins = currentMixins[props.mixinType] ? [...currentMixins[props.mixinType]] : []
+    const reversedMixins = currentMixins && (currentMixins[props.mixinType] ? [...currentMixins[props.mixinType]] : [])
 
     if (currentMixins && currentMixins.mixinsDataState === dataStates.requested) {
         return <div className='card-container card-100-container'><LoadingMixinCard/></div>
@@ -80,24 +37,25 @@ function MixinsContainer(props: { isCurrent: boolean, channel: channel | undefin
     }
 
     return <div className='card-container card-100-container'>
-        {currentMixins && reversedMixins.map(channel => <MixinCard key={channel['channel_id']} channel={channel} mixinType={props.mixinType}/>)}
+        {currentMixins && reversedMixins.map(channel => <MixinCard key={channel['channel_id']} channel={channel}
+                                                                   mixinType={props.mixinType}/>)}
     </div>
 }
 
 export const mixinTabs = [
     {
         name: 'In', parameterName: 'in',
-        id: 1, block: () => ((isCurrent: boolean, channel: channel | undefined) =>
+        id: 1, block: () => ((isCurrent: boolean, channel: Channel | undefined) =>
             <MixinsContainer key='1' isCurrent={isCurrent} channel={channel} mixinType={MixinTypeStates.in}/>)
     },
     {
         name: 'Out', parameterName: 'keys',
-        id: 2, block: () => ((isCurrent: boolean, channel: channel | undefined) =>
+        id: 2, block: () => ((isCurrent: boolean, channel: Channel | undefined) =>
             <MixinsContainer key='2' isCurrent={isCurrent} channel={channel} mixinType={MixinTypeStates.out}/>)
     },
 ]
 
-export function MixinsSettingsBlock(props: { isCurrent: boolean, channel: channel | undefined }) {
+export function MixinsSettingsBlock(props: { isCurrent: boolean, channel: Channel | undefined }) {
     function changeTab(tab: string) {
         return function () {
             changeActiveTab(tab)

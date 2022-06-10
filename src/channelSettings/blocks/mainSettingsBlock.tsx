@@ -1,7 +1,7 @@
 import {Input} from "../../elements/inputs/input";
 import React, {useState} from "react";
 import {Submit} from "../../elements/inputs/submit";
-import {channel} from "../../store/reducers/channelsReducer";
+import {Channel} from "../../store/reducers/channelsReducer";
 import {useDispatch} from "react-redux";
 import {fetchRenameChannel} from "../../fetch/fetchRenameChannel";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
@@ -10,7 +10,7 @@ import {dataStates} from "../../store/reducers/consts";
 import {ApiRoutes} from "../../fetch/apiRoutes";
 import {Loading} from "../../elements/loading/loading";
 
-export function MainSettingsBlock(props: { isCurrent: boolean, channel: channel | undefined }) {
+export function MainSettingsBlock(props: { isCurrent: boolean, channel: Channel | undefined }) {
     function submit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault()
 

@@ -5,7 +5,7 @@ interface keyTypesCount {
     inactive: number
 }
 
-export interface channel {
+export interface Channel {
     channel_id: string,
     channel_name: string,
     read_keys: keyTypesCount,
@@ -13,7 +13,7 @@ export interface channel {
 }
 
 interface channelsState {
-    channels: channel[],
+    channels: Channel[],
     channelsDataState: dataStates.notRequested | dataStates.requested | dataStates.received | dataStates.error
 }
 
@@ -31,12 +31,12 @@ export enum ChannelsActionTypes {
 
 interface setChannelsAction {
     type: ChannelsActionTypes.setChannels,
-    payload: channel[]
+    payload: Channel[]
 }
 
 interface addChannelAction {
     type: ChannelsActionTypes.addChannel,
-    payload: channel
+    payload: Channel
 }
 
 type ChannelId = string

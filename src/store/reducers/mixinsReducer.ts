@@ -1,13 +1,13 @@
 import {dataStates} from "./consts";
-import {channel} from "./channelsReducer";
+import {Channel} from "./channelsReducer";
 
 
 interface MixinState {
     mixinsData: {
         [channelId: string]:
             {
-                in: channel[],
-                out: channel[],
+                in: Channel[],
+                out: Channel[],
                 mixinsDataState: dataStates.notRequested | dataStates.requested | dataStates.received | dataStates.error
             }
     },
@@ -36,12 +36,12 @@ type MixinType = MixinTypeStates.in | MixinTypeStates.out
 
 interface setMixinsAction {
     type: MixinActionTypes.setMixins,
-    payload: { channelId: ChannelId, mixins: {in: channel[], out: channel[]} }
+    payload: { channelId: ChannelId, mixins: {in: Channel[], out: Channel[]} }
 }
 
 interface addMixinAction {
     type: MixinActionTypes.addMixin,
-    payload: { channelId: ChannelId, mixin: channel, mixinType: MixinType }
+    payload: { channelId: ChannelId, mixin: Channel, mixinType: MixinType }
 }
 
 
@@ -61,7 +61,7 @@ export type mixinAction = setMixinsAction | addMixinAction | deleteMixinAction |
 export function MixinsReducer(state = defaultState, action: mixinAction): MixinState {
     const channelId = action.payload?.channelId;
     const mixins = state.mixinsData
-    let dataState, newMixins: {in: channel[], out: channel[]}= {in: [], out: []}
+    let dataState, newMixins: {in: Channel[], out: Channel[]}= {in: [], out: []}
     switch (action.type) {
         case MixinActionTypes.setMixins:
             newMixins = action.payload.mixins

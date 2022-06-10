@@ -49,7 +49,7 @@ function App() {
     }, [pathId])
 
     if (![dataStates.received, dataStates.error].includes(userDataState)) {
-        return <div className='grey-window'><Loading/></div>
+        return <div className='grey-window center vertical-center'><Loading/></div>
     }
 
     return (

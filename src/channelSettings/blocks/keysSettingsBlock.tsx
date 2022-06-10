@@ -1,4 +1,4 @@
-import {channel} from "../../store/reducers/channelsReducer";
+import {Channel} from "../../store/reducers/channelsReducer";
 import {Input} from "../../elements/inputs/input";
 import {Submit} from "../../elements/inputs/submit";
 import React, {useState} from "react";
@@ -17,7 +17,7 @@ export function checkKeyLength(key: string) {
     return key.length <= 32
 }
 
-export function KeysSettingsBlock(props: { isCurrent: boolean, channel: channel | undefined }) {
+export function KeysSettingsBlock(props: { isCurrent: boolean, channel: Channel | undefined }) {
     function submit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault()
 

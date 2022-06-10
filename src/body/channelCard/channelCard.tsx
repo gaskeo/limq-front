@@ -1,4 +1,4 @@
-import {channel} from "../../store/reducers/channelsReducer";
+import {Channel} from "../../store/reducers/channelsReducer";
 import {Circle} from "../../svg/circle";
 import {Key} from "../../svg/key";
 import {Settings} from "../../svg/settings";
@@ -6,7 +6,7 @@ import {useNavigate} from "react-router-dom";
 import {routes} from "../../routes/routes";
 import React from "react";
 
-export function ChannelCard(props: { channel: channel }) {
+export function ChannelCard(props: { channel: Channel }) {
     function onClick() {
         return function () {
             navigate(routes.channelSettings.replace(':channelId', props.channel.channel_id))
