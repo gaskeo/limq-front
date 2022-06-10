@@ -85,6 +85,10 @@ body {
 }
 
 .button {
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    box-sizing: border-box;
     outline: none;
     border: 1px solid var(--third-color);
     border-radius: 5px;
@@ -94,7 +98,7 @@ body {
     background-color: var(--fourth-color);
     color: var(--second-color);
     padding: 6px;
-    transition: .2s background-color;
+    transition: .2s background-color, .2s border;
 }
 
 .button:hover {
@@ -135,11 +139,6 @@ body {
 [data-theme="dark"] .theme-icon {
     transform: rotate(180deg);
 
-}
-
-
-.theme-icon:hover {
-    fill: var(--fifth-color)
 }
 
 @media screen and (max-width: 600px) {
