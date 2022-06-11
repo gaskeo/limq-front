@@ -18,6 +18,10 @@ export function getTheme(): availableThemesType {
         return currentTheme
     }
 
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        setTheme(availableThemes.dark)
+        return availableThemes.dark
+    }
     setTheme(availableThemes.light)
     return availableThemes.light
 }
