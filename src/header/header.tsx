@@ -27,7 +27,7 @@ function UserButton() {
     }
 
     const {fetchLogout} = useActions()
-    const {username} = useTypedSelector(state => state.user)
+    const {user} = useTypedSelector(state => state.user)
     const [buttonOpen, changeOpen] = useState(false)
     document.addEventListener("mousedown", checkOutsideClick);
 
@@ -38,7 +38,7 @@ function UserButton() {
                 <User/>
             </div>
             <div className={'dropdown ' + (buttonOpen ? 'show' : '')}>
-                <div className='button mini-button dropdown-item no-hover'>{username}</div>
+                <div className='button mini-button dropdown-item no-hover'>{user.username}</div>
                 <Link to={routes.userSettings} className='button mini-button dropdown-item'>Settings</Link>
                 <button className='button mini-button dropdown-item' onClick={exit()}>Exit</button>
             </div>
@@ -53,7 +53,7 @@ export function Header() {
         }
     }
 
-    const {id, userDataState} = useTypedSelector(state => state.user)
+    const {user, userDataState} = useTypedSelector(state => state.user)
     const dispatch = useDispatch()
 
     return (
@@ -66,7 +66,7 @@ export function Header() {
                 <div className='horizontal'>
                     <div onClick={toggleTheme}
                          className='header-element'><div className='theme-icon'><Theme/></div></div>
-                    {userDataState === dataStates.received && id ? <UserButton/> :
+                    {userDataState === dataStates.received && user.id ? <UserButton/> :
                         <button className='button mini-button' onClick={onClick(routes.login)}>Login</button>}
                 </div>
             </div>

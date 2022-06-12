@@ -1,6 +1,5 @@
 import React, {useState} from "react";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
-import {useDispatch} from "react-redux";
 import {Input} from "../../elements/inputs/input";
 import {Submit} from "../../elements/inputs/submit";
 import {dataStates} from "../../store/reducers/consts";
@@ -33,7 +32,7 @@ export function EmailBlock(props: { isCurrent: boolean }) {
             return
         }
 
-        if (id) {
+        if (user.id) {
             changeEmail(newEmail, password)
             changePassword('')
         }
@@ -52,7 +51,7 @@ export function EmailBlock(props: { isCurrent: boolean }) {
     }
 
 
-    const {id, email} = useTypedSelector(state => state.user)
+    const {user} = useTypedSelector(state => state.user)
     const [newEmail, changeNewEmail] = useState('')
     const [password, changePassword] = useState('')
 
@@ -70,7 +69,7 @@ export function EmailBlock(props: { isCurrent: boolean }) {
         return null
     }
 
-    const placeholder = email ? hideEmail(email) : ''
+    const placeholder = user.email ? hideEmail(user.email) : ''
     return (
         <div>
             <h1 className='header-1'>Change email</h1>

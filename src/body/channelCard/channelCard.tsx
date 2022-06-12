@@ -2,25 +2,21 @@ import {Channel} from "../../store/reducers/channelsReducer";
 import {Circle} from "../../svg/circle";
 import {Key} from "../../svg/key";
 import {Settings} from "../../svg/settings";
-import {useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {routes} from "../../routes/routes";
 import React from "react";
 
 export function ChannelCard(props: { channel: Channel }) {
-    function onClick() {
-        return function () {
-            navigate(routes.channelSettings.replace(':channelId', props.channel.channel_id))
-        }
-    }
-    const navigate = useNavigate()
-
     const activeChannel = Boolean(props.channel.write_keys.active || props.channel.read_keys.active)
 
     return (
         <div className='card'>
             <div className='card-header-container'>
                 <h1 className='card-header'>{props.channel.channel_name}</h1>
-                <span className='card-icon-near-header' onClick={onClick()}><Settings/></span>
+                <Link className='card-icon-near-header'
+                      to={routes.channelSettings.replace(':channelId', props.channel.channel_id)}>
+                    <Settings/>
+                </Link>
             </div>
             <div className='card-info-container'>
                 <code className='card-code'>#{props.channel.channel_id}</code>

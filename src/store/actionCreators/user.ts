@@ -2,7 +2,7 @@ import {Dispatch} from "@reduxjs/toolkit";
 
 import axios, {AxiosError} from "axios";
 import {rootActions} from "../reducers";
-import {userAction, UserActionTypes} from "../reducers/userReducer";
+import {User, userAction, UserActionTypes} from "../reducers/userReducer";
 import {FetchActionTypes} from "../reducers/fetchReducer";
 import {dataStates} from "../reducers/consts";
 import {ApiRoutes} from "./apiRoutes";
@@ -13,14 +13,13 @@ export const fetchUser = () => {
     return async (dispatch: Dispatch<userAction>) => {
         try {
             dispatch({type: UserActionTypes.setUserDataState, payload: dataStates.requested})
-            const response = await axios(ApiRoutes.GetUser)
+            const response = await axios.get<{ auth: boolean, user: User, path: string }>(ApiRoutes.GetUser)
             if (response.data['auth']) {
                 dispatch({type: UserActionTypes.setUser, payload: response.data['user']})
             }
 
             dispatch({type: UserActionTypes.setUserDataState, payload: dataStates.received})
-        }
-        catch (error) {
+        } catch (error) {
             dispatch({type: UserActionTypes.setUserDataState, payload: dataStates.error})
         }
     }
@@ -47,7 +46,7 @@ export const fetchLogin = (email: string, password: string, rememberMe: boolean)
                 }
             })
 
-            const response = await axios.post(ApiRoutes.Login, form, {
+            const response = await axios.post<{ auth: boolean, user: User, path: string }>(ApiRoutes.Login, form, {
                 headers: {"Content-Type": "multipart/form-data"},
             })
 
@@ -102,7 +101,7 @@ export const fetchRegister = (email: string, username: string, password: string)
                 }
             })
 
-            const response = await axios.post(ApiRoutes.Register, form, {
+            const response = await axios.post<{ status: boolean, path: string }>(ApiRoutes.Register, form, {
                 headers: {"Content-Type": "multipart/form-data"},
             })
 
@@ -143,7 +142,7 @@ export const fetchRenameUser = (newUsername: string) => {
                     state: {status: 200, message: '', dataState: dataStates.requested}
                 }
             })
-            const response = await axios.put(ApiRoutes.RenameUser, form, {
+            const response = await axios.put<{ auth: boolean, user: User, path: string }>(ApiRoutes.RenameUser, form, {
                 headers: {"Content-Type": "multipart/form-data"},
             })
 
@@ -192,7 +191,7 @@ export const changeEmail = (newEmail: string, password: string) => {
                 }
             })
 
-            const response = await axios.put(ApiRoutes.ChangeEmail, form, {
+            const response = await axios.put<{ auth: boolean, user: User, path: string }>(ApiRoutes.ChangeEmail, form, {
                 headers: {"Content-Type": "multipart/form-data"},
             })
 
@@ -241,7 +240,8 @@ export const fetchChangePassword = (oldPassword: string, password: string) => {
                 }
             })
 
-            const response = await axios.put(ApiRoutes.ChangePassword, form, {
+            const response = await axios.put<{ auth: boolean, user: User, path: string }>
+            (ApiRoutes.ChangePassword, form, {
                 headers: {"Content-Type": "multipart/form-data"},
             })
 
@@ -274,7 +274,7 @@ export const fetchChangePassword = (oldPassword: string, password: string) => {
 export const fetchLogout = () => {
     return async (dispatch: Dispatch<rootActions>) => {
         try {
-            const response = await axios.post(ApiRoutes.Logout, {}, {
+            const response = await axios.post<{ auth: boolean }>(ApiRoutes.Logout, {}, {
                 headers: {"Content-Type": "multipart/form-data"},
             })
 

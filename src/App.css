@@ -38,10 +38,24 @@ body {
 
 .header-1 {
     line-height: 1.2em;
+    font-size: xx-large;
     font-family: var(--header-font-family);
     color: var(--second-color);
 }
 
+.header-2 {
+    line-height: 1.2em;
+    font-size: x-large;
+    font-family: var(--header-font-family);
+    color: var(--second-color)
+}
+
+.header-3 {
+    line-height: 1.2em;
+    font-size: large;
+    font-family: var(--header-font-family);
+    color: var(--second-color)
+}
 .center {
     display: flex;
     justify-content: center;
@@ -139,6 +153,10 @@ body {
 [data-theme="dark"] .theme-icon {
     transform: rotate(180deg);
 
+}
+
+.text {
+    color: var(--second-color)
 }
 
 @media screen and (max-width: 600px) {

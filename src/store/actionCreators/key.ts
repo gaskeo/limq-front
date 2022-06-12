@@ -1,10 +1,11 @@
 import {Dispatch} from "@reduxjs/toolkit";
 import {rootActions} from "../reducers";
-import {KeyActionTypes} from "../reducers/keysReducer";
+import {Key, KeyActionTypes} from "../reducers/keysReducer";
 import {dataStates} from "../reducers/consts";
 import axios, {AxiosError} from "axios";
 import {ApiRoutes} from "./apiRoutes";
 import {FetchActionTypes} from "../reducers/fetchReducer";
+import {ChannelsActionTypes} from "../reducers/channelsReducer";
 
 export const fetchGetKeys = (channelId: string) => {
     return async (dispatch: Dispatch<rootActions>) => {
@@ -60,7 +61,7 @@ export const fetchCreateKey = (keyName: string, permission: string, channelId: s
                 }
             })
 
-            const response = await axios.post(ApiRoutes.Grant, form, {
+            const response = await axios.post<Key>(ApiRoutes.Grant, form, {
                 headers: {"Content-Type": "multipart/form-data"},
             })
 
@@ -73,6 +74,11 @@ export const fetchCreateKey = (keyName: string, permission: string, channelId: s
                         state: {status: 200, message: '', dataState: dataStates.received}
                     }
                 })
+                dispatch({
+                    type: ChannelsActionTypes.plusActiveKeys,
+                    payload: {channelId: channelId, keyType: response.data.read ? 'read_keys' : 'write_keys', count: 1}
+                })
+
             }
         } catch (error: AxiosError | any) {
             dispatch({
@@ -95,38 +101,47 @@ function createToggleKeyForm(keyId: string): FormData {
     return form
 }
 
-export const fetchToggleKey = (channelId: string, keyId: string) => {
+export const fetchToggleKey = (channelId: string, key: Key) => {
     return async (dispatch: Dispatch<rootActions>) => {
         try {
-            const form = createToggleKeyForm(keyId)
+            const form = createToggleKeyForm(key.key)
 
             dispatch({
                 type: FetchActionTypes.setFetch,
                 payload: {
-                    identifier: ApiRoutes.ToggleKey + keyId,
+                    identifier: ApiRoutes.ToggleKey + key.key,
                     state: {status: 200, message: '', dataState: dataStates.requested}
                 }
             })
 
-            const response = await axios.put(ApiRoutes.ToggleKey, form, {
+            const response = await axios.put<Key>(ApiRoutes.ToggleKey, form, {
                 headers: {"Content-Type": "multipart/form-data"},
             })
 
             if (response.data) {
+                const keyType = key.read ? 'read_keys' : 'write_keys'
                 dispatch({type: KeyActionTypes.replaceKey, payload: {channelId: channelId, key: response.data}})
                 dispatch({
                     type: FetchActionTypes.setFetch,
                     payload: {
-                        identifier: ApiRoutes.ToggleKey + keyId,
+                        identifier: ApiRoutes.ToggleKey + key.key,
                         state: {status: 200, message: '', dataState: dataStates.received}
                     }
+                })
+                dispatch({
+                    type: key.active ? ChannelsActionTypes.plusActiveKeys : ChannelsActionTypes.plusInactiveKeys,
+                    payload: {channelId: channelId, keyType: keyType, count: -1}
+                })
+                dispatch({
+                    type: key.active ? ChannelsActionTypes.plusInactiveKeys : ChannelsActionTypes.plusActiveKeys,
+                    payload: {channelId: channelId, keyType: keyType, count: 1}
                 })
             }
         } catch (error: AxiosError | any) {
             dispatch({
                 type: FetchActionTypes.setFetch,
                 payload: {
-                    identifier: ApiRoutes.ToggleKey + keyId,
+                    identifier: ApiRoutes.ToggleKey + key.key,
                     state: {status: error.status, message: '', dataState: dataStates.error}
                 }
             })
@@ -141,22 +156,27 @@ function createDeleteKeyForm(keyId: string): FormData {
     return form
 }
 
-export const fetchDeleteKey = (channelId: string, keyId: string) => {
+export const fetchDeleteKey = (channelId: string, key: Key) => {
     return async (dispatch: Dispatch<rootActions>) => {
         try {
-            const form = createDeleteKeyForm(keyId)
+            const form = createDeleteKeyForm(key.key)
 
-            const response = await axios.post(ApiRoutes.DeleteKey, form, {
+            const response = await axios.post<{key: string}>(ApiRoutes.DeleteKey, form, {
                 headers: {"Content-Type": "multipart/form-data"},
             })
 
-            if (response.data && response.data['key'] === keyId) {
-                dispatch({type: KeyActionTypes.deleteKey,
-                    payload: {channelId: channelId, keyId: response.data['key']}})
+            if (response.data && response.data['key'] === key.key) {
+                const active = key.active ? ChannelsActionTypes.plusActiveKeys : ChannelsActionTypes.plusInactiveKeys
+                const keyType = key.read ? 'read_keys' : 'write_keys'
+                dispatch({
+                    type: KeyActionTypes.deleteKey,
+                    payload: {channelId: channelId, keyId: response.data['key']}
+                })
+
+                dispatch({type: active, payload: {channelId: channelId, keyType: keyType, count: -1}})
             }
 
-        }
-        catch (error: AxiosError | any) {
+        } catch (error: AxiosError | any) {
             console.log(error.message)
         }
     }

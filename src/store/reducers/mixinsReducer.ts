@@ -2,15 +2,16 @@ import {dataStates} from "./consts";
 import {Channel} from "./channelsReducer";
 
 
-interface MixinState {
+export interface Mixin {
+    in: Channel[],
+    out: Channel[],
+    mixinsDataState: dataStates.notRequested | dataStates.requested | dataStates.received | dataStates.error
+}
+
+export interface MixinState {
     mixinsData: {
-        [channelId: string]:
-            {
-                in: Channel[],
-                out: Channel[],
-                mixinsDataState: dataStates.notRequested | dataStates.requested | dataStates.received | dataStates.error
-            }
-    },
+        [channelId: string]: Mixin
+    }
 }
 
 const defaultState: MixinState = {

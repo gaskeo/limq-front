@@ -22,7 +22,7 @@ export function PasswordBlock(props: { isCurrent: boolean }) {
             return
         }
 
-        if (id) {
+        if (user.id) {
             fetchChangePassword(oldPassword, newPassword)
         }
     }
@@ -45,7 +45,7 @@ export function PasswordBlock(props: { isCurrent: boolean }) {
         }
     }
 
-    const {id} = useTypedSelector(state => state.user)
+    const {user} = useTypedSelector(state => state.user)
     const [oldPassword, changeOldPassword] = useState('')
     const [newPassword, changeNewPassword] = useState('')
     const [newPasswordAgain, changeNewPasswordAgain] = useState('')

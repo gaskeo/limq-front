@@ -1,10 +1,11 @@
 import {Dispatch} from "@reduxjs/toolkit";
 import {rootActions} from "../reducers";
-import {MixinActionTypes, MixinTypeStates} from "../reducers/mixinsReducer";
+import {MixinActionTypes, Mixin, MixinTypeStates} from "../reducers/mixinsReducer";
 import {dataStates} from "../reducers/consts";
 import axios, {AxiosError} from "axios";
 import {ApiRoutes} from "./apiRoutes";
 import {FetchActionTypes} from "../reducers/fetchReducer";
+import {Channel} from "../reducers/channelsReducer";
 
 export const fetchGetMixins = (channelId: string) => {
     return async (dispatch: Dispatch<rootActions>) => {
@@ -17,7 +18,7 @@ export const fetchGetMixins = (channelId: string) => {
                 }
             })
 
-            const response = await axios(ApiRoutes.GetMixins, {params: {'channel_id': channelId}})
+            const response = await axios.get<Mixin>(ApiRoutes.GetMixins, {params: {'channel_id': channelId}})
 
             if (response.data) {
                 dispatch({type: MixinActionTypes.setMixins, payload: {channelId: channelId, mixins: response.data}})
@@ -55,7 +56,7 @@ export const fetchCreateMixin = (channelId: string, keyId: string) => {
                 }
             })
 
-            const response = await axios.post(ApiRoutes.CreateMixin, form, {
+            const response = await axios.post<{ mixin: Channel }>(ApiRoutes.CreateMixin, form, {
                 headers: {"Content-Type": "multipart/form-data"},
             })
 
@@ -104,7 +105,7 @@ export const fetchRestrictMixin = (subject: string, channelId: string, mixinType
         try {
             const form = createRestrictMixinForm(subject, channelId, mixinType)
 
-            const response = await axios.post(ApiRoutes.RestrictMixin, form, {
+            const response = await axios.post<{ mixin: string }>(ApiRoutes.RestrictMixin, form, {
                 headers: {"Content-Type": "multipart/form-data"},
             })
 

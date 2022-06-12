@@ -1,4 +1,4 @@
-import {key} from "../../../store/reducers/keysReducer";
+import {Key} from "../../../store/reducers/keysReducer";
 import React from "react";
 import {useTypedSelector} from "../../../hooks/useTypedSelector";
 import {ApiRoutes} from "../../../store/actionCreators/apiRoutes";
@@ -6,14 +6,14 @@ import {dataStates} from "../../../store/reducers/consts";
 import {Loading} from "../../../elements/loading/loading";
 import {useActions} from "../../../hooks/useActions";
 
-export function KeyCard(props: { channelKey: key }) {
+export function KeyCard(props: { channelKey: Key }) {
     function toggleActiveKey() {
-        fetchToggleKey(props.channelKey.channel, props.channelKey.key)
+        fetchToggleKey(props.channelKey.channel, props.channelKey)
     }
 
     function deleteKey() {
         if (window.confirm('Delete key?')) {
-            fetchDeleteKey(props.channelKey.channel, props.channelKey.key)
+            fetchDeleteKey(props.channelKey.channel, props.channelKey)
         }
     }
 

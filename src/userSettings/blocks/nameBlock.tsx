@@ -22,7 +22,7 @@ export function NameBlock(props: {isCurrent: boolean}) {
             return
         }
 
-        if (id) {
+        if (user.id) {
             fetchRenameUser(newUsername)
         }
     }
@@ -33,7 +33,7 @@ export function NameBlock(props: {isCurrent: boolean}) {
         }
     }
 
-    const {id, username} = useTypedSelector(state => state.user)
+    const {user} = useTypedSelector(state => state.user)
     const [newUsername, changeNewUsername] = useState('')
     const {fetchRenameUser} = useActions()
 
@@ -49,7 +49,7 @@ export function NameBlock(props: {isCurrent: boolean}) {
         return null
     }
 
-    const placeholder = username ? username : ''
+    const placeholder = user.username ? user.username : ''
     return (
         <div>
             <h1 className='header-1'>Main settings</h1>

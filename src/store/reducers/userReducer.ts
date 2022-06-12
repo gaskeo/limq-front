@@ -1,16 +1,19 @@
 import {dataStates} from "./consts";
 
-interface userState {
+export interface User {
     id: number | null,
     username: string | null,
     email: string | null,
+}
+
+interface userState {
+    user: User,
     userDataState: dataStates.notRequested | dataStates.requested | dataStates.received | dataStates.error
+
 }
 
 const defaultState: userState = {
-    id: 0,
-    email: null,
-    username: null,
+    user: {id: 0, email: '', username: ''},
     userDataState: dataStates.notRequested
 }
 
@@ -22,7 +25,7 @@ export enum UserActionTypes {
 
 interface setUserAction {
     type: UserActionTypes.setUser,
-    payload: {id: number, username: string, email: string}
+    payload: User
 }
 
 interface setUserDataAction {
@@ -39,7 +42,7 @@ export type userAction = setUserAction | setUserDataAction | deleteUser
 export function UserReducer(state: userState = defaultState, action: userAction):userState {
     switch (action.type) {
         case UserActionTypes.setUser:
-            return {...state, id: action.payload.id, username: action.payload.username, email: action.payload.email}
+            return {...state, user: action.payload}
         case UserActionTypes.setUserDataState:
             return {...state, userDataState: action.payload}
         case UserActionTypes.deleteUser:

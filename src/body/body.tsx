@@ -6,7 +6,7 @@ import {Loading} from "../elements/loading/loading";
 import './body.css';
 
 export function Body() {
-    const {id, userDataState} = useTypedSelector(state => state.user)
+    const {user, userDataState} = useTypedSelector(state => state.user)
 
     if (userDataState === dataStates.notRequested || userDataState === dataStates.requested) {
         return <div className='center vertical-center'><Loading/></div>
@@ -16,7 +16,7 @@ export function Body() {
         return <div>something went wrong...</div>
     }
 
-    if (userDataState === dataStates.received && id) {
+    if (userDataState === dataStates.received && user.id) {
         return <RegisterBody/>
     }
     return <BaseBody/>

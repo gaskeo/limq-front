@@ -14,12 +14,11 @@ import {CreateChannel} from "./createChannel/createChannel";
 import {ChannelSettings} from "./channelSettings/channelSettings";
 import {UserSettings} from "./userSettings/userSettings";
 import {FetchActionTypes} from "./store/reducers/fetchReducer";
-import {Loading} from "./elements/loading/loading";
 import {useActions} from "./hooks/useActions";
 import {useDispatch} from "react-redux";
 
 function App() {
-    const {id, userDataState} = useTypedSelector(state => state.user)
+    const {user, userDataState} = useTypedSelector(state => state.user)
     const {channelsDataState} = useTypedSelector(state => state.channels)
     const {path, pathId} = useTypedSelector(state => state.path)
 
@@ -35,7 +34,7 @@ function App() {
     })
 
     useEffect(() => {
-        if (channelsDataState === dataStates.notRequested && userDataState === dataStates.received && id) {
+        if (channelsDataState === dataStates.notRequested && userDataState === dataStates.received && user.id) {
             fetchChannels()
         }
     })
@@ -47,16 +46,12 @@ function App() {
         }
     }, [pathId])
 
-    if (![dataStates.received, dataStates.error].includes(userDataState)) {
-        return <div className='grey-window center vertical-center'><Loading/></div>
-    }
-
     return (
         <>
             <div className="App">
                 <Header/>
             </div>
-            <div className={`app-body`}>
+            <div className='app-body'>
                 <Routes>
                     <Route path={routes.index} element={<Body/>}/>
                     <Route path={routes.login} element={<Login/>}/>

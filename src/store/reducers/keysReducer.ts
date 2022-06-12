@@ -1,6 +1,6 @@
 import {dataStates} from "./consts";
 
-export interface key {
+export interface Key {
     key: string,
     name: string,
     read: number,
@@ -15,7 +15,7 @@ interface keysState {
     keysData: {
         [channelId: string]:
             {
-                keys: key[],
+                keys: Key[],
                 keysDataState: dataStates.notRequested | dataStates.requested | dataStates.received | dataStates.error
             }
     },
@@ -38,12 +38,12 @@ type KeyId = string
 
 interface setKeysAction {
     type: KeyActionTypes.setKeys,
-    payload: { channelId: ChannelId, keys: key[] }
+    payload: { channelId: ChannelId, keys: Key[] }
 }
 
 interface addKeyAction {
     type: KeyActionTypes.addKey,
-    payload: { channelId: ChannelId, key: key }
+    payload: { channelId: ChannelId, key: Key }
 }
 
 interface deleteKeyAction {
@@ -58,7 +58,7 @@ interface setKeysDataAction {
 
 interface replaceKey {
     type: KeyActionTypes.replaceKey,
-    payload: {channelId: ChannelId, key: key}
+    payload: {channelId: ChannelId, key: Key}
 }
 
 export type keyAction = setKeysAction | addKeyAction | deleteKeyAction | setKeysDataAction | replaceKey

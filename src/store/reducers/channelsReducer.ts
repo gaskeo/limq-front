@@ -26,7 +26,9 @@ export enum ChannelsActionTypes {
     setChannels = 'setChannels',
     addChannel = 'addChannel',
     deleteChannel = 'deleteChannel',
-    setChannelsDataState = 'setChannelsDataState'
+    setChannelsDataState = 'setChannelsDataState',
+    plusActiveKeys = 'plusActiveKeys',
+    plusInactiveKeys = 'plusInactiveKeys'
 }
 
 interface setChannelsAction {
@@ -51,7 +53,18 @@ interface setChannelsDataAction {
     payload: dataStates.notRequested | dataStates.requested | dataStates.received | dataStates.error
 }
 
-export type channelAction = setChannelsAction | deleteChannelAction | setChannelsDataAction | addChannelAction
+interface plusActiveKeysAction {
+    type: ChannelsActionTypes.plusActiveKeys,
+    payload: {channelId: string, keyType: 'read_keys' | 'write_keys', count: number}
+}
+
+interface plusInactiveKeysAction {
+    type: ChannelsActionTypes.plusInactiveKeys,
+    payload: {channelId: string, keyType: 'read_keys' | 'write_keys', count: number}
+}
+
+export type channelAction = setChannelsAction | deleteChannelAction | setChannelsDataAction
+    | addChannelAction | plusActiveKeysAction | plusInactiveKeysAction
 
 export function ChannelsReducer(state = defaultState, action: channelAction): channelsState {
     switch (action.type) {
@@ -63,6 +76,16 @@ export function ChannelsReducer(state = defaultState, action: channelAction): ch
             return {...state, channels: state.channels.filter(channel => channel.channel_id !== action.payload)}
         case ChannelsActionTypes.setChannelsDataState:
             return {...state, channelsDataState: action.payload}
+        case ChannelsActionTypes.plusActiveKeys:
+                return {...state, channels: state.channels.map(channel =>
+                        channel['channel_id'] === action.payload.channelId ? {...channel, [action.payload.keyType]:
+                                {...channel[action.payload.keyType],
+                                    active: channel[action.payload.keyType].active + action.payload.count}} : channel)}
+        case ChannelsActionTypes.plusInactiveKeys:
+            return {...state, channels: state.channels.map(channel =>
+                    channel['channel_id'] === action.payload.channelId ? {...channel, [action.payload.keyType]:
+                            {...channel[action.payload.keyType],
+                                inactive: channel[action.payload.keyType].inactive + action.payload.count}} : channel)}
         default:
             return state
     }

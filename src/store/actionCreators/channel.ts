@@ -1,5 +1,5 @@
 import {Dispatch} from "@reduxjs/toolkit";
-import {channelAction, ChannelsActionTypes} from "../reducers/channelsReducer";
+import {Channel, channelAction, ChannelsActionTypes} from "../reducers/channelsReducer";
 import {dataStates} from "../reducers/consts";
 import axios, {AxiosError} from "axios";
 import {ApiRoutes} from "./apiRoutes";
@@ -11,7 +11,7 @@ export const fetchChannels = () => {
     return async (dispatch: Dispatch<channelAction>) => {
         try {
             dispatch({type: ChannelsActionTypes.setChannelsDataState, payload: dataStates.requested})
-            const response = await axios(ApiRoutes.GetChannels)
+            const response = await axios.get<Channel[]>(ApiRoutes.GetChannels)
             if (response.data) {
                 dispatch({type: ChannelsActionTypes.setChannels, payload: response.data})
             }
@@ -42,7 +42,7 @@ export const fetchCreateChannel = (channelName: string) => {
                 }
             })
 
-            const response = await axios.post(ApiRoutes.CreateChannel, form, {
+            const response = await axios.post<Channel>(ApiRoutes.CreateChannel, form, {
                 headers: {"Content-Type": "multipart/form-data"},
             })
 
@@ -94,7 +94,7 @@ export const fetchRenameChannel = (channelId: string, newChannelName: string) =>
                 }
             })
 
-            const response = await axios.put(ApiRoutes.RenameChannel, form, {
+            const response = await axios.put<Channel>(ApiRoutes.RenameChannel, form, {
                 headers: {"Content-Type": "multipart/form-data"},
             })
 
