@@ -12,6 +12,7 @@ import {LoadingMixinCard} from "./mixinCard/loadingMixinCard";
 import {NoMixinsCard} from "./mixinCard/noMixinsCard";
 import {MixinCard} from "./mixinCard/mixinCard";
 import {useActions} from "../../hooks/useActions";
+import {ApiRoutes} from "../../store/actionCreators/apiRoutes";
 
 export function checkMixinLength(mixin: string) {
     return mixin.length === 32
@@ -93,7 +94,7 @@ export function MixinsSettingsBlock(props: { isCurrent: boolean, channel: Channe
     const [errors, changeErrors] = useState({mixin: ''})
 
     const {states} = useTypedSelector(state => state.fetch)
-    const createMixinState = states[FetchActionTypes.setFetch]
+    const createMixinState = states[ApiRoutes.CreateMixin]
 
     const requested = createMixinState && createMixinState.dataState === dataStates.requested
     const hasError = createMixinState && createMixinState.status !== 200
