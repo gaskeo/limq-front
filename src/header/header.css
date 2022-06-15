@@ -60,6 +60,7 @@ span.mq-label:hover {
 }
 
 .dropdown {
+    z-index: 120;
     display: none;
     position: absolute;
 }

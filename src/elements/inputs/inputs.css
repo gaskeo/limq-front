@@ -66,3 +66,49 @@
 .submit:hover {
     background-color: var(--third-color);
 }
+
+.select-container {
+    position: relative;
+}
+
+.select-dropdown {
+    z-index: 100;
+
+    display: none;
+    position: absolute;
+}
+
+.select-dropdown-show {
+    display: block;
+    width: 100%;
+}
+
+.select-element {
+    display: flex;
+    align-items: center;
+    padding-left: .4rem;
+    padding-right: .4rem;
+    min-height: 5.5vh;
+    min-width: 10rem;
+}
+
+.select-label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--second-color);
+    font-family: var(--main-font-family);
+    font-size: 1.2em;
+    width: 100%;
+    line-height: 2em;
+}
+
+
+.selected {
+    background-color: var(--third-color);
+}
+
+.select-element-open {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}

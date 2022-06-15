@@ -5,11 +5,10 @@ import {routes} from "../routes/routes";
 import "./header.css";
 import {useDispatch} from "react-redux";
 import {PathActionTypes} from "../store/reducers/pathReducer";
-import {toggleTheme} from "../theme";
-import {Theme} from "../svg/theme"
 import {Link} from "react-router-dom";
 import {User} from "../svg/user";
 import {useActions} from "../hooks/useActions";
+import {Settings} from "../svg/settings";
 
 function UserButton() {
     function checkOutsideClick(event: Event):any {
@@ -66,8 +65,8 @@ export function Header() {
             </Link>
             <div>
                 <div className='horizontal'>
-                    <div onClick={toggleTheme}
-                         className='header-element'><div className='theme-icon'><Theme/></div></div>
+                    <Link to={routes.settings}
+                         className='header-element'><div className='theme-icon'><Settings/></div></Link>
                     {userDataState === dataStates.received && user.id ? <UserButton/> :
                         <button className='button mini-button' onClick={onClick(routes.login)}>{lang.LoginButton}</button>}
                 </div>

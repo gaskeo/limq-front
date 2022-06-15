@@ -1,4 +1,4 @@
-import {LangStruct} from "./langStruct";
+import {LangStruct} from "../langStruct";
 
 export const langDict: LangStruct = {
     RegisterChannelsHeader: 'Каналы',
@@ -64,4 +64,10 @@ export const langDict: LangStruct = {
     RenameUserHeader: 'Сменить имя',
     ChangeEmailHeader: 'Сменить почту',
     ChangePasswordHeader: 'Сменить пароль',
+    MainSettings: 'Настройки',
+    ChangeLanguage: 'Язык',
+    ChangeTheme: 'Тема',
+    DarkTheme: 'Темная',
+    LightTheme: 'Светлая',
+    SystemTheme: 'Системная',
 }

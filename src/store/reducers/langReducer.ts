@@ -2,7 +2,7 @@ import {defaultLangValue, LangStruct} from "../../lang/langStruct";
 import {availableLanguages, availableLanguagesType} from "../../lang/getLang";
 
 interface Lang {
-    lang: LangStruct
+    lang: LangStruct,
     langCode: availableLanguagesType
 }
 
@@ -15,8 +15,8 @@ export enum LangActionTypes {
     setLang = 'setLang'
 }
 
-export interface setLangAction {
-    type: LangActionTypes.setLang
+interface setLangAction {
+    type: LangActionTypes.setLang,
     payload: Lang
 }
 

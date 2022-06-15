@@ -9,7 +9,8 @@ export type availableLanguagesType = availableLanguages.ru | availableLanguages.
 
 export function getLang(): availableLanguagesType {
     const storageLang = localStorage.getItem('lang') as availableLanguagesType
-    if (storageLang) {
+
+    if (storageLang && storageLang !== availableLanguages.undefined) {
         return storageLang
     }
 
@@ -26,18 +27,18 @@ export function setLang(language: availableLanguagesType) {
     localStorage.setItem('lang', language)
 }
 
-export async function getLangDict(language: availableLanguagesType): Promise<typeof import("./en")> {
+export async function getLangDict(language: availableLanguagesType): Promise<typeof import("./languages/en")> {
     let lang;
 
     switch (language) {
         case availableLanguages.en:
-            lang = await import("./en")
+            lang = await import("./languages/en")
             return lang
         case availableLanguages.ru:
-            lang = await import("./ru")
+            lang = await import("./languages/ru")
             return lang
         default:
-            lang = await import("./en")
+            lang = await import("./languages/en")
             return lang
     }
 }

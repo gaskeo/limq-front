@@ -62,6 +62,12 @@ export interface LangStruct {
     RenameUserHeader: string
     ChangeEmailHeader: string
     ChangePasswordHeader: string
+    MainSettings: string
+    ChangeLanguage: string
+    ChangeTheme: string
+    DarkTheme: string
+    LightTheme: string
+    SystemTheme: string
 }
 
 export const defaultLangValue: LangStruct = {
@@ -127,5 +133,11 @@ export const defaultLangValue: LangStruct = {
     DeleteKeyConfirmQuestion: '',
     RenameUserHeader: '',
     ChangeEmailHeader: '',
-    ChangePasswordHeader: ''
+    ChangePasswordHeader: '',
+    MainSettings: '',
+    ChangeLanguage: '',
+    ChangeTheme: '',
+    DarkTheme: '',
+    LightTheme: '',
+    SystemTheme: '',
 }

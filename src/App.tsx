@@ -18,6 +18,7 @@ import {useActions} from "./hooks/useActions";
 import {useDispatch} from "react-redux";
 import {availableLanguages, getLang, getLangDict} from "./lang/getLang";
 import {LangActionTypes} from "./store/reducers/langReducer";
+import {MainSettings} from "./settings/settings";
 
 function App() {
     const {user, userDataState} = useTypedSelector(state => state.user)
@@ -50,9 +51,9 @@ function App() {
     }, [pathId])
 
     useEffect(() => {
-        console.log(langCode === availableLanguages.undefined)
         if (langCode === availableLanguages.undefined) {
             getLangDict(getLang()).then(l => {
+                console.log(getLang())
                 dispatch({
                     type: LangActionTypes.setLang,
                     payload: {lang: l.langDict, langCode: getLang()}
@@ -74,6 +75,7 @@ function App() {
                     <Route path={routes.addChannel} element={<CreateChannel/>}/>
                     <Route path={routes.channelSettings} element={<ChannelSettings/>}/>
                     <Route path={routes.userSettings} element={<UserSettings/>}/>
+                    <Route path={routes.settings} element={<MainSettings/>}/>
                 </Routes>
             </div>
         </>

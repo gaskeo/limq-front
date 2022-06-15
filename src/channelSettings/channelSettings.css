@@ -57,6 +57,11 @@
         grid-template-columns: 1fr;
         grid-template-rows: 1fr auto;
     }
+
+    .settings-without-menu {
+        width: 100%;
+    }
+
     .menu {
         display: grid;
         grid-auto-columns: 1fr;
@@ -75,11 +80,20 @@
     .settings {
         grid-template-columns: 1fr 5fr;
     }
+
+    .settings-without-menu {
+        width: 60%;
+    }
 }
 
 @media screen and (min-width: 801px) {
     .settings {
         grid-template-columns: 1fr 6fr;
+    }
+
+    .settings-without-menu {
+        width: 60%;
+        max-width: 800px;
     }
 }
 
