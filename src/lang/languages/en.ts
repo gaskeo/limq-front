@@ -70,4 +70,6 @@ export const langDict: LangStruct = {
     DarkTheme: 'Dark',
     LightTheme: 'Light',
     SystemTheme: 'System',
+    English: 'English',
+    Russian: 'Русский'
 }

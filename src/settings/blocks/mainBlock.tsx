@@ -36,8 +36,8 @@ export function MainBlock({isCurrent}: mainBlockProps) {
     return (
         <div>
             <h1 className='header-1'>{lang.MainSettings}</h1>
-            <Select id='lang' items={[{text: 'english', value: 'en'},
-                {text: 'Русский', value: 'ru'}]} onChange={onLangChange} label={lang.ChangeLanguage} selected={getLang()}/>
+            <Select id='lang' items={[{text: lang.English, value: availableLanguages.en},
+                {text: lang.Russian, value: availableLanguages.ru}]} onChange={onLangChange} label={lang.ChangeLanguage} selected={getLang()}/>
             <div className='gap'/>
             <Select id='theme' items={[{text: lang.DarkTheme, value: availableThemes.dark},
                 {text: lang.LightTheme, value: availableThemes.light},

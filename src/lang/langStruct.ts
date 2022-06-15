@@ -68,6 +68,8 @@ export interface LangStruct {
     DarkTheme: string
     LightTheme: string
     SystemTheme: string
+    English: string
+    Russian: string
 }
 
 export const defaultLangValue: LangStruct = {
@@ -140,4 +142,6 @@ export const defaultLangValue: LangStruct = {
     DarkTheme: '',
     LightTheme: '',
     SystemTheme: '',
+    English: '',
+    Russian: ''
 }
