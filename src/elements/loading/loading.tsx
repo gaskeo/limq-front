@@ -1,8 +1,11 @@
 import './loading.css'
 import React from "react";
 
-export function Loading(props: {diameter?: string}) {
-    const style = {'--diameter': props.diameter ? props.diameter : '15px'} as React.CSSProperties
+interface loadingProps {
+    diameter?: string
+}
+export function Loading({diameter}: loadingProps) {
+    const style = {'--diameter': diameter ? diameter : '15px'} as React.CSSProperties
     return (
         <div className='loading' style={style}>
             <div className='circle circle-1'/>

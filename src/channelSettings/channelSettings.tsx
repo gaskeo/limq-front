@@ -9,12 +9,30 @@ import {MixinsSettingsBlock} from "./blocks/mixinsSettingsBlock";
 import {useEffect} from "react";
 
 export const menuTabs = [
-    {name: 'Main settings', parameterName: 'mainSettings',
-        id: 1, block: () => ((isCurrent: boolean, channel: Channel | undefined) => <MainSettingsBlock key='1' isCurrent={isCurrent} channel={channel}/>)},
-    {name: 'Keys', parameterName: 'keys',
-        id: 2, block: () => ((isCurrent: boolean, channel: Channel | undefined) => <KeysSettingsBlock key='2' isCurrent={isCurrent} channel={channel}/>)},
-    {name: 'Mixins', parameterName: 'mixins',
-        id: 3, block: () => ((isCurrent: boolean, channel: Channel | undefined) => <MixinsSettingsBlock key='3' isCurrent={isCurrent} channel={channel}/>)}
+    {
+        name: 'Main settings',
+        parameterName: 'mainSettings',
+        id: 1,
+        block: () => ((isCurrent: boolean, channel: Channel | undefined) => <MainSettingsBlock key='1'
+                                                                                               isCurrent={isCurrent}
+                                                                                               channel={channel}/>)
+    },
+    {
+        name: 'Keys',
+        parameterName: 'keys',
+        id: 2,
+        block: () => ((isCurrent: boolean, channel: Channel | undefined) => <KeysSettingsBlock key='2'
+                                                                                               isCurrent={isCurrent}
+                                                                                               channel={channel}/>)
+    },
+    {
+        name: 'Mixins',
+        parameterName: 'mixins',
+        id: 3,
+        block: () => ((isCurrent: boolean, channel: Channel | undefined) => <MixinsSettingsBlock key='3'
+                                                                                                 isCurrent={isCurrent}
+                                                                                                 channel={channel}/>)
+    }
 ]
 
 

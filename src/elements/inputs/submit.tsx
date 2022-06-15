@@ -1,6 +1,9 @@
 import "./inputs.css";
 
+interface submitProps {
+    label: string | JSX.Element,
+}
 
-export function Submit(props: {label: string | JSX.Element, submit?: any}) {
-    return <button type='submit' className='submit button center'>{props.label}</button>
+export function Submit({label}: submitProps) {
+    return <button type='submit' className='submit button center'>{label}</button>
 }

@@ -1,26 +1,27 @@
 import {ChangeEvent, Dispatch, SetStateAction} from "react";
 import "./inputs.css";
 
-export function Radio(props: {
+interface radioProps {
     label: string,
     setData: string,
     name: string,
     checked?: boolean,
-    state: string,
     setState: Dispatch<SetStateAction<string>>,
-}) {
+}
+
+export function Radio({label, setState, name, setData, checked}: radioProps) {
     function onChange() {
         return function (_: ChangeEvent<HTMLInputElement>) {
-            props.setState(props.setData)
+            setState(setData)
         }
     }
 
     return (
         <>
             <label className='input-label radio-container' htmlFor='radio'>
-                <input className='radio' id='radio' type='radio' name='123' checked={props.checked}
+                <input className='radio' id='radio' type='radio' name={name} checked={checked}
                        onChange={onChange()}/>
-                <span>{props.label}</span>
+                <span>{label}</span>
 
             </label>
         </>

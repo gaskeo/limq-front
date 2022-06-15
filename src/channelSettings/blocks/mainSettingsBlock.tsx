@@ -9,11 +9,16 @@ import {ApiRoutes} from "../../store/actionCreators/apiRoutes";
 import {Loading} from "../../elements/loading/loading";
 import {useActions} from "../../hooks/useActions";
 
-export function MainSettingsBlock(props: { isCurrent: boolean, channel: Channel | undefined }) {
+interface mainSettingsBlockProps {
+    isCurrent: boolean,
+    channel: Channel | undefined
+}
+
+export function MainSettingsBlock({isCurrent, channel}: mainSettingsBlockProps) {
     function submit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault()
 
-        if (!props.channel) {
+        if (!channel) {
             return
         }
 
@@ -25,7 +30,7 @@ export function MainSettingsBlock(props: { isCurrent: boolean, channel: Channel 
             return
         }
 
-        fetchRenameChannel(props.channel['channel_id'], channelName)
+        fetchRenameChannel(channel['channel_id'], channelName)
     }
 
     function checkChannelName(name: string) {
@@ -45,11 +50,11 @@ export function MainSettingsBlock(props: { isCurrent: boolean, channel: Channel 
     const requested = createChannelState && createChannelState.dataState === dataStates.requested
     const hasError = createChannelState && createChannelState.status !== 200
 
-    if (!props.isCurrent) {
+    if (!isCurrent) {
         return null
     }
 
-    const placeholder = props.channel ? props.channel['channel_name'] : ''
+    const placeholder = channel ? channel['channel_name'] : ''
 
     return (
         <div>

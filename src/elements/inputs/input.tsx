@@ -1,20 +1,22 @@
 import {ChangeEvent, Dispatch, SetStateAction} from "react";
 import "./inputs.css";
 
-export function Input(props: {
+interface inputProps {
     label: string,
     state: string,
     setState: Dispatch<SetStateAction<string>>,
     onChange?: ((value: string) => any), type: string,
     errorText?: string,
     placeholder?: string
-}) {
+}
 
-    function onChange() {
+export function Input({label, onChange, setState, state, placeholder, type, errorText}: inputProps) {
+
+    function _onChange() {
         return function (event: ChangeEvent<HTMLInputElement>) {
-            props.setState(event.target.value)
-            if (props.onChange) {
-                props.onChange(event.target.value)
+            setState(event.target.value)
+            if (onChange) {
+                onChange(event.target.value)
             }
         }
     }
@@ -22,11 +24,11 @@ export function Input(props: {
     return (
         <>
             <label className='input-label'>
-                {props.label}
-                <input className='input' type={props.type} value={props.state} placeholder={props.placeholder}
-                       onChange={onChange()}/>
+                {label}
+                <input className='input' type={type} value={state} placeholder={placeholder}
+                       onChange={_onChange()}/>
             </label>
-            <p className='error-text'>{props.errorText && props.errorText}</p>
+            <p className='error-text'>{errorText && errorText}</p>
         </>
     )
 }

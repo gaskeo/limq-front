@@ -1,29 +1,29 @@
 import {ChangeEvent, Dispatch, SetStateAction} from "react";
 import "./inputs.css";
 
-export function Checkbox(props: {
+interface checkboxProps {
     label: string,
     state: boolean,
     setState: Dispatch<SetStateAction<boolean>>,
-    onChange?: ((value: string) => any)
-}) {
+    onChange?: (value: string) => any
+}
 
-    function onChange() {
+export function Checkbox({label, onChange, state, setState}: checkboxProps) {
+
+    function _onChange() {
         return function (event: ChangeEvent<HTMLInputElement>) {
-            props.setState(event.target.checked)
-            if (props.onChange) {
-                props.onChange(event.target.value)
+            setState(event.target.checked)
+            if (onChange) {
+                onChange(event.target.value)
             }
         }
     }
 
     return (
-        <>
-            <label className='input-label'>
-                <input type='checkbox' checked={props.state}
-                       onChange={onChange()}/>
-                {props.label}
-            </label>
-        </>
+        <label className='input-label'>
+            <input type='checkbox' checked={state}
+                   onChange={_onChange()}/>
+            {label}
+        </label>
     )
 }

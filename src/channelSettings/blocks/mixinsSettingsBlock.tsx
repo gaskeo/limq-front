@@ -6,7 +6,6 @@ import {Menu} from "../../elements/menu/menu";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {dataStates} from "../../store/reducers/consts";
 import {MixinTypeStates} from "../../store/reducers/mixinsReducer";
-import {FetchActionTypes} from "../../store/reducers/fetchReducer";
 import {Loading} from "../../elements/loading/loading";
 import {LoadingMixinCard} from "./mixinCard/loadingMixinCard";
 import {NoMixinsCard} from "./mixinCard/noMixinsCard";
@@ -18,27 +17,33 @@ export function checkMixinLength(mixin: string) {
     return mixin.length === 32
 }
 
-function MixinsContainer(props: { isCurrent: boolean, channel: Channel | undefined, mixinType: MixinTypeStates }) {
+interface mixinsContainerProps {
+    isCurrent: boolean,
+    channel: Channel | undefined,
+    mixinType: MixinTypeStates
+}
+
+function MixinsContainer({isCurrent, mixinType, channel}: mixinsContainerProps) {
     const {mixinsData} = useTypedSelector(state => state.mixins)
 
-    if (!props.isCurrent) {
+    if (!isCurrent) {
         return null
     }
 
-    const currentMixins = mixinsData[props.channel ? props.channel['channel_id'] : '']
-    const reversedMixins = currentMixins && (currentMixins[props.mixinType] ? [...currentMixins[props.mixinType]] : [])
+    const currentMixins = mixinsData[channel ? channel['channel_id'] : '']
+    const reversedMixins = currentMixins && (currentMixins[mixinType] ? [...currentMixins[mixinType]] : [])
 
     if (currentMixins && currentMixins.mixinsDataState === dataStates.requested) {
         return <div className='card-container card-100-container'><LoadingMixinCard/></div>
     }
     if (currentMixins && currentMixins.mixinsDataState === dataStates.received &&
-        currentMixins[props.mixinType].length === 0) {
-        return <div className='card-container card-100-container'><NoMixinsCard mixinType={props.mixinType}/></div>
+        currentMixins[mixinType].length === 0) {
+        return <div className='card-container card-100-container'><NoMixinsCard mixinType={mixinType}/></div>
     }
 
     return <div className='card-container card-100-container'>
         {currentMixins && reversedMixins.map(channel => <MixinCard key={channel['channel_id']} channel={channel}
-                                                                   mixinType={props.mixinType}/>)}
+                                                                   mixinType={mixinType}/>)}
     </div>
 }
 
@@ -55,7 +60,12 @@ export const mixinTabs = [
     },
 ]
 
-export function MixinsSettingsBlock(props: { isCurrent: boolean, channel: Channel | undefined }) {
+interface mixinsSettingsBlockProps {
+    isCurrent: boolean,
+    channel: Channel | undefined,
+}
+
+export function MixinsSettingsBlock({isCurrent, channel}: mixinsSettingsBlockProps) {
     function changeTab(tab: string) {
         return function () {
             changeActiveTab(tab)
@@ -65,7 +75,7 @@ export function MixinsSettingsBlock(props: { isCurrent: boolean, channel: Channe
     function submit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault()
 
-        if (!props.channel) {
+        if (!channel) {
             return
         }
 
@@ -75,8 +85,8 @@ export function MixinsSettingsBlock(props: { isCurrent: boolean, channel: Channe
         if (newErrors.mixin) {
             return
         }
-        if (props.channel) {
-            fetchCreateMixin(props.channel['channel_id'], keyId)
+        if (channel) {
+            fetchCreateMixin(channel['channel_id'], keyId)
         }
     }
 
@@ -99,7 +109,7 @@ export function MixinsSettingsBlock(props: { isCurrent: boolean, channel: Channe
     const requested = createMixinState && createMixinState.dataState === dataStates.requested
     const hasError = createMixinState && createMixinState.status !== 200
 
-    if (!props.isCurrent) {
+    if (!isCurrent) {
         return null
     }
 
@@ -126,7 +136,7 @@ export function MixinsSettingsBlock(props: { isCurrent: boolean, channel: Channe
             </div>
             <span className='gap'/>
 
-            {mixinTabs.map(mixinTab => mixinTab.block()(mixinTab.parameterName === activeTab, props.channel))}
+            {mixinTabs.map(mixinTab => mixinTab.block()(mixinTab.parameterName === activeTab, channel))}
         </div>
     )
 }

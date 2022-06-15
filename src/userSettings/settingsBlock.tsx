@@ -1,7 +1,11 @@
 import {menuTabs} from "./userSettings";
 
-export function SettingsBlock(props: {currentTab: string | null}) {
+interface settingsBlockProps {
+    currentTab: string | null
+}
+
+export function SettingsBlock({currentTab}: settingsBlockProps) {
     return <div className='settings-block'>
-        {menuTabs.map(tab => tab.block()(tab.parameterName === props.currentTab))}
+        {menuTabs.map(tab => tab.block()(tab.parameterName === currentTab))}
     </div>
 }

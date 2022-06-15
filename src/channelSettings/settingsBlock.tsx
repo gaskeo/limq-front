@@ -4,12 +4,16 @@ import {dataStates} from "../store/reducers/consts";
 import {menuTabs} from "./channelSettings";
 import {useActions} from "../hooks/useActions";
 
+interface settingsBlockProps {
+    channelId: string | undefined,
+    currentTab: string | null
+}
 
-export function SettingsBlock(props: { channelId: string | undefined, currentTab: string | null }) {
+export function SettingsBlock({channelId, currentTab}: settingsBlockProps) {
     const {channels} = useTypedSelector(state => state.channels)
     const {keysData} = useTypedSelector(state => state.keys)
     const {mixinsData} = useTypedSelector(state => state.mixins)
-    const currentChannel = channels.filter(channel => channel['channel_id'] === props.channelId)[0]
+    const currentChannel = channels.filter(channel => channel['channel_id'] === channelId)[0]
 
     useEffect(() => {
         if (!currentChannel) {
@@ -43,6 +47,6 @@ export function SettingsBlock(props: { channelId: string | undefined, currentTab
         return null
     }
     return <div className='settings-block'>
-        {menuTabs.map(tab => tab.block()(tab.parameterName === props.currentTab, currentChannel))}
+        {menuTabs.map(tab => tab.block()(tab.parameterName === currentTab, currentChannel))}
     </div>
 }

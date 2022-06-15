@@ -16,7 +16,12 @@ export function checkKeyLength(key: string) {
     return key.length <= 32
 }
 
-export function KeysSettingsBlock(props: { isCurrent: boolean, channel: Channel | undefined }) {
+interface keysSettingsBlockProps {
+    isCurrent: boolean,
+    channel: Channel | undefined
+}
+
+export function KeysSettingsBlock({isCurrent, channel}: keysSettingsBlockProps) {
     function submit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault()
 
@@ -27,17 +32,17 @@ export function KeysSettingsBlock(props: { isCurrent: boolean, channel: Channel 
             return
         }
 
-        if (!props.channel) {
+        if (!channel) {
             return
         }
 
-        fetchCreateKey(keyName, keyType, props.channel['channel_id'], allowInfo)
+        fetchCreateKey(keyName, keyType, channel['channel_id'], allowInfo)
     }
 
     const {fetchCreateKey} = useActions()
 
     const {keysData} = useTypedSelector(state => state.keys)
-    const currentKeys = keysData[props.channel ? props.channel['channel_id'] : '']
+    const currentKeys = keysData[channel ? channel['channel_id'] : '']
 
     const [keyName, changeKeyName] = useState('')
     const [keyType, changeKeyType] = useState('0')
@@ -52,7 +57,7 @@ export function KeysSettingsBlock(props: { isCurrent: boolean, channel: Channel 
 
     const reversedKeys = currentKeys?.keys ? [...currentKeys.keys].reverse() : []
 
-    if (!props.isCurrent) {
+    if (!isCurrent) {
         return null
     }
 
@@ -67,7 +72,6 @@ export function KeysSettingsBlock(props: { isCurrent: boolean, channel: Channel 
                                checked={keyType === '0'}
                                setData='0'
                                name='key-type'
-                               state={keyType}
                                setState={changeKeyType}/>
 
                         {keyType === "0" && <>
@@ -76,7 +80,7 @@ export function KeysSettingsBlock(props: { isCurrent: boolean, channel: Channel 
                         </>}
 
                     </div>
-                    <Radio label='Write' setData='1' name='key-type' state={keyType} setState={changeKeyType}/>
+                    <Radio label='Write' setData='1' name='key-type' setState={changeKeyType}/>
                 </div>
                 <p className='error-text'>{hasError && createKeyState.message}</p>
 

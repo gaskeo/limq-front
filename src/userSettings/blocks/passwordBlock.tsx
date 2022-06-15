@@ -8,7 +8,12 @@ import {ApiRoutes} from "../../store/actionCreators/apiRoutes";
 import {Loading} from "../../elements/loading/loading";
 import {useActions} from "../../hooks/useActions";
 
-export function PasswordBlock(props: { isCurrent: boolean }) {
+
+interface passwordBlockProps {
+    isCurrent: boolean
+}
+
+export function PasswordBlock({isCurrent}: passwordBlockProps) {
     function submit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault()
         let newErrors = {...errors}
@@ -60,7 +65,7 @@ export function PasswordBlock(props: { isCurrent: boolean }) {
     const requested = changePasswordState && changePasswordState.dataState === dataStates.requested
     const hasError = changePasswordState && changePasswordState.status !== 200
 
-    if (!props.isCurrent) {
+    if (!isCurrent) {
         return null
     }
 

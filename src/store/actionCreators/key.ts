@@ -101,7 +101,7 @@ function createToggleKeyForm(keyId: string): FormData {
     return form
 }
 
-export const fetchToggleKey = (channelId: string, key: Key) => {
+export const fetchToggleKey = (key: Key) => {
     return async (dispatch: Dispatch<rootActions>) => {
         try {
             const form = createToggleKeyForm(key.key)
@@ -120,7 +120,7 @@ export const fetchToggleKey = (channelId: string, key: Key) => {
 
             if (response.data) {
                 const keyType = key.read ? 'read_keys' : 'write_keys'
-                dispatch({type: KeyActionTypes.replaceKey, payload: {channelId: channelId, key: response.data}})
+                dispatch({type: KeyActionTypes.replaceKey, payload: {channelId: key.channel, key: response.data}})
                 dispatch({
                     type: FetchActionTypes.setFetch,
                     payload: {
@@ -130,11 +130,11 @@ export const fetchToggleKey = (channelId: string, key: Key) => {
                 })
                 dispatch({
                     type: key.active ? ChannelsActionTypes.plusActiveKeys : ChannelsActionTypes.plusInactiveKeys,
-                    payload: {channelId: channelId, keyType: keyType, count: -1}
+                    payload: {channelId: key.channel, keyType: keyType, count: -1}
                 })
                 dispatch({
                     type: key.active ? ChannelsActionTypes.plusInactiveKeys : ChannelsActionTypes.plusActiveKeys,
-                    payload: {channelId: channelId, keyType: keyType, count: 1}
+                    payload: {channelId: key.channel, keyType: keyType, count: 1}
                 })
             }
         } catch (error: AxiosError | any) {
