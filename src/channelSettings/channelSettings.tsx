@@ -7,10 +7,11 @@ import {MainSettingsBlock} from "./blocks/mainSettingsBlock";
 import {KeysSettingsBlock} from "./blocks/keysSettingsBlock";
 import {MixinsSettingsBlock} from "./blocks/mixinsSettingsBlock";
 import {useEffect} from "react";
+import {useTypedSelector} from "../hooks/useTypedSelector";
 
-export const menuTabs = [
+export const menuTabs = (tabNames: { main: string, keys: string, mixins: string }) => [
     {
-        name: 'Main settings',
+        name: tabNames.main,
         parameterName: 'mainSettings',
         id: 1,
         block: () => ((isCurrent: boolean, channel: Channel | undefined) => <MainSettingsBlock key='1'
@@ -18,7 +19,7 @@ export const menuTabs = [
                                                                                                channel={channel}/>)
     },
     {
-        name: 'Keys',
+        name: tabNames.keys,
         parameterName: 'keys',
         id: 2,
         block: () => ((isCurrent: boolean, channel: Channel | undefined) => <KeysSettingsBlock key='2'
@@ -26,7 +27,7 @@ export const menuTabs = [
                                                                                                channel={channel}/>)
     },
     {
-        name: 'Mixins',
+        name: tabNames.mixins,
         parameterName: 'mixins',
         id: 3,
         block: () => ((isCurrent: boolean, channel: Channel | undefined) => <MixinsSettingsBlock key='3'
@@ -44,18 +45,21 @@ export function ChannelSettings() {
     }
 
     const {channelId} = useParams()
+    const {lang} = useTypedSelector(state => state.lang)
     const [searchParams, changeSearchParams] = useSearchParams()
+    const tabs = menuTabs({main: lang.ChannelSettingsMenuMainSettings,
+        keys: lang.ChannelSettingsMenuKeys, mixins: lang.ChannelSettingsMenuMixins})
 
     useEffect(() => {
         if (!searchParams.get('tab')) {
-            changeTab(menuTabs[0].parameterName)()
+            changeTab(tabs[0].parameterName)()
         }
     })
 
     return (
         <div className='settings'>
-            <Menu active={searchParams.get('tab')} onClick={changeTab} tabs={menuTabs}/>
-            <SettingsBlock channelId={channelId} currentTab={searchParams.get('tab')}/>
+            <Menu active={searchParams.get('tab')} onClick={changeTab} tabs={tabs}/>
+            <SettingsBlock channelId={channelId} currentTab={searchParams.get('tab')} tabs={tabs}/>
         </div>
     )
 }

@@ -5,6 +5,7 @@ import {channelAction, ChannelsReducer} from "./channelsReducer";
 import {keyAction, KeysReducer} from "./keysReducer";
 import {mixinAction, MixinsReducer} from "./mixinsReducer";
 import {fetchAction, FetchReducer} from "./fetchReducer";
+import {langAction, LangReducer} from "./langReducer";
 
 
 export const rootReducer = combineReducers({
@@ -13,9 +14,10 @@ export const rootReducer = combineReducers({
     channels: ChannelsReducer,
     keys: KeysReducer,
     mixins: MixinsReducer,
-    fetch: FetchReducer
+    fetch: FetchReducer,
+    lang: LangReducer
 })
 
-export type rootActions = userAction | pathAction | channelAction | keyAction | mixinAction | fetchAction
+export type rootActions = userAction | pathAction | channelAction | keyAction | mixinAction | fetchAction | langAction
 
 export type rootState = ReturnType<typeof rootReducer>

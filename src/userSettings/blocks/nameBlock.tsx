@@ -21,7 +21,7 @@ export function NameBlock({isCurrent}: nameBlockProps) {
     function submit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault()
         let newErrors = {...errors}
-        newErrors.name = !checkChannelLength(newUsername) ? 'Username too long' : ''
+        newErrors.name = !checkChannelLength(newUsername) ? lang.UsernameTooLongError : ''
         changeErrors(newErrors)
         if (newErrors.name) {
             return
@@ -45,6 +45,7 @@ export function NameBlock({isCurrent}: nameBlockProps) {
     const [errors, changeErrors] = useState({name: ''})
 
     const {states} = useTypedSelector(state => state.fetch)
+    const {lang} = useTypedSelector(state => state.lang)
     const renameUserState = states[ApiRoutes.RenameUser]
 
     const requested = renameUserState && renameUserState.dataState === dataStates.requested
@@ -57,9 +58,9 @@ export function NameBlock({isCurrent}: nameBlockProps) {
     const placeholder = user.username ? user.username : ''
     return (
         <div>
-            <h1 className='header-1'>Main settings</h1>
+            <h1 className='header-1'>{lang.RenameUserHeader}</h1>
             <form onSubmit={submit}>
-                <Input label='Name'
+                <Input label={lang.UsernameForm}
                        state={newUsername}
                        setState={changeNewUsername}
                        placeholder={placeholder}
@@ -68,7 +69,7 @@ export function NameBlock({isCurrent}: nameBlockProps) {
                        type='text'/>
                 <p className='error-text'>{hasError && renameUserState.message}</p>
 
-                <Submit label={requested ? <Loading/> : 'Rename'}/>
+                <Submit label={requested ? <Loading/> : lang.RenameUserButton}/>
             </form>
         </div>
     )

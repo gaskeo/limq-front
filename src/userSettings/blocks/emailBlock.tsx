@@ -12,9 +12,12 @@ function hideEmail(email: string) {
     if (email.length < 3) {
         return ''
     }
+
     const [name, fullDomain] = email.split('@')
     const [domain, zone] = fullDomain.split('.')
-    const hiddenName = name[0] + '*'.repeat(name.length - 2) + name[name.length - 1]
+    const hiddenName = name.length > 2 ?
+        name[0] + '*'.repeat(Math.max(0, name.length - 2)) + name[Math.min(0, name.length - 1)]
+        : name
     const hiddenDomain = domain[0] + '*'.repeat(domain.length - 2) + domain[domain.length - 1]
     return `${hiddenName}@${hiddenDomain}.${zone}`
 }
@@ -29,8 +32,8 @@ export function EmailBlock({isCurrent}: emailBlockProps) {
         event.preventDefault()
         let newErrors = {...errors}
 
-        newErrors.email = !confirmEmail(newEmail) ? 'Invalid email address' : ''
-        newErrors.password = !checkPasswordLength(password) ? 'Password too short' : ''
+        newErrors.email = !confirmEmail(newEmail) ? lang.InvalidEmailError : ''
+        newErrors.password = !checkPasswordLength(password) ? lang.PasswordTooShortError : ''
 
         changeErrors(newErrors)
         if (newErrors.email || newErrors.password) {
@@ -65,6 +68,7 @@ export function EmailBlock({isCurrent}: emailBlockProps) {
     const [errors, changeErrors] = useState({email: '', password: ''})
 
     const {states} = useTypedSelector(state => state.fetch)
+    const {lang} = useTypedSelector(state => state.lang)
     const changeEmailState = states[ApiRoutes.ChangeEmail]
 
     const requested = changeEmailState && changeEmailState.dataState === dataStates.requested
@@ -77,16 +81,16 @@ export function EmailBlock({isCurrent}: emailBlockProps) {
     const placeholder = user.email ? hideEmail(user.email) : ''
     return (
         <div>
-            <h1 className='header-1'>Change email</h1>
+            <h1 className='header-1'>{lang.ChangeEmailHeader}</h1>
             <form onSubmit={submit}>
-                <Input label='Email'
+                <Input label={lang.EmailForm}
                        state={newEmail}
                        setState={changeNewEmail}
                        errorText={errors.email}
                        onChange={validateEmail}
                        placeholder={placeholder}
                        type='text'/>
-                <Input label='Password'
+                <Input label={lang.PasswordForm}
                        state={password}
                        errorText={errors.password}
                        onChange={checkPassword}
@@ -94,7 +98,7 @@ export function EmailBlock({isCurrent}: emailBlockProps) {
                        type='password'/>
                 <p className='error-text'>{hasError && changeEmailState.message}</p>
 
-                <Submit label={requested ? <Loading/> : 'Change Email'}/>
+                <Submit label={requested ? <Loading/> : lang.ChangeEmailButton}/>
             </form>
         </div>
     )

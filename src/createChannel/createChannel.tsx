@@ -16,7 +16,7 @@ export function CreateChannel() {
         event.preventDefault()
         let newErrors = {...errors}
 
-        newErrors.name = !checkChannelLength(channelName) ? 'Channel name too long' : ''
+        newErrors.name = !checkChannelLength(channelName) ? lang.ChannelNameTooLong : ''
         changeErrors(newErrors)
         if (newErrors.name) {
             return
@@ -36,6 +36,7 @@ export function CreateChannel() {
     const [errors, changeErrors] = useState({name: ''})
 
     const {states} = useTypedSelector(state => state.fetch)
+    const {lang} = useTypedSelector(state => state.lang)
     const createChannelState = states[ApiRoutes.CreateChannel]
 
     const requested = createChannelState && createChannelState.dataState === dataStates.requested
@@ -46,13 +47,13 @@ export function CreateChannel() {
             <form className='app-form' onSubmit={submit}>
                 <Input state={channelName}
                        setState={changeChannelName}
-                       label='Name'
+                       label={lang.ChannelNameForm}
                        type='text'
                        errorText={errors.name}
                        onChange={checkChannelName}/>
                 <p className='error-text'>{hasError && createChannelState.message}</p>
 
-                <Submit label={requested ? <Loading/> : 'Create'}/>
+                <Submit label={requested ? <Loading/> : lang.CreateChannelButton}/>
             </form>
         </div>
     )

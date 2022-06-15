@@ -6,13 +6,14 @@ import {dataStates} from "../store/reducers/consts";
 
 export function RegisterBody() {
     const {channels, channelsDataState} = useTypedSelector(state => state.channels)
+    const {lang} = useTypedSelector(state => state.lang)
     const reversedChannels = [...channels].reverse()
     return (
         <div>
-            <h1 className='header-1'>Channels</h1>
+            <h1 className='header-1'>{lang.RegisterChannelsHeader}</h1>
             <div className='card-container'>
                 {channelsDataState === dataStates.requested && <LoadingChannelCard/>}
-                {channels && reversedChannels.map(channel => <ChannelCard key={channel.channel_id} channel={channel}/>)}
+                {channels && reversedChannels.map(channel => <ChannelCard key={channel['channel_id']} channel={channel}/>)}
                 <CreateChannelCard/>
             </div>
         </div>

@@ -16,11 +16,14 @@ import {UserSettings} from "./userSettings/userSettings";
 import {FetchActionTypes} from "./store/reducers/fetchReducer";
 import {useActions} from "./hooks/useActions";
 import {useDispatch} from "react-redux";
+import {availableLanguages, getLang, getLangDict} from "./lang/getLang";
+import {LangActionTypes} from "./store/reducers/langReducer";
 
 function App() {
     const {user, userDataState} = useTypedSelector(state => state.user)
     const {channelsDataState} = useTypedSelector(state => state.channels)
     const {path, pathId} = useTypedSelector(state => state.path)
+    const {langCode} = useTypedSelector(state => state.lang)
 
     const {fetchUser, fetchChannels} = useActions()
     const dispatch = useDispatch()
@@ -45,6 +48,18 @@ function App() {
             Redirect(path, navigate, location)
         }
     }, [pathId])
+
+    useEffect(() => {
+        console.log(langCode === availableLanguages.undefined)
+        if (langCode === availableLanguages.undefined) {
+            getLangDict(getLang()).then(l => {
+                dispatch({
+                    type: LangActionTypes.setLang,
+                    payload: {lang: l.langDict, langCode: getLang()}
+                })
+            })
+        }
+    })
 
     return (
         <>

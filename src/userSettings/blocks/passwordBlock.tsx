@@ -60,6 +60,7 @@ export function PasswordBlock({isCurrent}: passwordBlockProps) {
     const [errors, changeErrors] = useState({oldPassword: '', newPassword: '', newPasswordAgain: ''})
 
     const {states} = useTypedSelector(state => state.fetch)
+    const {lang} = useTypedSelector(state => state.lang)
     const changePasswordState = states[ApiRoutes.ChangePassword]
 
     const requested = changePasswordState && changePasswordState.dataState === dataStates.requested
@@ -71,21 +72,21 @@ export function PasswordBlock({isCurrent}: passwordBlockProps) {
 
     return (
         <div>
-            <h1 className='header-1'>Change password</h1>
+            <h1 className='header-1'>{lang.ChangePasswordHeader}</h1>
             <form onSubmit={submit}>
-                <Input label='Old password'
+                <Input label={lang.OldPasswordForm}
                        state={oldPassword}
                        setState={changeOldPassword}
                        type='password'
                        onChange={checkOldPassword}
                 errorText={errors.oldPassword}/>
-                <Input label='New password'
+                <Input label={lang.NewPasswordForm}
                        state={newPassword}
                        setState={changeNewPassword}
                        type='password'
                        onChange={checkPassword}
                 errorText={errors.newPassword}/>
-                <Input label='New password again'
+                <Input label={lang.NewPasswordForm}
                        state={newPasswordAgain}
                        setState={changeNewPasswordAgain}
                        onChange={checkPasswordAgain}
@@ -93,7 +94,7 @@ export function PasswordBlock({isCurrent}: passwordBlockProps) {
                        type='password'/>
                 <p className='error-text'>{hasError && changePasswordState.message}</p>
 
-                <Submit label={requested ? <Loading/> : 'Change password'}/>
+                <Submit label={requested ? <Loading/> : lang.ChangePasswordButton}/>
             </form>
         </div>
     )

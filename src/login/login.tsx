@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-import {useDispatch} from "react-redux";
 import {Input} from "../elements/inputs/input";
 import {Submit} from "../elements/inputs/submit";
 import {checkPasswordLength, confirmEmail} from "../register/register";
@@ -47,6 +46,7 @@ export function Login() {
     const [errors, changeErrors] = useState({email: '', password: ''})
 
     const {states} = useTypedSelector(state => state.fetch)
+    const {lang} = useTypedSelector(state => state.lang)
     const loginState = states[ApiRoutes.Login]
 
     const requested = loginState && loginState.dataState === dataStates.requested
@@ -57,22 +57,22 @@ export function Login() {
             <form className='app-form' onSubmit={submit}>
                 <Input state={email}
                        setState={changeEmail}
-                       label='Email'
+                       label={lang.EmailForm}
                        type='text'
                        errorText={errors.email}
                        onChange={validateEmail}/>
 
                 <Input state={password}
                        setState={changePassword}
-                       label='Password'
+                       label={lang.PasswordForm}
                        type='password'
                        errorText={errors.password}
                        onChange={checkPassword}/>
 
-                <Checkbox label='Remember me' state={rememberMe} setState={changeRememberMe}/>
+                <Checkbox label={lang.RememberMeForm} state={rememberMe} setState={changeRememberMe}/>
                 <p className='error-text'>{hasError && loginState.message}</p>
 
-                <Submit label={requested ? <Loading/> : 'Login'}/>
+                <Submit label={requested ? <Loading/> : lang.LoginButton}/>
             </form>
         </div>
     )

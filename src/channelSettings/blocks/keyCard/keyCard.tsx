@@ -16,21 +16,23 @@ export function KeyCard({channelKey}: keyCardProps) {
     }
 
     function deleteKey() {
-        if (window.confirm('Delete key?')) {
+        if (window.confirm(lang.DeleteKeyConfirmQuestion)) {
             fetchDeleteKey(channelKey.channel, channelKey)
         }
     }
 
     const {fetchDeleteKey, fetchToggleKey} = useActions()
-    const perm = channelKey.read ? 'Read' : 'write'
 
     const {states} = useTypedSelector(state => state.fetch)
+    const {lang} = useTypedSelector(state => state.lang)
     const toggleKey = states[ApiRoutes.ToggleKey + channelKey.key]
+    const perm = channelKey.read ? lang.KeyTypeReadForm : lang.KeyTypeWriteForm
 
     const requested = toggleKey && toggleKey.dataState === dataStates.requested
 
     const pauseResume = requested ?
-        <div className='warning-loading'><Loading diameter='10px'/></div> : (channelKey.active ? 'Pause' : 'Resume')
+        <div className='warning-loading'><Loading diameter='10px'/></div> : (channelKey.active ?
+            lang.PauseKeyButton : lang.ResumeKeyButton)
 
     return (
         <div className='card card-100 horizontal-scroll'>
@@ -42,7 +44,7 @@ export function KeyCard({channelKey}: keyCardProps) {
                 <code className='card-code card-background-text'>{channelKey.key}</code>
                 <div className='card-inline-block'>
                     <button className='button mini-button warning' onClick={toggleActiveKey}>{pauseResume}</button>
-                    <button className='button mini-button error' onClick={deleteKey}>Delete</button>
+                    <button className='button mini-button error' onClick={deleteKey}>{lang.DeleteKeyButton}</button>
                 </div>
             </div>
         </div>

@@ -83,6 +83,7 @@ export function Register() {
     const [errors, changeErrors] = useState({email: '', password: '', username: '', passwordAgain: ''})
 
     const {states} = useTypedSelector(state => state.fetch)
+    const {lang} = useTypedSelector(state => state.lang)
     const registerState = states[ApiRoutes.Register]
 
     const requested = registerState && registerState.dataState === dataStates.requested
@@ -93,34 +94,34 @@ export function Register() {
             <form className='app-form' onSubmit={submit}>
                 <Input state={email}
                        setState={changeEmail}
-                       label='Email'
+                       label={lang.EmailForm}
                        type='text'
                        errorText={errors.email}
                        onChange={validateEmail}/>
 
                 <Input state={username}
                        setState={changeUsername}
-                       label='Username'
+                       label={lang.UsernameForm}
                        type='text'
                        errorText={errors.username}
                        onChange={checkUsername}/>
 
                 <Input state={password}
                        setState={changePassword}
-                       label='Password'
+                       label={lang.PasswordForm}
                        type='password'
                        errorText={errors.password}
                        onChange={checkPassword}/>
 
                 <Input state={passwordAgain}
                        setState={changePasswordAgain}
-                       label='Password again'
+                       label={lang.PasswordAgainForm}
                        type='password'
                        errorText={errors.passwordAgain}
                        onChange={checkPasswordAgain}/>
                 <p className='error-text'>{hasError && registerState.message}</p>
 
-                <Submit label={requested ? <Loading/> : 'Register'}/>
+                <Submit label={requested ? <Loading/> : lang.RegisterButton}/>
             </form>
         </div>
     )

@@ -26,7 +26,7 @@ export function KeysSettingsBlock({isCurrent, channel}: keysSettingsBlockProps) 
         event.preventDefault()
 
         let newErrors = {...errors}
-        newErrors.name = !checkKeyLength(keyName) ? 'Key name too long' : ''
+        newErrors.name = !checkKeyLength(keyName) ? lang.KeyNameTooLongError : ''
         changeErrors(newErrors)
         if (newErrors.name) {
             return
@@ -42,6 +42,7 @@ export function KeysSettingsBlock({isCurrent, channel}: keysSettingsBlockProps) 
     const {fetchCreateKey} = useActions()
 
     const {keysData} = useTypedSelector(state => state.keys)
+    const {lang} = useTypedSelector(state => state.lang)
     const currentKeys = keysData[channel ? channel['channel_id'] : '']
 
     const [keyName, changeKeyName] = useState('')
@@ -63,12 +64,12 @@ export function KeysSettingsBlock({isCurrent, channel}: keysSettingsBlockProps) 
 
     return (
         <div>
-            <h1 className='header-1'>Create key</h1>
+            <h1 className='header-1'>{lang.CreateKeyHeader}</h1>
             <form onSubmit={submit}>
-                <Input label='Name' state={keyName} setState={changeKeyName} type='text' errorText={errors.name}/>
+                <Input label={lang.KeyNameForm} state={keyName} setState={changeKeyName} type='text' errorText={errors.name}/>
                 <div className='channel-settings-radio-container'>
                     <div className='horizontal justify-left'>
-                        <Radio label='Read'
+                        <Radio label={lang.KeyTypeReadForm}
                                checked={keyType === '0'}
                                setData='0'
                                name='key-type'
@@ -76,18 +77,18 @@ export function KeysSettingsBlock({isCurrent, channel}: keysSettingsBlockProps) 
 
                         {keyType === "0" && <>
                             <div className='horizontal-gap'/>
-                            <Checkbox label='Allow info' state={allowInfo} setState={changeAllowInfo}/>
+                            <Checkbox label={lang.KeyAllowInfoForm} state={allowInfo} setState={changeAllowInfo}/>
                         </>}
 
                     </div>
-                    <Radio label='Write' setData='1' name='key-type' setState={changeKeyType}/>
+                    <Radio label={lang.KeyTypeWriteForm} setData='1' name='key-type' setState={changeKeyType}/>
                 </div>
                 <p className='error-text'>{hasError && createKeyState.message}</p>
 
-                <Submit label={requested ? <Loading/> : 'Create'}/>
+                <Submit label={requested ? <Loading/> : lang.CreateKeyButton}/>
             </form>
             <span className='gap'/>
-            <h1 className='header-1'>Your keys</h1>
+            <h1 className='header-1'>{lang.YourKeysHeader}</h1>
 
             <div className='card-100-container'>
                 {currentKeys?.keysDataState === dataStates.requested && <LoadingKeyCard/>}

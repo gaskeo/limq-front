@@ -47,14 +47,14 @@ function MixinsContainer({isCurrent, mixinType, channel}: mixinsContainerProps) 
     </div>
 }
 
-export const mixinTabs = [
+export const mixinTabs = (names: {in: string, out: string}) =>  [
     {
-        name: 'In', parameterName: 'in',
+        name: names.in, parameterName: 'in',
         id: 1, block: () => ((isCurrent: boolean, channel: Channel | undefined) =>
             <MixinsContainer key='1' isCurrent={isCurrent} channel={channel} mixinType={MixinTypeStates.in}/>)
     },
     {
-        name: 'Out', parameterName: 'keys',
+        name: names.out, parameterName: 'keys',
         id: 2, block: () => ((isCurrent: boolean, channel: Channel | undefined) =>
             <MixinsContainer key='2' isCurrent={isCurrent} channel={channel} mixinType={MixinTypeStates.out}/>)
     },
@@ -80,7 +80,7 @@ export function MixinsSettingsBlock({isCurrent, channel}: mixinsSettingsBlockPro
         }
 
         let newErrors = {...errors}
-        newErrors.mixin = !checkMixinLength(keyId) ? 'wrong key' : ''
+        newErrors.mixin = !checkMixinLength(keyId) ? lang.WrongKeyError : ''
         changeErrors(newErrors)
         if (newErrors.mixin) {
             return
@@ -99,12 +99,14 @@ export function MixinsSettingsBlock({isCurrent, channel}: mixinsSettingsBlockPro
     const {fetchCreateMixin} = useActions()
 
     const [keyId, changeKeyId] = useState('')
-    const [activeTab, changeActiveTab] = useState(mixinTabs[0].parameterName)
 
     const [errors, changeErrors] = useState({mixin: ''})
 
     const {states} = useTypedSelector(state => state.fetch)
+    const {lang} = useTypedSelector(state => state.lang)
     const createMixinState = states[ApiRoutes.CreateMixin]
+    const tabs = mixinTabs({in: lang.MixinsIn, out: lang.MixinsOut})
+    const [activeTab, changeActiveTab] = useState(tabs[0].parameterName)
 
     const requested = createMixinState && createMixinState.dataState === dataStates.requested
     const hasError = createMixinState && createMixinState.status !== 200
@@ -115,28 +117,29 @@ export function MixinsSettingsBlock({isCurrent, channel}: mixinsSettingsBlockPro
 
     return (
         <div>
-            <h1 className='header-1'>Create mixin</h1>
+            <h1 className='header-1'>{lang.CreateMixinHeader}</h1>
             <form onSubmit={submit}>
                 <Input state={keyId}
                        setState={changeKeyId}
-                       label='Read key'
+                       label={lang.ReadKeyForm}
                        type='text'
                        errorText={errors.mixin}
                        onChange={checkMixin}
                        placeholder={'x'.repeat(32)}/>
                 <p className='error-text'>{hasError && createMixinState.message}</p>
 
-                <Submit label={requested ? <Loading/> : 'Create'}/>
+                <Submit label={requested ? <Loading/> : lang.CreateMixinButton}/>
             </form>
             <span className='gap'/>
-            <h1 className='header-1'>Your mixins</h1>
+            <h1 className='header-1'>{lang.YourMixinsHeader}</h1>
+
             <div className='center'>
-                <Menu active={activeTab} onClick={changeTab} tabs={mixinTabs}
+                <Menu active={activeTab} onClick={changeTab} tabs={tabs}
                       menuClasses='menu-horizontal width-50' menuTabClasses='menu-tab-horizontal'/>
             </div>
             <span className='gap'/>
 
-            {mixinTabs.map(mixinTab => mixinTab.block()(mixinTab.parameterName === activeTab, channel))}
+            {tabs.map(mixinTab => mixinTab.block()(mixinTab.parameterName === activeTab, channel))}
         </div>
     )
 }

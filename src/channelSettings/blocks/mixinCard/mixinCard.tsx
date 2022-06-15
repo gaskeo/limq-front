@@ -2,6 +2,7 @@ import {MixinTypeStates} from "../../../store/reducers/mixinsReducer";
 import {useParams} from "react-router-dom";
 import {Channel} from "../../../store/reducers/channelsReducer";
 import {useActions} from "../../../hooks/useActions";
+import {useTypedSelector} from "../../../hooks/useTypedSelector";
 
 interface mixinCardProps {
     channel: Channel,
@@ -10,12 +11,13 @@ interface mixinCardProps {
 
 export function MixinCard({channel, mixinType}: mixinCardProps) {
     function deleteMixin() {
-        if (channelId && window.confirm('Delete key?')) {
+        if (channelId && window.confirm(lang.DeleteMixinConfirmQuestion)) {
             fetchRestrictMixin(channelId, channel['channel_id'], mixinType)
         }
     }
 
     const {channelId} = useParams()
+    const {lang} = useTypedSelector(state => state.lang)
     const {fetchRestrictMixin} = useActions()
 
     return (
@@ -25,7 +27,7 @@ export function MixinCard({channel, mixinType}: mixinCardProps) {
             </div>
             <div className='card-info-container'>
                 <code className='card-code card-background-text'>{channel['channel_id']}</code>
-                <button className='button mini-button error' onClick={deleteMixin}>Delete</button>
+                <button className='button mini-button error' onClick={deleteMixin}>{lang.DeleteMixinButton}</button>
             </div>
         </div>
     )

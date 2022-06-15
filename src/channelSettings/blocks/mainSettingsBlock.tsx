@@ -24,7 +24,7 @@ export function MainSettingsBlock({isCurrent, channel}: mainSettingsBlockProps) 
 
         let newErrors = {...errors}
 
-        newErrors.name = !checkChannelLength(channelName) ? 'Channel name too long' : ''
+        newErrors.name = !checkChannelLength(channelName) ? lang.ChannelNameTooLong : ''
         changeErrors(newErrors)
         if (newErrors.name) {
             return
@@ -45,6 +45,7 @@ export function MainSettingsBlock({isCurrent, channel}: mainSettingsBlockProps) 
     const [errors, changeErrors] = useState({name: ''})
 
     const {states} = useTypedSelector(state => state.fetch)
+    const {lang} = useTypedSelector(state => state.lang)
     const createChannelState = states[ApiRoutes.RenameChannel]
 
     const requested = createChannelState && createChannelState.dataState === dataStates.requested
@@ -58,18 +59,18 @@ export function MainSettingsBlock({isCurrent, channel}: mainSettingsBlockProps) 
 
     return (
         <div>
-            <h1 className='header-1'>Main settings</h1>
+            <h1 className='header-1'>{lang.RenameChannelHeader}</h1>
             <form onSubmit={submit}>
                 <Input state={channelName}
                        setState={changeChannelName}
-                       label='Name'
+                       label={lang.ChannelNameForm}
                        type='text'
                        errorText={errors.name}
                        onChange={checkChannelName}
                        placeholder={placeholder}/>
                 <p className='error-text'>{hasError && createChannelState.message}</p>
 
-                <Submit label={requested ? <Loading/> : 'Rename'}/>
+                <Submit label={requested ? <Loading/> : lang.RenameChannelButton}/>
             </form>
         </div>
     )
