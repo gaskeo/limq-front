@@ -53,7 +53,6 @@ function App() {
     useEffect(() => {
         if (langCode === availableLanguages.undefined) {
             getLangDict(getLang()).then(l => {
-                console.log(getLang())
                 dispatch({
                     type: LangActionTypes.setLang,
                     payload: {lang: l.langDict, langCode: getLang()}
