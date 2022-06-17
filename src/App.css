@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato&family=Manrope:wght@600&family=Nunito:wght@300&family=Roboto:wght@300&family=Rubik:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Manrope:wght@600&family=Noto+Sans+Mono:wght@500&family=Nunito:wght@300&family=Roboto:wght@300&family=Rubik:wght@500&display=swap');
 
 [data-theme="light"] {
     --main-color: white; /* background color */
@@ -7,18 +7,23 @@
     --fourth-color: #f8f9fa; /* element's background color */
     --fifth-color: #d3c3c3;
     --error-color: #e83f36;
+    --error-text-color: white;
+
     --error-color-2: #dc3545;
     --warning-color: #ffc107;
     --warning-color-2: #cca324;
 }
 
 [data-theme="dark"] {
-    --main-color: #1d1922;
-    --second-color: white;
-    --third-color: #212734;
-    --fourth-color: #272727;
-    --fifth-color: #575757;
+    --main-color: #000C14;
+    --second-color: #F6FFF8;
+    --third-color: #032531;
+    --fourth-color: #001a2c;
+    --fifth-color: #bfc0c0;
+    --sixth-color: #003D66;
+
     --error-color: #ff5f3a;
+    --error-text-color: #F6FFF8;
     --error-color-2: #dc3545;
     --warning-color: #ffc107;
     --warning-color-2: #cca324;
@@ -28,6 +33,7 @@ body {
     transition: all .2s;
     --header-font-family: 'Manrope', sans-serif;
     --main-font-family: 'Nunito', sans-serif;
+    --code-font-family: 'Noto Sans Mono', monospace;;
     background-color: var(--main-color);
 }
 
@@ -139,12 +145,11 @@ body {
 
 .error {
     background-color: var(--error-color);
-    color: var(--main-color);
+    color: var(--error-text-color);
 }
 
 .error:hover {
     background-color: var(--error-color-2);
-    color: var(--main-color);
 }
 
 .theme-icon {

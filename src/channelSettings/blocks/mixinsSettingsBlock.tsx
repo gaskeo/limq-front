@@ -133,9 +133,9 @@ export function MixinsSettingsBlock({isCurrent, channel}: mixinsSettingsBlockPro
             <span className='gap'/>
             <h1 className='header-1'>{lang.YourMixinsHeader}</h1>
 
-            <div className='center'>
+            <div className='max-width-500'>
                 <Menu active={activeTab} onClick={changeTab} tabs={tabs}
-                      menuClasses='menu-horizontal width-50' menuTabClasses='menu-tab-horizontal'/>
+                      menuClasses='menu-horizontal' menuTabClasses='menu-tab-horizontal'/>
             </div>
             <span className='gap'/>
 

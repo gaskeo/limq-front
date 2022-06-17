@@ -126,7 +126,11 @@
 
 
 .selected {
-    background-color: var(--third-color);
+    background-color: var(--sixth-color);
+}
+
+.selected:hover {
+    background-color: var(--sixth-color);
 }
 
 .select-element-open {
@@ -140,21 +144,14 @@
 
 @media screen and (min-width: 601px) and (max-width: 800px) {
     .input-container {
-        display: grid;
-        grid-template-columns: 2fr 5fr;
-
-        grid-gap: 1rem;
-
-        align-items: center;
+        display: flex;
 
     }
 }
 
 @media screen and (min-width: 801px) {
     .input-container {
-        display: grid;
-        grid-gap: 1rem;
-        grid-template-columns: 2fr 5fr;
+        display: flex;
         align-items: center;
         max-width: 500px;
     }

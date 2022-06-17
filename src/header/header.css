@@ -83,14 +83,18 @@ span.mq-label:hover {
     min-height: 5.5vh;
 }
 
-.header-element-hover {
-    background-color: var(--fifth-color);
-}
 
 .header-element:hover {
-    background-color: var(--fifth-color);
+    background-color: var(--third-color);
 }
 
+.header-element-hover {
+    background-color: var(--sixth-color);
+}
+
+.header-element-hover:hover {
+    background-color: var(--sixth-color);
+}
 
 .dropdown-item {
     float: right;

@@ -35,7 +35,18 @@
     border-bottom: 1px solid var(--third-color);
     color: var(--second-color);
     font-family: var(--main-font-family);
-}   
+    transition: background-color .2s;
+}
+
+
+.menu-tab:hover {
+    background-color: var(--third-color);
+}
+
+.max-width-500 {
+    max-width: 500px;
+}
+
 
 .menu-tab:last-child {
     border: none;
@@ -50,8 +61,13 @@
 }
 
 .active {
-    background-color: var(--third-color);
+    background-color: var(--sixth-color);
 }
+
+.active:hover {
+    background-color: var(--sixth-color);
+}
+
 
 @media screen and (max-width: 600px) {
     .settings {

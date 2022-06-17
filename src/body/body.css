@@ -13,7 +13,7 @@
     box-shadow: 0 0 4px 2px var(--third-color);
     background-color: var(--fourth-color);
     border-radius: 5px;
-    padding: 15px 20px 10px;
+    padding: 15px 20px 20px;
     overflow-x: hidden;
     min-height: 140px;
     max-width: 500px;
@@ -29,7 +29,7 @@
 }
 
 .add-channel-card:hover {
-    background-color: var(--third-color);
+    background-color: var(--sixth-color);
 }
 
 .add-channel-card-text {
@@ -72,7 +72,7 @@
 }
 
 .card-icon-near-header:hover {
-    fill: var(--fifth-color);
+    fill: var(--sixth-color);
 }
 
 .card-info-container {
@@ -88,6 +88,7 @@
     display: block;
     color: var(--fifth-color);
     margin-bottom: 16px;
+    font-family: var(--code-font-family);
 }
 
 .card-icon-and-text-container {
@@ -114,11 +115,11 @@
 }
 
 .card-background-text {
-    background-color: var(--fifth-color);
+    background-color: var(--main-color);
     width: max-content;
     padding: 10px;
     border-radius: 5px;
-    color: var(--second-color);
+    color: var(--fifth-color);
 }
 
 .card-text {
