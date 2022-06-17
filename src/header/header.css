@@ -1,7 +1,8 @@
 .app-header {
     padding-left: 8%;
     padding-right: 8%;
-    min-height: 5.5vh;
+    min-height: 50px;
+    max-height: 70px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -110,7 +111,7 @@ span.mq-label:hover {
 }
 
 .no-hover:hover {
-    background: none;
+    background: var(--fourth-color);
 }
 
 .button-opened {

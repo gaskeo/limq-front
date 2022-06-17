@@ -33,7 +33,7 @@ export const langDict: LangStruct = {
     DeleteMixinButton: "Delete",
     NoMixinInCard: "You haven't in mixins",
     NoMixinOutCard: "You haven't out mixin",
-    CreateChannelButton: "Create",
+    CreateChannelButton: "Create channel",
     LoginButton: "Login",
     ExitButton: "Exit",
     SettingsButton: "Settings",

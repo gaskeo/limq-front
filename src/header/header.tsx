@@ -60,7 +60,7 @@ export function Header() {
     return (
         <header className="app-header">
             <Link to={routes.index} className='lithium-container'>
-                <span className="lithium-label">Lithium</span>
+                <span className="lithium-label">Li</span>
                 <span className="lithium-label mq-label">MQ</span>
             </Link>
             <div>

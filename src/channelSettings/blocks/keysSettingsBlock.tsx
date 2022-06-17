@@ -75,10 +75,10 @@ export function KeysSettingsBlock({isCurrent, channel}: keysSettingsBlockProps) 
                                name='key-type'
                                setState={changeKeyType}/>
 
-                        {keyType === "0" && <>
                             <div className='horizontal-gap'/>
-                            <Checkbox label={lang.KeyAllowInfoForm} state={allowInfo} setState={changeAllowInfo}/>
-                        </>}
+                            <div className={keyType === "0" ? '' : 'hidden'}>
+                                <Checkbox label={lang.KeyAllowInfoForm} state={allowInfo} setState={changeAllowInfo}/>
+                            </div>
 
                     </div>
                     <Radio label={lang.KeyTypeWriteForm} setData='1' name='key-type' setState={changeKeyType}/>

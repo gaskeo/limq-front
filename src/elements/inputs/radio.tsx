@@ -18,10 +18,10 @@ export function Radio({label, setState, name, setData, checked}: radioProps) {
 
     return (
         <>
-            <label className='input-label radio-container' htmlFor='radio'>
+            <label className='radio-container' htmlFor='radio'>
                 <input className='radio' id='radio' type='radio' name={name} checked={checked}
                        onChange={onChange()}/>
-                <span>{label}</span>
+                <span className='input-label'>{label}</span>
 
             </label>
         </>

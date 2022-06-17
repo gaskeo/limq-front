@@ -23,8 +23,8 @@ export function Input({label, onChange, setState, state, placeholder, type, erro
 
     return (
         <>
-            <label className='input-label'>
-                {label}
+            <label className='input-container'>
+                <span className='input-label'>{label}</span>
                 <input className='input' type={type} value={state} placeholder={placeholder}
                        onChange={_onChange()}/>
             </label>

@@ -8,7 +8,6 @@
     border-radius: 5px;
     border: 1px solid var(--third-color);
     background-color: var(--fourth-color);
-
     font-size: 1.4em;
     padding-left: .5rem;
     transition: background-color .2s;
@@ -18,7 +17,7 @@
     background-color: var(--third-color);
 }
 
-.input-label {
+.input-container {
     color: var(--second-color);
     font-family: var(--main-font-family);
     font-size: 1.2em;
@@ -39,9 +38,25 @@
 }
 
 .radio-container {
+    color: var(--second-color);
+    font-family: var(--main-font-family);
+    font-size: 1.2em;
     display: flex;
     width: auto;
     align-items: center;
+}
+
+.checkbox-container {
+    color: var(--second-color);
+    font-family: var(--main-font-family);
+    font-size: 1.2em;
+    display: flex;
+    width: auto;
+    align-items: center;
+}
+
+.hidden {
+    visibility: hidden;
 }
 
 .radio {
@@ -103,6 +118,12 @@
     line-height: 2em;
 }
 
+.input-label {
+    line-height: 1em;
+
+    word-wrap: normal;
+}
+
 
 .selected {
     background-color: var(--third-color);
@@ -112,3 +133,35 @@
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
 }
+
+@media screen and (max-width: 600px) {
+
+}
+
+@media screen and (min-width: 601px) and (max-width: 800px) {
+    .input-container {
+        display: grid;
+        grid-template-columns: 2fr 5fr;
+
+        grid-gap: 1rem;
+
+        align-items: center;
+
+    }
+}
+
+@media screen and (min-width: 801px) {
+    .input-container {
+        display: grid;
+        grid-gap: 1rem;
+        grid-template-columns: 2fr 5fr;
+        align-items: center;
+        max-width: 500px;
+    }
+    .input {
+    }
+    .submit {
+        max-width: 300px;
+    }
+}
+

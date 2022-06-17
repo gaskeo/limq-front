@@ -16,6 +16,7 @@
     padding: 15px 20px 10px;
     overflow-x: hidden;
     min-height: 140px;
+    max-width: 500px;
 }
 
 .add-channel-card {
@@ -24,6 +25,7 @@
     justify-content: center;
     transition: background-color .2s;
     cursor: pointer;
+    text-decoration: none;
 }
 
 .add-channel-card:hover {
@@ -157,13 +159,12 @@
 
 @media screen and (min-width: 801px) {
     .card-container {
-        grid-template-columns: repeat(auto-fill, clamp(200px, 26vw, 400px));
+        grid-template-columns: repeat(auto-fill, clamp(200px, 26vw, 500px));
 
     }
 
     .card {
         width: 26vw;
-        max-width: 400px;
     }
 }
 
@@ -177,7 +178,6 @@
 
 .card-100 {
     width: 100%;
-    max-width: none;
 }
 
 .horizontal-scroll {

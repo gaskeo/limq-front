@@ -3,7 +3,7 @@
     display: grid;
     width: 100%;
     grid-template-columns: 1fr 3fr;
-    gap: 1rem
+    gap: 2rem
 }
 
 .menu {
@@ -34,6 +34,7 @@
     padding: 15px;
     border-bottom: 1px solid var(--third-color);
     color: var(--second-color);
+    font-family: var(--main-font-family);
 }   
 
 .menu-tab:last-child {
@@ -78,7 +79,7 @@
 
 @media screen and (min-width: 601px) and (max-width: 800px) {
     .settings {
-        grid-template-columns: 1fr 5fr;
+        grid-template-columns: 2fr 5fr;
     }
 
     .settings-without-menu {
@@ -88,7 +89,7 @@
 
 @media screen and (min-width: 801px) {
     .settings {
-        grid-template-columns: 1fr 6fr;
+        grid-template-columns: 2fr 6fr;
     }
 
     .settings-without-menu {

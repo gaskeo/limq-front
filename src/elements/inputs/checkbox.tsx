@@ -20,7 +20,7 @@ export function Checkbox({label, onChange, state, setState}: checkboxProps) {
     }
 
     return (
-        <label className='input-label'>
+        <label className='checkbox-container'>
             <input type='checkbox' checked={state}
                    onChange={_onChange()}/>
             {label}
