@@ -64,9 +64,15 @@ export function KeysSettingsBlock({isCurrent, channel}: keysSettingsBlockProps) 
 
     return (
         <div>
-            <h1 className='header-1'>{lang.CreateKeyHeader}</h1>
             <form onSubmit={submit}>
-                <Input label={lang.KeyNameForm} state={keyName} setState={changeKeyName} type='text' errorText={errors.name}/>
+                <h2 className='header-2'>{lang.CreateKeyHeader}</h2>
+
+                <Input label={lang.KeyNameForm}
+                       state={keyName}
+                       setState={changeKeyName}
+                       type='text'
+                       errorText={errors.name}
+                placeholder={lang.EnterKeyName}/>
                 <div className='channel-settings-radio-container'>
                     <div className='horizontal justify-left'>
                         <Radio label={lang.KeyTypeReadForm}
@@ -81,7 +87,8 @@ export function KeysSettingsBlock({isCurrent, channel}: keysSettingsBlockProps) 
                             </div>
 
                     </div>
-                    <Radio label={lang.KeyTypeWriteForm} setData='1' name='key-type' setState={changeKeyType}/>
+                    <Radio label={lang.KeyTypeWriteForm} setData='1' name='key-type' setState={changeKeyType}
+                           checked={keyType === '1'}/>
                 </div>
                 <p className='error-text'>{hasError && createKeyState.message}</p>
 

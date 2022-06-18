@@ -54,22 +54,27 @@ export function Login() {
 
     return (
         <div className='center'>
-            <form className='app-form' onSubmit={submit}>
+            <form className='app-form form-bg' onSubmit={submit}>
+                <h1 className='header-1'>{lang.LoginHeader}</h1>
+
                 <Input state={email}
                        setState={changeEmail}
                        label={lang.EmailForm}
                        type='text'
                        errorText={errors.email}
-                       onChange={validateEmail}/>
+                       onChange={validateEmail}
+                       placeholder={lang.EnterEmail}
+                />
 
                 <Input state={password}
                        setState={changePassword}
                        label={lang.PasswordForm}
                        type='password'
                        errorText={errors.password}
-                       onChange={checkPassword}/>
+                       onChange={checkPassword}
+                       placeholder={lang.EnterPassword}/>
 
-                <Checkbox label={lang.RememberMeForm} state={rememberMe} setState={changeRememberMe}/>
+                <div className='width-100 max-width-500 left'><Checkbox label={lang.RememberMeForm} state={rememberMe} setState={changeRememberMe}/></div>
                 <p className='error-text'>{hasError && loginState.message}</p>
 
                 <Submit label={requested ? <Loading/> : lang.LoginButton}/>

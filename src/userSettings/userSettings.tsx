@@ -8,13 +8,19 @@ import {PasswordBlock} from "./blocks/passwordBlock";
 import {useTypedSelector} from "../hooks/useTypedSelector";
 
 
-export const menuTabs = (names: {changeName: string, changeEmail: string, changePassword: string}) => [
-    {name: names.changeName, parameterName: 'changeName',
-        id: 1, block: () => ((isCurrent: boolean) => <NameBlock key='1' isCurrent={isCurrent}/>)},
-    {name: names.changeEmail, parameterName: 'changeEmail',
-        id: 2, block: () => ((isCurrent: boolean) => <EmailBlock key='2' isCurrent={isCurrent}/>)},
-    {name: names.changePassword, parameterName: 'changePassword',
-        id: 3, block: () => ((isCurrent: boolean) => <PasswordBlock key='3' isCurrent={isCurrent}/>)}
+export const menuTabs = (names: { changeName: string, changeEmail: string, changePassword: string }) => [
+    {
+        name: names.changeName, parameterName: 'changeName',
+        id: 1, block: () => ((isCurrent: boolean) => <NameBlock key='1' isCurrent={isCurrent}/>)
+    },
+    {
+        name: names.changeEmail, parameterName: 'changeEmail',
+        id: 2, block: () => ((isCurrent: boolean) => <EmailBlock key='2' isCurrent={isCurrent}/>)
+    },
+    {
+        name: names.changePassword, parameterName: 'changePassword',
+        id: 3, block: () => ((isCurrent: boolean) => <PasswordBlock key='3' isCurrent={isCurrent}/>)
+    }
 ]
 
 
@@ -27,8 +33,10 @@ export function UserSettings() {
 
     const [searchParams, changeSearchParams] = useSearchParams()
     const {lang} = useTypedSelector(state => state.lang)
-    const tabs = menuTabs({changeName: lang.UserSettingsMenuUsername,
-        changeEmail: lang.UserSettingsMenuEmail, changePassword: lang.UserSettingsMenuPassword})
+    const tabs = menuTabs({
+        changeName: lang.UserSettingsMenuUsername,
+        changeEmail: lang.UserSettingsMenuEmail, changePassword: lang.UserSettingsMenuPassword
+    })
 
     useEffect(() => {
         if (!searchParams.get('tab')) {
@@ -37,9 +45,13 @@ export function UserSettings() {
     })
 
     return (
-        <div className='settings'>
-            <Menu active={searchParams.get('tab')} onClick={changeTab} tabs={tabs}/>
-            <SettingsBlock currentTab={searchParams.get('tab')} tabs={tabs}/>
+        <div className='settings-container'>
+            <h1 className='header-1'>{lang.UserSettingsHeader}</h1>
+
+            <div className='settings'>
+                <Menu active={searchParams.get('tab')} onClick={changeTab} tabs={tabs}/>
+                <SettingsBlock currentTab={searchParams.get('tab')} tabs={tabs}/>
+            </div>
         </div>
     )
 }

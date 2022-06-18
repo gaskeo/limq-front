@@ -72,26 +72,31 @@ export function PasswordBlock({isCurrent}: passwordBlockProps) {
 
     return (
         <div>
-            <h1 className='header-1'>{lang.ChangePasswordHeader}</h1>
             <form onSubmit={submit}>
+                <h2 className='header-2'>{lang.ChangePasswordHeader}</h2>
+
                 <Input label={lang.OldPasswordForm}
                        state={oldPassword}
                        setState={changeOldPassword}
                        type='password'
                        onChange={checkOldPassword}
-                errorText={errors.oldPassword}/>
+                       errorText={errors.oldPassword}
+                       placeholder={lang.EnterOldPassword}/>
                 <Input label={lang.NewPasswordForm}
                        state={newPassword}
                        setState={changeNewPassword}
                        type='password'
                        onChange={checkPassword}
-                errorText={errors.newPassword}/>
+                       errorText={errors.newPassword}
+                       placeholder={lang.EnterNewPassword}/>
                 <Input label={lang.NewPasswordForm}
                        state={newPasswordAgain}
                        setState={changeNewPasswordAgain}
                        onChange={checkPasswordAgain}
                        errorText={errors.newPasswordAgain}
-                       type='password'/>
+                       type='password'
+                       placeholder={lang.EnterNewPasswordAgain}
+                />
                 <p className='error-text'>{hasError && changePasswordState.message}</p>
 
                 <Submit label={requested ? <Loading/> : lang.ChangePasswordButton}/>

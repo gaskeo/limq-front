@@ -91,34 +91,39 @@ export function Register() {
 
     return (
         <div className='center'>
-            <form className='app-form' onSubmit={submit}>
+            <form className='app-form form-bg' onSubmit={submit}>
+                <h1 className='header-1'>{lang.RegisterHeader}</h1>
                 <Input state={email}
                        setState={changeEmail}
                        label={lang.EmailForm}
                        type='text'
                        errorText={errors.email}
-                       onChange={validateEmail}/>
+                       onChange={validateEmail}
+                       placeholder={lang.EnterEmail}/>
 
                 <Input state={username}
                        setState={changeUsername}
                        label={lang.UsernameForm}
                        type='text'
                        errorText={errors.username}
-                       onChange={checkUsername}/>
+                       onChange={checkUsername}
+                       placeholder={lang.EnterUsername}/>
 
                 <Input state={password}
                        setState={changePassword}
                        label={lang.PasswordForm}
                        type='password'
                        errorText={errors.password}
-                       onChange={checkPassword}/>
+                       onChange={checkPassword}
+                       placeholder={lang.EnterPassword}/>
 
                 <Input state={passwordAgain}
                        setState={changePasswordAgain}
                        label={lang.PasswordAgainForm}
                        type='password'
                        errorText={errors.passwordAgain}
-                       onChange={checkPasswordAgain}/>
+                       onChange={checkPasswordAgain}
+                       placeholder={lang.EnterPasswordAgain}/>
                 <p className='error-text'>{hasError && registerState.message}</p>
 
                 <Submit label={requested ? <Loading/> : lang.RegisterButton}/>

@@ -70,6 +70,20 @@ export interface LangStruct {
     SystemTheme: string
     English: string
     Russian: string
+
+    EnterEmail: string
+    EnterPassword: string
+    EnterUsername: string
+    EnterPasswordAgain: string
+    EnterOldPassword: string
+    EnterNewPassword: string
+    EnterNewPasswordAgain: string
+    EnterKeyName: string
+    EnterReadKey: string
+    LoginHeader: string
+    RegisterHeader: string
+    UserSettingsHeader: string
+    ChannelSettingsHeader: string
 }
 
 export const defaultLangValue: LangStruct = {
@@ -143,5 +157,19 @@ export const defaultLangValue: LangStruct = {
     LightTheme: '',
     SystemTheme: '',
     English: '',
-    Russian: ''
+    Russian: '',
+
+    EnterEmail: '',
+    EnterPassword: '',
+    EnterUsername: '',
+    EnterPasswordAgain: '',
+    EnterOldPassword: '',
+    EnterNewPassword: '',
+    EnterNewPasswordAgain: '',
+    EnterKeyName: '',
+    EnterReadKey: '',
+    LoginHeader: '',
+    RegisterHeader: '',
+    UserSettingsHeader: '',
+    ChannelSettingsHeader: '',
 }

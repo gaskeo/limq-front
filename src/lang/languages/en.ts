@@ -71,5 +71,20 @@ export const langDict: LangStruct = {
     LightTheme: 'Light',
     SystemTheme: 'System',
     English: 'English',
-    Russian: 'Русский'
+    Russian: 'Русский',
+
+    EnterEmail: 'Enter Email',
+    EnterPassword: 'Enter password',
+    EnterUsername: 'Enter username',
+    EnterPasswordAgain: 'Enter password again',
+    EnterOldPassword: 'Enter old password',
+    EnterNewPassword: 'Enter new password',
+    EnterNewPasswordAgain: 'Enter new password again',
+    EnterKeyName: 'Enter key name',
+    EnterReadKey: 'Enter read key',
+    LoginHeader: 'Sing in with email',
+    RegisterHeader: 'Sing up with email',
+    UserSettingsHeader: 'User settings',
+    ChannelSettingsHeader: 'Channel settings',
+
 }

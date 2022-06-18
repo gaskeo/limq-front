@@ -47,8 +47,10 @@ export function ChannelSettings() {
     const {channelId} = useParams()
     const {lang} = useTypedSelector(state => state.lang)
     const [searchParams, changeSearchParams] = useSearchParams()
-    const tabs = menuTabs({main: lang.ChannelSettingsMenuMainSettings,
-        keys: lang.ChannelSettingsMenuKeys, mixins: lang.ChannelSettingsMenuMixins})
+    const tabs = menuTabs({
+        main: lang.ChannelSettingsMenuMainSettings,
+        keys: lang.ChannelSettingsMenuKeys, mixins: lang.ChannelSettingsMenuMixins
+    })
 
     useEffect(() => {
         if (!searchParams.get('tab')) {
@@ -57,9 +59,12 @@ export function ChannelSettings() {
     })
 
     return (
-        <div className='settings'>
-            <Menu active={searchParams.get('tab')} onClick={changeTab} tabs={tabs}/>
-            <SettingsBlock channelId={channelId} currentTab={searchParams.get('tab')} tabs={tabs}/>
+        <div className='settings-container'>
+            <h1 className='header-1'>{lang.ChannelSettingsHeader}</h1>
+            <div className='settings'>
+                <Menu active={searchParams.get('tab')} onClick={changeTab} tabs={tabs}/>
+                <SettingsBlock channelId={channelId} currentTab={searchParams.get('tab')} tabs={tabs}/>
+            </div>
         </div>
     )
 }

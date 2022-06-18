@@ -1,17 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato&family=Manrope:wght@600&family=Noto+Sans+Mono:wght@500&family=Nunito:wght@300&family=Roboto:wght@300&family=Rubik:wght@500&display=swap');
 
 [data-theme="light"] {
-    --main-color: white; /* background color */
+    --main-color: #f8f0fb; /* background color */
     --second-color: black; /* text color */
-    --third-color: #f2edf8; /* element's border color and hover */
-    --fourth-color: #f8f9fa; /* element's background color */
-    --fifth-color: #d3c3c3;
+    --third-color: #00e1ff; /* element's border color and hover */
+    --fourth-color: #00eeff; /* element's background color */
+    --fifth-color: #939196;
+    --sixth-color: #00d4ff;
+    --seventh-color: white;
     --error-color: #e83f36;
     --error-text-color: white;
 
     --error-color-2: #dc3545;
     --warning-color: #ffc107;
     --warning-color-2: #cca324;
+
+    --box-shadow: 0 0 4px 2px var(--fourth-color);
 }
 
 [data-theme="dark"] {
@@ -21,12 +25,16 @@
     --fourth-color: #001a2c;
     --fifth-color: #bfc0c0;
     --sixth-color: #003D66;
+    --seventh-color: black;
 
     --error-color: #ff5f3a;
     --error-text-color: #F6FFF8;
     --error-color-2: #dc3545;
     --warning-color: #ffc107;
     --warning-color-2: #cca324;
+
+    --box-shadow: 0 0 4px 2px var(--third-color);
+
 }
 
 body {
@@ -54,6 +62,7 @@ body {
 }
 
 .header-2 {
+    margin-top: 0;
     line-height: 1.2em;
     font-size: x-large;
     font-family: var(--header-font-family);
@@ -61,6 +70,8 @@ body {
 }
 
 .header-3 {
+    margin-top: 0;
+
     line-height: 1.2em;
     font-size: large;
     font-family: var(--header-font-family);
@@ -70,6 +81,11 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.left {
+    display: flex;
+    justify-content: left;
 }
 
 .height-100 {
@@ -92,12 +108,20 @@ body {
 
 .app-form {
     display: flex;
+    padding: 2rem;
     align-items: center;
     justify-content: space-between;
     flex-direction: column;
+    border-radius: 5px;
+    max-width: calc(500px + 4rem);
+}
+
+.form-bg {
+    background-color: var(--seventh-color);
 }
 
 .error-text {
+    max-width: 500px;
     font-family: var(--main-font-family);
     font-size: 1em;
     margin-top: .4rem;
@@ -178,11 +202,13 @@ body {
     .app-form {
         width: 64vw;
     }
+    .error-text {
+        margin-left: 2fr;
+    }
 }
 
 @media screen and (min-width: 801px) {
     .app-form {
         width: 64vw;
-        max-width: 800px;
     }
 }

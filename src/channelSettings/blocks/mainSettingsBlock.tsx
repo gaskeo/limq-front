@@ -59,8 +59,9 @@ export function MainSettingsBlock({isCurrent, channel}: mainSettingsBlockProps) 
 
     return (
         <div>
-            <h1 className='header-1'>{lang.RenameChannelHeader}</h1>
             <form onSubmit={submit}>
+                <h2 className='header-2'>{lang.RenameChannelHeader}</h2>
+
                 <Input state={channelName}
                        setState={changeChannelName}
                        label={lang.ChannelNameForm}

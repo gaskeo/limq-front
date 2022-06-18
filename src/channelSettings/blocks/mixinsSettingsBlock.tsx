@@ -117,15 +117,16 @@ export function MixinsSettingsBlock({isCurrent, channel}: mixinsSettingsBlockPro
 
     return (
         <div>
-            <h1 className='header-1'>{lang.CreateMixinHeader}</h1>
             <form onSubmit={submit}>
+                <h2 className='header-2'>{lang.CreateMixinHeader}</h2>
+
                 <Input state={keyId}
                        setState={changeKeyId}
                        label={lang.ReadKeyForm}
                        type='text'
                        errorText={errors.mixin}
                        onChange={checkMixin}
-                       placeholder={'x'.repeat(32)}/>
+                       placeholder={lang.EnterReadKey}/>
                 <p className='error-text'>{hasError && createMixinState.message}</p>
 
                 <Submit label={requested ? <Loading/> : lang.CreateMixinButton}/>

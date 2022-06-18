@@ -18,7 +18,9 @@ function hideEmail(email: string) {
     const hiddenName = name.length > 2 ?
         name[0] + '*'.repeat(Math.max(0, name.length - 2)) + name[Math.min(0, name.length - 1)]
         : name
-    const hiddenDomain = domain[0] + '*'.repeat(domain.length - 2) + domain[domain.length - 1]
+    const hiddenDomain = domain.length > 2 ?
+        domain[0] + '*'.repeat(domain.length - 2) + domain[domain.length - 1]
+        : domain
     return `${hiddenName}@${hiddenDomain}.${zone}`
 }
 
@@ -81,8 +83,8 @@ export function EmailBlock({isCurrent}: emailBlockProps) {
     const placeholder = user.email ? hideEmail(user.email) : ''
     return (
         <div>
-            <h1 className='header-1'>{lang.ChangeEmailHeader}</h1>
             <form onSubmit={submit}>
+                <h2 className='header-2'>{lang.ChangeEmailHeader}</h2>
                 <Input label={lang.EmailForm}
                        state={newEmail}
                        setState={changeNewEmail}
@@ -95,7 +97,8 @@ export function EmailBlock({isCurrent}: emailBlockProps) {
                        errorText={errors.password}
                        onChange={checkPassword}
                        setState={changePassword}
-                       type='password'/>
+                       type='password'
+                       placeholder={lang.EnterPassword}/>
                 <p className='error-text'>{hasError && changeEmailState.message}</p>
 
                 <Submit label={requested ? <Loading/> : lang.ChangeEmailButton}/>

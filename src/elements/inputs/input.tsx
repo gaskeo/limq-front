@@ -5,7 +5,8 @@ interface inputProps {
     label: string,
     state: string,
     setState: Dispatch<SetStateAction<string>>,
-    onChange?: ((value: string) => any), type: string,
+    onChange?: ((value: string) => any),
+    type: string,
     errorText?: string,
     placeholder?: string
 }
@@ -25,8 +26,10 @@ export function Input({label, onChange, setState, state, placeholder, type, erro
         <>
             <label className='input-container'>
                 <span className='input-label'>{label}</span>
-                <input className='input' type={type} value={state} placeholder={placeholder}
-                       onChange={_onChange()}/>
+                <div>
+                    <input className='input' type={type} value={state} placeholder={placeholder}
+                           onChange={_onChange()}/>
+                </div>
             </label>
             <p className='error-text'>{errorText && errorText}</p>
         </>

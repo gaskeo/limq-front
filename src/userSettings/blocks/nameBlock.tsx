@@ -58,8 +58,8 @@ export function NameBlock({isCurrent}: nameBlockProps) {
     const placeholder = user.username ? user.username : ''
     return (
         <div>
-            <h1 className='header-1'>{lang.RenameUserHeader}</h1>
             <form onSubmit={submit}>
+                <h2 className='header-2'>{lang.RenameUserHeader}</h2>
                 <Input label={lang.UsernameForm}
                        state={newUsername}
                        setState={changeNewUsername}

@@ -1,4 +1,10 @@
+import {Register} from "../register/register";
+
 export function BaseBody() {
 
-    return <div>base</div>
+    return (
+        <div>
+            <Register/>
+        </div>
+    )
 }
