@@ -9,19 +9,15 @@ import {Loading} from "../../elements/loading/loading";
 import {useActions} from "../../hooks/useActions";
 
 
-interface passwordBlockProps {
-    isCurrent: boolean
-}
-
-export function PasswordBlock({isCurrent}: passwordBlockProps) {
+export function PasswordBlock() {
     function submit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault()
         let newErrors = {...errors}
 
-        newErrors.oldPassword = !checkPasswordLength(oldPassword) ? 'Password too short' : ''
-        newErrors.newPassword = !checkPasswordLength(newPassword) ? 'New password too short' : ''
+        newErrors.oldPassword = !checkPasswordLength(oldPassword) ? lang.PasswordTooShortError : ''
+        newErrors.newPassword = !checkPasswordLength(newPassword) ? lang.PasswordTooShortError : ''
         newErrors.newPasswordAgain = !checkPasswordsMatch(newPassword, newPasswordAgain)
-            ? "Passwords don't match" : ''
+            ? lang.PasswordsNotMatchError : ''
         changeErrors(newErrors)
         if (newErrors.oldPassword || newErrors.newPasswordAgain || newErrors.newPasswordAgain) {
             return
@@ -65,10 +61,6 @@ export function PasswordBlock({isCurrent}: passwordBlockProps) {
 
     const requested = changePasswordState && changePasswordState.dataState === dataStates.requested
     const hasError = changePasswordState && changePasswordState.status !== 200
-
-    if (!isCurrent) {
-        return null
-    }
 
     return (
         <div>

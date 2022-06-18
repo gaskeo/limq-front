@@ -7,42 +7,40 @@ import {LangActionTypes} from "../../store/reducers/langReducer";
 import {availableThemes, getTheme, setTheme} from "../../theme";
 
 
-interface mainBlockProps {
-    isCurrent: boolean
-}
-
-export function MainBlock({isCurrent}: mainBlockProps) {
+export function MainBlock() {
     const {lang} = useTypedSelector(state => state.lang)
 
-    const [theme, changeTheme] = useState('')
+    const [theme, changeTheme] = useState(getTheme())
 
     const dispatch = useDispatch()
 
     function onLangChange(language: string) {
         setLang(language as availableLanguages)
-        dispatch({type: LangActionTypes.setLang, payload: {lang: language,
-                langCode: availableLanguages.undefined}})
-        }
-
-    function onThemeChange(newTheme: string) {
-        changeTheme(newTheme)
-        setTheme(newTheme)
+        dispatch({
+            type: LangActionTypes.setLang, payload: {
+                lang: language,
+                langCode: availableLanguages.undefined
+            }
+        })
     }
 
-    if (!isCurrent) {
-        return null
+    function onThemeChange(newTheme: string) {
+        changeTheme(newTheme as availableThemes)
+        setTheme(newTheme)
     }
 
     return (
         <div>
             <h1 className='header-1'>{lang.MainSettings}</h1>
             <Select id='lang' items={[{text: lang.English, value: availableLanguages.en},
-                {text: lang.Russian, value: availableLanguages.ru}]} onChange={onLangChange} label={lang.ChangeLanguage} selected={getLang()}/>
+                {text: lang.Russian, value: availableLanguages.ru}]} onChange={onLangChange} label={lang.ChangeLanguage}
+                    selected={getLang()}/>
             <div className='gap'/>
-            <Select id='theme' items={[{text: lang.DarkTheme, value: availableThemes.dark},
+            <Select id='theme' items={[
+                {text: lang.DarkTheme, value: availableThemes.dark},
                 {text: lang.LightTheme, value: availableThemes.light},
                 {text: lang.SystemTheme, value: availableThemes.system}]}
-                    onChange={onThemeChange} label={lang.ChangeTheme} selected={getTheme()}/>
+                    onChange={onThemeChange} label={lang.ChangeTheme} selected={theme}/>
         </div>
     )
 }

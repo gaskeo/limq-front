@@ -1,13 +1,13 @@
 import {useSearchParams} from "react-router-dom";
 import {useEffect} from "react";
-import {SettingsBlock} from "./settingsBlock";
+import {SettingsBlock} from "../elements/menu/settingsBlock";
 import {MainBlock} from "./blocks/mainBlock";
 
 
 export const menuTabs = (names: { main: string }) => [
     {
         name: names.main, parameterName: 'main',
-        id: 1, block: () => ((isCurrent: boolean) => <MainBlock key='1' isCurrent={isCurrent}/>)
+        id: 1, block: () => <MainBlock key='1'/>
     },
 ]
 

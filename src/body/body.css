@@ -5,6 +5,11 @@
     width: 84vw;
 }
 
+.base-body {
+    display: grid;
+    grid-template-columns: 4fr 2fr;
+}
+
 .card {
     box-sizing: border-box;
     display: flex;

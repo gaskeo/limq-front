@@ -1,7 +1,6 @@
-import {Channel} from "../../store/reducers/channelsReducer";
 import {Input} from "../../elements/inputs/input";
 import {Submit} from "../../elements/inputs/submit";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Menu} from "../../elements/menu/menu";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {dataStates} from "../../store/reducers/consts";
@@ -12,23 +11,22 @@ import {NoMixinsCard} from "./mixinCard/noMixinsCard";
 import {MixinCard} from "./mixinCard/mixinCard";
 import {useActions} from "../../hooks/useActions";
 import {ApiRoutes} from "../../store/actionCreators/apiRoutes";
+import {useParams, useSearchParams} from "react-router-dom";
+import {SettingsBlock} from "../../elements/menu/settingsBlock";
 
 export function checkMixinLength(mixin: string) {
     return mixin.length === 32
 }
 
-interface mixinsContainerProps {
-    isCurrent: boolean,
-    channel: Channel | undefined,
-    mixinType: MixinTypeStates
-}
 
-function MixinsContainer({isCurrent, mixinType, channel}: mixinsContainerProps) {
+function MixinsContainer() {
     const {mixinsData} = useTypedSelector(state => state.mixins)
+    const {channels} = useTypedSelector(state => state.channels)
+    const {channelId} = useParams()
 
-    if (!isCurrent) {
-        return null
-    }
+    const channel = channels.filter(channel => channel['channel_id'] === channelId)[0]
+    const [searchParams, _] = useSearchParams()
+    const mixinType = searchParams.get('mixin-tab') as MixinTypeStates || MixinTypeStates.in
 
     const currentMixins = mixinsData[channel ? channel['channel_id'] : '']
     const reversedMixins = currentMixins && (currentMixins[mixinType] ? [...currentMixins[mixinType]] : [])
@@ -36,7 +34,7 @@ function MixinsContainer({isCurrent, mixinType, channel}: mixinsContainerProps) 
     if (currentMixins && currentMixins.mixinsDataState === dataStates.requested) {
         return <div className='card-container card-100-container'><LoadingMixinCard/></div>
     }
-    if (currentMixins && currentMixins.mixinsDataState === dataStates.received &&
+    if (currentMixins && currentMixins.mixinsDataState === dataStates.received && currentMixins[mixinType] &&
         currentMixins[mixinType].length === 0) {
         return <div className='card-container card-100-container'><NoMixinsCard mixinType={mixinType}/></div>
     }
@@ -50,25 +48,27 @@ function MixinsContainer({isCurrent, mixinType, channel}: mixinsContainerProps) 
 export const mixinTabs = (names: {in: string, out: string}) =>  [
     {
         name: names.in, parameterName: 'in',
-        id: 1, block: () => ((isCurrent: boolean, channel: Channel | undefined) =>
-            <MixinsContainer key='1' isCurrent={isCurrent} channel={channel} mixinType={MixinTypeStates.in}/>)
+        id: 1, block: () =>
+            <MixinsContainer key='1'/>
     },
     {
-        name: names.out, parameterName: 'keys',
-        id: 2, block: () => ((isCurrent: boolean, channel: Channel | undefined) =>
-            <MixinsContainer key='2' isCurrent={isCurrent} channel={channel} mixinType={MixinTypeStates.out}/>)
+        name: names.out, parameterName: 'out',
+        id: 2, block: () =>
+            <MixinsContainer key='2'/>
     },
 ]
 
-interface mixinsSettingsBlockProps {
-    isCurrent: boolean,
-    channel: Channel | undefined,
-}
 
-export function MixinsSettingsBlock({isCurrent, channel}: mixinsSettingsBlockProps) {
+export function MixinsSettingsBlock() {
+    useEffect(() => {
+        if (!searchParams.get('mixin-tab')) {
+            changeTab(tabs[0].parameterName)()
+        }
+    })
+
     function changeTab(tab: string) {
         return function () {
-            changeActiveTab(tab)
+            changeSearchParams({'mixin-tab': tab, 'tab': searchParams.get('tab') || ''})
         }
     }
 
@@ -95,6 +95,10 @@ export function MixinsSettingsBlock({isCurrent, channel}: mixinsSettingsBlockPro
             return changeErrors({...errors, mixin: ''})
         }
     }
+    const {channels} = useTypedSelector(state => state.channels)
+    const {channelId} = useParams()
+
+    const channel = channels.filter(channel => channel['channel_id'] === channelId)[0]
 
     const {fetchCreateMixin} = useActions()
 
@@ -102,18 +106,16 @@ export function MixinsSettingsBlock({isCurrent, channel}: mixinsSettingsBlockPro
 
     const [errors, changeErrors] = useState({mixin: ''})
 
+    const [searchParams, changeSearchParams] = useSearchParams()
+
     const {states} = useTypedSelector(state => state.fetch)
     const {lang} = useTypedSelector(state => state.lang)
     const createMixinState = states[ApiRoutes.CreateMixin]
     const tabs = mixinTabs({in: lang.MixinsIn, out: lang.MixinsOut})
-    const [activeTab, changeActiveTab] = useState(tabs[0].parameterName)
 
     const requested = createMixinState && createMixinState.dataState === dataStates.requested
     const hasError = createMixinState && createMixinState.status !== 200
 
-    if (!isCurrent) {
-        return null
-    }
 
     return (
         <div>
@@ -135,12 +137,11 @@ export function MixinsSettingsBlock({isCurrent, channel}: mixinsSettingsBlockPro
             <h1 className='header-1'>{lang.YourMixinsHeader}</h1>
 
             <div className='max-width-500'>
-                <Menu active={activeTab} onClick={changeTab} tabs={tabs}
+                <Menu active={searchParams.get('mixin-tab') || MixinTypeStates.in} onClick={changeTab} tabs={tabs}
                       menuClasses='menu-horizontal' menuTabClasses='menu-tab-horizontal'/>
             </div>
             <span className='gap'/>
-
-            {tabs.map(mixinTab => mixinTab.block()(mixinTab.parameterName === activeTab, channel))}
+            <SettingsBlock currentTab={searchParams.get('mixin-tab') || ''} tabs={tabs}/>
         </div>
     )
 }

@@ -25,7 +25,7 @@
     --fourth-color: #001a2c;
     --fifth-color: #bfc0c0;
     --sixth-color: #003D66;
-    --seventh-color: black;
+    --seventh-color: #210124;
 
     --error-color: #ff5f3a;
     --error-text-color: #F6FFF8;
@@ -43,6 +43,10 @@ body {
     --main-font-family: 'Nunito', sans-serif;
     --code-font-family: 'Noto Sans Mono', monospace;;
     background-color: var(--main-color);
+}
+
+code {
+    font-family: var(--code-font-family);
 }
 
 .app-body {

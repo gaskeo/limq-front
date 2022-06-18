@@ -1,7 +1,7 @@
 import {useSearchParams} from "react-router-dom";
 import {useEffect} from "react";
 import {Menu} from "../elements/menu/menu";
-import {SettingsBlock} from "./settingsBlock";
+import {SettingsBlock} from "../elements/menu/settingsBlock";
 import {NameBlock} from "./blocks/nameBlock";
 import {EmailBlock} from "./blocks/emailBlock";
 import {PasswordBlock} from "./blocks/passwordBlock";
@@ -11,15 +11,15 @@ import {useTypedSelector} from "../hooks/useTypedSelector";
 export const menuTabs = (names: { changeName: string, changeEmail: string, changePassword: string }) => [
     {
         name: names.changeName, parameterName: 'changeName',
-        id: 1, block: () => ((isCurrent: boolean) => <NameBlock key='1' isCurrent={isCurrent}/>)
+        id: 1, block: () => <NameBlock key='1'/>
     },
     {
         name: names.changeEmail, parameterName: 'changeEmail',
-        id: 2, block: () => ((isCurrent: boolean) => <EmailBlock key='2' isCurrent={isCurrent}/>)
+        id: 2, block: () => <EmailBlock key='2'/>
     },
     {
         name: names.changePassword, parameterName: 'changePassword',
-        id: 3, block: () => ((isCurrent: boolean) => <PasswordBlock key='3' isCurrent={isCurrent}/>)
+        id: 3, block: () => <PasswordBlock key='3'/>
     }
 ]
 

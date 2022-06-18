@@ -1,20 +1,16 @@
 import {Input} from "../../elements/inputs/input";
 import React, {useState} from "react";
 import {Submit} from "../../elements/inputs/submit";
-import {Channel} from "../../store/reducers/channelsReducer";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {checkChannelLength} from "../../createChannel/createChannel";
 import {dataStates} from "../../store/reducers/consts";
 import {ApiRoutes} from "../../store/actionCreators/apiRoutes";
 import {Loading} from "../../elements/loading/loading";
 import {useActions} from "../../hooks/useActions";
+import {useParams} from "react-router-dom";
 
-interface mainSettingsBlockProps {
-    isCurrent: boolean,
-    channel: Channel | undefined
-}
 
-export function MainSettingsBlock({isCurrent, channel}: mainSettingsBlockProps) {
+export function MainSettingsBlock() {
     function submit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault()
 
@@ -39,6 +35,11 @@ export function MainSettingsBlock({isCurrent, channel}: mainSettingsBlockProps) 
         }
     }
 
+    const {channels} = useTypedSelector(state => state.channels)
+    const {channelId} = useParams()
+
+    const channel = channels.filter(channel => channel['channel_id'] === channelId)[0]
+
     const {fetchRenameChannel} = useActions()
 
     const [channelName, changeChannelName] = useState('')
@@ -50,10 +51,6 @@ export function MainSettingsBlock({isCurrent, channel}: mainSettingsBlockProps) 
 
     const requested = createChannelState && createChannelState.dataState === dataStates.requested
     const hasError = createChannelState && createChannelState.status !== 200
-
-    if (!isCurrent) {
-        return null
-    }
 
     const placeholder = channel ? channel['channel_name'] : ''
 

@@ -13,11 +13,7 @@ export function checkUsernameLength(name: string) {
 }
 
 
-interface nameBlockProps {
-    isCurrent: boolean
-}
-
-export function NameBlock({isCurrent}: nameBlockProps) {
+export function NameBlock() {
     function submit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault()
         let newErrors = {...errors}
@@ -50,10 +46,6 @@ export function NameBlock({isCurrent}: nameBlockProps) {
 
     const requested = renameUserState && renameUserState.dataState === dataStates.requested
     const hasError = renameUserState && renameUserState.status !== 200
-
-    if (!isCurrent) {
-        return null
-    }
 
     const placeholder = user.username ? user.username : ''
     return (

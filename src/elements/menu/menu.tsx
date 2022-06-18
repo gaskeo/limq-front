@@ -1,7 +1,7 @@
 interface menuProps {
     active: string | null,
     onClick: (tab: string) => () => void,
-    tabs: { id: number, name: string, parameterName: string, block: () => (...parameters: any[]) => JSX.Element }[],
+    tabs: { id: number, name: string, parameterName: string, block: () => JSX.Element }[],
     menuClasses?: string,
     menuTabClasses?: string
 }

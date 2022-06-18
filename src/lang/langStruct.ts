@@ -84,6 +84,7 @@ export interface LangStruct {
     RegisterHeader: string
     UserSettingsHeader: string
     ChannelSettingsHeader: string
+    CreateChannelHeader: string
 }
 
 export const defaultLangValue: LangStruct = {
@@ -172,4 +173,5 @@ export const defaultLangValue: LangStruct = {
     RegisterHeader: '',
     UserSettingsHeader: '',
     ChannelSettingsHeader: '',
+    CreateChannelHeader: '',
 }

@@ -1,4 +1,3 @@
-import {Channel} from "../../store/reducers/channelsReducer";
 import {Input} from "../../elements/inputs/input";
 import {Submit} from "../../elements/inputs/submit";
 import React, {useState} from "react";
@@ -11,17 +10,13 @@ import {Loading} from "../../elements/loading/loading";
 import {KeyCard} from "./keyCard/keyCard";
 import {LoadingKeyCard} from "./keyCard/loadingCard";
 import {useActions} from "../../hooks/useActions";
+import {useParams} from "react-router-dom";
 
 export function checkKeyLength(key: string) {
     return key.length <= 32
 }
 
-interface keysSettingsBlockProps {
-    isCurrent: boolean,
-    channel: Channel | undefined
-}
-
-export function KeysSettingsBlock({isCurrent, channel}: keysSettingsBlockProps) {
+export function KeysSettingsBlock() {
     function submit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault()
 
@@ -41,6 +36,11 @@ export function KeysSettingsBlock({isCurrent, channel}: keysSettingsBlockProps) 
 
     const {fetchCreateKey} = useActions()
 
+    const {channels} = useTypedSelector(state => state.channels)
+    const {channelId} = useParams()
+
+    const channel = channels.filter(channel => channel['channel_id'] === channelId)[0]
+
     const {keysData} = useTypedSelector(state => state.keys)
     const {lang} = useTypedSelector(state => state.lang)
     const currentKeys = keysData[channel ? channel['channel_id'] : '']
@@ -57,10 +57,6 @@ export function KeysSettingsBlock({isCurrent, channel}: keysSettingsBlockProps) 
     const hasError = createKeyState && createKeyState.status !== 200
 
     const reversedKeys = currentKeys?.keys ? [...currentKeys.keys].reverse() : []
-
-    if (!isCurrent) {
-        return null
-    }
 
     return (
         <div>

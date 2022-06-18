@@ -86,5 +86,5 @@ export const langDict: LangStruct = {
     RegisterHeader: 'Sing up with email',
     UserSettingsHeader: 'User settings',
     ChannelSettingsHeader: 'Channel settings',
-
+    CreateChannelHeader: 'Create channel',
 }

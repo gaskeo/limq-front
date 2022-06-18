@@ -24,12 +24,7 @@ function hideEmail(email: string) {
     return `${hiddenName}@${hiddenDomain}.${zone}`
 }
 
-
-interface emailBlockProps {
-    isCurrent: boolean
-}
-
-export function EmailBlock({isCurrent}: emailBlockProps) {
+export function EmailBlock() {
     function submit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault()
         let newErrors = {...errors}
@@ -75,10 +70,6 @@ export function EmailBlock({isCurrent}: emailBlockProps) {
 
     const requested = changeEmailState && changeEmailState.dataState === dataStates.requested
     const hasError = changeEmailState && changeEmailState.status !== 200
-
-    if (!isCurrent) {
-        return null
-    }
 
     const placeholder = user.email ? hideEmail(user.email) : ''
     return (

@@ -44,7 +44,8 @@ export function CreateChannel() {
 
     return (
         <div>
-            <form className='app-form' onSubmit={submit}>
+            <form className='app-form form-bg' onSubmit={submit}>
+                <h1 className='header-1'>{lang.CreateChannelHeader}</h1>
                 <Input state={channelName}
                        setState={changeChannelName}
                        label={lang.ChannelNameForm}
