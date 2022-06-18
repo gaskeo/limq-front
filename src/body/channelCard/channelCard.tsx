@@ -5,15 +5,15 @@ import {Settings} from "../../svg/settings";
 import {Link} from "react-router-dom";
 import {routes} from "../../routes/routes";
 import React from "react";
-import {useTypedSelector} from "../../hooks/useTypedSelector";
+import {useChannelCard} from "../../hooks/elementHooks/useCard";
 
 interface channelCardProps {
     channel: Channel
 }
 
+
 export function ChannelCard({channel}: channelCardProps) {
-    const {lang} = useTypedSelector(state => state.lang)
-    const activeChannel = Boolean(channel['write_keys'].active || channel['read_keys'].active)
+    const {lang, activeChannel} = useChannelCard(channel)
 
     return (
         <div className='card'>
@@ -24,11 +24,11 @@ export function ChannelCard({channel}: channelCardProps) {
                     <Settings/>
                 </Link>
             </div>
+
             <div className='card-info-container'>
                 <code className='card-code'>#{channel['channel_id']}</code>
                 <div className='card-icon-and-text-container'>
                     <Circle active={activeChannel}/>
-
                     <span>{activeChannel ? lang.ChannelCardActive : lang.ChannelCardInactive}</span>
                 </div>
                 <div className='channel-card-keys-container'>
