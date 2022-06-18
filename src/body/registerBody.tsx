@@ -1,13 +1,11 @@
-import {useTypedSelector} from "../hooks/useTypedSelector";
 import {ChannelCard} from "./channelCard/channelCard";
 import {CreateChannelCard} from "./channelCard/createChannelCard";
 import {LoadingChannelCard} from "./channelCard/loadingCard";
 import {dataStates} from "../store/reducers/consts";
+import {useChannels} from "../hooks/elementHooks/useChannels";
 
 export function RegisterBody() {
-    const {channels, channelsDataState} = useTypedSelector(state => state.channels)
-    const {lang} = useTypedSelector(state => state.lang)
-    const reversedChannels = [...channels].reverse()
+    const {lang, reversedChannels, channels, channelsDataState} = useChannels()
     return (
         <div>
             <h1 className='header-1'>{lang.RegisterChannelsHeader}</h1>

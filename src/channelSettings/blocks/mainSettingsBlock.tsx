@@ -1,74 +1,40 @@
 import {Input} from "../../elements/inputs/input";
-import React, {useState} from "react";
+import React from "react";
 import {Submit} from "../../elements/inputs/submit";
-import {useTypedSelector} from "../../hooks/useTypedSelector";
-import {checkChannelLength} from "../../createChannel/createChannel";
-import {dataStates} from "../../store/reducers/consts";
-import {ApiRoutes} from "../../store/actionCreators/apiRoutes";
 import {Loading} from "../../elements/loading/loading";
-import {useActions} from "../../hooks/useActions";
-import {useParams} from "react-router-dom";
+import {useMainSettingsBlock} from "../../hooks/elementHooks/useChannelSettings";
 
 
 export function MainSettingsBlock() {
-    function submit(event: React.FormEvent<HTMLFormElement>) {
-        event.preventDefault()
+    const {
+        lang,
+        channelName,
+        changeChannelName,
+        checkChannelName,
+        placeholder,
+        submit,
+        errors,
+        requested,
+        errorMessage
+    } = useMainSettingsBlock()
 
-        if (!channel) {
-            return
-        }
-
-        let newErrors = {...errors}
-
-        newErrors.name = !checkChannelLength(channelName) ? lang.ChannelNameTooLong : ''
-        changeErrors(newErrors)
-        if (newErrors.name) {
-            return
-        }
-
-        fetchRenameChannel(channel['channel_id'], channelName)
-    }
-
-    function checkChannelName(name: string) {
-        if (checkChannelLength(name)) {
-            return changeErrors({...errors, name: ''})
-        }
-    }
-
-    const {channels} = useTypedSelector(state => state.channels)
-    const {channelId} = useParams()
-
-    const channel = channels.filter(channel => channel['channel_id'] === channelId)[0]
-
-    const {fetchRenameChannel} = useActions()
-
-    const [channelName, changeChannelName] = useState('')
-    const [errors, changeErrors] = useState({name: ''})
-
-    const {states} = useTypedSelector(state => state.fetch)
-    const {lang} = useTypedSelector(state => state.lang)
-    const createChannelState = states[ApiRoutes.RenameChannel]
-
-    const requested = createChannelState && createChannelState.dataState === dataStates.requested
-    const hasError = createChannelState && createChannelState.status !== 200
-
-    const placeholder = channel ? channel['channel_name'] : ''
+    const {RenameChannelHeader, ChannelNameForm, RenameChannelButton} = lang
 
     return (
         <div>
             <form onSubmit={submit}>
-                <h2 className='header-2'>{lang.RenameChannelHeader}</h2>
+                <h2 className='header-2'>{RenameChannelHeader}</h2>
 
                 <Input state={channelName}
                        setState={changeChannelName}
-                       label={lang.ChannelNameForm}
+                       label={ChannelNameForm}
                        type='text'
                        errorText={errors.name}
                        onChange={checkChannelName}
                        placeholder={placeholder}/>
-                <p className='error-text'>{hasError && createChannelState.message}</p>
+                <p className='error-text'>{errorMessage}</p>
 
-                <Submit label={requested ? <Loading/> : lang.RenameChannelButton}/>
+                <Submit label={requested ? <Loading/> : RenameChannelButton}/>
             </form>
         </div>
     )
