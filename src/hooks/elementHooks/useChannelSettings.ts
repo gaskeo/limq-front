@@ -8,9 +8,15 @@ import {checkKeyLength} from "../../channelSettings/blocks/keysSettingsBlock";
 import {checkChannelLength} from "../../createChannel/createChannel";
 import {checkMixinLength, mixinTabs} from "../../channelSettings/blocks/mixinsSettingsBlock";
 import {MixinTypeStates} from "../../store/reducers/mixinsReducer";
+import {menuTabs} from "../../channelSettings/channelSettings";
 
-function useChannelSettings() {
-    const {fetchCreateMixin, fetchRenameChannel, fetchCreateKey} = useActions()
+const params = {
+    tab: 'tab',
+    mixinTab: 'mixin-tab'
+}
+
+function useChannelSettingsBase() {
+    const {fetchCreateMixin, fetchRenameChannel, fetchCreateKey, fetchGetKeys, fetchGetMixins} = useActions()
 
     const {lang} = useTypedSelector(state => state.lang)
 
@@ -18,7 +24,7 @@ function useChannelSettings() {
     const {channelId} = useParams()
     const channel = channels.filter(channel => channel['channel_id'] === channelId)[0]
     return {
-        lang, channel, fetchCreateMixin, fetchRenameChannel, fetchCreateKey
+        lang, channel, fetchCreateMixin, fetchRenameChannel, fetchCreateKey, fetchGetKeys, fetchGetMixins
     }
 }
 
@@ -40,7 +46,7 @@ export function useKeysSettingsBlock() {
         fetchCreateKey(keyName, keyType, channel['channel_id'], allowInfo)
     }
 
-    const {lang, channel, fetchCreateKey} = useChannelSettings()
+    const {lang, channel, fetchCreateKey} = useChannelSettingsBase()
 
     const {keysData} = useTypedSelector(state => state.keys)
 
@@ -103,7 +109,7 @@ export function useMainSettingsBlock() {
         }
     }
 
-    const {lang, channel, fetchRenameChannel} = useChannelSettings()
+    const {lang, channel, fetchRenameChannel} = useChannelSettingsBase()
 
     const [channelName, changeChannelName] = useState('')
     const [errors, changeErrors] = useState({name: ''})
@@ -131,14 +137,18 @@ export function useMainSettingsBlock() {
 
 export function useMixinsSettingsBlock() {
     function checkTabInParams() {
-        if (!searchParams.get('mixin-tab')) {
+        if (!searchParams.get(params.mixinTab)) {
             changeTab(tabs[0].parameterName)()
         }
     }
 
     function changeTab(tab: string) {
         return function () {
-            changeSearchParams({'mixin-tab': tab, 'tab': searchParams.get('tab') || ''})
+            changeSearchParams(
+                {
+                    [params.mixinTab]: tab,
+                    [params.tab]: searchParams.get(params.tab) || '',
+                })
         }
     }
 
@@ -166,7 +176,7 @@ export function useMixinsSettingsBlock() {
         }
     }
 
-    const {lang, channel, fetchCreateMixin} = useChannelSettings()
+    const {lang, channel, fetchCreateMixin} = useChannelSettingsBase()
 
     const [keyId, changeKeyId] = useState('')
     const [errors, changeErrors] = useState({mixin: ''})
@@ -177,7 +187,7 @@ export function useMixinsSettingsBlock() {
     const createMixinState = states[ApiRoutes.CreateMixin]
 
     const tabs = mixinTabs({in: lang.MixinsIn, out: lang.MixinsOut})
-    const activeTab = searchParams.get('mixin-tab') || MixinTypeStates.in
+    const activeTab = searchParams.get(params.mixinTab) || MixinTypeStates.in
 
     const requested = createMixinState && createMixinState.dataState === dataStates.requested
     const hasError = createMixinState && createMixinState.status !== 200
@@ -197,4 +207,93 @@ export function useMixinsSettingsBlock() {
         tabs,
         checkTabInParams
     }
+}
+
+
+export function useMixinContainer() {
+    const [searchParams] = useSearchParams()
+
+    const {channels} = useTypedSelector(state => state.channels)
+    const {channelId} = useParams()
+    const channel = channels.filter(channel => channel['channel_id'] === channelId)[0]
+
+    const {mixinsData} = useTypedSelector(state => state.mixins)
+    const currentMixins = mixinsData[channel ? channel['channel_id'] : '']
+    const mixinType = searchParams.get('mixin-tab') as MixinTypeStates || MixinTypeStates.in
+    const reversedMixins = currentMixins && (currentMixins[mixinType] ? [...currentMixins[mixinType]] : [])
+    const mixinsDataState = currentMixins.mixinsDataState
+
+    return {reversedMixins, mixinsDataState, mixinType}
+}
+
+export function useChannelSettings() {
+    function checkTabInParams() {
+        if (!searchParams.get(params.tab)) {
+            changeTab(tabs[0].parameterName)()
+        }
+    }
+
+    function changeTab(tab: string) {
+        return function () {
+            changeSearchParams(
+                {
+                    [params.mixinTab]: searchParams.get(params.mixinTab) || MixinTypeStates.in,
+                    [params.tab]: tab
+                })
+        }
+    }
+
+    function fetchKeys() {
+        const falseStatement = !channel || (keysData[channel['channel_id']] &&
+            keysData[channel['channel_id']].keysDataState === dataStates.requested)
+        if (falseStatement) {
+            return;
+        }
+        const trueStatement = !keysData[channel['channel_id']] ||
+            keysData[channel['channel_id']].keysDataState === dataStates.notRequested
+
+        if (trueStatement) {
+            fetchGetKeys(channel['channel_id'])
+        }
+    }
+
+    function fetchMixins() {
+        const falseStatement = !channel ||
+            (mixinsData[channel['channel_id']] &&
+                mixinsData[channel['channel_id']].mixinsDataState === dataStates.requested)
+        if (falseStatement) {
+            return
+        }
+
+        const trueStatement = !mixinsData[channel['channel_id']] ||
+            mixinsData[channel['channel_id']].mixinsDataState === dataStates.notRequested
+        if (trueStatement) {
+            fetchGetMixins(channel['channel_id'])
+        }
+
+    }
+
+    function fetchAll() {
+        fetchKeys()
+        fetchMixins()
+    }
+
+
+    const {fetchGetMixins, fetchGetKeys, channel, lang} = useChannelSettingsBase()
+    const [searchParams, changeSearchParams] = useSearchParams()
+
+    const tabs = menuTabs({
+        main: lang.ChannelSettingsMenuMainSettings,
+        keys: lang.ChannelSettingsMenuKeys, mixins: lang.ChannelSettingsMenuMixins
+    })
+
+
+    const {keysData} = useTypedSelector(state => state.keys)
+    const {mixinsData} = useTypedSelector(state => state.mixins)
+    const activeTab = searchParams.get(params.tab) || ''
+
+    return {
+        activeTab, lang, changeTab, tabs, fetchAll, checkTabInParams
+    }
+
 }
