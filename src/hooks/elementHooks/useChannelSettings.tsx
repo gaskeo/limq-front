@@ -4,16 +4,55 @@ import {useTypedSelector} from "../useTypedSelector";
 import {useParams, useSearchParams} from "react-router-dom";
 import {ApiRoutes} from "../../store/actionCreators/apiRoutes";
 import {dataStates} from "../../store/reducers/consts";
-import {checkKeyLength} from "../../channelSettings/blocks/keysSettingsBlock";
-import {checkChannelLength} from "../../createChannel/createChannel";
-import {checkMixinLength, mixinTabs} from "../../channelSettings/blocks/mixinsSettingsBlock";
+import {checkKeyLength, KeysSettingsBlock} from "../../channelSettings/blocks/keysSettingsBlock";
+import {checkChannelLength} from "./useCreateChannel";
 import {MixinTypeStates} from "../../store/reducers/mixinsReducer";
-import {menuTabs} from "../../channelSettings/channelSettings";
+import {MixinsContainer} from "../../channelSettings/blocks/mixinsContainer";
+import {MainSettingsBlock} from "../../channelSettings/blocks/mainSettingsBlock";
+import {MixinsSettingsBlock} from "../../channelSettings/blocks/mixinsSettingsBlock";
 
 const params = {
     tab: 'tab',
     mixinTab: 'mixin-tab'
 }
+
+export function checkMixinLength(mixin: string) {
+    return mixin.length === 32
+}
+
+const mixinTabs = (names: { in: string, out: string }) => [
+    {
+        name: names.in, parameterName: 'in',
+        id: 1, block: () =>
+            <MixinsContainer key='1'/>
+    },
+    {
+        name: names.out, parameterName: 'out',
+        id: 2, block: () =>
+            <MixinsContainer key='2'/>
+    },
+]
+
+export const menuTabs = (tabNames: { main: string, keys: string, mixins: string }) => [
+    {
+        name: tabNames.main,
+        parameterName: 'mainSettings',
+        id: 1,
+        block: (() => <MainSettingsBlock key='1'/>)
+    },
+    {
+        name: tabNames.keys,
+        parameterName: 'keys',
+        id: 2,
+        block: (() => <KeysSettingsBlock key='2'/>)
+    },
+    {
+        name: tabNames.mixins,
+        parameterName: 'mixins',
+        id: 3,
+        block: (() => <MixinsSettingsBlock key='3'/>)
+    }
+]
 
 function useChannelSettingsBase() {
     const {fetchCreateMixin, fetchRenameChannel, fetchCreateKey, fetchGetKeys, fetchGetMixins} = useActions()

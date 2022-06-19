@@ -1,10 +1,11 @@
+import {menuTab} from "./menu";
 
 interface settingsBlockProps {
     currentTab: string | null
-    tabs: { id: number, name: string, parameterName: string, block: () => JSX.Element }[]
+    tabs: menuTab[]
 }
 
-function getCurrentTab(tabs: { id: number, name: string, parameterName: string, block: () => JSX.Element }[], tabName: string) {
+function getCurrentTab(tabs: menuTab[], tabName: string) {
     const currentTab = tabs.filter(tab => tab.parameterName === tabName)[0]
     if (!currentTab) {
         return tabs[0].block()

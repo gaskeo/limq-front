@@ -12,7 +12,6 @@ interface inputProps {
 }
 
 export function Input({label, onChange, setState, state, placeholder, type, errorText}: inputProps) {
-
     function _onChange() {
         return function (event: ChangeEvent<HTMLInputElement>) {
             setState(event.target.value)

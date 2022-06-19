@@ -1,40 +1,18 @@
-import React, {useState} from 'react'
-import {useTypedSelector} from "../hooks/useTypedSelector";
+import React from 'react'
 import {dataStates} from "../store/reducers/consts";
 import {routes} from "../routes/routes";
 import "./header.css";
-import {useDispatch} from "react-redux";
-import {PathActionTypes} from "../store/reducers/pathReducer";
 import {Link} from "react-router-dom";
 import {User} from "../svg/user";
-import {useActions} from "../hooks/useActions";
 import {Settings} from "../svg/settings";
+import {useHeader, useUserButton} from "../hooks/elementHooks/useHeader";
 
 function UserButton() {
-    function checkOutsideClick(event: Event):any {
-        if (!event.composedPath().filter((e: any) => e.id === 'user-button').length) {
-            changeOpen(false)
-        }
-    }
-
-    function exit() {
-        return function () {
-            fetchLogout()
-            changeOpen(false)
-            return null
-        }
-    }
-
-    const {fetchLogout} = useActions()
-    const {user} = useTypedSelector(state => state.user)
-    const {lang} = useTypedSelector(state => state.lang)
-    const [buttonOpen, changeOpen] = useState(false)
-    document.addEventListener("mousedown", checkOutsideClick);
-
+    const {lang, buttonOpen, user, exit, toggleOpen} = useUserButton()
     return (
         <div className='button-container' id='user-button'>
             <div className={'user-icon header-element ' + (buttonOpen ? 'header-element-hover' : '')}
-                 onClick={() => changeOpen(!buttonOpen)}>
+                 onClick={toggleOpen}>
                 <User/>
             </div>
             <div className={'dropdown ' + (buttonOpen ? 'show' : '')}>
@@ -47,16 +25,10 @@ function UserButton() {
 }
 
 export function Header() {
-    function onClick(route: string) {
-        return function () {
-            dispatch({type: PathActionTypes.setPath, payload: route})
-        }
-    }
+    const {onClick, user, userDataState, lang} = useHeader()
 
-    const {user, userDataState} = useTypedSelector(state => state.user)
-    const {lang} = useTypedSelector(state => state.lang)
-    const dispatch = useDispatch()
-
+    const {LoginButton} = lang
+    const renderUserButton = userDataState === dataStates.received && user.id
     return (
         <header className="app-header">
             <Link to={routes.index} className='lithium-container'>
@@ -66,9 +38,16 @@ export function Header() {
             <div>
                 <div className='horizontal'>
                     <Link to={routes.settings}
-                         className='header-element'><div className='theme-icon'><Settings/></div></Link>
-                    {userDataState === dataStates.received && user.id ? <UserButton/> :
-                        <button className='button mini-button' onClick={onClick(routes.login)}>{lang.LoginButton}</button>}
+                          className='header-element'>
+                        <div className='theme-icon'><Settings/></div>
+                    </Link>
+
+                    {
+                        renderUserButton ? <UserButton/> :
+                            <button className='button mini-button' onClick={onClick(routes.login)}>
+                                {LoginButton}
+                            </button>
+                    }
                 </div>
             </div>
         </header>)

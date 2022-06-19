@@ -1,7 +1,9 @@
+export type menuTab = { id: number, name: string, parameterName: string, block: () => JSX.Element }
+
 interface menuProps {
     active: string | null,
     onClick: (tab: string) => () => void,
-    tabs: { id: number, name: string, parameterName: string, block: () => JSX.Element }[],
+    tabs: menuTab[],
     menuClasses?: string,
     menuTabClasses?: string
 }
@@ -10,6 +12,7 @@ export function Menu({active, menuClasses, menuTabClasses, tabs, onClick}: menuP
 ) {
     const newMenuClasses = 'menu ' + menuClasses
     const newMenuTabClasses = 'menu-tab ' + menuTabClasses
+
     return (
         <div className={newMenuClasses}>
             {tabs.map(tab => <div key={tab.id}

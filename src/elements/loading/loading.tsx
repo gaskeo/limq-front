@@ -6,6 +6,7 @@ interface loadingProps {
 }
 export function Loading({diameter}: loadingProps) {
     const style = {'--diameter': diameter ? diameter : '15px'} as React.CSSProperties
+
     return (
         <div className='loading' style={style}>
             <div className='circle circle-1'/>

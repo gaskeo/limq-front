@@ -3,7 +3,7 @@ import {Input} from "../../elements/inputs/input";
 import {Submit} from "../../elements/inputs/submit";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {dataStates} from "../../store/reducers/consts";
-import {checkChannelLength} from "../../createChannel/createChannel";
+import {checkChannelLength} from "../../hooks/elementHooks/useCreateChannel";
 import {ApiRoutes} from "../../store/actionCreators/apiRoutes";
 import {Loading} from "../../elements/loading/loading";
 import {useActions} from "../../hooks/useActions";

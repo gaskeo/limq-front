@@ -9,7 +9,6 @@ interface checkboxProps {
 }
 
 export function Checkbox({label, onChange, state, setState}: checkboxProps) {
-
     function _onChange() {
         return function (event: ChangeEvent<HTMLInputElement>) {
             setState(event.target.checked)
