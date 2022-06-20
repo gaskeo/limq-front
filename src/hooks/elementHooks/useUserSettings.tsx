@@ -9,6 +9,7 @@ import {useActions} from "../useActions";
 import {ApiRoutes} from "../../store/actionCreators/apiRoutes";
 import {dataStates} from "../../store/reducers/consts";
 import {checkChannelLength} from "./useCreateChannel";
+import {getErrorDescription} from "../../lang/getServerErrorDescription";
 
 
 const menuTabs = (names: { changeName: string, changeEmail: string, changePassword: string }) => [
@@ -116,7 +117,7 @@ export function useEmailSettingsBlock() {
 
     const requested = changeEmailState && changeEmailState.dataState === dataStates.requested
     const hasError = changeEmailState && changeEmailState.status !== 200
-    const errorMessage = hasError && changeEmailState.message
+    const errorMessage = hasError ? getErrorDescription(lang, changeEmailState.code) : ''
 
     const placeholder = user.email ? hideEmail(user.email) : ''
 
@@ -169,7 +170,7 @@ export function useNameSettingsBlock() {
 
     const requested = renameUserState && renameUserState.dataState === dataStates.requested
     const hasError = renameUserState && renameUserState.status !== 200
-    const errorMessage = hasError && renameUserState.message
+    const errorMessage = hasError ? getErrorDescription(lang, renameUserState.code) : ''
 
     const placeholder = user.username ? user.username : ''
 
@@ -239,7 +240,7 @@ export function usePasswordSettingsBlock() {
 
     const requested = changePasswordState && changePasswordState.dataState === dataStates.requested
     const hasError = changePasswordState && changePasswordState.status !== 200
-    const errorMessage = hasError && changePasswordState.message
+    const errorMessage = hasError ? getErrorDescription(lang, changePasswordState.code) : ''
 
     return {
         lang,

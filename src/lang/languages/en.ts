@@ -87,4 +87,26 @@ export const langDict: LangStruct = {
     UserSettingsHeader: 'User settings',
     ChannelSettingsHeader: 'Channel settings',
     CreateChannelHeader: 'Create channel',
+
+    ChannelNameError: 'Bad channel name',
+    ChannelNotExistError: "Channel doesn't exist",
+    NotChannelOwnerError: "You haven't access to this channel",
+
+    KeyNameError: 'Bad key name',
+    KeyPermissionsError: 'Bad permissions',
+    BadChannelIdError: 'Bad channel ID',
+    BadKeyError: 'Bad key',
+
+    AlreadyMixedError: 'Channels already mixed',
+    BadThreadError: 'Bad thread',
+    BadKeyTypeError: 'Bad key type',
+    CircleMixinError: 'You want to create circle',
+    SelfMixinError: "Can't mixin with self",
+
+    EmailError: 'Bad Email',
+    UsernameError: 'Bad username',
+    PasswordError: 'Bad password',
+    EmailExistError: 'User with this Email exist',
+    BadUserError: 'Bad user',
+    UnknownError: 'Unknown error'
 }

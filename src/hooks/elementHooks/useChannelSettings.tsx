@@ -10,6 +10,7 @@ import {MixinTypeStates} from "../../store/reducers/mixinsReducer";
 import {MixinsContainer} from "../../channelSettings/blocks/mixinsContainer";
 import {MainSettingsBlock} from "../../channelSettings/blocks/mainSettingsBlock";
 import {MixinsSettingsBlock} from "../../channelSettings/blocks/mixinsSettingsBlock";
+import {getErrorDescription} from "../../lang/getServerErrorDescription";
 
 const params = {
     tab: 'tab',
@@ -104,7 +105,7 @@ export function useKeysSettingsBlock() {
     const requested = createKeyState && createKeyState.dataState === dataStates.requested
     const hasError = createKeyState && createKeyState.status !== 200
 
-    const errorMessage = hasError && createKeyState.message
+    const errorMessage = hasError ? getErrorDescription(lang, createKeyState.code) : ''
 
     return {
         reversedKeys,
@@ -158,7 +159,7 @@ export function useMainSettingsBlock() {
 
     const requested = createChannelState && createChannelState.dataState === dataStates.requested
     const hasError = createChannelState && createChannelState.status !== 200
-    const errorMessage = hasError && createChannelState.message
+    const errorMessage = hasError ? getErrorDescription(lang, createChannelState.code) : ''
 
     const placeholder = channel ? channel['channel_name'] : ''
     return {
@@ -230,7 +231,7 @@ export function useMixinsSettingsBlock() {
 
     const requested = createMixinState && createMixinState.dataState === dataStates.requested
     const hasError = createMixinState && createMixinState.status !== 200
-    const errorMessage = hasError && createMixinState.message
+    const errorMessage = hasError ? getErrorDescription(lang, createMixinState.code) : ''
 
     return {
         lang,

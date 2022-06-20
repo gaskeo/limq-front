@@ -2,7 +2,7 @@ import {dataStates} from "./consts";
 
 interface state {
     status: number,
-    message: string,
+    code: string,
     dataState: dataStates.notRequested | dataStates.requested | dataStates.received | dataStates.error
 }
 

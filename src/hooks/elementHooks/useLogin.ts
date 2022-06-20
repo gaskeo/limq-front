@@ -1,9 +1,10 @@
 import React, {useState} from "react";
-import {checkPasswordLength, confirmEmail} from "../../register/register";
 import {useActions} from "../useActions";
 import {useTypedSelector} from "../useTypedSelector";
 import {ApiRoutes} from "../../store/actionCreators/apiRoutes";
 import {dataStates} from "../../store/reducers/consts";
+import {checkPasswordLength, confirmEmail} from "./useRegister";
+import {getErrorDescription} from "../../lang/getServerErrorDescription";
 
 export function useLogin() {
     function submit(event: React.FormEvent<HTMLFormElement>) {
@@ -47,7 +48,7 @@ export function useLogin() {
 
     const requested = loginState && loginState.dataState === dataStates.requested
     const hasError = loginState && loginState.status !== 200
-    const errorMessage = hasError && loginState.message
+    const errorMessage = hasError ? getErrorDescription(lang, loginState.code) : ''
 
     return {
         submit,

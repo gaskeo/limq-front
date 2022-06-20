@@ -86,6 +86,27 @@ export const langDict: LangStruct = {
     RegisterHeader: 'Регистрация по email',
     UserSettingsHeader: 'Настройки пользователя',
     ChannelSettingsHeader: 'Настройки канала',
-    CreateChannelHeader: 'Создать канал'
+    CreateChannelHeader: 'Создать канал',
 
+    ChannelNameError: 'Невалидное название канала',
+    ChannelNotExistError: 'Канал не найден',
+    NotChannelOwnerError: 'Вы не владеете данным каналом',
+
+    KeyNameError: 'Невалидное название ключа',
+    KeyPermissionsError: 'Разрешения ключа невалидны',
+    BadChannelIdError: 'Канал имеет невалидный ID',
+    BadKeyError: 'Невалидный ключ',
+
+    AlreadyMixedError: 'Вы уже подписаны на данный канал',
+    BadThreadError: 'Канал не найден',
+    BadKeyTypeError: 'Данный ключ не имеет прав на чтение',
+    CircleMixinError: 'Невозможно подписаться на канал из-за цикличности',
+    SelfMixinError: 'Нельзя подписываться на этот же канал',
+
+    EmailError: 'Невалидный Email',
+    UsernameError: 'Невалидное имя',
+    PasswordError: 'Невалидный пароль',
+    EmailExistError: 'Пользователь с таким Email уже существует',
+    BadUserError: 'Пользователь не найден',
+    UnknownError: 'Неизвестная ошибка'
 }

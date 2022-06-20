@@ -38,7 +38,7 @@ export const fetchCreateChannel = (channelName: string) => {
                 type: FetchActionTypes.setFetch,
                 payload: {
                     identifier: ApiRoutes.CreateChannel,
-                    state: {status: 200, message: '', dataState: dataStates.requested}
+                    state: {status: 200, code: '', dataState: dataStates.requested}
                 }
             })
 
@@ -56,7 +56,7 @@ export const fetchCreateChannel = (channelName: string) => {
                 type: FetchActionTypes.setFetch,
                 payload: {
                     identifier: ApiRoutes.CreateChannel,
-                    state: {status: 200, message: '', dataState: dataStates.received}
+                    state: {status: 200, code: '', dataState: dataStates.received}
                 }
             })
         } catch (error: AxiosError | any) {
@@ -64,7 +64,7 @@ export const fetchCreateChannel = (channelName: string) => {
                 type: FetchActionTypes.setFetch,
                 payload: {
                     identifier: ApiRoutes.CreateChannel, state: {
-                        status: error.status, message: error.response.data.message,
+                        status: error.status, code: String(error.response.data.code),
                         dataState: dataStates.error
                     }
                 }
@@ -90,7 +90,7 @@ export const fetchRenameChannel = (channelId: string, newChannelName: string) =>
                 type: FetchActionTypes.setFetch,
                 payload: {
                     identifier: ApiRoutes.RenameChannel,
-                    state: {status: 200, message: '', dataState: dataStates.requested}
+                    state: {status: 200, code: '', dataState: dataStates.requested}
                 }
             })
 
@@ -105,7 +105,7 @@ export const fetchRenameChannel = (channelId: string, newChannelName: string) =>
                     type: FetchActionTypes.setFetch,
                     payload: {
                         identifier: ApiRoutes.RenameChannel,
-                        state: {status: 200, message: '', dataState: dataStates.received}
+                        state: {status: 200, code: '', dataState: dataStates.received}
                     }
                 })
             }
@@ -115,7 +115,7 @@ export const fetchRenameChannel = (channelId: string, newChannelName: string) =>
                 type: FetchActionTypes.setFetch,
                 payload: {
                     identifier: ApiRoutes.RenameChannel, state: {
-                        status: error.status, message: error.response.data.message,
+                        status: error.status, code: String(error.response.data.code),
                         dataState: dataStates.error
                     }
                 }

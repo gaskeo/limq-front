@@ -57,7 +57,7 @@ export const fetchCreateKey = (keyName: string, permission: string, channelId: s
                 type: FetchActionTypes.setFetch,
                 payload: {
                     identifier: ApiRoutes.Grant,
-                    state: {status: 200, message: '', dataState: dataStates.requested}
+                    state: {status: 200, code: '', dataState: dataStates.requested}
                 }
             })
 
@@ -71,7 +71,7 @@ export const fetchCreateKey = (keyName: string, permission: string, channelId: s
                     type: FetchActionTypes.setFetch,
                     payload: {
                         identifier: ApiRoutes.Grant,
-                        state: {status: 200, message: '', dataState: dataStates.received}
+                        state: {status: 200, code: '', dataState: dataStates.received}
                     }
                 })
                 dispatch({
@@ -85,7 +85,7 @@ export const fetchCreateKey = (keyName: string, permission: string, channelId: s
                 type: FetchActionTypes.setFetch,
                 payload: {
                     identifier: ApiRoutes.Grant, state: {
-                        status: error.status, message: error.response.data.message,
+                        status: error.status, code: String(error.response.data.code),
                         dataState: dataStates.error
                     }
                 }
@@ -110,7 +110,7 @@ export const fetchToggleKey = (key: Key) => {
                 type: FetchActionTypes.setFetch,
                 payload: {
                     identifier: ApiRoutes.ToggleKey + key.key,
-                    state: {status: 200, message: '', dataState: dataStates.requested}
+                    state: {status: 200, code: '', dataState: dataStates.requested}
                 }
             })
 
@@ -125,7 +125,7 @@ export const fetchToggleKey = (key: Key) => {
                     type: FetchActionTypes.setFetch,
                     payload: {
                         identifier: ApiRoutes.ToggleKey + key.key,
-                        state: {status: 200, message: '', dataState: dataStates.received}
+                        state: {status: 200, code: '', dataState: dataStates.received}
                     }
                 })
                 dispatch({
@@ -142,7 +142,7 @@ export const fetchToggleKey = (key: Key) => {
                 type: FetchActionTypes.setFetch,
                 payload: {
                     identifier: ApiRoutes.ToggleKey + key.key,
-                    state: {status: error.status, message: '', dataState: dataStates.error}
+                    state: {status: error.status, code: '', dataState: dataStates.error}
                 }
             })
         }

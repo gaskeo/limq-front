@@ -3,6 +3,7 @@ import {useActions} from "../useActions";
 import {useTypedSelector} from "../useTypedSelector";
 import {ApiRoutes} from "../../store/actionCreators/apiRoutes";
 import {dataStates} from "../../store/reducers/consts";
+import {getErrorDescription} from "../../lang/getServerErrorDescription";
 
 export function checkChannelLength(name: string) {
     return name.length <= 32
@@ -40,7 +41,7 @@ export function useCreateChannel() {
 
     const requested = createChannelState && createChannelState.dataState === dataStates.requested
     const hasError = createChannelState && createChannelState.status !== 200
-    const errorMessage = hasError && createChannelState.message
+    const errorMessage = hasError ? getErrorDescription(lang, createChannelState.code) : ''
 
     return {
         lang,

@@ -52,7 +52,7 @@ export const fetchCreateMixin = (channelId: string, keyId: string) => {
                 type: FetchActionTypes.setFetch,
                 payload: {
                     identifier: ApiRoutes.CreateMixin,
-                    state: {status: 200, message: '', dataState: dataStates.requested}
+                    state: {status: 200, code: '', dataState: dataStates.requested}
                 }
             })
 
@@ -72,7 +72,7 @@ export const fetchCreateMixin = (channelId: string, keyId: string) => {
                     type: FetchActionTypes.setFetch,
                     payload: {
                         identifier: ApiRoutes.CreateMixin,
-                        state: {status: 200, message: '', dataState: dataStates.received}
+                        state: {status: 200, code: '', dataState: dataStates.received}
                     }
                 })
             }
@@ -81,7 +81,7 @@ export const fetchCreateMixin = (channelId: string, keyId: string) => {
                 type: FetchActionTypes.setFetch,
                 payload: {
                     identifier: ApiRoutes.CreateMixin, state: {
-                        status: error.status, message: error.response.data.message,
+                        status: error.status, code: String(error.response.data.code),
                         dataState: dataStates.error
                     }
                 }

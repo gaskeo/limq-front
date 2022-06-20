@@ -42,7 +42,7 @@ export const fetchLogin = (email: string, password: string, rememberMe: boolean)
                 type: FetchActionTypes.setFetch,
                 payload: {
                     identifier: ApiRoutes.Login,
-                    state: {status: 200, message: '', dataState: dataStates.requested}
+                    state: {status: 200, code: '', dataState: dataStates.requested}
                 }
             })
 
@@ -62,7 +62,7 @@ export const fetchLogin = (email: string, password: string, rememberMe: boolean)
                 type: FetchActionTypes.setFetch,
                 payload: {
                     identifier: ApiRoutes.Login,
-                    state: {status: 200, message: '', dataState: dataStates.received}
+                    state: {status: 200, code: '', dataState: dataStates.received}
                 }
             })
         } catch (error: AxiosError | any) {
@@ -71,7 +71,7 @@ export const fetchLogin = (email: string, password: string, rememberMe: boolean)
                 type: FetchActionTypes.setFetch,
                 payload: {
                     identifier: ApiRoutes.Login, state: {
-                        status: error.status, message: error.response.data.message,
+                        status: error.status, code: String(error.response.data.code),
                         dataState: dataStates.error
                     }
                 }
@@ -97,7 +97,7 @@ export const fetchRegister = (email: string, username: string, password: string)
                 type: FetchActionTypes.setFetch,
                 payload: {
                     identifier: ApiRoutes.Register,
-                    state: {status: 0, message: '', dataState: dataStates.requested}
+                    state: {status: 0, code: '', dataState: dataStates.requested}
                 }
             })
 
@@ -114,7 +114,7 @@ export const fetchRegister = (email: string, username: string, password: string)
                 type: FetchActionTypes.setFetch,
                 payload: {
                     identifier: ApiRoutes.Register, state: {
-                        status: error.status, message: error.response.data.message,
+                        status: error.status, code: String(error.response.data.code),
                         dataState: dataStates.error
                     }
                 }
@@ -139,7 +139,7 @@ export const fetchRenameUser = (newUsername: string) => {
                 type: FetchActionTypes.setFetch,
                 payload: {
                     identifier: ApiRoutes.RenameUser,
-                    state: {status: 200, message: '', dataState: dataStates.requested}
+                    state: {status: 200, code: '', dataState: dataStates.requested}
                 }
             })
             const response = await axios.put<{ auth: boolean, user: User, path: string }>(ApiRoutes.RenameUser, form, {
@@ -152,7 +152,7 @@ export const fetchRenameUser = (newUsername: string) => {
                     type: FetchActionTypes.setFetch,
                     payload: {
                         identifier: ApiRoutes.RenameUser,
-                        state: {status: 200, message: '', dataState: dataStates.received}
+                        state: {status: 200, code: '', dataState: dataStates.received}
                     }
                 })
             }
@@ -161,8 +161,8 @@ export const fetchRenameUser = (newUsername: string) => {
                 type: FetchActionTypes.setFetch,
                 payload: {
                     identifier: ApiRoutes.RenameUser, state: {
-                        status: error.status, message:
-                        error.response.data.message, dataState: dataStates.received
+                        status: error.status, code:
+                        String(error.response.data.code), dataState: dataStates.received
                     }
                 }
             })
@@ -187,7 +187,7 @@ export const changeEmail = (newEmail: string, password: string) => {
                 type: FetchActionTypes.setFetch,
                 payload: {
                     identifier: ApiRoutes.ChangeEmail,
-                    state: {status: 200, message: '', dataState: dataStates.requested}
+                    state: {status: 200, code: '', dataState: dataStates.requested}
                 }
             })
 
@@ -201,7 +201,7 @@ export const changeEmail = (newEmail: string, password: string) => {
                     type: FetchActionTypes.setFetch,
                     payload: {
                         identifier: ApiRoutes.ChangeEmail,
-                        state: {status: 200, message: '', dataState: dataStates.received}
+                        state: {status: 200, code: '', dataState: dataStates.received}
                     }
                 })
             }
@@ -210,8 +210,8 @@ export const changeEmail = (newEmail: string, password: string) => {
                 type: FetchActionTypes.setFetch,
                 payload: {
                     identifier: ApiRoutes.ChangeEmail, state: {
-                        status: error.status, message:
-                        error.response.data.message, dataState: dataStates.received
+                        status: error.status, code:
+                        String(error.response.data.code), dataState: dataStates.received
                     }
                 }
             })
@@ -236,7 +236,7 @@ export const fetchChangePassword = (oldPassword: string, password: string) => {
                 type: FetchActionTypes.setFetch,
                 payload: {
                     identifier: ApiRoutes.ChangePassword,
-                    state: {status: 200, message: '', dataState: dataStates.requested}
+                    state: {status: 200, code: '', dataState: dataStates.requested}
                 }
             })
 
@@ -251,7 +251,7 @@ export const fetchChangePassword = (oldPassword: string, password: string) => {
                     type: FetchActionTypes.setFetch,
                     payload: {
                         identifier: ApiRoutes.ChangePassword,
-                        state: {status: 200, message: '', dataState: dataStates.received}
+                        state: {status: 200, code: '', dataState: dataStates.received}
                     }
                 })
             }
@@ -261,8 +261,8 @@ export const fetchChangePassword = (oldPassword: string, password: string) => {
                 type: FetchActionTypes.setFetch,
                 payload: {
                     identifier: ApiRoutes.ChangePassword, state: {
-                        status: error.status, message:
-                        error.response.data.message, dataState: dataStates.received
+                        status: error.status, code:
+                        error.response.data.code, dataState: dataStates.received
                     }
                 }
             })

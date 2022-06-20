@@ -3,6 +3,7 @@ import {useActions} from "../useActions";
 import {useTypedSelector} from "../useTypedSelector";
 import {ApiRoutes} from "../../store/actionCreators/apiRoutes";
 import {dataStates} from "../../store/reducers/consts";
+import {getErrorDescription} from "../../lang/getServerErrorDescription";
 
 export function confirmEmail(email: string): boolean {
     if (!email.includes("@") || !email.includes(".")) {
@@ -85,7 +86,7 @@ export function useRegister() {
 
     const requested = registerState && registerState.dataState === dataStates.requested
     const hasError = registerState && registerState.status !== 200
-    const errorMessage = hasError && registerState.message
+    const errorMessage = hasError ? getErrorDescription(lang, registerState.code) : ''
 
     return {
         submit,
