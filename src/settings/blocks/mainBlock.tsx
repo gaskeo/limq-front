@@ -1,46 +1,36 @@
-import React, {useState} from "react";
-import {useTypedSelector} from "../../hooks/useTypedSelector";
+import React from "react";
 import {Select} from "../../elements/inputs/select";
-import {useDispatch} from "react-redux";
-import {availableLanguages, getLang, setLang} from "../../lang/getLang";
-import {LangActionTypes} from "../../store/reducers/langReducer";
-import {availableThemes, getTheme, setTheme} from "../../theme";
+import {availableLanguages, getLang} from "../../lang/getLang";
+import {availableThemes} from "../../theme";
+import {useSettingsBlock} from "../../hooks/elementHooks/useSettings";
 
 
 export function MainBlock() {
-    const {lang} = useTypedSelector(state => state.lang)
+    const {lang, onThemeChange, onLangChange, theme} = useSettingsBlock()
 
-    const [theme, changeTheme] = useState(getTheme())
-
-    const dispatch = useDispatch()
-
-    function onLangChange(language: string) {
-        setLang(language as availableLanguages)
-        dispatch({
-            type: LangActionTypes.setLang, payload: {
-                lang: language,
-                langCode: availableLanguages.undefined
-            }
-        })
-    }
-
-    function onThemeChange(newTheme: string) {
-        changeTheme(newTheme as availableThemes)
-        setTheme(newTheme)
-    }
+    const {
+        MainSettings,
+        English,
+        Russian,
+        ChangeLanguage,
+        DarkTheme,
+        LightTheme,
+        SystemTheme,
+        ChangeTheme
+    } = lang
 
     return (
         <div>
-            <h1 className='header-1'>{lang.MainSettings}</h1>
-            <Select id='lang' items={[{text: lang.English, value: availableLanguages.en},
-                {text: lang.Russian, value: availableLanguages.ru}]} onChange={onLangChange} label={lang.ChangeLanguage}
+            <h1 className='header-1'>{MainSettings}</h1>
+            <Select id='lang' items={[{text: English, value: availableLanguages.en},
+                {text: Russian, value: availableLanguages.ru}]} onChange={onLangChange} label={ChangeLanguage}
                     selected={getLang()}/>
             <div className='gap'/>
             <Select id='theme' items={[
-                {text: lang.DarkTheme, value: availableThemes.dark},
-                {text: lang.LightTheme, value: availableThemes.light},
-                {text: lang.SystemTheme, value: availableThemes.system}]}
-                    onChange={onThemeChange} label={lang.ChangeTheme} selected={theme}/>
+                {text: DarkTheme, value: availableThemes.dark},
+                {text: LightTheme, value: availableThemes.light},
+                {text: SystemTheme, value: availableThemes.system}]}
+                    onChange={onThemeChange} label={ChangeTheme} selected={theme}/>
         </div>
     )
 }

@@ -1,56 +1,22 @@
-import {useSearchParams} from "react-router-dom";
 import {useEffect} from "react";
 import {Menu} from "../elements/menu/menu";
 import {SettingsBlock} from "../elements/menu/settingsBlock";
-import {NameBlock} from "./blocks/nameBlock";
-import {EmailBlock} from "./blocks/emailBlock";
-import {PasswordBlock} from "./blocks/passwordBlock";
-import {useTypedSelector} from "../hooks/useTypedSelector";
-
-
-export const menuTabs = (names: { changeName: string, changeEmail: string, changePassword: string }) => [
-    {
-        name: names.changeName, parameterName: 'changeName',
-        id: 1, block: () => <NameBlock key='1'/>
-    },
-    {
-        name: names.changeEmail, parameterName: 'changeEmail',
-        id: 2, block: () => <EmailBlock key='2'/>
-    },
-    {
-        name: names.changePassword, parameterName: 'changePassword',
-        id: 3, block: () => <PasswordBlock key='3'/>
-    }
-]
-
+import {useUserSettings} from "../hooks/elementHooks/useUserSettings";
 
 export function UserSettings() {
-    function changeTab(tab: string) {
-        return function () {
-            changeSearchParams({'tab': tab})
-        }
-    }
+    const {lang, checkTabInParams, changeTab, tabs, currentTab} = useUserSettings()
 
-    const [searchParams, changeSearchParams] = useSearchParams()
-    const {lang} = useTypedSelector(state => state.lang)
-    const tabs = menuTabs({
-        changeName: lang.UserSettingsMenuUsername,
-        changeEmail: lang.UserSettingsMenuEmail, changePassword: lang.UserSettingsMenuPassword
-    })
+    const {UserSettingsHeader} = lang
 
-    useEffect(() => {
-        if (!searchParams.get('tab')) {
-            changeTab(tabs[0].parameterName)()
-        }
-    })
+    useEffect(checkTabInParams)
 
     return (
         <div className='settings-container'>
-            <h1 className='header-1'>{lang.UserSettingsHeader}</h1>
+            <h1 className='header-1'>{UserSettingsHeader}</h1>
 
             <div className='settings'>
-                <Menu active={searchParams.get('tab')} onClick={changeTab} tabs={tabs}/>
-                <SettingsBlock currentTab={searchParams.get('tab')} tabs={tabs}/>
+                <Menu active={currentTab} onClick={changeTab} tabs={tabs}/>
+                <SettingsBlock currentTab={currentTab} tabs={tabs}/>
             </div>
         </div>
     )
