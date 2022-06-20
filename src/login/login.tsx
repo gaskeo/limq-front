@@ -1,83 +1,58 @@
-import React, {useState} from "react";
+import React from "react";
 import {Input} from "../elements/inputs/input";
 import {Submit} from "../elements/inputs/submit";
-import {checkPasswordLength, confirmEmail} from "../register/register";
-import {useTypedSelector} from "../hooks/useTypedSelector";
-import {dataStates} from "../store/reducers/consts";
-import {ApiRoutes} from "../store/actionCreators/apiRoutes";
 import {Checkbox} from "../elements/inputs/checkbox";
 import {Loading} from "../elements/loading/loading";
-import {useActions} from "../hooks/useActions";
+import {useLogin} from "../hooks/elementHooks/useLogin";
 
 export function Login() {
-    function submit(event: React.FormEvent<HTMLFormElement>) {
-        event.preventDefault()
-        let newErrors = {...errors}
+    const {
+        submit,
+        lang,
+        email,
+        changeEmail,
+        errors,
+        validateEmail,
+        password,
+        changePassword,
+        checkPassword,
+        rememberMe,
+        changeRememberMe,
+        errorMessage,
+        requested
+    } = useLogin()
 
-        newErrors.password = !checkPasswordLength(password) ? 'Password too short' : ''
-        newErrors.email = !confirmEmail(email) ? 'Invalid email address' : ''
-
-        changeErrors(newErrors)
-        if (newErrors.email || newErrors.password) {
-            return
-        }
-
-        fetchLogin(email, password, rememberMe)
-        return false;
-    }
-
-    function validateEmail(email: string) {
-        if (confirmEmail(email)) {
-            return changeErrors({...errors, email: ''})
-        }
-    }
-
-    function checkPassword(password: string) {
-        if (checkPasswordLength(password)) {
-            return changeErrors({...errors, password: ''})
-        }
-    }
-
-    const {fetchLogin} = useActions()
-
-    const [email, changeEmail] = useState('');
-    const [password, changePassword] = useState('')
-    const [rememberMe, changeRememberMe] = useState(true)
-    const [errors, changeErrors] = useState({email: '', password: ''})
-
-    const {states} = useTypedSelector(state => state.fetch)
-    const {lang} = useTypedSelector(state => state.lang)
-    const loginState = states[ApiRoutes.Login]
-
-    const requested = loginState && loginState.dataState === dataStates.requested
-    const hasError = loginState && loginState.status !== 200
+    const {LoginHeader, LoginButton, EmailForm, EnterEmail, PasswordForm, EnterPassword, RememberMeForm} = lang
 
     return (
         <div className='center'>
             <form className='app-form form-bg' onSubmit={submit}>
-                <h1 className='header-1'>{lang.LoginHeader}</h1>
+                <h1 className='header-1'>{LoginHeader}</h1>
 
                 <Input state={email}
                        setState={changeEmail}
-                       label={lang.EmailForm}
+                       label={EmailForm}
                        type='text'
                        errorText={errors.email}
                        onChange={validateEmail}
-                       placeholder={lang.EnterEmail}
+                       placeholder={EnterEmail}
                 />
 
                 <Input state={password}
                        setState={changePassword}
-                       label={lang.PasswordForm}
+                       label={PasswordForm}
                        type='password'
                        errorText={errors.password}
                        onChange={checkPassword}
-                       placeholder={lang.EnterPassword}/>
+                       placeholder={EnterPassword}/>
 
-                <div className='width-100 max-width-500 left'><Checkbox label={lang.RememberMeForm} state={rememberMe} setState={changeRememberMe}/></div>
-                <p className='error-text'>{hasError && loginState.message}</p>
+                <div className='width-100 max-width-500 left'>
+                    <Checkbox label={RememberMeForm} state={rememberMe}
+                              setState={changeRememberMe}/>
+                </div>
+                <p className='error-text'>{errorMessage}</p>
 
-                <Submit label={requested ? <Loading/> : lang.LoginButton}/>
+                <Submit label={requested ? <Loading/> : LoginButton}/>
             </form>
         </div>
     )

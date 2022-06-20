@@ -9,6 +9,9 @@ import {useHeader, useUserButton} from "../hooks/elementHooks/useHeader";
 
 function UserButton() {
     const {lang, buttonOpen, user, exit, toggleOpen} = useUserButton()
+
+    const {SettingsButton, ExitButton} = lang
+
     return (
         <div className='button-container' id='user-button'>
             <div className={'user-icon header-element ' + (buttonOpen ? 'header-element-hover' : '')}
@@ -17,8 +20,8 @@ function UserButton() {
             </div>
             <div className={'dropdown ' + (buttonOpen ? 'show' : '')}>
                 <div className='button mini-button dropdown-item no-hover'>{user.username}</div>
-                <Link to={routes.userSettings} className='button mini-button dropdown-item'>{lang.SettingsButton}</Link>
-                <button className='button mini-button dropdown-item' onClick={exit()}>{lang.ExitButton}</button>
+                <Link to={routes.userSettings} className='button mini-button dropdown-item'>{SettingsButton}</Link>
+                <button className='button mini-button dropdown-item' onClick={exit()}>{ExitButton}</button>
             </div>
         </div>
     )
