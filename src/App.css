@@ -3,10 +3,10 @@
 [data-theme="light"] {
     --main-color: #f8f0fb; /* background color */
     --second-color: black; /* text color */
-    --third-color: #00e1ff; /* element's border color and hover */
+    --third-color: #90ceff; /* element's border color and hover */
     --fourth-color: #00eeff; /* element's background color */
-    --fifth-color: #939196;
-    --sixth-color: #00d4ff;
+    --fifth-color: #21587e;
+    --sixth-color: #348ccc;
     --seventh-color: white;
     --error-color: #e83f36;
     --error-text-color: white;
