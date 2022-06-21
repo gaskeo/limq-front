@@ -4,6 +4,7 @@ import {RegisterBody} from "./registerBody";
 import {BaseBody} from "./baseBody";
 import {Loading} from "../elements/loading/loading";
 import './body.css';
+import './channelCard/card.css'
 
 export function Body() {
     const {user, userDataState} = useTypedSelector(state => state.user)

@@ -1,10 +1,7 @@
 import {Menu} from "../elements/menu/menu";
 import {SettingsBlock} from "../elements/menu/settingsBlock";
-import "./channelSettings.css"
 import {useEffect} from "react";
 import {useChannelSettings} from "../hooks/elementHooks/useChannelSettings";
-
-
 
 export function ChannelSettings() {
     const {lang, activeTab, changeTab, tabs, fetchAll, checkTabInParams} = useChannelSettings()

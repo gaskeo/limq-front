@@ -1,4 +1,5 @@
 import {menuTab} from "./menu";
+import './settings.css'
 
 interface settingsBlockProps {
     currentTab: string | null
