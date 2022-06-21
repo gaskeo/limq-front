@@ -1,4 +1,7 @@
 import React, {useEffect} from 'react';
+import './App.css';
+import './helpers.css';
+
 import {Header} from "./header/header";
 import {Login} from "./login/login";
 import {Route, Routes} from "react-router-dom";
@@ -10,8 +13,7 @@ import {ChannelSettings} from "./channelSettings/channelSettings";
 import {UserSettings} from "./userSettings/userSettings";
 import {MainSettings} from "./settings/settings";
 import {useApp} from "./hooks/elementHooks/useApp";
-import './App.css';
-import './helpers.css'
+
 
 function App() {
     const {pathId, checkRedirect, fetchChannelsFunc, fetchUserFunc, setLang} = useApp()

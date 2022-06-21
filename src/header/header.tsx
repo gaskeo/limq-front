@@ -1,11 +1,11 @@
 import React from 'react'
 import {dataStates} from "../store/reducers/consts";
 import {routes} from "../routes/routes";
-import "./header.css";
 import {Link} from "react-router-dom";
 import {User} from "../svg/user";
 import {Settings} from "../svg/settings";
 import {useHeader, useUserButton} from "../hooks/elementHooks/useHeader";
+import "./header.css";
 
 function UserButton() {
     const {lang, buttonOpen, user, exit, toggleOpen} = useUserButton()
@@ -35,8 +35,7 @@ export function Header() {
     return (
         <header className="app-header">
             <Link to={routes.index} className='lithium-container'>
-                <span className="lithium-label">Li</span>
-                <span className="lithium-label mq-label">MQ</span>
+                <img alt='LiMQ' src={require('../svg/limq.svg').default}/>
             </Link>
             <div>
                 <div className='horizontal'>
