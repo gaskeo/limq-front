@@ -73,7 +73,6 @@
 .dropdown-item {
     float: right;
     border-radius: 0;
-    display: block;
     border-bottom: none;
     min-width: 10rem;
 }

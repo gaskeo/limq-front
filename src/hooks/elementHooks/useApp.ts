@@ -48,6 +48,7 @@ export function useApp() {
     const dispatch = useDispatch()
     const navigate = useNavigate();
     const location = useLocation();
+    const loaded = userDataState === dataStates.received || userDataState === dataStates.error
 
-    return {pathId, fetchUserFunc, fetchChannelsFunc, checkRedirect, setLang}
+    return {pathId, fetchUserFunc, fetchChannelsFunc, checkRedirect, setLang, loaded}
 }

@@ -13,10 +13,12 @@ import {ChannelSettings} from "./channelSettings/channelSettings";
 import {UserSettings} from "./userSettings/userSettings";
 import {MainSettings} from "./settings/settings";
 import {useApp} from "./hooks/elementHooks/useApp";
+import {dataStates} from "./store/reducers/consts";
+import {Loading} from "./elements/loading/loading";
 
 
 function App() {
-    const {pathId, checkRedirect, fetchChannelsFunc, fetchUserFunc, setLang} = useApp()
+    const {pathId, checkRedirect, fetchChannelsFunc, fetchUserFunc, setLang, loaded} = useApp()
 
     useEffect(() => {
         fetchUserFunc()
@@ -25,6 +27,10 @@ function App() {
     })
 
     useEffect(checkRedirect, [pathId])
+
+    if (!loaded) {
+        return <div className='center vertical-center'><Loading/></div>
+    }
 
     return (
         <>

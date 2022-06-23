@@ -89,7 +89,6 @@
     align-items: center;
     padding-left: .4rem;
     padding-right: .4rem;
-    min-height: 2rem;
     min-width: 10rem;
     background-color: var(--select-color);
     color: var(--text-color);

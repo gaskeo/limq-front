@@ -209,6 +209,9 @@ code {
 }
 
 .button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
     text-decoration: none;
     text-align: center;
@@ -216,13 +219,14 @@ code {
     outline: none;
     border: none;
     border-radius: 5px;
-    line-height: .8em;
-    font: var(--main-font-family);
+    line-height: 1em;
+    font-family: var(--main-font-family);
     font-size: 1em;
     background-color: var(--button-color);
     color: var(--button-text-color);
     padding: 6px;
     transition: .2s background-color, .2s border;
+    min-height: 3rem;
 }
 
 .button:hover {
