@@ -76,7 +76,7 @@ export function Register() {
                        placeholder={EnterPasswordAgain}/>
                 <p className='error-text'>{errorMessage}</p>
 
-                <Submit label={requested ? <Loading/> : RegisterButton}/>
+                <Submit classes='success-button' label={requested ? <Loading/> : RegisterButton}/>
             </form>
         </div>
     )

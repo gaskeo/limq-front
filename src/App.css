@@ -1,20 +1,63 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato&family=Manrope:wght@600&family=Noto+Sans+Mono:wght@500&family=Nunito:wght@300&family=Roboto:wght@300&family=Rubik:wght@500&display=swap');
 
 [data-theme="light"] {
-    --main-color: #FFFFFF; /* background color */
-    --second-color: black; /* text color */
-    --third-color: #cbd1d7; /* element's border color and hover */
-    --fourth-color: #f8f9fa; /* element's background color */
-    --fifth-color: #21587e;
-    --sixth-color: #348ccc;
-    --seventh-color: white;
-    --error-color: #e83f36;
-    --error-text-color: white;
+    --background-color: #FFFFFF;
+    --header-color: #F7F8F9;
+    --text-color: #000000;
+    --error-text-color: #dc3545;
+    --placeholder-color: #8A8A8A;
+    --border-color: #E7E7E7;
+    --form-background-color: #F7F8F9;
+    --form-input-color: #FFFFFF;
+    --form-input-border-color: #E7E7E7;
+    --form-input-color-hover: #ECECEC;
 
+    --menu-tab-color: #F7F8F9;
+    --menu-tab-hover-color: #E7E7E7;
+    --menu-tab-selected-color: #AACDEC;
 
-    --error-color-2: #dc3545;
+    --code-color: #687179;
+    --code-background-color: #E7E7E7;
+
+    --button-color: #007bfe;
+    --button-color-hover: #2990fd;
+    --button-text-color: #FFFFFF;
+    --button-text-color-hover: #FFFFFF;
+
+    --select-color: #F7F8F9;
+    --select-hover-color: #E7E7E7;
+    --select-selected-color: #AACDEC;
+
+    --header-element-color: #000000;
+    --header-element-bg-color: transparent;
+    --header-element-color-hover: #000000;
+    --header-element-bg-color-hover: #2990fd;
+    --header-element-color-selected: #000000;
+    --header-element-bg-color-selected: #0465cb;
+
+    --success-color: #28a745;
+    --button-success-color: #28a745;
+    --button-success-color-hover: #2eb94e;
+    --button-success-text-color: #F6FFF8;
+    --button-success-text-color-hover: #F6FFF8;
+
     --warning-color: #ffc107;
-    --warning-color-2: #cca324;
+    --button-warning-color: #ffc107;
+    --button-warning-color-hover: #cca324;
+    --button-warning-text-color: #000C14;
+    --button-warning-text-color-hover: #000C14;
+
+    --button-error-color: #ff5f3a;
+    --button-error-color-hover: #dc3545;
+    --button-error-text-color: #F6FFF8;
+    --button-error-text-color-hover: #F6FFF8;
+
+    --card-color: #FFFFFF;
+    --card-border-color: #e5e5e5;
+    --card-hover-color: #e5e5e5;
+
+    --icon-color: #000000;
+    --icon-hover-color: #6a6a6A;
 }
 
 [data-theme="dark"] {
@@ -26,6 +69,7 @@
     --border-color: #032531;
     --form-background-color: #210124;
     --form-input-color: #001a2c;
+    --form-input-border-color: #001a2c;
     --form-input-color-hover: #032531;
 
     --menu-tab-color: #210124;
@@ -39,8 +83,11 @@
     --button-color-hover: #032531;
     --button-text-color: #F6FFF8;
     --button-text-color-hover: #F6FFF8;
-    --button-selected-color: #003D66;
-    --button-selected-text-color: #F6FFF8;
+
+    --select-color: #001a2c;
+    --select-hover-color: #032531;
+    --select-selected-color: #003D66;
+
 
     --header-element-color: #F6FFF8;
     --header-element-bg-color: transparent;
@@ -67,6 +114,7 @@
     --button-error-text-color-hover: #F6FFF8;
 
     --card-color: #001a2c;
+    --card-border-color: null;
     --card-hover-color: #032531;
 
     --icon-color: #F6FFF8;
@@ -165,7 +213,6 @@ code {
     box-sizing: border-box;
     outline: none;
     border: none;
-    /* border: 1px solid var(--b); */
     border-radius: 5px;
     line-height: .8em;
     font: var(--main-font-family);
@@ -186,14 +233,24 @@ code {
     padding: 8px 25px;
 }
 
+.success-button {
+    background-color: var(--button-success-color) !important;
+    color: var(--button-success-text-color) !important;
+}
+
+.success-button:hover {
+    background-color: var(--button-success-color-hover) !important;
+    color: var(--button-success-text-color-hover) !important;
+}
+
 .warning-button {
-    background-color: var(--button-warning-color);
-    color: var(--button-warning-text-color);
+    background-color: var(--button-warning-color) !important;
+    color: var(--button-warning-text-color) !important;
 }
 
 .warning-button:hover {
-    background-color: var(--button-warning-color-hover);
-    color: var(--button-warning-text-color-hover);
+    background-color: var(--button-warning-color-hover) !important;
+    color: var(--button-warning-text-color-hover) !important;
 }
 
 .error-button {

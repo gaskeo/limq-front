@@ -29,7 +29,7 @@
     width: 18px;
     height: 18px;
     transition: fill .2s;
-    fill: var(--icon-color)
+    fill: var(--header-element-color)
 }
 
 .dropdown {

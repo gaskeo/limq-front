@@ -21,13 +21,14 @@ export function Select({label, items, onChange, selected, id}: selectProps) {
         <label className='select-label'>
             {label}
             <div className='select-container' id={id}>
-                <div className={'select-element button center ' + (open ? 'select-element-open' : '')}
+                <div className={`button center select-element ${open ? 'select-element-open' : ''}`}
                      onClick={() => changeOpen(!open)}>
                     {selected && items.filter(item => item.value === selected)[0].text}
                 </div>
                 <div className={'select-dropdown ' + (open ? 'select-dropdown-show' : '')}>
                     {items.map(item =>
-                        <div key={item.value} className={'button dropdown-item ' + (selected === item.value ? 'selected' : '')}
+                        <div key={item.value} className={`button dropdown-item 
+                        select-dropdown-item ${selected === item.value ? 'selected' : ''}`}
                              onClick={() => {
                                  changeOpen(false)
                                  onChange(item.value)

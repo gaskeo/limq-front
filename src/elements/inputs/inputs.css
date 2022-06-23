@@ -6,8 +6,8 @@
     color: var(--text-color);
     font-family: var(--main-font-family);
     border-radius: 5px;
-    border: none;
     background-color: var(--form-input-color);
+    border: 2px solid var(--form-input-border-color);
     font-size: 1.1em;
     padding-left: .5rem;
     transition: background-color .2s;
@@ -58,7 +58,7 @@
     border: none;
     border-radius: 5px;
     background-color: var(--button-color);
-    color: var(--text-color);
+    color: var(--button-text-color);
     height: 3rem;
     transition: background-color .2s;
 }
@@ -90,6 +90,13 @@
     padding-right: .4rem;
     min-height: 2rem;
     min-width: 10rem;
+    background-color: var(--select-color);
+    color: var(--text-color);
+}
+
+.select-element:hover {
+    background-color: var(--select-hover-color);
+    color: var(--text-color);
 }
 
 .select-label {
@@ -109,12 +116,23 @@
     word-wrap: normal;
 }
 
+.select-dropdown-item {
+    color: var(--text-color);
+    background-color: var(--select-color);
+}
+
+.select-dropdown-item:hover {
+    color: var(--text-color);
+    background-color: var(--select-hover-color);
+}
+
 .selected {
-    background-color: var(--button-selected-color);
+    color: var(--text-color);
+    background-color: var(--select-selected-color);
 }
 
 .selected:hover {
-    background-color: var(--button-selected-color);
+    background-color: var(--select-selected-color);
 }
 
 .select-element-open {
