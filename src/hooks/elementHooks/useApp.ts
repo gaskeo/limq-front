@@ -22,7 +22,7 @@ export function useApp() {
     }
 
     function checkRedirect() {
-        if (path) {
+        if (path && path !== location.pathname) {
             dispatch({type: FetchActionTypes.deleteFetches})
             Redirect(path, navigate, location)
         }

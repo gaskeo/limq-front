@@ -1,40 +1,76 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato&family=Manrope:wght@600&family=Noto+Sans+Mono:wght@500&family=Nunito:wght@300&family=Roboto:wght@300&family=Rubik:wght@500&display=swap');
 
 [data-theme="light"] {
-    --main-color: #f8f0fb; /* background color */
+    --main-color: #FFFFFF; /* background color */
     --second-color: black; /* text color */
-    --third-color: #90ceff; /* element's border color and hover */
-    --fourth-color: #00eeff; /* element's background color */
+    --third-color: #cbd1d7; /* element's border color and hover */
+    --fourth-color: #f8f9fa; /* element's background color */
     --fifth-color: #21587e;
     --sixth-color: #348ccc;
     --seventh-color: white;
     --error-color: #e83f36;
     --error-text-color: white;
 
+
     --error-color-2: #dc3545;
     --warning-color: #ffc107;
     --warning-color-2: #cca324;
-
-    --box-shadow: 0 0 4px 2px var(--fourth-color);
 }
 
 [data-theme="dark"] {
-    --main-color: #000C14;
-    --second-color: #F6FFF8;
-    --third-color: #032531;
-    --fourth-color: #001a2c;
-    --fifth-color: #bfc0c0;
-    --sixth-color: #003D66;
-    --seventh-color: #210124;
+    --background-color: #000C14;
+    --header-color: #001A2C;
+    --text-color: #F6FFF8;
+    --error-text-color: #FF5F3A;
+    --placeholder-color: #757575;
+    --border-color: #032531;
+    --form-background-color: #210124;
+    --form-input-color: #001a2c;
+    --form-input-color-hover: #032531;
 
-    --error-color: #ff5f3a;
-    --error-text-color: #F6FFF8;
-    --error-color-2: #dc3545;
+    --menu-tab-color: #210124;
+    --menu-tab-hover-color: #032531;
+    --menu-tab-selected-color: #003D66;
+
+    --code-color: #bfc0c0;
+    --code-background-color: #000C14;
+
+    --button-color: #001a2c;
+    --button-color-hover: #032531;
+    --button-text-color: #F6FFF8;
+    --button-text-color-hover: #F6FFF8;
+    --button-selected-color: #003D66;
+    --button-selected-text-color: #F6FFF8;
+
+    --header-element-color: #F6FFF8;
+    --header-element-bg-color: transparent;
+    --header-element-color-hover: #F6FFF8;
+    --header-element-bg-color-hover: #032531;
+    --header-element-color-selected: #F6FFF8;
+    --header-element-bg-color-selected: #003D66;
+
+    --success-color: #28a745;
+    --button-success-color: #28a745;
+    --button-success-color-hover: #2eb94e;
+    --button-success-text-color: #F6FFF8;
+    --button-success-text-color-hover: #F6FFF8;
+
     --warning-color: #ffc107;
-    --warning-color-2: #cca324;
+    --button-warning-color: #ffc107;
+    --button-warning-color-hover: #cca324;
+    --button-warning-text-color: #000C14;
+    --button-warning-text-color-hover: #000C14;
 
-    --box-shadow: 0 0 4px 2px var(--third-color);
+    --button-error-color: #ff5f3a;
+    --button-error-color-hover: #dc3545;
+    --button-error-text-color: #F6FFF8;
+    --button-error-text-color-hover: #F6FFF8;
 
+    --card-color: #001a2c;
+    --card-hover-color: #032531;
+
+    --icon-color: #F6FFF8;
+    --icon-hover-color: #bfc0c0;
 }
 
 body {
@@ -42,7 +78,7 @@ body {
     --header-font-family: 'Manrope', sans-serif;
     --main-font-family: 'Nunito', sans-serif;
     --code-font-family: 'Noto Sans Mono', monospace;;
-    background-color: var(--main-color);
+    background-color: var(--background-color);
 }
 
 code {
@@ -62,7 +98,7 @@ code {
     margin-top: 0;
     font-size: xx-large;
     font-family: var(--header-font-family);
-    color: var(--second-color);
+    color: var(--text-color);
 }
 
 .header-2 {
@@ -70,7 +106,7 @@ code {
     line-height: 1.2em;
     font-size: x-large;
     font-family: var(--header-font-family);
-    color: var(--second-color)
+    color: var(--text-color)
 }
 
 .header-3 {
@@ -79,7 +115,7 @@ code {
     line-height: 1.2em;
     font-size: large;
     font-family: var(--header-font-family);
-    color: var(--second-color)
+    color: var(--text-color)
 }
 
 .grey-window {
@@ -107,7 +143,7 @@ code {
 }
 
 .form-bg {
-    background-color: var(--seventh-color);
+    background-color: var(--form-background-color);
 }
 
 .error-text {
@@ -119,7 +155,7 @@ code {
     height: .4em;
     text-align: left;
     width: 100%;
-    color: var(--error-color)
+    color: var(--error-text-color)
 }
 
 .button {
@@ -128,19 +164,21 @@ code {
     text-align: center;
     box-sizing: border-box;
     outline: none;
-    border: 1px solid var(--third-color);
+    border: none;
+    /* border: 1px solid var(--b); */
     border-radius: 5px;
     line-height: .8em;
     font: var(--main-font-family);
     font-size: 1em;
-    background-color: var(--fourth-color);
-    color: var(--second-color);
+    background-color: var(--button-color);
+    color: var(--button-text-color);
     padding: 6px;
     transition: .2s background-color, .2s border;
 }
 
 .button:hover {
-    background-color: var(--third-color);
+    background-color: var(--button-color-hover);
+    color: var(--button-text-color-hover)
 }
 
 .mini-button {
@@ -148,45 +186,38 @@ code {
     padding: 8px 25px;
 }
 
-.warning {
-    background-color: var(--warning-color);
-    color: black;
+.warning-button {
+    background-color: var(--button-warning-color);
+    color: var(--button-warning-text-color);
 }
 
-.warning:hover {
-    background-color: var(--warning-color-2);
+.warning-button:hover {
+    background-color: var(--button-warning-color-hover);
+    color: var(--button-warning-text-color-hover);
 }
 
-.error {
-    background-color: var(--error-color);
-    color: var(--error-text-color);
+.error-button {
+    background-color: var(--button-error-color);
+    color: var(--button-error-text-color);
 }
 
-.error:hover {
-    background-color: var(--error-color-2);
+.error-button:hover {
+    background-color: var(--button-error-color-hover);
+    color: var(--button-error-text-color-hover);
 }
 
 .warning-loading > * >  .circle {
-    background-color: var(--main-color);
+    background-color: var(--background-color);
 }
 
 .warning-loading > * > .circle-1 {
-    background-color: var(--main-color);
+    background-color: var(--background-color);
 }
 
-.active {
-    background-color: var(--sixth-color);
-}
-
-.active:hover {
-    background-color: var(--sixth-color);
-}
-
-
-.theme-icon {
+.settings-icon {
     width: 20px;
     height: 20px;
-    fill: var(--second-color);
+    fill: var(--header-element-color);
     transition: fill .2s, all .5s;
 }
 

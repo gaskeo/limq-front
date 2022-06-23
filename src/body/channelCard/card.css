@@ -10,8 +10,8 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    box-shadow: var(--box-shadow);
-    background-color: var(--fourth-color);
+    /* box-shadow: var(--box-shadow); */
+    background-color: var(--card-color);
     border-radius: 5px;
     padding: 15px 20px 20px;
     overflow-x: hidden;
@@ -29,7 +29,7 @@
 }
 
 .add-channel-card:hover {
-    background-color: var(--sixth-color);
+    background-color: var(--card-hover-color);
 }
 
 .add-channel-card-text {
@@ -39,7 +39,7 @@
 }
 
 .channel-card-add-icon {
-    fill: var(--second-color);
+    fill: var(--icon-color);
     width: 16px;
     height: 16px;
     margin-bottom: 8px;
@@ -54,7 +54,7 @@
 
 .card-header {
     font: var(--header-font-family);
-    color: var(--second-color);
+    color: var(--text-color);
     margin-top: 0;
     font-size: 1.3em;
     margin-bottom: 8px;
@@ -63,7 +63,7 @@
 }
 
 .card-icon-near-header {
-    fill: var(--second-color);
+    fill: var(--icon-color);
     cursor: pointer;
     width: 16px;
     height: 16px;
@@ -72,7 +72,7 @@
 }
 
 .card-icon-near-header:hover {
-    fill: var(--sixth-color);
+    fill: var(--icon-hover-color);
 }
 
 .card-info-container {
@@ -86,13 +86,13 @@
 
 .card-code {
     display: block;
-    color: var(--fifth-color);
+    color: var(--code-color);
     margin-bottom: 16px;
     font-family: var(--code-font-family);
 }
 
 .card-icon-and-text-container {
-    color: var(--second-color);
+    color: var(--text-color);
     display: flex;
     justify-content: left;
     gap: 7px;
@@ -101,7 +101,7 @@
 }
 
 .channel-card-keys-container {
-    color: var(--second-color);
+    color: var(--text-color);
     max-width: 100px;
     display: flex;
     gap: 4px;
@@ -109,21 +109,21 @@
 }
 
 .channel-card-key-icon {
-    fill: var(--second-color);
+    fill: var(--icon-color);
     width: 16px !important;
     height: 16px !important;
 }
 
 .card-background-text {
-    background-color: var(--main-color);
+    background-color: var(--code-background-color);
     width: max-content;
     padding: 10px;
     border-radius: 5px;
-    color: var(--fifth-color);
+    color: var(--code-color);
 }
 
 .card-text {
-    color: var(--second-color);
+    color: var(--text-color);
     font-family: var(--main-font-family);
     font-size: .9em;
 }
@@ -179,9 +179,9 @@
 
 
 .dot-active {
-    fill: #28a745
+    fill: var(--success-color);
 }
 
 .dot-inactive {
-    fill: yellow;
+    fill: var(--warning-color);
 }

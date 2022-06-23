@@ -17,7 +17,7 @@ export function MixinCard({channel, mixinType}: mixinCardProps) {
             </div>
             <div className='card-info-container'>
                 <code className='card-code card-background-text'>{channel['channel_id']}</code>
-                <button className='button mini-button error' onClick={deleteMixin}>{lang.DeleteMixinButton}</button>
+                <button className='button mini-button error-button' onClick={deleteMixin}>{lang.DeleteMixinButton}</button>
             </div>
         </div>
     )

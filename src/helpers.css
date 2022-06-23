@@ -14,11 +14,11 @@
 }
 
 .text {
-    color: var(--second-color)
+    color: var(--text-color)
 }
 
 .grey-text {
-    color: var(--fifth-color)
+    color: var(--code-color)
 }
 .horizontal-scroll {
     -ms-overflow-style: none; /* for Internet Explorer, Edge */

@@ -6,7 +6,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    background-color: var(--fourth-color);
+    background-color: var(--header-color);
     justify-content: space-between;
 }
 
@@ -20,34 +20,6 @@
     width: 50px;
 }
 
-
-.lithium-label {
-    color: var(--second-color);
-    display: inline-block;
-    height: 2.75vh;
-    line-height: 2.75vh;
-}
-
-.lithium-label:hover {
-    text-decoration: none;
-}
-
-span.mq-label {
-    margin-left: 3px;
-    background-color: red;
-    color: white;
-    border-radius: 3px;
-    line-height: 3.2vh;
-    height: 3.2vh;
-    padding-left: 5px;
-    padding-right: 5px;
-}
-
-span.mq-label:hover {
-    text-decoration: none;
-    color: white;
-}
-
 .button-container {
     position: relative;
 }
@@ -57,7 +29,7 @@ span.mq-label:hover {
     width: 18px;
     height: 18px;
     transition: fill .2s;
-    fill: var(--second-color)
+    fill: var(--icon-color)
 }
 
 .dropdown {
@@ -76,6 +48,8 @@ span.mq-label:hover {
 }
 
 .header-element {
+    color: var(--header-element-color);
+    background-color: var(--header-element-bg-color);
     display: flex;
     align-items: center;
     padding-left: .8rem;
@@ -87,15 +61,13 @@ span.mq-label:hover {
 
 
 .header-element:hover {
-    background-color: var(--third-color);
+    color: var(--header-element-color-hover);
+    background-color: var(--header-element-bg-color-hover);
 }
 
-.header-element-hover {
-    background-color: var(--sixth-color);
-}
-
-.header-element-hover:hover {
-    background-color: var(--sixth-color);
+.header-element-hover, .header-element-hover:hover {
+    color: var(--header-element-color-selected);
+    background-color: var(--header-element-bg-color-selected);
 }
 
 .dropdown-item {
@@ -109,15 +81,11 @@ span.mq-label:hover {
 .dropdown-item:last-child {
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
-    border-bottom: 1px solid var(--third-color);
 }
 
-.no-hover {
+.no-hover, .no-hover:hover {
     cursor: default;
-}
-
-.no-hover:hover {
-    background: var(--fourth-color);
+    background: var(--button-color);
 }
 
 .button-opened {

@@ -18,14 +18,13 @@ import {useApp} from "./hooks/elementHooks/useApp";
 function App() {
     const {pathId, checkRedirect, fetchChannelsFunc, fetchUserFunc, setLang} = useApp()
 
-
     useEffect(() => {
         fetchUserFunc()
         fetchChannelsFunc()
         setLang()
     })
 
-    useEffect(checkRedirect, [checkRedirect, pathId])
+    useEffect(checkRedirect, [pathId])
 
     return (
         <>

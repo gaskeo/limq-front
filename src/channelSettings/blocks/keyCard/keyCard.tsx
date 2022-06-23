@@ -31,10 +31,10 @@ export function KeyCard({channelKey}: keyCardProps) {
                 <p className='card-text grey-text'>{perm}, {channelKey.created}</p>
                 <code className='card-code card-background-text'>{channelKey.key}</code>
                 <div className='card-inline-block'>
-                    <button className='button mini-button warning' onClick={toggleActiveKey}>
+                    <button className='button mini-button warning-button' onClick={toggleActiveKey}>
                         <PauseButtonContent active={channelKey.active} requested={requested}/>
                     </button>
-                    <button className='button mini-button error' onClick={deleteKey}>{lang.DeleteKeyButton}</button>
+                    <button className='button mini-button error-button' onClick={deleteKey}>{lang.DeleteKeyButton}</button>
                 </div>
             </div>
         </div>

@@ -8,7 +8,7 @@
 
 .menu {
     box-sizing: border-box;
-    border: 1px solid var(--third-color);
+    /* border: 1px solid var(--third-color);*/
     border-radius: 5px;
     height: max-content;
     overflow: hidden;
@@ -27,8 +27,9 @@
     font-family: var(--main-font-family);
     display: block;
 }
+
 .channel-settings-radio-container > * {
-    display: block;
+    margin-bottom: 8px;
 }
 
 .menu-tab {
@@ -36,16 +37,27 @@
     align-items: center;
     line-height: 1.3em;
     padding: 15px;
-    border-bottom: 1px solid var(--third-color);
-    color: var(--second-color);
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-color);
     font-family: var(--main-font-family);
     transition: background-color .2s;
+    background-color: var(--menu-tab-color);
 }
 
 
 .menu-tab:hover {
-    background-color: var(--third-color);
+    background-color: var(--menu-tab-hover-color);
 }
+
+
+.active {
+    background-color: var(--menu-tab-selected-color);
+}
+
+.active:hover {
+    background-color: var(--menu-tab-selected-color);
+}
+
 
 .menu-tab:last-child {
     border: none;
@@ -68,10 +80,14 @@
     }
 
     .menu-tab {
-        border-right: 1px solid var(--third-color);
+        border-right: 1px solid var(--border-color);
         border-bottom: none;
         justify-content: center;
         text-align: center;
+    }
+
+    .menu-tab:last-child {
+        border: none;
     }
 }
 
@@ -103,7 +119,7 @@
 }
 
 .menu-tab-horizontal {
-    border-right: 1px solid var(--third-color);
+    border-right: 1px solid var(--border-color);
     border-bottom: none;
     text-align: center;
     justify-content: center;

@@ -41,7 +41,7 @@ export function Header() {
                 <div className='horizontal'>
                     <Link to={routes.settings}
                           className='header-element'>
-                        <div className='theme-icon'><Settings/></div>
+                        <div className='settings-icon'><Settings/></div>
                     </Link>
 
                     {

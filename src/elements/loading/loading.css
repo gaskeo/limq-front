@@ -10,7 +10,7 @@
 .circle {
     position: absolute;
     display: inline-block;
-    background-color: var(--second-color);
+    background-color: var(--text-color);
     border-radius: 50%;
     width: var(--diameter);
     height: var(--diameter);
@@ -44,7 +44,7 @@
         transform: scale(1);
     }
     to {
-        background-color: var(--fifth-color);
+        background-color: var(--code-color);
         transform: scale(0);
     }
 }
@@ -59,7 +59,7 @@
 
 @keyframes circle-animate-3 {
     from {
-        background-color: var(--fifth-color);
+        background-color: var(--code-color);
         transform: scale(0);
     }
     to {
