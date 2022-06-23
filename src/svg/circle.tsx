@@ -4,4 +4,3 @@ export const Circle = ({active}: { active: boolean }) => (
         <circle cx="4" cy="4" r="4"/>
     </svg>
 )
-

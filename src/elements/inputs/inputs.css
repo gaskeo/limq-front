@@ -10,7 +10,7 @@
     border: 2px solid var(--form-input-border-color);
     font-size: 1.1em;
     padding-left: .5rem;
-    transition: background-color .2s;
+    transition: background-color .2s, border .2s;
     max-width: 500px;
 }
 
@@ -20,6 +20,7 @@
 
 .input:hover {
     background-color: var(--form-input-color-hover);
+    border-color: var(--form-input-border-color-hover);
 }
 
 .input-container {

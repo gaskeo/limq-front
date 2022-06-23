@@ -52,7 +52,7 @@ export function Login() {
                 </div>
                 <p className='error-text'>{errorMessage}</p>
 
-                <Submit label={requested ? <Loading/> : LoginButton}/>
+                <Submit classes='success-button' label={requested ? <Loading/> : LoginButton}/>
             </form>
         </div>
     )

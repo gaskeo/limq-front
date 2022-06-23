@@ -8,7 +8,6 @@
 
 .menu {
     box-sizing: border-box;
-    /* border: 1px solid var(--third-color);*/
     border-radius: 5px;
     height: max-content;
     overflow: hidden;

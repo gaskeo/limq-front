@@ -11,6 +11,7 @@
     --form-input-color: #FFFFFF;
     --form-input-border-color: #E7E7E7;
     --form-input-color-hover: #ECECEC;
+    --form-input-border-color-hover: #E7E7E7;
 
     --menu-tab-color: #F7F8F9;
     --menu-tab-hover-color: #E7E7E7;
@@ -71,6 +72,7 @@
     --form-input-color: #001a2c;
     --form-input-border-color: #001a2c;
     --form-input-color-hover: #032531;
+    --form-input-border-color-hover: #032531;
 
     --menu-tab-color: #210124;
     --menu-tab-hover-color: #032531;

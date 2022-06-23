@@ -30,10 +30,10 @@ export function useApp() {
 
     function setLang() {
         if (langCode === availableLanguages.undefined) {
-            getLangDict(getLang()).then(l => {
+            getLangDict(getLang()).then(language => {
                 dispatch({
                     type: LangActionTypes.setLang,
-                    payload: {lang: l.langDict, langCode: getLang()}
+                    payload: {lang: language.langDict, langCode: getLang()}
                 })
             })
         }
