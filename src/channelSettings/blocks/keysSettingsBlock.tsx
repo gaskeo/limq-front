@@ -72,14 +72,19 @@ export function KeysSettingsBlock() {
 
                 <Submit label={requested ? <Loading/> : CreateKeyButton}/>
             </form>
-            <span className='gap'/>
-            <h1 className='header-1'>{YourKeysHeader}</h1>
+            {
+                reversedKeys.length > 0 &&
+                <div>
+                    <span className='gap'/>
+                    <h1 className='header-1'>{YourKeysHeader}</h1>
 
-            <div className='card-100-container'>
-                {keysDataState === dataStates.requested && <LoadingKeyCard/>}
-                {reversedKeys.map(key => <KeyCard key={key.key}
-                                                  channelKey={key}/>)}
-            </div>
+                    <div className='card-100-container'>
+                        {keysDataState === dataStates.requested && <LoadingKeyCard/>}
+                        {reversedKeys.map(key => <KeyCard key={key.key}
+                                                          channelKey={key}/>)}
+                    </div>
+                </div>
+            }
         </div>
     )
 }

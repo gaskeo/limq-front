@@ -46,7 +46,7 @@ export function Header() {
 
                     {
                         renderUserButton ? <UserButton/> :
-                            <button className='button mini-button' onClick={onClick(routes.login)}>
+                            <button className='header-element' onClick={onClick(routes.login)}>
                                 {LoginButton}
                             </button>
                     }

@@ -13,7 +13,6 @@ import {ChannelSettings} from "./channelSettings/channelSettings";
 import {UserSettings} from "./userSettings/userSettings";
 import {MainSettings} from "./settings/settings";
 import {useApp} from "./hooks/elementHooks/useApp";
-import {dataStates} from "./store/reducers/consts";
 import {Loading} from "./elements/loading/loading";
 
 
@@ -37,6 +36,8 @@ function App() {
             <div className="App">
                 <Header/>
             </div>
+            <div className='gap'/>
+
             <div className='app-body'>
                 <Routes>
                     <Route path={routes.index} element={<Body/>}/>
@@ -48,6 +49,8 @@ function App() {
                     <Route path={routes.settings} element={<MainSettings/>}/>
                 </Routes>
             </div>
+            <div className='gap'/>
+
         </>
     );
 }

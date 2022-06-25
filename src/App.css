@@ -182,6 +182,11 @@ code {
     height: 100vh;
 }
 
+.block-vertical-center {
+    display: flex;
+    align-items: center;
+}
+
 .app-form {
     display: flex;
     padding: 2rem;
@@ -189,7 +194,6 @@ code {
     justify-content: space-between;
     flex-direction: column;
     border-radius: 5px;
-    max-width: calc(500px + 4rem);
 }
 
 .form-bg {
@@ -237,6 +241,8 @@ code {
 .mini-button {
     width: max-content;
     padding: 8px 25px;
+    min-height: min-content;
+    height: max-content;
 }
 
 .success-button {
@@ -302,5 +308,7 @@ code {
 @media screen and (min-width: 801px) {
     .app-form {
         width: 64vw;
+        max-width: calc(500px + 4rem);
+
     }
 }

@@ -4,6 +4,10 @@
     align-items: center;
 }
 
+.center-text {
+    text-align: center;
+}
+
 .left {
     display: flex;
     justify-content: left;
@@ -14,7 +18,8 @@
 }
 
 .text {
-    color: var(--text-color)
+    color: var(--text-color);
+    font-family: var(--main-font-family);
 }
 
 .grey-text {

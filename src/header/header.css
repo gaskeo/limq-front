@@ -57,6 +57,10 @@
     min-height: 50px;
     height: 100%;
     max-height: 70px;
+    border: none;
+    outline: none;
+    font-family: var(--main-font-family);
+    font-size: 1em;
 }
 
 
