@@ -2,7 +2,6 @@ import {useTypedSelector} from "../hooks/useTypedSelector";
 import {dataStates} from "../store/reducers/consts";
 import {RegisterBody} from "./registerBody";
 import {BaseBody} from "./baseBody";
-import {Loading} from "../elements/loading/loading";
 import './body.css';
 import './channelCard/card.css'
 

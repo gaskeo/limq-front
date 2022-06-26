@@ -33,9 +33,7 @@ function App() {
 
     return (
         <>
-            <div className="App">
-                <Header/>
-            </div>
+            <Header/>
             <div className='gap'/>
 
             <div className='app-body'>

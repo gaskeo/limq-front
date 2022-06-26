@@ -108,5 +108,9 @@ export const langDict: LangStruct = {
     PasswordError: 'Bad password',
     EmailExistError: 'User with this Email exist',
     BadUserError: 'Bad user',
-    UnknownError: 'Unknown error'
+    UnknownError: 'Unknown error',
+
+    GreetingHeader: 'Introducing LiMQ functions',
+    GreetingText: 'LiMQ is a powerful SaaS cloud message broker',
+    LearnMoreButton: 'Learn more',
 }

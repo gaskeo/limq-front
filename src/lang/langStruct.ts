@@ -107,6 +107,10 @@ export interface LangStruct {
     EmailExistError: string
     BadUserError: string
     UnknownError: string
+
+    GreetingHeader: string
+    GreetingText: string
+    LearnMoreButton: string
 }
 
 export const defaultLangValue: LangStruct = {
@@ -218,5 +222,9 @@ export const defaultLangValue: LangStruct = {
     PasswordError: 'PasswordError',
     EmailExistError: 'EmailExistError',
     BadUserError: 'BadUserError',
-    UnknownError: 'UnknownError'
+    UnknownError: 'UnknownError',
+
+    GreetingHeader: 'GreetingHeader',
+    GreetingText: 'GreetingText',
+    LearnMoreButton: 'LearnMoreButton',
 }

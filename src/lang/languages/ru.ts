@@ -108,5 +108,9 @@ export const langDict: LangStruct = {
     PasswordError: 'Невалидный пароль',
     EmailExistError: 'Пользователь с таким Email уже существует',
     BadUserError: 'Пользователь не найден',
-    UnknownError: 'Неизвестная ошибка'
+    UnknownError: 'Неизвестная ошибка',
+
+    GreetingHeader: 'Ознакомьтесь с функциями LiMQ',
+    GreetingText: 'LiMQ — это мощный облачный SaaS брокер сообщений',
+    LearnMoreButton: 'Узнать больше',
 }
