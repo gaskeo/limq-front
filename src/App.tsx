@@ -28,7 +28,7 @@ function App() {
     useEffect(checkRedirect, [pathId])
 
     if (!loaded) {
-        return <div className='center vertical-center'><Loading/></div>
+        return <div className='vertical-center horizontal-center'><Loading/></div>
     }
 
     return (

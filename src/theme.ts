@@ -15,22 +15,26 @@ export function initTheme() {
 
 export function getTheme(): availableThemesType {
     const currentTheme = localStorage.getItem(Theme)
-    if (currentTheme === availableThemes.light || currentTheme === availableThemes.dark || currentTheme === availableThemes.system) {
+    if (currentTheme === availableThemes.light || currentTheme === availableThemes.dark) {
         return currentTheme
     }
 
     setTheme(availableThemes.system)
-    return availableThemes.light
+    return availableThemes.system
+}
+
+export function getSystemTheme(): availableThemesType {
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        return  availableThemes.dark
+    } else {
+        return  availableThemes.light
+    }
 }
 
 export function setTheme(theme: string) {
     let dataTheme;
     if (!(theme === availableThemes.light || theme === availableThemes.dark)) {
-        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            dataTheme = availableThemes.dark
-        } else {
-            dataTheme = availableThemes.light
-        }
+        dataTheme = getSystemTheme()
     } else {
         dataTheme = theme
     }

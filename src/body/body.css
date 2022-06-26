@@ -10,11 +10,6 @@
     max-width: 800px;
 }
 
-[data-theme="dark"] .body-image {
-    background-color: var(--code-color);
-    border-radius: 5px;
-}
-
 .greeting-window {
     padding: 2rem 2rem;
     background-color: var(--form-background-color);
@@ -55,11 +50,12 @@
 
 @media screen and (min-width: 801px) {
     .base-body {
-        display: grid;
         grid-template-areas: "A B";
+        grid-template-columns: 1fr 1fr;
     }
 
     .register-main-window {
         max-width: 1000px;
+        width: 50vw;
     }
 }

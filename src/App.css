@@ -182,6 +182,13 @@ code {
     height: 100vh;
 }
 
+.horizontal-center {
+    position: absolute;
+    display: flex;
+    width: 100vw;
+    justify-content: center;
+}
+
 .block-vertical-center {
     display: flex;
     align-items: center;
