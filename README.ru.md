@@ -9,14 +9,14 @@
 React версия [панели LiMQ](https://github.com/tikovka72/limq-panel).
 
 ## Функции
-* Выбор языка и темы
+### Выбор языка и темы
 
 ![settings](assets/settings.jpg)
 
-* Настройки пользователя
+### Настройки пользователя
 
 ![user settings](assets/user_settings.jpg)
 
-* Настройки канала
+### Настройки канала
 
 ![channel settings](assets/channel_settings.jpg)
