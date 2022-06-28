@@ -1,4 +1,6 @@
-# LiMQ react panel
+# LiMQ panel frontend repo
+
+This is a React repository containing all the frontend assets for the LiMQ panel.
 
 Another assets for LiMQ are: [LiMQ core api](https://github.com/emmitrin/limq), [LiMQ panel](https://github.com/tikovka72/limq-panel)
 
@@ -6,17 +8,15 @@ Another assets for LiMQ are: [LiMQ core api](https://github.com/emmitrin/limq), 
 
 ![main page](assets/main_page.jpg)
 
-React версия [панели LiMQ](https://github.com/tikovka72/limq-panel).
+## Features 
 
-## Функции 
-### Выбор языка и темы
-
+#### User interface preferences: language, theme modes (Dark / Light)
 ![settings](assets/settings.jpg)
 
-### Настройки пользователя
 
+#### User account preferences: e-mail, password, personal info
 ![user settings](assets/user_settings.jpg)
 
-### Настройки канала
+#### Channel preferences, API keys management
 
 ![channel settings](assets/channel_settings.jpg)
