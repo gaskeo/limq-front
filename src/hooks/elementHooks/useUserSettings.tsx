@@ -39,7 +39,7 @@ function hideEmail(email: string) {
     const [name, fullDomain] = email.split('@')
     const [domain, zone] = fullDomain.split('.')
     const hiddenName = name.length > 2 ?
-        name[0] + '*'.repeat(Math.max(0, name.length - 2)) + name[Math.min(0, name.length - 1)]
+        name[0] + '*'.repeat(Math.max(0, name.length - 2)) + name[Math.max(0, name.length - 1)]
         : name
     const hiddenDomain = domain.length > 2 ?
         domain[0] + '*'.repeat(domain.length - 2) + domain[domain.length - 1]
