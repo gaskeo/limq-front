@@ -14,7 +14,7 @@ export function BaseBody() {
                 <div>
                     <img className='body-image' src={conveyorImage} alt=''/>
                     <div className='gap'/>
-                    <h1 className='header-1 center-text'>{GreetingHeader}</h1>
+                    <h1 className='center-text'>{GreetingHeader}</h1>
                     <p className='text'>{GreetingText}</p>
                     <div className='center'>
                         <button className='button mini-button'>{LearnMoreButton}</button>

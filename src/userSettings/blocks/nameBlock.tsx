@@ -31,7 +31,7 @@ export function NameBlock() {
     return (
         <div>
             <form onSubmit={submit}>
-                <h2 className='header-2'>{RenameUserHeader}</h2>
+                <h2>{RenameUserHeader}</h2>
                 <Input label={UsernameForm}
                        state={newUsername}
                        setState={changeNewUsername}

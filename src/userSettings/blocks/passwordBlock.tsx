@@ -37,7 +37,7 @@ export function PasswordBlock() {
     return (
         <div>
             <form onSubmit={submit}>
-                <h2 className='header-2'>{ChangePasswordHeader}</h2>
+                <h2>{ChangePasswordHeader}</h2>
 
                 <Input label={OldPasswordForm}
                        state={oldPassword}

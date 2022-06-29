@@ -32,7 +32,7 @@ export function MixinsSettingsBlock() {
     return (
         <div>
             <form onSubmit={submit}>
-                <h2 className='header-2'>{CreateMixinHeader}</h2>
+                <h2>{CreateMixinHeader}</h2>
 
                 <Input state={keyId}
                        setState={changeKeyId}
@@ -46,7 +46,7 @@ export function MixinsSettingsBlock() {
                 <Submit label={requested ? <Loading/> : CreateMixinButton}/>
             </form>
             <span className='gap'/>
-            <h1 className='header-1'>{YourMixinsHeader}</h1>
+            <h1>{YourMixinsHeader}</h1>
 
             <div className='max-width-500'>
                 <Menu active={activeTab} onClick={changeTab} tabs={tabs}

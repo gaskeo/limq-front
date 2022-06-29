@@ -13,7 +13,7 @@ export function ChannelSettings() {
 
     return (
         <div className='settings-container'>
-            <h1 className='header-1'>{ChannelSettingsHeader}</h1>
+            <h1>{ChannelSettingsHeader}</h1>
             <div className='settings'>
                 <>
                     <Menu active={activeTab} onClick={changeTab} tabs={tabs}/>

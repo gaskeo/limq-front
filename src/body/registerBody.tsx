@@ -8,7 +8,7 @@ export function RegisterBody() {
     const {lang, reversedChannels, channels, channelsDataState} = useChannels()
     return (
         <div>
-            <h1 className='header-1'>{lang.RegisterChannelsHeader}</h1>
+            <h1>{lang.RegisterChannelsHeader}</h1>
             <div className='card-container'>
                 {channelsDataState === dataStates.requested && <LoadingChannelCard/>}
                 {channels && reversedChannels.map(channel => <ChannelCard key={channel['channel_id']} channel={channel}/>)}

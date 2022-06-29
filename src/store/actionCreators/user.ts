@@ -11,17 +11,16 @@ import {routes} from "../../routes/routes";
 
 export const fetchUser = () => {
     return async (dispatch: Dispatch<userAction>) => {
-        try {
-            dispatch({type: UserActionTypes.setUserDataState, payload: dataStates.requested})
-            const response = await axios.get<{ auth: boolean, user: User, path: string }>(ApiRoutes.GetUser)
+        dispatch({type: UserActionTypes.setUserDataState, payload: dataStates.requested})
+        axios.get<{ auth: boolean, user: User, path: string }>(ApiRoutes.GetUser).then(response => {
             if (response.data['auth']) {
                 dispatch({type: UserActionTypes.setUser, payload: response.data['user']})
             }
 
             dispatch({type: UserActionTypes.setUserDataState, payload: dataStates.received})
-        } catch (error) {
+        }).catch(() => {
             dispatch({type: UserActionTypes.setUserDataState, payload: dataStates.error})
-        }
+        })
     }
 }
 
@@ -36,20 +35,18 @@ function createLoginForm(email: string, password: string, rememberMe: boolean): 
 
 export const fetchLogin = (email: string, password: string, rememberMe: boolean) => {
     return async (dispatch: Dispatch<rootActions>) => {
-        try {
-            const form = createLoginForm(email, password, rememberMe)
-            dispatch({
-                type: FetchActionTypes.setFetch,
-                payload: {
-                    identifier: ApiRoutes.Login,
-                    state: {status: 200, code: '', dataState: dataStates.requested}
-                }
-            })
+        const form = createLoginForm(email, password, rememberMe)
+        dispatch({
+            type: FetchActionTypes.setFetch,
+            payload: {
+                identifier: ApiRoutes.Login,
+                state: {status: 200, code: '', dataState: dataStates.requested}
+            }
+        })
 
-            const response = await axios.post<{ auth: boolean, user: User, path: string }>(ApiRoutes.Login, form, {
-                headers: {"Content-Type": "multipart/form-data"},
-            })
-
+        axios.post<{ auth: boolean, user: User, path: string }>(ApiRoutes.Login, form, {
+            headers: {"Content-Type": "multipart/form-data"},
+        }).then(response => {
             if (response.data['auth']) {
                 dispatch({type: UserActionTypes.setUser, payload: response.data['user']})
             }
@@ -65,7 +62,7 @@ export const fetchLogin = (email: string, password: string, rememberMe: boolean)
                     state: {status: 200, code: '', dataState: dataStates.received}
                 }
             })
-        } catch (error: AxiosError | any) {
+        }).catch((error: AxiosError | any) => {
             dispatch({type: UserActionTypes.setUserDataState, payload: dataStates.notRequested})
             dispatch({
                 type: FetchActionTypes.setFetch,
@@ -76,7 +73,7 @@ export const fetchLogin = (email: string, password: string, rememberMe: boolean)
                     }
                 }
             })
-        }
+        })
     }
 }
 
@@ -91,35 +88,34 @@ function createRegisterForm(email: string, username: string, password: string): 
 
 export const fetchRegister = (email: string, username: string, password: string) => {
     return async (dispatch: Dispatch<rootActions>) => {
-        try {
-            const form = createRegisterForm(email, username, password)
-            dispatch({
-                type: FetchActionTypes.setFetch,
-                payload: {
-                    identifier: ApiRoutes.Register,
-                    state: {status: 0, code: '', dataState: dataStates.requested}
-                }
-            })
+        const form = createRegisterForm(email, username, password)
+        dispatch({
+            type: FetchActionTypes.setFetch,
+            payload: {
+                identifier: ApiRoutes.Register,
+                state: {status: 0, code: '', dataState: dataStates.requested}
+            }
+        })
 
-            const response = await axios.post<{ status: boolean, path: string }>(ApiRoutes.Register, form, {
-                headers: {"Content-Type": "multipart/form-data"},
-            })
-
+        await axios.post<{ status: boolean, path: string }>(ApiRoutes.Register, form, {
+            headers: {"Content-Type": "multipart/form-data"},
+        }).then(response => {
             if (response.data['status']) {
                 dispatch({type: PathActionTypes.deletePath})
                 dispatch({type: PathActionTypes.setPath, payload: response.data['path']})
             }
-        } catch (error: AxiosError | any) {
+        }).catch((error: AxiosError) => {
+            const data = error.response?.data as ({ code: number } | undefined)
             dispatch({
                 type: FetchActionTypes.setFetch,
                 payload: {
                     identifier: ApiRoutes.Register, state: {
-                        status: error.status, code: String(error.response.data.code),
+                        status: Number(error.status) || 0, code: String(data?.code || 0),
                         dataState: dataStates.error
                     }
                 }
             })
-        }
+        })
     }
 }
 
@@ -132,20 +128,18 @@ function createRenameUserForm(newUsername: string): FormData {
 
 export const fetchRenameUser = (newUsername: string) => {
     return async (dispatch: Dispatch<rootActions>) => {
-        try {
-            const form = createRenameUserForm(newUsername)
+        const form = createRenameUserForm(newUsername)
 
-            dispatch({
-                type: FetchActionTypes.setFetch,
-                payload: {
-                    identifier: ApiRoutes.RenameUser,
-                    state: {status: 200, code: '', dataState: dataStates.requested}
-                }
-            })
-            const response = await axios.put<{ auth: boolean, user: User, path: string }>(ApiRoutes.RenameUser, form, {
-                headers: {"Content-Type": "multipart/form-data"},
-            })
-
+        dispatch({
+            type: FetchActionTypes.setFetch,
+            payload: {
+                identifier: ApiRoutes.RenameUser,
+                state: {status: 200, code: '', dataState: dataStates.requested}
+            }
+        })
+        axios.put<{ auth: boolean, user: User, path: string }>(ApiRoutes.RenameUser, form, {
+            headers: {"Content-Type": "multipart/form-data"},
+        }).then(response => {
             if (response.data['auth']) {
                 dispatch({type: UserActionTypes.setUser, payload: response.data['user']})
                 dispatch({
@@ -156,17 +150,19 @@ export const fetchRenameUser = (newUsername: string) => {
                     }
                 })
             }
-        } catch (error: AxiosError | any) {
+        }).catch((error: AxiosError) => {
+            const data = error.response?.data as ({ code: number } | undefined)
+
             dispatch({
                 type: FetchActionTypes.setFetch,
                 payload: {
                     identifier: ApiRoutes.RenameUser, state: {
-                        status: error.status, code:
-                        String(error.response.data.code), dataState: dataStates.received
+                        status: Number(error.status) || 0, code:
+                            String(data?.code || 0), dataState: dataStates.received
                     }
                 }
             })
-        }
+        })
     }
 }
 
@@ -180,21 +176,19 @@ function createChangeEmailForm(newEmail: string, password: string): FormData {
 
 export const changeEmail = (newEmail: string, password: string) => {
     return async (dispatch: Dispatch<rootActions>) => {
-        try {
-            const form = createChangeEmailForm(newEmail, password)
+        const form = createChangeEmailForm(newEmail, password)
 
-            dispatch({
-                type: FetchActionTypes.setFetch,
-                payload: {
-                    identifier: ApiRoutes.ChangeEmail,
-                    state: {status: 200, code: '', dataState: dataStates.requested}
-                }
-            })
+        dispatch({
+            type: FetchActionTypes.setFetch,
+            payload: {
+                identifier: ApiRoutes.ChangeEmail,
+                state: {status: 200, code: '', dataState: dataStates.requested}
+            }
+        })
 
-            const response = await axios.put<{ auth: boolean, user: User, path: string }>(ApiRoutes.ChangeEmail, form, {
-                headers: {"Content-Type": "multipart/form-data"},
-            })
-
+        axios.put<{ auth: boolean, user: User, path: string }>(ApiRoutes.ChangeEmail, form, {
+            headers: {"Content-Type": "multipart/form-data"},
+        }).then(response => {
             if (response.data['auth']) {
                 dispatch({type: UserActionTypes.setUser, payload: response.data['user']})
                 dispatch({
@@ -205,17 +199,18 @@ export const changeEmail = (newEmail: string, password: string) => {
                     }
                 })
             }
-        } catch (error: AxiosError | any) {
+        }).catch((error: AxiosError) => {
+            const data = error.response?.data as ({ code: number } | undefined)
             dispatch({
                 type: FetchActionTypes.setFetch,
                 payload: {
                     identifier: ApiRoutes.ChangeEmail, state: {
-                        status: error.status, code:
-                        String(error.response.data.code), dataState: dataStates.received
+                        status: Number(error.status) || 0, code:
+                            String(data?.code || 0), dataState: dataStates.received
                     }
                 }
             })
-        }
+        })
     }
 }
 

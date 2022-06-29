@@ -9,17 +9,17 @@ import {PathActionTypes} from "../reducers/pathReducer";
 
 export const fetchChannels = () => {
     return async (dispatch: Dispatch<channelAction>) => {
-        try {
-            dispatch({type: ChannelsActionTypes.setChannelsDataState, payload: dataStates.requested})
-            const response = await axios.get<Channel[]>(ApiRoutes.GetChannels)
+        dispatch({type: ChannelsActionTypes.setChannelsDataState, payload: dataStates.requested})
+        axios.get<Channel[]>(ApiRoutes.GetChannels).then(response => {
             if (response.data) {
                 dispatch({type: ChannelsActionTypes.setChannels, payload: response.data})
             }
 
             dispatch({type: ChannelsActionTypes.setChannelsDataState, payload: dataStates.received})
-        } catch (error) {
+        }).catch(() => {
             dispatch({type: ChannelsActionTypes.setChannelsDataState, payload: dataStates.error})
-        }
+
+        })
     }
 }
 
@@ -32,24 +32,21 @@ function createCreateChannelForm(name: string): FormData {
 
 export const fetchCreateChannel = (channelName: string) => {
     return async (dispatch: Dispatch<rootActions>) => {
-        try {
-            const form = createCreateChannelForm(channelName)
-            dispatch({
-                type: FetchActionTypes.setFetch,
-                payload: {
-                    identifier: ApiRoutes.CreateChannel,
-                    state: {status: 200, code: '', dataState: dataStates.requested}
-                }
-            })
+        const form = createCreateChannelForm(channelName)
+        dispatch({
+            type: FetchActionTypes.setFetch,
+            payload: {
+                identifier: ApiRoutes.CreateChannel,
+                state: {status: 200, code: '', dataState: dataStates.requested}
+            }
+        })
 
-            const response = await axios.post<Channel>(ApiRoutes.CreateChannel, form, {
-                headers: {"Content-Type": "multipart/form-data"},
-            })
-
+        axios.post<Channel>(ApiRoutes.CreateChannel, form, {
+            headers: {"Content-Type": "multipart/form-data"},
+        }).then(response => {
             if (response.data) {
                 dispatch({type: ChannelsActionTypes.addChannel, payload: response.data})
             }
-
             dispatch({type: PathActionTypes.deletePath})
             dispatch({type: PathActionTypes.setPath, payload: '/'})
             dispatch({
@@ -59,17 +56,18 @@ export const fetchCreateChannel = (channelName: string) => {
                     state: {status: 200, code: '', dataState: dataStates.received}
                 }
             })
-        } catch (error: AxiosError | any) {
+        }).catch((error: AxiosError) => {
+            const data = error.response?.data as ({ code: number } | undefined)
             dispatch({
                 type: FetchActionTypes.setFetch,
                 payload: {
                     identifier: ApiRoutes.CreateChannel, state: {
-                        status: error.status, code: String(error.response.data.code),
+                        status: Number(error.status) || 0, code: String(data?.code || 0),
                         dataState: dataStates.error
                     }
                 }
             })
-        }
+        })
     }
 }
 
@@ -83,21 +81,19 @@ function createRenameChannelForm(id: string, name: string): FormData {
 
 export const fetchRenameChannel = (channelId: string, newChannelName: string) => {
     return async (dispatch: Dispatch<rootActions>) => {
-        try {
-            const form = createRenameChannelForm(channelId, newChannelName)
+        const form = createRenameChannelForm(channelId, newChannelName)
 
-            dispatch({
-                type: FetchActionTypes.setFetch,
-                payload: {
-                    identifier: ApiRoutes.RenameChannel,
-                    state: {status: 200, code: '', dataState: dataStates.requested}
-                }
-            })
+        dispatch({
+            type: FetchActionTypes.setFetch,
+            payload: {
+                identifier: ApiRoutes.RenameChannel,
+                state: {status: 200, code: '', dataState: dataStates.requested}
+            }
+        })
 
-            const response = await axios.put<Channel>(ApiRoutes.RenameChannel, form, {
-                headers: {"Content-Type": "multipart/form-data"},
-            })
-
+        axios.put<Channel>(ApiRoutes.RenameChannel, form, {
+            headers: {"Content-Type": "multipart/form-data"},
+        }).then(response => {
             if (response.data) {
                 dispatch({type: ChannelsActionTypes.deleteChannel, payload: channelId})
                 dispatch({type: ChannelsActionTypes.addChannel, payload: response.data})
@@ -109,17 +105,17 @@ export const fetchRenameChannel = (channelId: string, newChannelName: string) =>
                     }
                 })
             }
-
-        } catch (error: AxiosError | any) {
+        }).catch((error: AxiosError) => {
+            const data = error.response?.data as ({ code: number } | undefined)
             dispatch({
                 type: FetchActionTypes.setFetch,
                 payload: {
                     identifier: ApiRoutes.RenameChannel, state: {
-                        status: error.status, code: String(error.response.data.code),
+                        status: Number(error.status) || 0, code: String(data?.code || 0),
                         dataState: dataStates.error
                     }
                 }
             })
-        }
+        })
     }
 }

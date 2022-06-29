@@ -23,7 +23,7 @@ export function MainSettingsBlock() {
     return (
         <div>
             <form onSubmit={submit}>
-                <h2 className='header-2'>{RenameChannelHeader}</h2>
+                <h2>{RenameChannelHeader}</h2>
 
                 <Input state={channelName}
                        setState={changeChannelName}

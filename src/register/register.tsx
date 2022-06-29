@@ -42,7 +42,7 @@ export function Register() {
     return (
         <div className='center'>
             <form className='app-form form-bg' onSubmit={submit}>
-                <h1 className='header-1'>{RegisterHeader}</h1>
+                <h1>{RegisterHeader}</h1>
                 <Input state={email}
                        setState={changeEmail}
                        label={EmailForm}

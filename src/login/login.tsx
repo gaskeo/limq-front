@@ -27,7 +27,7 @@ export function Login() {
     return (
         <div className='center'>
             <form className='app-form form-bg' onSubmit={submit}>
-                <h1 className='header-1'>{LoginHeader}</h1>
+                <h1>{LoginHeader}</h1>
 
                 <Input state={email}
                        setState={changeEmail}

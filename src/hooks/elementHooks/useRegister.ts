@@ -85,7 +85,7 @@ export function useRegister() {
     const registerState = states[ApiRoutes.Register]
 
     const requested = registerState && registerState.dataState === dataStates.requested
-    const hasError = registerState && registerState.status !== 200
+    const hasError = registerState && registerState.dataState === dataStates.error && registerState.status !== 200
     const errorMessage = hasError ? getErrorDescription(lang, registerState.code) : ''
 
     return {

@@ -36,23 +36,6 @@
     --header-element-color-selected: #000000;
     --header-element-bg-color-selected: #0465cb;
 
-    --success-color: #28a745;
-    --button-success-color: #28a745;
-    --button-success-color-hover: #2eb94e;
-    --button-success-text-color: #F6FFF8;
-    --button-success-text-color-hover: #F6FFF8;
-
-    --warning-color: #ffc107;
-    --button-warning-color: #ffc107;
-    --button-warning-color-hover: #cca324;
-    --button-warning-text-color: #000C14;
-    --button-warning-text-color-hover: #000C14;
-
-    --button-error-color: #ff5f3a;
-    --button-error-color-hover: #dc3545;
-    --button-error-text-color: #F6FFF8;
-    --button-error-text-color-hover: #F6FFF8;
-
     --card-color: #FFFFFF;
     --card-border-color: #e5e5e5;
     --card-hover-color: #e5e5e5;
@@ -98,6 +81,15 @@
     --header-element-color-selected: #F6FFF8;
     --header-element-bg-color-selected: #003D66;
 
+    --card-color: #001a2c;
+    --card-border-color: null;
+    --card-hover-color: #032531;
+
+    --icon-color: #F6FFF8;
+    --icon-hover-color: #bfc0c0;
+}
+
+body {
     --success-color: #28a745;
     --button-success-color: #28a745;
     --button-success-color-hover: #2eb94e;
@@ -115,15 +107,6 @@
     --button-error-text-color: #F6FFF8;
     --button-error-text-color-hover: #F6FFF8;
 
-    --card-color: #001a2c;
-    --card-border-color: null;
-    --card-hover-color: #032531;
-
-    --icon-color: #F6FFF8;
-    --icon-hover-color: #bfc0c0;
-}
-
-body {
     transition: all .2s;
     --header-font-family: 'Manrope', sans-serif;
     --main-font-family: 'Nunito', sans-serif;
@@ -143,7 +126,7 @@ code {
     margin-right: 8vw;
 }
 
-.header-1 {
+h1 {
     line-height: 1em;
     margin-top: 0;
     font-size: xx-large;
@@ -151,7 +134,7 @@ code {
     color: var(--text-color);
 }
 
-.header-2 {
+h2 {
     margin-top: 0;
     line-height: 1.2em;
     font-size: x-large;
@@ -159,7 +142,7 @@ code {
     color: var(--text-color)
 }
 
-.header-3 {
+h3 {
     margin-top: 0;
 
     line-height: 1.2em;

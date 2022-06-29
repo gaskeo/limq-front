@@ -7,6 +7,7 @@ import {FetchActionTypes} from "../../store/reducers/fetchReducer";
 import {Redirect} from "../../routes/redirect";
 import {availableLanguages, getLang, getLangDict} from "../../lang/getLang";
 import {LangActionTypes} from "../../store/reducers/langReducer";
+import {PathActionTypes} from "../../store/reducers/pathReducer";
 
 export function useApp() {
     function fetchUserFunc() {
@@ -25,6 +26,8 @@ export function useApp() {
         if (path && path !== location.pathname) {
             dispatch({type: FetchActionTypes.deleteFetches})
             Redirect(path, navigate, location)
+            dispatch({type: PathActionTypes.deletePath})
+
         }
     }
 
@@ -48,7 +51,6 @@ export function useApp() {
     const dispatch = useDispatch()
     const navigate = useNavigate();
     const location = useLocation();
-    const loaded = userDataState === dataStates.received || userDataState === dataStates.error
 
-    return {pathId, fetchUserFunc, fetchChannelsFunc, checkRedirect, setLang, loaded}
+    return {pathId, fetchUserFunc, fetchChannelsFunc, checkRedirect, setLang}
 }

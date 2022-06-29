@@ -44,7 +44,7 @@ export function KeysSettingsBlock() {
     return (
         <div>
             <form onSubmit={submit}>
-                <h2 className='header-2'>{CreateKeyHeader}</h2>
+                <h2>{CreateKeyHeader}</h2>
                 <Input label={KeyNameForm}
                        state={keyName}
                        setState={changeKeyName}
@@ -76,7 +76,7 @@ export function KeysSettingsBlock() {
                 reversedKeys.length > 0 &&
                 <div>
                     <span className='gap'/>
-                    <h1 className='header-1'>{YourKeysHeader}</h1>
+                    <h1>{YourKeysHeader}</h1>
 
                     <div className='card-100-container'>
                         {keysDataState === dataStates.requested && <LoadingKeyCard/>}

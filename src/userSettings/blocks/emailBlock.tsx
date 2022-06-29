@@ -32,7 +32,7 @@ export function EmailBlock() {
     return (
         <div>
             <form onSubmit={submit}>
-                <h2 className='header-2'>{ChangeEmailHeader}</h2>
+                <h2>{ChangeEmailHeader}</h2>
                 <Input label={EmailForm}
                        state={newEmail}
                        setState={changeNewEmail}

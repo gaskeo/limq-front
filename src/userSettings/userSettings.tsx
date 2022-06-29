@@ -12,7 +12,7 @@ export function UserSettings() {
 
     return (
         <div className='settings-container'>
-            <h1 className='header-1'>{UserSettingsHeader}</h1>
+            <h1>{UserSettingsHeader}</h1>
 
             <div className='settings'>
                 <Menu active={currentTab} onClick={changeTab} tabs={tabs}/>

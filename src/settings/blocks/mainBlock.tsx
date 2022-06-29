@@ -21,7 +21,7 @@ export function MainBlock() {
 
     return (
         <div>
-            <h1 className='header-1'>{MainSettings}</h1>
+            <h1>{MainSettings}</h1>
             <Select id='lang' items={[{text: English, value: availableLanguages.en},
                 {text: Russian, value: availableLanguages.ru}]} onChange={onLangChange} label={ChangeLanguage}
                     selected={getLang()}/>
