@@ -1,11 +1,11 @@
 import {Input} from "../../elements/inputs/input";
-import React from "react";
+import React, {memo} from "react";
 import {Submit} from "../../elements/inputs/submit";
 import {Loading} from "../../elements/loading/loading";
 import {useMainSettingsBlock} from "../../hooks/elementHooks/useChannelSettings";
 
 
-export function MainSettingsBlock() {
+export const MainSettingsBlock = memo(() => {
     const {
         lang,
         channelName,
@@ -38,4 +38,4 @@ export function MainSettingsBlock() {
             </form>
         </div>
     )
-}
+})

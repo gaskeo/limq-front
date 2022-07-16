@@ -1,9 +1,9 @@
 import {Menu} from "../elements/menu/menu";
 import {SettingsBlock} from "../elements/menu/settingsBlock";
-import {useEffect} from "react";
+import {memo, useEffect} from "react";
 import {useChannelSettings} from "../hooks/elementHooks/useChannelSettings";
 
-export function ChannelSettings() {
+export const ChannelSettings = memo(() => {
     const {lang, activeTab, changeTab, tabs, fetchAll, checkTabInParams} = useChannelSettings()
 
     const {ChannelSettingsHeader} = lang
@@ -22,4 +22,4 @@ export function ChannelSettings() {
             </div>
         </div>
     )
-}
+})

@@ -1,11 +1,11 @@
-import React from "react";
+import React, {memo} from "react";
 import {Input} from "../elements/inputs/input";
 import {Submit} from "../elements/inputs/submit";
 import {Checkbox} from "../elements/inputs/checkbox";
 import {Loading} from "../elements/loading/loading";
 import {useLogin} from "../hooks/elementHooks/useLogin";
 
-export function Login() {
+export const Login = memo(function Login() {
     const {
         submit,
         lang,
@@ -56,4 +56,4 @@ export function Login() {
             </form>
         </div>
     )
-}
+})

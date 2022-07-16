@@ -57,6 +57,7 @@
     color: var(--text-color);
     margin-top: 0;
     font-size: 1.3em;
+    line-height: 1.3em;
     margin-bottom: 8px;
     max-width: calc(100% - 20px);
     overflow-x: hidden;

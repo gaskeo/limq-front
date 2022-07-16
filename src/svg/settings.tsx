@@ -1,6 +1,8 @@
 // Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com
 // License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc.
-export const Settings = () => (
+import {memo} from "react";
+
+export const Settings = memo(() => (
     <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 512 512">
@@ -22,4 +24,4 @@ export const Settings = () => (
         143.2 491.5 154.7 495.9 166.6V166.6zM256 336C300.2 336 336 300.2 336 255.1C336 211.8 300.2 175.1
          256 175.1C211.8 175.1 176 211.8 176 255.1C176 300.2 211.8 336 256 336z"/>
     </svg>
-)
+))
