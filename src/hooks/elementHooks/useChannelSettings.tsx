@@ -83,7 +83,7 @@ export function useKeysSettingsBlock() {
             return
         }
 
-        fetchCreateKey(keyName, keyType, channel['channel_id'], allowInfo)
+        fetchCreateKey(keyName, keyType, channel['channel_id'], allowInfo, disallowMixins)
     }
 
     const {lang, channel, fetchCreateKey} = useChannelSettingsBase()
@@ -97,6 +97,7 @@ export function useKeysSettingsBlock() {
     const [keyName, changeKeyName] = useState('')
     const [keyType, changeKeyType] = useState('0')
     const [allowInfo, changeAllowInfo] = useState(false)
+    const [disallowMixins, changeDisallowMixins] = useState(false)
 
     const [errors, changeErrors] = useState({name: ''})
     const {states} = useTypedSelector(state => state.fetch)
@@ -117,6 +118,8 @@ export function useKeysSettingsBlock() {
         changeKeyType,
         allowInfo,
         changeAllowInfo,
+        disallowMixins,
+        changeDisallowMixins,
         submit,
         errors,
         errorMessage,

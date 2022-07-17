@@ -39,19 +39,21 @@ export const fetchGetKeys = (channelId: string) => {
 }
 
 
-function createCreateKeyForm(name: string, permission: string, channelId: string, allowInfo: boolean): FormData {
+function createCreateKeyForm(name: string, permission: string,
+                             channelId: string, allowInfo: boolean, disallowMixins: boolean): FormData {
     const form = new FormData();
     form.append('name', name)
     form.append('id', channelId)
     form.append('permissions', permission)
     form.append('info_allowed', String(Number(allowInfo)))
-
+    form.append('disallow_mixins', String(Number(disallowMixins)))
     return form
 }
 
-export const fetchCreateKey = (keyName: string, permission: string, channelId: string, allowInfo: boolean) => {
+export const fetchCreateKey = (keyName: string, permission: string, channelId: string, allowInfo: boolean,
+                               disallowMixins: boolean) => {
     return async (dispatch: Dispatch<rootActions>) => {
-        const form = createCreateKeyForm(keyName, permission, channelId, allowInfo)
+        const form = createCreateKeyForm(keyName, permission, channelId, allowInfo, disallowMixins)
 
         dispatch({
             type: FetchActionTypes.setFetch,

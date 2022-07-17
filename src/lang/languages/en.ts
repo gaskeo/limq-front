@@ -25,6 +25,7 @@ export const langDict: LangStruct = {
     KeyTypeReadForm: "Read",
     KeyTypeWriteForm: "Write",
     KeyAllowInfoForm: "Allow info",
+    KeyDisallowMixinsForm: 'Disallow mixins',
     CreateKeyButton: "Create",
     PauseKeyButton: "Pause",
     ResumeKeyButton: "Resume",
