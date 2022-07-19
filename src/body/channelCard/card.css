@@ -14,9 +14,22 @@
     border: 2px solid var(--card-border-color);
     border-radius: 5px;
     padding: 15px 20px 20px;
-    overflow-x: hidden;
-    min-height: 140px;
+    overflow: hidden;
     max-width: 500px;
+
+}
+
+.show {
+    overflow: hidden;
+    max-height: 500px;
+    transition: all .3s ease-out;
+}
+
+.hide-card {
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    opacity: 0;
 }
 
 .add-channel-card {
@@ -168,10 +181,11 @@
 
 .card-100-container {
     display: grid;
+    flex-direction: column;
     justify-content: space-between;
     grid-template-columns: 1fr;
     width: 100%;
-    grid-gap: 1rem
+    transition: all .2s ease-out;
 }
 
 .card-100 {

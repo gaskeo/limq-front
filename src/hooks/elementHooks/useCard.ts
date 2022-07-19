@@ -6,6 +6,7 @@ import {ApiRoutes} from "../../store/actionCreators/apiRoutes";
 import {dataStates} from "../../store/reducers/consts";
 import {useParams} from "react-router-dom";
 import {MixinTypeStates} from "../../store/reducers/mixinsReducer";
+import {RefObject} from "react";
 
 export function useChannelCard(channel: Channel) {
     const {lang} = useTypedSelector(state => state.lang)
@@ -13,14 +14,18 @@ export function useChannelCard(channel: Channel) {
     return {lang, activeChannel}
 }
 
-export function useKeyCard(channelKey: Key) {
+export function useKeyCard(channelKey: Key, ref: RefObject<HTMLDivElement> | null) {
     function toggleActiveKey() {
         fetchToggleKey(channelKey)
     }
-
     function deleteKey() {
         if (window.confirm(lang.DeleteKeyConfirmQuestion)) {
-            fetchDeleteKey(channelKey.channel, channelKey)
+            if (ref) {
+                ref.current?.classList.add('hide-card')
+
+            }
+            setTimeout(() => fetchDeleteKey(channelKey.channel, channelKey), 300)
+
         }
     }
 

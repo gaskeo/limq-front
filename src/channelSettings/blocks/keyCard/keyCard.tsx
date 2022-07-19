@@ -1,5 +1,5 @@
 import {Key} from "../../../store/reducers/keysReducer";
-import React from "react";
+import React, {useRef} from "react";
 import {Loading} from "../../../elements/loading/loading";
 import {useKeyCard} from "../../../hooks/elementHooks/useCard";
 import {useTypedSelector} from "../../../hooks/useTypedSelector";
@@ -20,9 +20,12 @@ function PauseButtonContent({requested, active}: { requested: boolean, active: b
 }
 
 export function KeyCard({channelKey}: keyCardProps) {
-    const {deleteKey, toggleActiveKey, perm, requested, lang} = useKeyCard(channelKey)
+    const myRef = useRef<HTMLDivElement>(null)
+
+    const {deleteKey, toggleActiveKey, perm, requested, lang} = useKeyCard(channelKey, myRef)
 
     return (
+        <div className='show' ref={myRef}>
         <div className='card card-100 horizontal-scroll'>
             <div className='card-header-container'>
                 <h1 className='card-header'>{channelKey.name}</h1>
@@ -37,6 +40,8 @@ export function KeyCard({channelKey}: keyCardProps) {
                     <button className='button mini-button error-button' onClick={deleteKey}>{lang.DeleteKeyButton}</button>
                 </div>
             </div>
+        </div>
+            <div className='gap'/>
         </div>
     )
 }
