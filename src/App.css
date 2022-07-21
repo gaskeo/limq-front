@@ -158,6 +158,10 @@ h3 {
     background-color: grey;
 }
 
+a {
+    text-decoration: none;
+}
+
 .vertical-center {
     position: absolute;
     display: flex;

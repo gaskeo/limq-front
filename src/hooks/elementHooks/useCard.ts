@@ -18,11 +18,11 @@ export function useKeyCard(channelKey: Key, ref: RefObject<HTMLDivElement> | nul
     function toggleActiveKey() {
         fetchToggleKey(channelKey)
     }
+
     function deleteKey() {
         if (window.confirm(lang.DeleteKeyConfirmQuestion)) {
             if (ref) {
                 ref.current?.classList.add('hide-card')
-
             }
             setTimeout(() => fetchDeleteKey(channelKey.channel, channelKey), 300)
 
@@ -41,10 +41,13 @@ export function useKeyCard(channelKey: Key, ref: RefObject<HTMLDivElement> | nul
     return {deleteKey, toggleActiveKey, perm, requested, lang}
 }
 
-export function useMixinCard (channel: Channel, mixinType: MixinTypeStates) {
+export function useMixinCard(channel: Channel, mixinType: MixinTypeStates, ref: RefObject<HTMLDivElement> | null) {
     function deleteMixin() {
         if (channelId && window.confirm(lang.DeleteMixinConfirmQuestion)) {
-            fetchRestrictMixin(channelId, channel['channel_id'], mixinType)
+            if (ref) {
+                ref.current?.classList.add('hide-card')
+            }
+            setTimeout(() => fetchRestrictMixin(channelId, channel['channel_id'], mixinType), 300)
         }
     }
 
