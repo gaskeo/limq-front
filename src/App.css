@@ -162,6 +162,10 @@ a {
     text-decoration: none;
 }
 
+.no-wrap {
+    white-space: nowrap;
+}
+
 .vertical-center {
     position: absolute;
     display: flex;

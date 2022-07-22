@@ -112,6 +112,7 @@ export interface LangStruct {
     GreetingHeader: string
     GreetingText: string
     LearnMoreButton: string
+    TryPlayground: string
 }
 
 export const defaultLangValue: LangStruct = {
@@ -229,4 +230,5 @@ export const defaultLangValue: LangStruct = {
     GreetingHeader: 'GreetingHeader',
     GreetingText: 'GreetingText',
     LearnMoreButton: 'LearnMoreButton',
+    TryPlayground: 'TryPlayground'
 }

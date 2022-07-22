@@ -114,4 +114,5 @@ export const langDict: LangStruct = {
     GreetingHeader: 'Ознакомьтесь с функциями LiMQ',
     GreetingText: 'LiMQ — это мощный облачный SaaS брокер сообщений',
     LearnMoreButton: 'Узнать больше',
+    TryPlayground: 'Протестировать в плейграунде'
 }

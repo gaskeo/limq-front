@@ -15,6 +15,9 @@ export function useChannelCard(channel: Channel) {
 }
 
 export function useKeyCard(channelKey: Key, ref: RefObject<HTMLDivElement> | null) {
+    function copyCode() {
+        navigator.clipboard.writeText(channelKey.key)
+        }
     function toggleActiveKey() {
         fetchToggleKey(channelKey)
     }
@@ -38,7 +41,7 @@ export function useKeyCard(channelKey: Key, ref: RefObject<HTMLDivElement> | nul
 
     const requested = toggleKey && toggleKey.dataState === dataStates.requested
 
-    return {deleteKey, toggleActiveKey, perm, requested, lang}
+    return {deleteKey, toggleActiveKey, perm, requested, lang, copyCode}
 }
 
 export function useMixinCard(channel: Channel, mixinType: MixinTypeStates, ref: RefObject<HTMLDivElement> | null) {

@@ -101,10 +101,23 @@
 }
 
 .card-code {
+    overflow: hidden;
+    text-overflow: ellipsis;
     display: block;
     color: var(--code-color);
-    margin-bottom: 16px;
     font-family: var(--code-font-family);
+}
+
+.code-container {
+    display: flex;
+    gap: .5rem;
+    margin-bottom: 16px;
+
+}
+
+.copy-code {
+    width: 3em;
+    padding: .6em;
 }
 
 .card-icon-and-text-container {
@@ -145,6 +158,7 @@
 }
 
 .card-inline-block {
+    max-width: 100%;
     display: flex;
     gap: .5rem;
 }
