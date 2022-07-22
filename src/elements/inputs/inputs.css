@@ -7,7 +7,8 @@
     font-family: var(--main-font-family);
     border-radius: 5px;
     background-color: var(--form-input-color);
-    border: 2px solid var(--form-input-border-color);
+    border: 0;
+    outline: none;
     font-size: 1.1em;
     padding-left: .5rem;
     transition: background-color .2s, border .2s;
