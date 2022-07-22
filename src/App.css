@@ -197,7 +197,7 @@ a {
 }
 
 .form-bg {
-    background-color: var(--form-background-color);
+    background-color: var(--header-color);
 }
 
 .error-text {
