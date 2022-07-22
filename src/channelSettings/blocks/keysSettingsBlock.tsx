@@ -89,20 +89,23 @@ export function KeysSettingsBlock() {
                        errorText={errors.name}
                        placeholder={EnterKeyName}/>
                 <div className='channel-settings-radio-container'>
-                    <div className='horizontal justify-left'>
+                    <div>
                         <Radio label={KeyTypeReadForm}
                                checked={keyType === '0'}
                                setData='0'
                                name='key-type'
                                setState={changeKeyType}/>
 
-                        <div className='horizontal-gap'/>
-                        <div className={`horizontal ${keyType === "0" ? '' : 'hidden'}`}>
-                            <Checkbox label={KeyAllowInfoForm} state={allowInfo} setState={changeAllowInfo}/>
+                        <div className='small-gap'/>
+                        <div className='horizontal'>
                             <div className='horizontal-gap'/>
-                            <Checkbox label={KeyDisallowMixinsForm} state={disallowMixins}
-                                      setState={changeDisallowMixins}/>
+                            <div className={`${keyType === "0" ? '' : 'hidden'}`}>
+                                <Checkbox label={KeyAllowInfoForm} state={allowInfo} setState={changeAllowInfo}/>
+                                <Checkbox label={KeyDisallowMixinsForm} state={disallowMixins}
+                                          setState={changeDisallowMixins}/>
+                            </div>
                         </div>
+                        <div className='small-gap'/>
                     </div>
                     <Radio label={KeyTypeWriteForm} setData='1' name='key-type' setState={changeKeyType}
                            checked={keyType === '1'}/>

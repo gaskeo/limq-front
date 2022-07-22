@@ -40,6 +40,11 @@
     margin-bottom: 2rem;
 }
 
+.small-gap {
+    display: block;
+    margin-bottom: .5rem;
+}
+
 .max-width-500 {
     max-width: 500px;
 }

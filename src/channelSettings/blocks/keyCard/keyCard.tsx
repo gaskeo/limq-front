@@ -35,7 +35,7 @@ export const KeyCard = memo(({channelKey}: keyCardProps) => {
                     <p className='card-text grey-text'>{perm}, {channelKey.created}</p>
                     <div className='code-container'>
                         <code className='card-code card-background-text'>{channelKey.key}</code>
-                        <button className='button success-button copy-code' onClick={copyCode}><Copy color='#F6FFF8'/>
+                        <button className='button copy-code' onClick={copyCode}><Copy color='#F6FFF8'/>
                         </button>
                     </div>
                     <div className='card-inline-block'>
