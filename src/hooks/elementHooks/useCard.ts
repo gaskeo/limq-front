@@ -8,6 +8,10 @@ import {useParams} from "react-router-dom";
 import {MixinTypeStates} from "../../store/reducers/mixinsReducer";
 import {RefObject} from "react";
 
+function copyText(text: string) {
+    navigator.clipboard.writeText(text)
+}
+
 export function useChannelCard(channel: Channel) {
     const {lang} = useTypedSelector(state => state.lang)
     const activeChannel = Boolean(channel['write_keys'].active || channel['read_keys'].active)
@@ -15,9 +19,6 @@ export function useChannelCard(channel: Channel) {
 }
 
 export function useKeyCard(channelKey: Key, ref: RefObject<HTMLDivElement> | null) {
-    function copyCode() {
-        navigator.clipboard.writeText(channelKey.key)
-        }
     function toggleActiveKey() {
         fetchToggleKey(channelKey)
     }
@@ -31,6 +32,8 @@ export function useKeyCard(channelKey: Key, ref: RefObject<HTMLDivElement> | nul
 
         }
     }
+
+    const copyCode = () => copyText(channelKey.key)
 
     const {fetchDeleteKey, fetchToggleKey} = useActions()
 
@@ -54,8 +57,10 @@ export function useMixinCard(channel: Channel, mixinType: MixinTypeStates, ref: 
         }
     }
 
+    const copyCode = () => copyText(channel["channel_id"])
+
     const {channelId} = useParams()
     const {lang} = useTypedSelector(state => state.lang)
     const {fetchRestrictMixin} = useActions()
-    return {deleteMixin, channelId, lang}
+    return {deleteMixin, channelId, lang, copyCode}
 }
