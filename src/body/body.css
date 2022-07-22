@@ -12,7 +12,7 @@
 
 .greeting-window {
     padding: 2rem 2rem;
-    background-color: var(--form-background-color);
+    background-color: var(--header-color);
     border-radius: 5px;
     grid-area: A;
 }
