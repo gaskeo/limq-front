@@ -106,6 +106,7 @@
     display: block;
     color: var(--code-color);
     font-family: var(--code-font-family);
+    cursor: pointer;
 }
 
 .code-container {
@@ -149,6 +150,11 @@
     padding: 10px;
     border-radius: 5px;
     color: var(--code-color);
+    transition: .2s background-color;
+}
+
+.card-background-text:hover {
+    background-color: var(--code-background-hover-color);
 }
 
 .card-text {

@@ -3,7 +3,6 @@ import React, {memo, useRef} from "react";
 import {Loading} from "../../../elements/loading/loading";
 import {useKeyCard} from "../../../hooks/elementHooks/useCard";
 import {useTypedSelector} from "../../../hooks/useTypedSelector";
-import {Copy} from "../../../svg/copy";
 
 interface keyCardProps {
     channelKey: Key
@@ -34,9 +33,7 @@ export const KeyCard = memo(({channelKey}: keyCardProps) => {
                 <div className='card-info-container'>
                     <p className='card-text grey-text'>{perm}, {channelKey.created}</p>
                     <div className='code-container'>
-                        <code className='card-code card-background-text'>{channelKey.key}</code>
-                        <button className='button copy-code' onClick={copyCode}><Copy color='#F6FFF8'/>
-                        </button>
+                        <code className='card-code card-background-text' onClick={copyCode}>{channelKey.key}</code>
                     </div>
                     <div className='card-inline-block'>
                         <button className='button mini-button warning-button' onClick={toggleActiveKey}>

@@ -18,6 +18,7 @@
     --menu-tab-selected-color: #AACDEC;
 
     --code-color: #687179;
+    --code-background-hover-color: #d2d1d1;
     --code-background-color: #E7E7E7;
 
     --button-color: #007bfe;
@@ -62,6 +63,7 @@
     --menu-tab-selected-color: #003D66;
 
     --code-color: #bfc0c0;
+    --code-background-hover-color: #001421;
     --code-background-color: #000C14;
 
     --button-color: #001a2c;
