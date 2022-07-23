@@ -25,7 +25,7 @@ export const KeyCard = memo(({channelKey}: keyCardProps) => {
     const {deleteKey, toggleActiveKey, perm, requested, lang, copyCode} = useKeyCard(channelKey, myRef)
 
     return (
-        <div className='show' ref={myRef}>
+        <div className='show-card' ref={myRef}>
             <div className='card card-100 horizontal-scroll'>
                 <div className='card-header-container'>
                     <h1 className='card-header'>{channelKey.name}</h1>
