@@ -12,6 +12,8 @@ import {Key} from "../../store/reducers/keysReducer";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {Link} from "react-router-dom";
 
+const sandboxLink = 'https://sandbox.limq.ru'
+
 export function checkKeyLength(key: string) {
     return key.length <= 32
 }
@@ -43,7 +45,7 @@ const KeysList = memo(({reversedKeys, keysDataState}: KeysListProps) => {
                 {reversedKeys.map(key => <KeyCard key={key.key}
                                                   channelKey={key}/>)}
             </div>
-            <Link to='playground' className='card-code'>{lang.TryPlayground}</Link>
+            <Link to={sandboxLink} className='card-code'>{lang.TrySandbox}</Link>
         </div>
     )
 })
