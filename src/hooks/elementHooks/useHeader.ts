@@ -19,7 +19,7 @@ export function useHeader() {
     const theme = getTheme()
     const headerImage = (theme === availableThemes.light ||
         (theme === availableThemes.system && getSystemTheme() === availableThemes.light)) ? lightLogo : darkLogo
-    console.log(theme)
+
     const {user, userDataState} = useTypedSelector(state => state.user)
     const {lang} = useTypedSelector(state => state.lang)
     const dispatch = useDispatch()

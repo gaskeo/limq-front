@@ -264,7 +264,7 @@ export function useMixinContainer() {
     const currentMixins = mixinsData[channel ? channel['channel_id'] : '']
     const mixinType = searchParams.get('mixin-tab') as MixinTypeStates || MixinTypeStates.in
     const reversedMixins = currentMixins && (currentMixins[mixinType] ? [...currentMixins[mixinType]] : [])
-    console.log(reversedMixins)
+
     const mixinsDataState = currentMixins && currentMixins.mixinsDataState
 
     return {reversedMixins, mixinsDataState, mixinType}
