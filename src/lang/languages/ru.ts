@@ -93,28 +93,28 @@ export const langDict: LangStruct = {
 
     ChannelNameError: 'Невалидное название канала',
     ChannelNotExistError: 'Канал не найден',
-    NotChannelOwnerError: 'Вы не владеете данным каналом',
+    NotChannelOwnerError: 'Нет доступа к этому каналу',
 
-    KeyNameError: 'Невалидное название ключа',
-    KeyPermissionsError: 'Разрешения ключа невалидны',
-    BadChannelIdError: 'Канал имеет невалидный ID',
-    BadKeyError: 'Невалидный ключ',
+    KeyNameError: 'Название ключа указано неверно. Проверьте правильность данных и повторите попытку',
+    KeyPermissionsError: 'Права доступа для ключа указаны неверно. Проверьте правильность данных и повторите попытку',
+    BadChannelIdError: 'Неправильный ID канала',
+    BadKeyError: 'Ключ указан неверно. Проверьте правильность данных и повторите попытку',
 
     AlreadyMixedError: 'Вы уже подписаны на данный канал',
     BadThreadError: 'Канал не найден',
     BadKeyTypeError: 'Данный ключ не имеет прав на чтение',
-    CircleMixinError: 'Невозможно подписаться на канал из-за цикличности',
-    SelfMixinError: 'Нельзя подписываться на этот же канал',
+    CircleMixinError: 'Обнаружен рекурсивный миксин. Сообщения, которые попадают в ваш канал, уже попадают в канал назначения',
+    SelfMixinError: 'Нельзя подписаться на этот же канал',
 
-    EmailError: 'Невалидный Email',
-    UsernameError: 'Невалидное имя',
-    PasswordError: 'Невалидный пароль',
-    EmailExistError: 'Пользователь с таким Email уже существует',
+    EmailError: 'E-mail указан неверно. Проверьте правильность данных и повторите попытку',
+    UsernameError: 'Имя указано неверно. Проверьте правильность данных и повторите попытку',
+    PasswordError: 'Пароль указан неверно. Проверьте правильность данных и повторите попытку',
+    EmailExistError: 'Пользователь с таким e-mail уже существует',
     BadUserError: 'Пользователь не найден',
     UnknownError: 'Неизвестная ошибка',
 
     GreetingHeader: 'Ознакомьтесь с функциями LiMQ',
     GreetingText: 'LiMQ — это мощный облачный SaaS брокер сообщений',
     LearnMoreButton: 'Узнать больше',
-    TrySandbox: 'Протестировать в плейграунде'
+    TrySandbox: 'Попробуйте функции LiMQ в песочнице'
 }
