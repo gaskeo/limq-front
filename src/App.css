@@ -233,7 +233,7 @@ a {
     min-height: 3rem;
 }
 
-.button:hover {
+.button:hover, .button:focus {
     background-color: var(--button-color-hover);
     color: var(--button-text-color-hover)
 }
@@ -250,7 +250,7 @@ a {
     color: var(--button-success-text-color) !important;
 }
 
-.success-button:hover {
+.success-button:hover, .success-button:focus {
     background-color: var(--button-success-color-hover) !important;
     color: var(--button-success-text-color-hover) !important;
 }
@@ -260,7 +260,7 @@ a {
     color: var(--button-warning-text-color) !important;
 }
 
-.warning-button:hover {
+.warning-button:hover, .warning-button:focus {
     background-color: var(--button-warning-color-hover) !important;
     color: var(--button-warning-text-color-hover) !important;
 }
@@ -270,7 +270,7 @@ a {
     color: var(--button-error-text-color);
 }
 
-.error-button:hover {
+.error-button:hover, .error-button:focus {
     background-color: var(--button-error-color-hover);
     color: var(--button-error-text-color-hover);
 }

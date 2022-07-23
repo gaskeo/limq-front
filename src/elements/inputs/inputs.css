@@ -19,7 +19,7 @@
     color: var(--placeholder-color)
 }
 
-.input:hover {
+.input:hover, .input:focus {
     background-color: var(--form-input-color-hover);
     border-color: var(--form-input-border-color-hover);
 }
@@ -65,7 +65,7 @@
     transition: background-color .2s;
 }
 
-.submit:hover {
+.submit:hover, .submit:focus {
     background-color: var(--button-color-hover);
 }
 
