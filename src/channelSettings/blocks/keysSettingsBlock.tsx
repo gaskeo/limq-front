@@ -10,7 +10,6 @@ import {LoadingKeyCard} from "./keyCard/loadingCard";
 import {useKeysSettingsBlock} from "../../hooks/elementHooks/useChannelSettings";
 import {Key} from "../../store/reducers/keysReducer";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
-import {Link} from "react-router-dom";
 
 const sandboxLink = 'https://sandbox.limq.ru'
 
@@ -45,7 +44,7 @@ const KeysList = memo(({reversedKeys, keysDataState}: KeysListProps) => {
                 {reversedKeys.map(key => <KeyCard key={key.key}
                                                   channelKey={key}/>)}
             </div>
-            <Link to={sandboxLink} className='card-code'>{lang.TrySandbox}</Link>
+            <a href={sandboxLink} className='card-code'>{lang.TrySandbox}</a>
         </div>
     )
 })
