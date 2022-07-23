@@ -46,7 +46,7 @@ export function MixinsSettingsBlock() {
                 <Submit label={requested ? <Loading/> : CreateMixinButton}/>
             </form>
             <span className='gap'/>
-            <h1>{YourMixinsHeader}</h1>
+            <h2>{YourMixinsHeader}</h2>
 
             <div className='max-width-500'>
                 <Menu active={activeTab} onClick={changeTab} tabs={tabs}

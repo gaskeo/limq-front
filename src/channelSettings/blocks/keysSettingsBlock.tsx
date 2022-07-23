@@ -33,7 +33,7 @@ const KeysList = memo(({reversedKeys, keysDataState}: KeysListProps) => {
         <div>
             <span className='gap'/>
             <div className='inline-block'>
-                <h1 className='inline-block'>{YourKeysHeader}</h1>
+                <h2 className='inline-block'>{YourKeysHeader}</h2>
                 <div className='horizontal-gap inline-block'/>
 
             </div>
