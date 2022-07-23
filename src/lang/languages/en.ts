@@ -83,6 +83,7 @@ export const langDict: LangStruct = {
     EnterNewPasswordAgain: 'Enter new password again',
     EnterKeyName: 'Enter key name',
     EnterReadKey: 'Enter read key',
+    EnterChannelName: 'Enter channel name',
     LoginHeader: 'Sing in with email',
     RegisterHeader: 'Sing up with email',
     UserSettingsHeader: 'User settings',

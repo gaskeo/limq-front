@@ -83,6 +83,7 @@ export const langDict: LangStruct = {
     EnterNewPasswordAgain: 'Введите новый пароль еще раз',
     EnterKeyName: 'Введите название ключа',
     EnterReadKey: 'Введите ключ на чтение',
+    EnterChannelName: 'Введите название канала',
     LoginHeader: 'Вход по email',
     RegisterHeader: 'Регистрация по email',
     UserSettingsHeader: 'Настройки пользователя',

@@ -81,6 +81,7 @@ export interface LangStruct {
     EnterNewPasswordAgain: string
     EnterKeyName: string
     EnterReadKey: string
+    EnterChannelName: string
     LoginHeader: string
     RegisterHeader: string
     UserSettingsHeader: string
@@ -198,6 +199,7 @@ export const defaultLangValue: LangStruct = {
     EnterNewPasswordAgain: 'EnterNewPasswordAgain',
     EnterKeyName: 'EnterKeyName',
     EnterReadKey: 'EnterReadKey',
+    EnterChannelName: 'EnterChannelName',
     LoginHeader: 'LoginHeader',
     RegisterHeader: 'RegisterHeader',
     UserSettingsHeader: 'UserSettingsHeader',

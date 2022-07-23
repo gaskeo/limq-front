@@ -17,7 +17,7 @@ export function CreateChannel() {
         requested
     } = useCreateChannel()
 
-    const {CreateChannelButton, CreateChannelHeader, ChannelNameForm} = lang
+    const {CreateChannelButton, CreateChannelHeader, ChannelNameForm, EnterChannelName} = lang
 
     return (
         <div>
@@ -27,11 +27,10 @@ export function CreateChannel() {
                        setState={changeChannelName}
                        label={ChannelNameForm}
                        type='text'
-                       errorText={errors.name}
-                       onChange={checkChannelName}/>
-                <p className='error-text'>{errorMessage}</p>
-
-                <Submit label={requested ? <Loading/> : CreateChannelButton}/>
+                       errorText={errors.name || errorMessage}
+                       onChange={checkChannelName}
+                       placeholder={EnterChannelName}/>
+                <Submit classes='success-button' label={requested ? <Loading/> : CreateChannelButton}/>
             </form>
         </div>
     )
