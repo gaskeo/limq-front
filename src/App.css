@@ -229,7 +229,7 @@ a {
     background-color: var(--button-color);
     color: var(--button-text-color);
     padding: 6px;
-    transition: .2s background-color, .2s border;
+    transition: .2s all;
     min-height: 3rem;
 }
 
@@ -241,7 +241,7 @@ a {
 .mini-button {
     width: max-content;
     padding: 8px 25px;
-    min-height: min-content;
+    min-height: 2rem;
     height: max-content;
 }
 

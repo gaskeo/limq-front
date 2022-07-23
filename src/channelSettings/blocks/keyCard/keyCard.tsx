@@ -1,5 +1,5 @@
 import {Key} from "../../../store/reducers/keysReducer";
-import React, {memo, useRef} from "react";
+import React, {useRef} from "react";
 import {Loading} from "../../../elements/loading/loading";
 import {useKeyCard} from "../../../hooks/elementHooks/useCard";
 import {useTypedSelector} from "../../../hooks/useTypedSelector";
@@ -19,7 +19,7 @@ function PauseButtonContent({requested, active}: { requested: boolean, active: b
     return <>{lang.ResumeKeyButton}</>
 }
 
-export const KeyCard = memo(({channelKey}: keyCardProps) => {
+export const KeyCard = ({channelKey}: keyCardProps) => {
     const myRef = useRef<HTMLDivElement>(null)
 
     const {deleteKey, toggleActiveKey, perm, requested, lang, copyCode} = useKeyCard(channelKey, myRef)
@@ -47,6 +47,4 @@ export const KeyCard = memo(({channelKey}: keyCardProps) => {
             <div className='gap'/>
         </div>
     )
-}, (prevProps, nextProps) => {
-    return prevProps.channelKey.key === nextProps.channelKey.key
-})
+}
