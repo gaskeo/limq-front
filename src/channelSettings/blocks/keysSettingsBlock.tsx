@@ -59,8 +59,8 @@ export function KeysSettingsBlock() {
         changeKeyType,
         allowInfo,
         changeAllowInfo,
-        disallowMixins,
-        changeDisallowMixins,
+        allowMixins,
+        changeAllowMixins,
         submit,
         errors,
         errorMessage,
@@ -73,7 +73,7 @@ export function KeysSettingsBlock() {
         EnterKeyName,
         KeyTypeReadForm,
         KeyAllowInfoForm,
-        KeyDisallowMixinsForm,
+        KeyAllowMixinsForm,
         KeyTypeWriteForm,
         CreateKeyButton
     } = lang
@@ -101,8 +101,8 @@ export function KeysSettingsBlock() {
                             <div className='horizontal-gap'/>
                             <div className={`${keyType === "0" ? '' : 'hidden'}`}>
                                 <Checkbox label={KeyAllowInfoForm} state={allowInfo} setState={changeAllowInfo}/>
-                                <Checkbox label={KeyDisallowMixinsForm} state={disallowMixins}
-                                          setState={changeDisallowMixins}/>
+                                <Checkbox label={KeyAllowMixinsForm} state={allowMixins}
+                                          setState={changeAllowMixins}/>
                             </div>
                         </div>
                         <div className='small-gap'/>

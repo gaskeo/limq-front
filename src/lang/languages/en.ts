@@ -25,7 +25,7 @@ export const langDict: LangStruct = {
     KeyTypeReadForm: "Listen the queue for a new messages",
     KeyTypeWriteForm: "Post messages to the queue",
     KeyAllowInfoForm: "Allow info",
-    KeyDisallowMixinsForm: 'Disallow mixins',
+    KeyAllowMixinsForm: 'Allow mixins',
     CreateKeyButton: "Create",
     PauseKeyButton: "Pause",
     ResumeKeyButton: "Resume",
