@@ -1,4 +1,4 @@
-import {ChangeEvent, Dispatch, SetStateAction} from "react";
+import {ChangeEvent, Dispatch, SetStateAction, useState} from "react";
 import "./inputs.css";
 
 interface radioProps {
@@ -16,10 +16,11 @@ export function Radio({label, setState, name, setData, checked}: radioProps) {
         }
     }
 
+    const [id] = useState(String(Math.random()))
     return (
         <>
-            <label className='radio-container' htmlFor='radio'>
-                <input className='radio' id='radio' type='radio' name={name} checked={checked}
+            <label className='radio-container' htmlFor={id}>
+                <input className='radio' id={id} type='radio' name={name} checked={checked}
                        onChange={onChange()}/>
                 <span className='input-label'>{label}</span>
 
