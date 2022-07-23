@@ -25,6 +25,7 @@ export interface LangStruct {
     KeyAllowInfoForm: string
     KeyAllowMixinsForm: string
     CreateKeyButton: string
+    Paused: string,
     PauseKeyButton: string
     ResumeKeyButton: string
     DeleteKeyButton: string
@@ -143,6 +144,7 @@ export const defaultLangValue: LangStruct = {
     KeyAllowInfoForm: 'KeyAllowInfoForm',
     KeyAllowMixinsForm: 'KeyAllowMixinsForm',
     CreateKeyButton: 'CreateKeyButton',
+    Paused: 'Paused',
     PauseKeyButton: 'PauseKeyButton',
     ResumeKeyButton: 'ResumeKeyButton',
     DeleteKeyButton: 'DeleteKeyButton',

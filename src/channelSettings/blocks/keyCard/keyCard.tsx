@@ -28,7 +28,7 @@ export const KeyCard = ({channelKey}: keyCardProps) => {
         <div className='show-card' ref={myRef}>
             <div className='card card-100 horizontal-scroll'>
                 <div className='card-header-container'>
-                    <h1 className='card-header'>{channelKey.name}</h1>
+                    <h1 className='card-header'>{channelKey.name} {!channelKey.active && <span className='grey-text'>({lang.Paused})</span>}</h1>
                 </div>
                 <div className='card-info-container'>
                     <p className='card-text grey-text'>{perm}, {channelKey.created}</p>
@@ -36,7 +36,8 @@ export const KeyCard = ({channelKey}: keyCardProps) => {
                         <code className='card-code card-background-text' onClick={copyCode}>{channelKey.key}</code>
                     </div>
                     <div className='card-inline-block'>
-                        <button className='button mini-button warning-button' onClick={toggleActiveKey}>
+                        <button className={`button mini-button ${channelKey.active ? 'warning-button' : 'success-button'}`}
+                                onClick={toggleActiveKey}>
                             <PauseButtonContent active={channelKey.active} requested={requested}/>
                         </button>
                         <button className='button mini-button error-button'

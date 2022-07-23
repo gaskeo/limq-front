@@ -1,11 +1,11 @@
 import {useSearchParams} from "react-router-dom";
 import {MainBlock} from "../../settings/blocks/mainBlock";
 import {useTypedSelector} from "../useTypedSelector";
-import {useState} from "react";
-import {availableThemes, getTheme, setTheme} from "../../theme";
+import {setTheme} from "../../theme";
 import {useDispatch} from "react-redux";
 import {availableLanguages, setLang} from "../../lang/getLang";
 import {LangActionTypes} from "../../store/reducers/langReducer";
+import {ThemeActionTypes} from "../../store/reducers/theme";
 
 export const menuTabs = (names: { main: string }) => [
     {
@@ -50,13 +50,13 @@ export function useSettingsBlock() {
     }
 
     function onThemeChange(newTheme: string) {
-        changeTheme(newTheme as availableThemes)
+        dispatch({type: ThemeActionTypes.setTheme, payload: newTheme})
         setTheme(newTheme)
     }
 
     const {lang} = useTypedSelector(state => state.lang)
 
-    const [theme, changeTheme] = useState(getTheme())
+    const {theme} = useTypedSelector(state => state.theme)
     const dispatch = useDispatch()
 
     return {lang, theme, onLangChange, onThemeChange}

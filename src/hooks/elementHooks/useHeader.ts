@@ -3,6 +3,11 @@ import {useTypedSelector} from "../useTypedSelector";
 import {useDispatch} from "react-redux";
 import {useActions} from "../useActions";
 import {useState} from "react";
+import {availableThemes, getSystemTheme, getTheme} from "../../theme";
+
+const lightLogo = require('../../svg/limq-for-white.svg').default
+const darkLogo = require('../../svg/limq-for-dark.svg').default
+
 
 export function useHeader() {
     function onClick(route: string) {
@@ -11,10 +16,14 @@ export function useHeader() {
         }
     }
 
+    const theme = getTheme()
+    const headerImage = (theme === availableThemes.light ||
+        (theme === availableThemes.system && getSystemTheme() === availableThemes.light)) ? lightLogo : darkLogo
+    console.log(theme)
     const {user, userDataState} = useTypedSelector(state => state.user)
     const {lang} = useTypedSelector(state => state.lang)
     const dispatch = useDispatch()
-    return {lang, onClick, user, userDataState}
+    return {lang, onClick, user, userDataState, headerImage}
 }
 
 export function useUserButton() {

@@ -28,14 +28,14 @@ function UserButton() {
 }
 
 export function Header() {
-    const {onClick, user, userDataState, lang} = useHeader()
+    const {onClick, user, userDataState, lang, headerImage} = useHeader()
 
     const {LoginButton} = lang
     const renderUserButton = userDataState === dataStates.received && user.id
     return (
         <header className="app-header">
             <Link to={routes.index} className='lithium-container'>
-                <img alt='LiMQ' src={require('../svg/limq.svg').default}/>
+                    <img alt='LiMQ' src={headerImage}/>
             </Link>
             <div>
                 <div className='horizontal'>
