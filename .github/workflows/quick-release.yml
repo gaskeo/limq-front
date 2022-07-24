@@ -42,7 +42,7 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: limq-front@${{env.tag}}.zip
-          path: limq-front@${{env.tag}}.zip
+          path: react-github-actions-build/limq-front@${{env.tag}}.zip
       - name: Release
         uses: ncipollo/release-action@v1
         with:
