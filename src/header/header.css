@@ -65,7 +65,6 @@
     padding-left: .8rem;
     padding-right: .8rem;
     min-height: 50px;
-    height: 100%;
     max-height: 70px;
     border: none;
     outline: none;
@@ -92,8 +91,8 @@
 }
 
 .dropdown-item:last-child {
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
+    border-radius: 0 0 5px 5px;
+    border: 0 solid transparent;
 }
 
 .no-hover, .no-hover:hover {

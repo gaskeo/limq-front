@@ -113,12 +113,6 @@
     display: flex;
     gap: .5rem;
     margin-bottom: 16px;
-
-}
-
-.copy-code {
-    width: 2.5em;
-    padding: .6em;
 }
 
 .card-icon-and-text-container {
@@ -153,7 +147,7 @@
     transition: .2s background-color;
 }
 
-.card-background-text:hover {
+.card-background-text:hover, .card-background-text:focus {
     background-color: var(--code-background-hover-color);
 }
 

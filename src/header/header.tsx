@@ -14,14 +14,14 @@ function UserButton() {
 
     return (
         <div className='button-container' id='user-button'>
-            <div className={'user-icon header-element ' + (buttonOpen ? 'header-element-hover' : '')}
+            <div className={`user-icon header-element ${buttonOpen ? 'header-element-hover' : ''}`}
                  onClick={toggleOpen}>
                 <User/>
             </div>
             <div className={`dropdown ${buttonOpen ? 'show' : ''}`}>
                 <div className='button dropdown-item no-hover'>{user.username}</div>
                 <Link to={routes.userSettings} className='button dropdown-item'>{SettingsButton}</Link>
-                <button className='button dropdown-item' onClick={exit()}>{ExitButton}</button>
+                <div className='button dropdown-item' onClick={exit()}>{ExitButton}</div>
             </div>
         </div>
     )
