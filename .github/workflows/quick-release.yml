@@ -1,0 +1,47 @@
+on:
+  push:
+    paths:
+      - '.github/workflows/quick-release.yml'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v2
+      - name: Use Node.js 12.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.17.4
+      - name: Install dependencies
+        run: npm install
+      - name: Generate build
+        run: npm run build
+      - name: Share artifact inside workflow
+        uses: actions/upload-artifact@v1
+        with:
+          name: react-github-actions-build
+          path: build
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get artifact
+        uses: actions/download-artifact@v1
+        with:
+          name: react-github-actions-build
+      - name: Zip build
+        uses: thedoctor0/zip-release@master
+        with:
+          filename: limq-front@v1.0.8.zip
+          path: react-github-actions-build
+      - name: Upload build zip artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: limq-front@v1.0.8.zip
+          path: limq-front@v1.0.8.zip
+      - name: Release
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: limq-front@v1.0.8.zip
+          body: fixes for safari
+          token: ${{ secrets.GITHUB_TOKEN }}
