@@ -3,13 +3,16 @@ on:
     paths:
       - '.github/workflows/quick-release.yml'
 
+env:
+  tag: v1.0.9
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Clone repository
         uses: actions/checkout@v2
-      - name: Use Node.js 12.x
+      - name: Use Node.js
         uses: actions/setup-node@v1
         with:
           node-version: 14.17.4
@@ -33,18 +36,18 @@ jobs:
       - name: Zip build
         uses: thedoctor0/zip-release@master
         with:
-          filename: limq-front@v1.0.8.zip
+          filename: limq-front@v1.0.9.zip
           path: react-github-actions-build
       - name: Upload build zip artifact
         uses: actions/upload-artifact@v1
         with:
-          name: limq-front@v1.0.8.zip
-          path: limq-front@v1.0.8.zip
+          name: limq-front@${{env.tag}}.zip
+          path: limq-front@${{env.tag}}.zip
       - name: Release
         uses: ncipollo/release-action@v1
         with:
-          tag: v1.0.8
-          name: v1.0.8
-          artifacts: limq-front@v1.0.8.zip
+          tag: ${{env.tag}}
+          name: ${{env.tag}}
+          artifacts: limq-front@${{env.tag}}.zip
           body: fixes for safari
           token: ${{ secrets.GITHUB_TOKEN }}
