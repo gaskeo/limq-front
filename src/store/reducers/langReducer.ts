@@ -1,5 +1,6 @@
-import {defaultLangValue, LangStruct} from "../../lang/langStruct";
+import {LangStruct} from "../../lang/langStruct";
 import {availableLanguages, availableLanguagesType} from "../../lang/getLang";
+import {langDict} from "../../lang/languages/en";
 
 interface Lang {
     lang: LangStruct,
@@ -7,8 +8,8 @@ interface Lang {
 }
 
 const defaultState: Lang = {
-    lang: defaultLangValue,
-    langCode: availableLanguages.undefined
+    lang: langDict,
+    langCode: availableLanguages.en
 }
 
 export enum LangActionTypes {

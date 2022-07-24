@@ -20,10 +20,9 @@ export function ChannelCard({channel}: channelCardProps) {
             <div className='card'>
                 <div className='card-header-container'>
                     <h1 className='card-header'>{channel['channel_name']}</h1>
-                    <Link className='card-icon-near-header'
-                          to={routes.channelSettings.replace(':channelId', channel['channel_id'])}>
+                    <span className='card-icon-near-header'>
                         <Settings/>
-                    </Link>
+                    </span>
                 </div>
 
                 <div className='card-info-container'>
