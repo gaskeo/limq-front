@@ -9,7 +9,7 @@ interface Lang {
 
 const defaultState: Lang = {
     lang: langDict,
-    langCode: availableLanguages.en
+    langCode: availableLanguages.undefined
 }
 
 export enum LangActionTypes {
