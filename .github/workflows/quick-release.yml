@@ -32,12 +32,12 @@ jobs:
       - name: Get artifact
         uses: actions/download-artifact@v1
         with:
-          name: react-github-actions-build/*
+          name: react-github-actions-build
       - name: Zip build
         uses: thedoctor0/zip-release@master
         with:
           filename: limq-front@v1.0.9.zip
-          path: react-github-actions-build
+          path: react-github-actions-build/*
       - name: Upload build zip artifact
         uses: actions/upload-artifact@v1
         with:
