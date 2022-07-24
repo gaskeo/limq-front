@@ -291,7 +291,13 @@ a {
 
 @media screen and (max-width: 600px) {
     .app-form {
-        width: 84vw;
+        width: 90vw;
+        box-sizing: border-box;
+    }
+
+    .app-body {
+        margin-left: 5vw;
+        margin-right: 5vw;
     }
 }
 

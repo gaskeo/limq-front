@@ -4,7 +4,7 @@ on:
       - '.github/workflows/quick-release.yml'
 
 env:
-  tag: v1.1.4
+  tag: v1.1.5
 
 jobs:
   build:
@@ -49,5 +49,5 @@ jobs:
           tag: ${{env.tag}}
           name: ${{env.tag}}
           artifacts: react-github-actions-build/limq-front@${{env.tag}}.zip
-          body: language fix
+          body: form width fix
           token: ${{ secrets.GITHUB_TOKEN }}
