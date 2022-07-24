@@ -38,7 +38,6 @@ jobs:
         with:
           filename: limq-front@${{env.tag}}.zip
           directory: react-github-actions-build
-          path: react-github-actions-build
       - name: Upload build zip artifact
         uses: actions/upload-artifact@v1
         with:
