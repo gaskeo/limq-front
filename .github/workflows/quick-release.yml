@@ -48,6 +48,6 @@ jobs:
         with:
           tag: ${{env.tag}}
           name: ${{env.tag}}
-          artifacts: limq-front@${{env.tag}}.zip
+          artifacts: react-github-actions-build/limq-front@${{env.tag}}.zip
           body: fixes for safari
           token: ${{ secrets.GITHUB_TOKEN }}
