@@ -49,12 +49,6 @@ function hideEmail(email: string) {
 
 
 export function useUserSettings() {
-    function checkTabInParams() {
-        if (!searchParams.get(params.tab)) {
-            changeTab(tabs[0].parameterName)()
-        }
-    }
-
     function changeTab(tab: string) {
         return function () {
             changeSearchParams({[params.tab]: tab})
@@ -68,7 +62,7 @@ export function useUserSettings() {
         changeEmail: lang.UserSettingsMenuEmail, changePassword: lang.UserSettingsMenuPassword
     })
     const currentTab = searchParams.get(params.tab)
-    return {lang, tabs, currentTab, checkTabInParams, changeTab}
+    return {lang, tabs, currentTab, changeTab}
 }
 
 export function useEmailSettingsBlock() {

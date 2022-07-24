@@ -20,22 +20,11 @@ const params = {
 }
 
 export function useSettings() {
-    function checkTabInParams() {
-        if (!searchParams.get(params.tab)) {
-            changeTab(tabs[0].parameterName)()
-        }
-    }
-    function changeTab(tab: string) {
-        return function () {
-            changeSearchParams({[params.tab]: tab})
-        }
-    }
-
-    const [searchParams, changeSearchParams] = useSearchParams()
+    const [searchParams] = useSearchParams()
     const tabs = menuTabs({main: ''})
     const currentTab = searchParams.get(params.tab) || ''
 
-    return {checkTabInParams, changeTab, tabs, currentTab}
+    return {tabs, currentTab}
 }
 
 export function useSettingsBlock() {

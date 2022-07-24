@@ -4,11 +4,10 @@ import {memo, useEffect} from "react";
 import {useChannelSettings} from "../hooks/elementHooks/useChannelSettings";
 
 export const ChannelSettings = memo(() => {
-    const {lang, activeTab, changeTab, tabs, fetchAll, checkTabInParams} = useChannelSettings()
+    const {lang, activeTab, changeTab, tabs, fetchAll} = useChannelSettings()
 
     const {ChannelSettingsHeader} = lang
 
-    useEffect(checkTabInParams)
     useEffect(fetchAll)
 
     return (

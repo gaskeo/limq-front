@@ -271,12 +271,6 @@ export function useMixinContainer() {
 }
 
 export function useChannelSettings() {
-    function checkTabInParams() {
-        if (!searchParams.get(params.tab)) {
-            changeTab(tabs[0].parameterName)()
-        }
-    }
-
     function changeTab(tab: string) {
         return function () {
             changeSearchParams(
@@ -337,7 +331,7 @@ export function useChannelSettings() {
     const activeTab = searchParams.get(params.tab) || ''
 
     return {
-        activeTab, lang, changeTab, tabs, fetchAll, checkTabInParams
+        activeTab, lang, changeTab, tabs, fetchAll
     }
 
 }

@@ -15,8 +15,8 @@ export function Menu({active, menuClasses, menuTabClasses, tabs, onClick}: menuP
 
     return (
         <div className={newMenuClasses}>
-            {tabs.map(tab => <div key={tab.id}
-                                  className={active === tab.parameterName ? newMenuTabClasses + ' active' : newMenuTabClasses}
+            {tabs.map((tab, index) => <div key={tab.id}
+                                  className={active === tab.parameterName || (!active?.length && index === 0) ? newMenuTabClasses + ' active' : newMenuTabClasses}
                                   onClick={onClick(tab.parameterName)}>{tab.name}</div>)}
         </div>
 
