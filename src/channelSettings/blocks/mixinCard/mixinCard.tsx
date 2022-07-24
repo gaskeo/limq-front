@@ -19,11 +19,12 @@ export function MixinCard({channel, mixinType}: mixinCardProps) {
                 <div className='card-header-container'>
                     <div className='card-header'>{channel['channel_name']}</div>
                 </div>
-                <div className='card-info-container'>
+                <div className='code-container'>
                     <code onClick={copyCode} className='card-code card-background-text'>{channel['channel_id']}</code>
-                    <button className='button mini-button error-button'
-                            onClick={deleteMixin}>{lang.DeleteMixinButton}</button>
                 </div>
+
+                <button className='button mini-button error-button'
+                            onClick={deleteMixin}>{lang.DeleteMixinButton}</button>
             </div>
             <div className='gap'/>
         </div>

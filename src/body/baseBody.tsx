@@ -1,7 +1,7 @@
 import {Register} from "../register/register";
 import {useMainBody} from "../hooks/elementHooks/useMainBody";
 
-
+const learnMoreLink = '/helpdesk'
 
 export function BaseBody() {
     const {lang, conveyorImage} = useMainBody()
@@ -17,7 +17,7 @@ export function BaseBody() {
                     <h1 className='center-text'>{GreetingHeader}</h1>
                     <p className='text'>{GreetingText}</p>
                     <div className='center'>
-                        <button className='button mini-button'>{LearnMoreButton}</button>
+                        <a href={learnMoreLink} className='button mini-button'>{LearnMoreButton}</a>
                     </div>
                 </div>
             </div>
