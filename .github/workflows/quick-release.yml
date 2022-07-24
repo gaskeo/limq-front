@@ -43,6 +43,8 @@ jobs:
       - name: Release
         uses: ncipollo/release-action@v1
         with:
+          tag: v1.0.8
+          name: v1.0.8
           artifacts: limq-front@v1.0.8.zip
           body: fixes for safari
           token: ${{ secrets.GITHUB_TOKEN }}
