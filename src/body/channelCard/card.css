@@ -1,7 +1,7 @@
 .card-container {
     display: grid;
-    grid-gap: 1rem;
-    justify-content: center;
+    justify-content: space-between;
+    grid-gap: 20px;
     width: 84vw;
 }
 
@@ -15,9 +15,8 @@
     border-radius: 5px;
     padding: 15px 20px 20px;
     overflow: hidden;
-    min-height: 120px;
+    min-height: 160px;
     max-width: 500px;
-
 }
 
 .show-card {
@@ -176,22 +175,22 @@
 
 @media screen and (min-width: 601px) and (max-width: 800px) {
     .card-container {
-        grid-template-columns: repeat(auto-fill, 40vw);
-    }
-
-    .card {
-        width: 40vw;
+        grid-template-columns: repeat(auto-fill, calc((84vw - 20px) / 2));
     }
 }
 
-@media screen and (min-width: 801px) {
+@media screen and (min-width: 801px) and (max-width: 1920px) {
     .card-container {
-        grid-template-columns: repeat(auto-fill, clamp(200px, 26vw, 500px));
+        grid-template-columns: repeat(auto-fill, calc((84vw - 40px) / 3));
 
     }
 
-    .card {
-        width: 26vw;
+}
+
+@media screen and (min-width: 1921px) {
+    .card-container {
+        grid-auto-columns: 10%;
+        grid-template-columns: repeat(auto-fill, calc((84vw - 100px) / 6));
     }
 }
 

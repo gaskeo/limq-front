@@ -200,6 +200,10 @@ a {
     background-color: var(--header-color);
 }
 
+.align-left {
+    align-items: start;
+}
+
 .error-text {
     max-width: 500px;
     font-family: var(--main-font-family);

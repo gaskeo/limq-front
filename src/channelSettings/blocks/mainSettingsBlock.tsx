@@ -22,7 +22,7 @@ export const MainSettingsBlock = memo(() => {
 
     return (
         <div>
-            <form onSubmit={submit}>
+            <form onSubmit={submit} className='app-form form-bg align-left'>
                 <h2>{RenameChannelHeader}</h2>
 
                 <Input state={channelName}
