@@ -1,12 +1,12 @@
 # LiMQ react panel
 
-Другие ресурсы LiMQ: [LiMQ core api](https://github.com/emmitrin/limq), [LiMQ panel](https://github.com/tikovka72/limq-panel)
+Другие ресурсы LiMQ: [LiMQ core api](https://github.com/emmitrin/limq), [LiMQ panel](https://github.com/gaskeo/limq-panel)
 
 [English version](README.ru.md)
 
 ![main page](assets/main_page.jpg)
 
-React версия [панели LiMQ](https://github.com/tikovka72/limq-panel).
+React версия [панели LiMQ](https://github.com/gaskeo/limq-panel).
 
 ## Функции
 ### Выбор языка и темы
