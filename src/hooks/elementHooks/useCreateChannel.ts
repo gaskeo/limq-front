@@ -5,8 +5,11 @@ import {ApiRoutes} from "../../store/actionCreators/apiRoutes";
 import {dataStates} from "../../store/reducers/consts";
 import {getErrorDescription} from "../../lang/getServerErrorDescription";
 
+
+const maxChannelLength = 64
+
 export function checkChannelLength(name: string) {
-    return name.length <= 32
+    return name.length <= maxChannelLength
 }
 
 export function useCreateChannel() {

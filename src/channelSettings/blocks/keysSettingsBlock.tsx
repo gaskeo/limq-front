@@ -12,9 +12,10 @@ import {Key} from "../../store/reducers/keysReducer";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 
 const sandboxLink = 'https://sandbox.limq.ru'
+const maxKeyLength = 20
 
 export function checkKeyLength(key: string) {
-    return key.length <= 32
+    return key.length <= maxKeyLength
 }
 
 interface KeysListProps {
