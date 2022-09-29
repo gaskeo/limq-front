@@ -23,7 +23,7 @@ export const langDict: LangStruct = {
     KeyNameTooLongError: "Key name is too long",
     KeyNameForm: "Name",
     KeyTypeReadForm: "Listen the queue for a new messages",
-    KeyTypeWriteForm: "Post messages to the queue",
+    KeyTypeWriteForm: "Publish messages to the queue",
     KeyAllowInfoForm: "Allow info",
     KeyAllowMixinsForm: "Allow mixins",
     CreateKeyButton: "Create",
