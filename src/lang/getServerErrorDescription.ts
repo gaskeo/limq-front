@@ -25,6 +25,8 @@ const codes: codesStruct = {
     "1002": defaultLangValue.PasswordError,
     "1003": defaultLangValue.EmailExistError,
     "1004": defaultLangValue.BadUserError,
+
+    "1100": defaultLangValue.TooManyRequests,
     '-1': defaultLangValue.UnknownError
 }
 

@@ -112,6 +112,7 @@ export const langDict: LangStruct = {
     EmailExistError: 'Пользователь с таким e-mail уже существует',
     BadUserError: 'Пользователь не найден',
     UnknownError: 'Неизвестная ошибка',
+    TooManyRequests: 'Вы делаете много запросов, попробуйте позже',
 
     GreetingHeader: 'Ознакомьтесь с функциями LiMQ',
     GreetingText: 'LiMQ — это мощный облачный SaaS брокер сообщений',
