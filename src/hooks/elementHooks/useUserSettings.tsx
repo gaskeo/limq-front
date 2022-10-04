@@ -10,9 +10,10 @@ import {ApiRoutes} from "../../store/actionCreators/apiRoutes";
 import {dataStates} from "../../store/reducers/consts";
 import {checkChannelLength} from "./useCreateChannel";
 import {getErrorDescription} from "../../lang/getServerErrorDescription";
+import {QuotasBlock} from "../../userSettings/blocks/quotasBlock";
 
 
-const menuTabs = (names: { changeName: string, changeEmail: string, changePassword: string }) => [
+const menuTabs = (names: { changeName: string, changeEmail: string, changePassword: string, myQuotas: string }) => [
     {
         name: names.changeName, parameterName: 'changeName',
         id: 1, block: () => <NameBlock key='1'/>
@@ -24,6 +25,10 @@ const menuTabs = (names: { changeName: string, changeEmail: string, changePasswo
     {
         name: names.changePassword, parameterName: 'changePassword',
         id: 3, block: () => <PasswordBlock key='3'/>
+    },
+    {
+        name: names.myQuotas, parameterName: 'myQuotas',
+        id: 4, block: () => <QuotasBlock key='4'/>
     }
 ]
 
@@ -59,7 +64,8 @@ export function useUserSettings() {
     const {lang} = useTypedSelector(state => state.lang)
     const tabs = menuTabs({
         changeName: lang.UserSettingsMenuUsername,
-        changeEmail: lang.UserSettingsMenuEmail, changePassword: lang.UserSettingsMenuPassword
+        changeEmail: lang.UserSettingsMenuEmail, changePassword: lang.UserSettingsMenuPassword,
+        myQuotas: lang.UserSettingsMenuQuota
     })
     const currentTab = searchParams.get(params.tab)
     return {lang, tabs, currentTab, changeTab}
@@ -252,4 +258,27 @@ export function usePasswordSettingsBlock() {
         errorMessage,
         requested
     }
+}
+
+
+
+export function useQuotaSettingsBlock() {
+    function generateMainText() {
+        let [beforeDocs, afterDocs] =
+            lang.YourPlanTextR.replace('{planName}', quotaName).split('{docs}')
+        return <>
+            {beforeDocs}<a href={docsLink} className='link'>{lang.InDocsLink}</a>
+            {afterDocs}</>
+
+    }
+    const {quota, quotaDataState} = useTypedSelector(state => state.quota)
+    const {lang} = useTypedSelector(state => state.lang)
+    let quotaName = '';
+    if (quotaDataState === dataStates.received) {
+        quotaName = lang[quota.name as keyof typeof lang]
+    }
+    const docsLink = 'https://docs.limq.ru'
+
+    let mainText = generateMainText()
+    return {mainText}
 }

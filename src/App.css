@@ -164,6 +164,10 @@ a {
     text-decoration: none;
 }
 
+.link {
+    text-decoration: underline royalblue;
+}
+
 .no-wrap {
     white-space: nowrap;
 }
@@ -293,6 +297,10 @@ a {
     transition: fill .2s, all .5s;
 }
 
+.settings-text {
+    display: block;
+}
+
 @media screen and (max-width: 600px) {
     .app-form {
         width: 90vw;
@@ -312,12 +320,19 @@ a {
     .error-text {
         margin-left: 2fr;
     }
+
+    .settings-text {
+        max-width: 500px;
+    }
 }
 
 @media screen and (min-width: 801px) {
     .app-form {
         width: 64vw;
         max-width: calc(500px + 4rem);
+    }
 
+    .settings-text {
+        max-width: 500px;
     }
 }

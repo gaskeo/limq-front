@@ -8,16 +8,20 @@ import {dataStates} from "../reducers/consts";
 import {ApiRoutes} from "./apiRoutes";
 import {PathActionTypes} from "../reducers/pathReducer";
 import {routes} from "../../routes/routes";
+import {Quota, quotaAction, QuotaActionTypes} from "../reducers/quotaReducer";
 
 export const fetchUser = () => {
-    return async (dispatch: Dispatch<userAction>) => {
+    return async (dispatch: Dispatch<userAction | quotaAction>) => {
         dispatch({type: UserActionTypes.setUserDataState, payload: dataStates.requested})
-        axios.get<{ auth: boolean, user: User, path: string }>(ApiRoutes.GetUser).then(response => {
+        axios.get<{ auth: boolean, user: User, path: string, quota: Quota }>(ApiRoutes.GetUser).then(response => {
             if (response.data['auth']) {
                 dispatch({type: UserActionTypes.setUser, payload: response.data['user']})
+                dispatch({type: QuotaActionTypes.setQuota, payload: response.data['quota']})
             }
 
             dispatch({type: UserActionTypes.setUserDataState, payload: dataStates.received})
+            dispatch({type: QuotaActionTypes.setQuotaDataState, payload: dataStates.received})
+
         }).catch(() => {
             dispatch({type: UserActionTypes.setUserDataState, payload: dataStates.error})
         })

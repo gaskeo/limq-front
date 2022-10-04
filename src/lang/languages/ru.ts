@@ -52,6 +52,7 @@ export const langDict: LangStruct = {
     UserSettingsMenuUsername: 'Сменить имя',
     UserSettingsMenuEmail: 'Сменить почту',
     UserSettingsMenuPassword: 'Сменить пароль',
+    UserSettingsMenuQuota: 'Тариф аккаунта',
     ChangeEmailButton: 'Сменить почту',
     RenameUserButton: 'Сменить имя',
     OldPasswordForm: 'Старый пароль',
@@ -117,5 +118,11 @@ export const langDict: LangStruct = {
     GreetingHeader: 'Ознакомьтесь с функциями LiMQ',
     GreetingText: 'LiMQ — это мощный облачный SaaS брокер сообщений',
     LearnMoreButton: 'Узнать больше',
-    TrySandbox: 'Попробуйте функции LiMQ в песочнице'
+    TrySandbox: 'Попробуйте функции LiMQ в песочнице',
+
+    Free: 'бесплатный',
+    Pro: 'Pro',
+    YourPlanTextR: 'Тариф вашего аккаунта — {planName}. Про квоты и ограничения можете прочитать {docs}. ' +
+        'Перейти на Pro версию можно по ссылке в источнике.',
+    InDocsLink: 'в документации'
 }

@@ -50,6 +50,7 @@ export interface LangStruct {
     UserSettingsMenuUsername: string
     UserSettingsMenuEmail: string
     UserSettingsMenuPassword: string
+    UserSettingsMenuQuota: string
     ChangeEmailButton: string
     RenameUserButton: string
     OldPasswordForm: string
@@ -116,6 +117,12 @@ export interface LangStruct {
     GreetingText: string
     LearnMoreButton: string
     TrySandbox: string
+
+
+    Free: string
+    Pro: string
+    YourPlanTextR: string
+    InDocsLink: string
 }
 
 export const defaultLangValue: LangStruct = {
@@ -170,6 +177,7 @@ export const defaultLangValue: LangStruct = {
     UserSettingsMenuUsername: 'UserSettingsMenuUsername',
     UserSettingsMenuEmail: 'UserSettingsMenuEmail',
     UserSettingsMenuPassword: 'UserSettingsMenuPassword',
+    UserSettingsMenuQuota: 'UserSettingsMenuQuota',
     ChangeEmailButton: 'ChangeEmailButton',
     RenameUserButton: 'RenameUserButton',
     OldPasswordForm: 'OldPasswordForm',
@@ -236,5 +244,10 @@ export const defaultLangValue: LangStruct = {
     GreetingHeader: 'GreetingHeader',
     GreetingText: 'GreetingText',
     LearnMoreButton: 'LearnMoreButton',
-    TrySandbox: 'TryPlayground'
+    TrySandbox: 'TryPlayground',
+
+    Free: 'Free',
+    Pro: 'Pro',
+    YourPlanTextR: 'YourPlanTextR',
+    InDocsLink: 'InDocsLink'
 }
