@@ -307,6 +307,10 @@ a {
         box-sizing: border-box;
     }
 
+    .hide-600 {
+        display: none !important;
+    }
+
     .app-body {
         margin-left: 5vw;
         margin-right: 5vw;
@@ -317,6 +321,11 @@ a {
     .app-form {
         width: 64vw;
     }
+
+    .hide-800 {
+        display: none !important;
+    }
+
     .error-text {
         margin-left: 2fr;
     }

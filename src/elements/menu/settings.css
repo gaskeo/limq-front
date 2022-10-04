@@ -83,6 +83,8 @@
         border-bottom: none;
         justify-content: center;
         text-align: center;
+        padding-left: 2px;
+        padding-right: 2px;
     }
 
     .menu-tab:last-child {

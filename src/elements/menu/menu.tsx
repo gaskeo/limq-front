@@ -1,4 +1,7 @@
-export type menuTab = { id: number, name: string, parameterName: string, block: () => JSX.Element }
+export type menuInner = string | JSX.Element
+
+export type menuTab = { id: number, name: menuInner, parameterName: string, block: () => JSX.Element }
+
 
 interface menuProps {
     active: string | null,

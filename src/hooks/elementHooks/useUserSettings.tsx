@@ -11,9 +11,15 @@ import {dataStates} from "../../store/reducers/consts";
 import {checkChannelLength} from "./useCreateChannel";
 import {getErrorDescription} from "../../lang/getServerErrorDescription";
 import {QuotasBlock} from "../../userSettings/blocks/quotasBlock";
+import {menuInner} from "../../elements/menu/menu";
 
 
-const menuTabs = (names: { changeName: string, changeEmail: string, changePassword: string, myQuotas: string }) => [
+const menuTabs = (names: { changeName: menuInner, changeEmail: menuInner, changePassword: menuInner, myQuotas: menuInner }, accountType='') => [
+    {
+        name: <span className='width-100 space-between'><span>{names.myQuotas}</span><span className='height-80 card-code hide-600 hide-800'>{accountType}</span></span>,
+        parameterName: 'myQuotas',
+        id: 0, block: () => <QuotasBlock key='0'/>
+    },
     {
         name: names.changeName, parameterName: 'changeName',
         id: 1, block: () => <NameBlock key='1'/>
@@ -26,10 +32,6 @@ const menuTabs = (names: { changeName: string, changeEmail: string, changePasswo
         name: names.changePassword, parameterName: 'changePassword',
         id: 3, block: () => <PasswordBlock key='3'/>
     },
-    {
-        name: names.myQuotas, parameterName: 'myQuotas',
-        id: 4, block: () => <QuotasBlock key='4'/>
-    }
 ]
 
 const params = {
@@ -62,11 +64,12 @@ export function useUserSettings() {
 
     const [searchParams, changeSearchParams] = useSearchParams()
     const {lang} = useTypedSelector(state => state.lang)
+    const {quota} = useTypedSelector(state => state.quota)
     const tabs = menuTabs({
         changeName: lang.UserSettingsMenuUsername,
         changeEmail: lang.UserSettingsMenuEmail, changePassword: lang.UserSettingsMenuPassword,
         myQuotas: lang.UserSettingsMenuQuota
-    })
+    }, lang[quota.name + 'Menu' as keyof typeof lang])
     const currentTab = searchParams.get(params.tab)
     return {lang, tabs, currentTab, changeTab}
 }
@@ -277,7 +280,7 @@ export function useQuotaSettingsBlock() {
     if (quotaDataState === dataStates.received) {
         quotaName = lang[quota.name as keyof typeof lang]
     }
-    const docsLink = 'https://docs.limq.ru'
+    const docsLink = 'https://docs.limq.ru/quota/basic/'
 
     let mainText = generateMainText()
     return {mainText}

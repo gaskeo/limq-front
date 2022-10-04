@@ -122,6 +122,10 @@ export const langDict: LangStruct = {
 
     Free: 'бесплатный',
     Pro: 'Pro',
+
+    FreeMenu: 'free',
+    ProMenu: 'Pro',
+
     YourPlanTextR: 'Тариф вашего аккаунта — {planName}. Про квоты и ограничения можете прочитать {docs}. ' +
         'Перейти на Pro версию можно по ссылке в источнике.',
     InDocsLink: 'в документации'
