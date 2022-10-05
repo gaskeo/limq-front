@@ -16,7 +16,8 @@ import {menuInner} from "../../elements/menu/menu";
 
 const menuTabs = (names: { changeName: menuInner, changeEmail: menuInner, changePassword: menuInner, myQuotas: menuInner }, accountType='') => [
     {
-        name: <span className='width-100 space-between'><span>{names.myQuotas}</span><span className='height-80 card-code hide-600 hide-800'>{accountType}</span></span>,
+        name: <span className='width-100 special-menu-tab'><span className=''>{names.myQuotas}</span>
+            <span className='height-80 card-code hide-600 hide-800'>{accountType}</span></span>,
         parameterName: 'myQuotas',
         id: 0, block: () => <QuotasBlock key='0'/>
     },

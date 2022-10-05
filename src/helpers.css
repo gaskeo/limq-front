@@ -31,6 +31,14 @@
     font-family: var(--main-font-family);
 }
 
+.right {
+    text-align: right;
+}
+
+.inline {
+    display: block !important;
+}
+
 .grey-text {
     color: var(--code-color)
 }

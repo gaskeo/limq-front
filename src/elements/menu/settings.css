@@ -43,6 +43,10 @@
     background-color: var(--menu-tab-color);
 }
 
+.special-menu-tab {
+    display: grid;
+    grid-template-columns: auto min-content;
+}
 
 .menu-tab:hover {
     background-color: var(--menu-tab-hover-color);
@@ -81,6 +85,7 @@
     .menu-tab {
         border-right: 1px solid var(--border-color);
         border-bottom: none;
+        display: flex;
         justify-content: center;
         text-align: center;
         padding-left: 2px;
