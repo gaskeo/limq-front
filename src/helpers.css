@@ -39,6 +39,10 @@
     display: block !important;
 }
 
+.margin-left-4px {
+    margin-left: 4px;
+}
+
 .grey-text {
     color: var(--code-color)
 }
