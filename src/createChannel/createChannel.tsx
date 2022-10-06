@@ -73,7 +73,7 @@ export function CreateChannel() {
 
                 <p className='error-text'/>
                 <div className='max-width-500 align-left width-100 height-120 half-opacity horizontal na-cursor'>
-                    <Checkbox label={EndToEndDataEncryptionForm} state={false} active={false}
+                    <Checkbox label={EndToEndDataEncryptionForm} state={endToEndDataEncryption && false} active={false}
                               setState={changeEndToEndDataEncryption}/>
                 </div>
                 <p className='error-text'>{errorMessage}</p>
