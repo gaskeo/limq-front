@@ -74,6 +74,10 @@
     max-width: 500px;
 }
 
+.max-width-500-4rem {
+    max-width: calc(500px + 4rem);
+}
+
 .justify-left {
     justify-content: left;
 }
@@ -96,10 +100,25 @@
     font-size: 80%;
 }
 
+.height-120 {
+    height: 120%;
+}
+
+.half-opacity {
+    opacity: .5;
+}
+
+.transition {
+    transition: all .2s;
+}
 .hidden {
     visibility: hidden;
 }
 
 .horizontal-gap {
     width: 2rem;
+}
+
+.small-horizontal-gap {
+    width: .5rem;
 }

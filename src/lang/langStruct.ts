@@ -16,6 +16,12 @@ export interface LangStruct {
     CreateMixinButton: string
     YourMixinsHeader: string
     ChannelNameForm: string
+    MaxMessageSizeForm: string
+    NeedBufferizationForm: string
+    MaxBufferedMessageCount: string
+    BufferedDataPersistencyForm: string
+    EndToEndDataEncryptionForm: string
+    UpToPlaceholderR: string
     ChannelNameTooLong: string
     RenameChannelButton: string
     KeyNameTooLongError: string
@@ -147,6 +153,12 @@ export const defaultLangValue: LangStruct = {
     CreateMixinButton: 'CreateMixinButton',
     YourMixinsHeader: 'YourMixinsHeader',
     ChannelNameForm: 'ChannelNameForm',
+    MaxMessageSizeForm: 'MaxMessageSizeForm',
+    NeedBufferizationForm: 'NeedBufferizationForm',
+    MaxBufferedMessageCount: 'MaxBufferedMessageCount',
+    BufferedDataPersistencyForm: 'BufferedDataPersistencyForm',
+    EndToEndDataEncryptionForm: 'EndToEndDataEncryptionForm',
+    UpToPlaceholderR: 'UpToPlaceholderR',
     ChannelNameTooLong: 'ChannelNameTooLong',
     RenameChannelButton: 'RenameChannelButton',
     KeyNameTooLongError: 'KeyNameTooLongError',

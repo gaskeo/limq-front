@@ -97,17 +97,20 @@ export function KeysSettingsBlock() {
                                setData='0'
                                name='key-type'
                                setState={changeKeyType}/>
-
                         <div className='small-gap'/>
+                        <div className='small-gap'/>
+
                         <div className='horizontal'>
+
                             <div className='horizontal-gap'/>
-                            <div className={`${keyType === "0" ? '' : 'hidden'}`}>
-                                <Checkbox label={KeyAllowInfoForm} state={allowInfo} setState={changeAllowInfo}/>
-                                <Checkbox label={KeyAllowMixinsForm} state={allowMixins}
+                            <div className={`transition ${keyType === "0" ? '' : 'half-opacity'}`}>
+                                <Checkbox label={KeyAllowInfoForm} active={keyType === "0"} state={allowInfo} setState={changeAllowInfo}/>
+                                <div className='small-gap'/>
+                                <Checkbox label={KeyAllowMixinsForm} active={keyType === "0"} state={allowMixins}
                                           setState={changeAllowMixins}/>
                             </div>
                         </div>
-                        <div className='small-gap'/>
+                        <div className='gap'/>
                     </div>
                     <Radio label={KeyTypeWriteForm} setData='1' name='key-type' setState={changeKeyType}
                            checked={keyType === '1'}/>

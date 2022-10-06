@@ -15,11 +15,11 @@ export function MixinCard({channel, mixinType}: mixinCardProps) {
 
     return (
         <div className='show-card' ref={myRef}>
-            <div className='card card-100' key={channel["channel_id"]}>
+            <div className='card card-100 max-width-500-4rem' key={channel["channel_id"]}>
                 <div className='card-header-container'>
                     <div className='card-header'>{channel['channel_name']}</div>
                 </div>
-                <div className='code-container'>
+                <div className='code-container copy-cursor'>
                     <code onClick={copyCode} className='card-code card-background-text'>{channel['channel_id']}</code>
                 </div>
 

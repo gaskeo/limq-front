@@ -48,7 +48,7 @@ export function MixinsSettingsBlock() {
             <span className='gap'/>
             <h2>{YourMixinsHeader}</h2>
 
-            <div className='max-width-500'>
+            <div className='max-width-500-4rem'>
                 <Menu active={activeTab} onClick={changeTab} tabs={tabs}
                       menuClasses='menu-horizontal' menuTabClasses='menu-tab-horizontal'/>
             </div>

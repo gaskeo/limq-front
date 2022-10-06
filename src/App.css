@@ -192,6 +192,7 @@ a {
 }
 
 .app-form {
+    box-sizing: border-box;
     display: flex;
     padding: 2rem;
     align-items: center;

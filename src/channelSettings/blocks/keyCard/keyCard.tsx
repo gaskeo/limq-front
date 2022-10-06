@@ -26,14 +26,14 @@ export const KeyCard = ({channelKey}: keyCardProps) => {
 
     return (
         <div className='show-card' ref={myRef}>
-            <div className='card card-100 horizontal-scroll'>
+            <div className='card card-100 horizontal-scroll auto-width max-width-500-4rem'>
                 <div className='card-header-container'>
                     <h1 className='card-header'>{channelKey.name} {!channelKey.active && <span className='grey-text'>({lang.Paused})</span>}</h1>
                 </div>
                 <div className='card-info-container'>
                     <p className='card-text grey-text'>{perm}, {channelKey.created}</p>
                     <div className='code-container'>
-                        <code className='card-code card-background-text' onClick={copyCode}>{channelKey.key}</code>
+                        <code className='card-code card-background-text copy-cursor' onClick={copyCode}>{channelKey.key}</code>
                     </div>
                     <div className='card-inline-block'>
                         <button className={`button mini-button ${channelKey.active ? 'warning-button' : 'success-button'}`}

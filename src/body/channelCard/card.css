@@ -122,6 +122,18 @@
     margin-bottom: 16px;
 }
 
+.copy-cursor {
+    cursor: copy;
+}
+
+.na-cursor {
+    cursor: not-allowed;
+}
+
+.line-height-1-2em {
+    line-height: 1.2em;
+}
+
 .card-icon-and-text-container {
     color: var(--text-color);
     display: flex;
@@ -223,6 +235,7 @@
 .dot-inactive {
     fill: var(--warning-color);
 }
+
 .inactive-card {
     background-color: var(--code-color);
     cursor: auto;

@@ -16,12 +16,13 @@ export function Radio({label, setState, name, setData, checked}: radioProps) {
         }
     }
 
-    const [id] = useState(String(Math.random()))
+    const [id] = useState(String(Math.floor(Math.random() * 1000)))
     return (
         <>
             <label className='radio-container' htmlFor={id}>
                 <input className='radio' id={id} type='radio' name={name} checked={checked}
                        onChange={onChange()}/>
+                <span className={`custom-radio ${checked && 'radio-checked'}`}/>
                 <span className='input-label'>{label}</span>
 
             </label>

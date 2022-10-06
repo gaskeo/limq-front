@@ -35,9 +35,20 @@ export function useCreateChannel() {
     const {fetchCreateChannel} = useActions()
 
     const {lang} = useTypedSelector(state => state.lang)
+    const {quota} = useTypedSelector(state => state.quota)
+
+    const maxMessageSize = quota['max_message_size'] || 256
+    const maxBufferedMessageCount = quota['max_bufferred_message_count'] || 256
+    const maxBufferedDataPersistency = quota['buffered_data_persistency'] || 12
 
     const [channelName, changeChannelName] = useState('')
     const [errors, changeErrors] = useState({name: ''})
+
+    const [messageSizeKb, changeMessageSizeKb] = useState(maxMessageSize);
+    const [bufferization, changeBufferization] = useState(true);
+    const [bufferedMessageCount, changeBufferedMessageCount] = useState(maxBufferedMessageCount)
+    const [bufferedDataPersistency, changeBufferedDataPersistency] = useState(maxBufferedDataPersistency)
+    const [endToEndDataEncryption, changeEndToEndDataEncryption] = useState(true)
 
     const {states} = useTypedSelector(state => state.fetch)
     const createChannelState = states[ApiRoutes.CreateChannel]
@@ -54,6 +65,19 @@ export function useCreateChannel() {
         submit,
         errors,
         errorMessage,
-        requested
+        requested,
+        messageSizeKb,
+        changeMessageSizeKb,
+        bufferization,
+        changeBufferization,
+        bufferedMessageCount,
+        changeBufferedMessageCount,
+        bufferedDataPersistency,
+        changeBufferedDataPersistency,
+        endToEndDataEncryption,
+        changeEndToEndDataEncryption,
+        maxBufferedMessageCount,
+        maxMessageSize,
+        maxBufferedDataPersistency
     }
 }

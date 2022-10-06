@@ -10,7 +10,7 @@ export function NoMixinsCard({mixinType}: noMixinsCardProps) {
     const {lang} = useTypedSelector(state => state.lang)
     const cardText = mixinType === MixinTypeStates.in ? lang.NoMixinInCard : lang.NoMixinOutCard
     return (
-        <div className='card add-channel-card card-100 horizontal-scroll'>
+        <div className='card add-channel-card card-100 horizontal-scroll max-width-500-4rem'>
             <div className='add-channel-card-text width-100 center'>
                 <h1 className='card-header'>{cardText}</h1>
             </div>
