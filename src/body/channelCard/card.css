@@ -16,7 +16,6 @@
     padding: 15px 20px 20px;
     overflow: hidden;
     min-height: 160px;
-    max-width: 500px;
 }
 
 .show-card {
@@ -50,6 +49,15 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+}
+
+.upgrade-plan-card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-left: 1rem;
+    padding-right: 1rem;
 }
 
 .channel-card-add-icon {

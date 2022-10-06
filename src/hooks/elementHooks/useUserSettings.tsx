@@ -12,6 +12,7 @@ import {checkChannelLength} from "./useCreateChannel";
 import {getErrorDescription} from "../../lang/getServerErrorDescription";
 import {QuotasBlock} from "../../userSettings/blocks/quotasBlock";
 import {menuInner} from "../../elements/menu/menu";
+import {routes} from "../../routes/routes";
 
 
 const menuTabs = (names: { changeName: menuInner, changeEmail: menuInner, changePassword: menuInner, myQuotas: menuInner }, accountType='') => [
@@ -271,7 +272,7 @@ export function useQuotaSettingsBlock() {
         let [beforeDocs, afterDocs] =
             lang.YourPlanTextR.replace('{planName}', quotaName).split('{docs}')
         return <>
-            {beforeDocs}<a href={docsLink} className='link'>{lang.InDocsLink}</a>
+            {beforeDocs}<a href={routes.apiDocsQuotas} className='link'>{lang.InDocsLink}</a>
             {afterDocs}</>
 
     }
@@ -281,7 +282,6 @@ export function useQuotaSettingsBlock() {
     if (quotaDataState === dataStates.received) {
         quotaName = lang[quota.name as keyof typeof lang]
     }
-    const docsLink = 'https://docs.limq.ru/quota/basic/'
 
     let mainText = generateMainText()
     return {mainText}

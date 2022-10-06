@@ -95,6 +95,7 @@ export const langDict: LangStruct = {
     ChannelNameError: 'Bad channel name',
     ChannelNotExistError: "Channel doesn't exist",
     NotChannelOwnerError: "You do not have access to this channel",
+    ChannelLimitOver: "You've reached the maximum channel quantity on your account plan",
 
     KeyNameError: 'Bad key name',
     KeyPermissionsError: 'Bad permissions',

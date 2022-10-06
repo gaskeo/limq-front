@@ -10,8 +10,8 @@ import {LoadingKeyCard} from "./keyCard/loadingCard";
 import {useKeysSettingsBlock} from "../../hooks/elementHooks/useChannelSettings";
 import {Key} from "../../store/reducers/keysReducer";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
+import {routes} from "../../routes/routes";
 
-const sandboxLink = 'https://sandbox.limq.ru'
 const maxKeyLength = 20
 
 export function checkKeyLength(key: string) {
@@ -45,7 +45,7 @@ const KeysList = memo(({reversedKeys, keysDataState}: KeysListProps) => {
                 {reversedKeys.map(key => <KeyCard key={key.key}
                                                   channelKey={key}/>)}
             </div>
-            <a href={sandboxLink} className='card-code'>{lang.TrySandbox}</a>
+            <a href={routes.sandbox} className='card-code'>{lang.TrySandbox}</a>
         </div>
     )
 })
@@ -82,7 +82,7 @@ export function KeysSettingsBlock() {
 
     return (
         <div>
-            <form onSubmit={submit} className='app-form form-bg align-left'>
+            <form onSubmit={submit} className='app-form form-bg align-left auto-width'>
                 <h2>{CreateKeyHeader}</h2>
                 <Input label={KeyNameForm}
                        state={keyName}

@@ -95,6 +95,7 @@ export const langDict: LangStruct = {
     ChannelNameError: 'Невалидное название канала',
     ChannelNotExistError: 'Канал не найден',
     NotChannelOwnerError: 'Нет доступа к этому каналу',
+    ChannelLimitOver: 'Вы достигли максимального количества каналов по своему плану',
 
     KeyNameError: 'Название ключа указано неверно. Проверьте правильность данных и повторите попытку',
     KeyPermissionsError: 'Права доступа для ключа указаны неверно. Проверьте правильность данных и повторите попытку',

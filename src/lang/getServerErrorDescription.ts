@@ -27,6 +27,7 @@ const codes: codesStruct = {
     "1004": defaultLangValue.BadUserError,
 
     "1100": defaultLangValue.TooManyRequests,
+    "1101": defaultLangValue.ChannelLimitOver,
     '-1': defaultLangValue.UnknownError
 }
 

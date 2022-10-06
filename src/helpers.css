@@ -56,6 +56,10 @@
     display: none; /* for Chrome, Safari, and Opera */
 }
 
+.auto-width {
+    width: auto;
+}
+
 .gap {
     display: block;
     margin-bottom: 2rem;

@@ -31,7 +31,7 @@ export function MixinsSettingsBlock() {
 
     return (
         <div>
-            <form onSubmit={submit} className='app-form form-bg align-left'>
+            <form onSubmit={submit} className='app-form form-bg align-left auto-width'>
                 <h2>{CreateMixinHeader}</h2>
 
                 <Input state={keyId}

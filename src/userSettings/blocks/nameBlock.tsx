@@ -30,7 +30,7 @@ export function NameBlock() {
 
     return (
         <div>
-            <form onSubmit={submit}>
+            <form onSubmit={submit} className='app-form form-bg align-left auto-width'>
                 <h2>{RenameUserHeader}</h2>
                 <Input label={UsernameForm}
                        state={newUsername}

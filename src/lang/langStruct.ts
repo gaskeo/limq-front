@@ -93,6 +93,7 @@ export interface LangStruct {
     ChannelNameError: string,
     ChannelNotExistError: string,
     NotChannelOwnerError: string,
+    ChannelLimitOver: string,
 
     KeyNameError: string,
     KeyPermissionsError: string,
@@ -224,6 +225,7 @@ export const defaultLangValue: LangStruct = {
     ChannelNameError: 'ChannelNameError',
     ChannelNotExistError: 'ChannelNotExistError',
     NotChannelOwnerError: 'NotChannelOwnerError',
+    ChannelLimitOver: 'ChannelLimitOver',
 
     KeyNameError: 'KeyNameError',
     KeyPermissionsError: 'KeyPermissionsError',

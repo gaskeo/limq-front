@@ -31,7 +31,7 @@ export function EmailBlock() {
 
     return (
         <div>
-            <form onSubmit={submit}>
+            <form onSubmit={submit} className='app-form form-bg align-left auto-width'>
                 <h2>{ChangeEmailHeader}</h2>
                 <Input label={EmailForm}
                        state={newEmail}
