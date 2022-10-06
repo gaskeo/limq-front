@@ -5,8 +5,7 @@ export function useChannels() {
     const {lang} = useTypedSelector(state => state.lang)
     const {quota} = useTypedSelector(state => state.quota)
     let leftChannels = 0;
-    console.log(quota)
-    console.log(quota['max_channel_count'])
+
     if (quota['max_channel_count']) {
         leftChannels = quota['max_channel_count'] - (channels.length ? channels.length : 0)
     }
