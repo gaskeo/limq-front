@@ -117,7 +117,7 @@ export function KeysSettingsBlock() {
                 </div>
                 <p className='error-text'>{errorMessage}</p>
 
-                <Submit label={requested ? <Loading/> : CreateKeyButton}/>
+                <Submit classes='success-button' label={requested ? <Loading/> : CreateKeyButton}/>
             </form>
             <KeysList reversedKeys={reversedKeys} keysDataState={keysDataState}/>
         </div>

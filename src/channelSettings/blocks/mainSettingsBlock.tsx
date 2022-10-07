@@ -34,7 +34,7 @@ export const MainSettingsBlock = memo(() => {
                        placeholder={placeholder}/>
                 <p className='error-text'>{errorMessage}</p>
 
-                <Submit label={requested ? <Loading/> : RenameChannelButton}/>
+                <Submit classes='success-button' label={requested ? <Loading/> : RenameChannelButton}/>
             </form>
         </div>
     )

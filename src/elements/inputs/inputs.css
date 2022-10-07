@@ -120,7 +120,7 @@ input[type=number] {
 }
 
 .radio {
-    margin: 0 8px 2px 0;
+    margin: 0 12px 2px 0;
     opacity: 0;
     cursor: pointer;
 }
@@ -131,9 +131,10 @@ input[type=number] {
     aspect-ratio: 1 / 1;
     border-radius: 50%;
     border: none;
-    outline: 1px solid var(--code-color);
-    outline-offset: 1px;
-    bottom: 4px;
+    box-shadow: 0 0 0 1px var(--header-color), 0 0 0 2px var(--code-color);
+    background-color: var(--header-color);
+    margin-bottom: auto;
+    margin-top: auto;
     transition: background-color .2s;
 }
 
@@ -233,9 +234,9 @@ input[type=number] {
     border-radius: 5px;
     margin-right: 8px;
     margin-bottom: 4px;
-    box-shadow: 0 0 0 1px var(--form-background-color), 0 0 0 2px var(--code-color);
+    box-shadow: 0 0 0 1px var(--header-color), 0 0 0 2px var(--code-color);
     transition: background-color .2s;
-    background-color: var(--form-background-color);
+    background-color: var(--header-color);
 }
 
 .checkbox-checked {

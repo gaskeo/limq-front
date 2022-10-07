@@ -43,7 +43,7 @@ export function MixinsSettingsBlock() {
                        placeholder={EnterReadKey}/>
                 <p className='error-text'>{errorMessage}</p>
 
-                <Submit label={requested ? <Loading/> : CreateMixinButton}/>
+                <Submit classes='success-button' label={requested ? <Loading/> : CreateMixinButton}/>
             </form>
             <span className='gap'/>
             <h2>{YourMixinsHeader}</h2>
