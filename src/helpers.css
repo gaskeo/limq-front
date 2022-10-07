@@ -115,6 +115,10 @@
     visibility: hidden;
 }
 
+.no-display {
+    display: none;
+}
+
 .horizontal-gap {
     width: 2rem;
 }

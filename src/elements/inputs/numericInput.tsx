@@ -53,6 +53,7 @@ export function NumericInput({label, onChange, setState, state, placeholder, err
 
     return (
         <Input label={label}
+               pattern="\d*"
                onChange={_onChange}
                setState={changeShowValue}
                state={showValue}

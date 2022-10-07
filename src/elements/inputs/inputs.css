@@ -46,6 +46,14 @@ input[type=number] {
     background-color: var(--form-input-color);
     transition: background-color .2s, border .2s, color .2s;
     color: var(--text-color);
+
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
 }
 
 .input::placeholder {
@@ -223,11 +231,11 @@ input[type=number] {
     height: 1.2rem;
     aspect-ratio: 1 / 1;
     border-radius: 5px;
-    outline: 1px solid var(--code-color);
-    outline-offset: 1px;
     margin-right: 8px;
     margin-bottom: 4px;
+    box-shadow: 0 0 0 1px var(--form-background-color), 0 0 0 2px var(--code-color);
     transition: background-color .2s;
+    background-color: var(--form-background-color);
 }
 
 .checkbox-checked {
