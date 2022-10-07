@@ -23,7 +23,8 @@ export function useCreateChannel() {
             return
         }
 
-        fetchCreateChannel(channelName)
+        fetchCreateChannel(channelName, messageSizeKb, bufferization, bufferedMessageCount,
+            bufferedDataPersistency, endToEndDataEncryption && false)
     }
 
     function checkChannelName(name: string) {

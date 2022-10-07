@@ -24,15 +24,32 @@ export const fetchChannels = () => {
 }
 
 
-function createCreateChannelForm(name: string): FormData {
+function createCreateChannelForm(name: string,
+                                 messageSize: number,
+                                 needBufferization: boolean,
+                                 bufferedMessageCount: number,
+                                 bufferedDataPersistency: number,
+                                 endToEndDataEncryption: boolean): FormData {
     const form = new FormData();
     form.append('name', name)
+    form.append('max_message_size', messageSize.toString())
+    form.append('need_bufferization', needBufferization ? '1' : '0')
+    form.append('buffered_message_count', bufferedMessageCount.toString())
+    form.append('buffered_data_persistency', bufferedDataPersistency.toString())
+    form.append('end_to_end_data_encryption', endToEndDataEncryption ? '1' : '0')
     return form
 }
 
-export const fetchCreateChannel = (channelName: string) => {
+export const fetchCreateChannel = (channelName: string,
+                                   messageSize: number,
+                                   needBufferization: boolean,
+                                   bufferedMessageCount: number,
+                                   bufferedDataPersistency: number,
+                                   endToEndDataEncryption: boolean) => {
     return async (dispatch: Dispatch<rootActions>) => {
-        const form = createCreateChannelForm(channelName)
+        const form = createCreateChannelForm(channelName, messageSize, needBufferization,
+            bufferedMessageCount, bufferedDataPersistency, endToEndDataEncryption)
+
         dispatch({
             type: FetchActionTypes.setFetch,
             payload: {
