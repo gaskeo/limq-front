@@ -43,14 +43,20 @@
 }
 
 .dropdown {
-    z-index: 120;
-    display: none;
+    z-index: -50;
+    opacity: 0;
     position: absolute;
+    transition: opacity .2s, z-index .2s;
+    width: 100%;
+    visibility: hidden;
 }
 
 .show {
+    transition: opacity .2s, z-index .2s;
+    opacity: 1;
+    z-index: 100;
     display: block;
-    width: 100%;
+    visibility: visible;
 }
 
 .dropdown-button {

@@ -16,7 +16,7 @@ function getCurrentTab(tabs: menuTab[], tabName: string) {
 
 
 export function SettingsBlock({currentTab, tabs}: settingsBlockProps) {
-    return <div className='settings-block'>
+    return <div className='settings-block max-width-100pe'>
         {getCurrentTab(tabs, currentTab || '')}
     </div>
 }

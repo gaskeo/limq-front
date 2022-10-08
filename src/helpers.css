@@ -83,6 +83,10 @@
     max-width: calc(500px + 4rem);
 }
 
+.max-width-100pe {
+    max-width: 100% !important;
+}
+
 .justify-left {
     justify-content: left;
 }

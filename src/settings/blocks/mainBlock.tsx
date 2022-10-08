@@ -22,11 +22,11 @@ export function MainBlock() {
     return (
         <div>
             <h1>{MainSettings}</h1>
-            <Select id='lang' items={[{text: English, value: availableLanguages.en},
+            <Select id='lang' key='lang' items={[{text: English, value: availableLanguages.en},
                 {text: Russian, value: availableLanguages.ru}]} onChange={onLangChange} label={ChangeLanguage}
                     selected={getLang()}/>
             <div className='gap'/>
-            <Select id='theme' items={[
+            <Select id='theme' key='theme' items={[
                 {text: DarkTheme, value: availableThemes.dark},
                 {text: LightTheme, value: availableThemes.light},
                 {text: SystemTheme, value: availableThemes.system}]}

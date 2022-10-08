@@ -25,7 +25,7 @@ export function Select({label, items, onChange, selected, id}: selectProps) {
                      onClick={() => changeOpen(!open)}>
                     {selected && items.filter(item => item.value === selected)[0].text}
                 </div>
-                <div className={'select-dropdown ' + (open ? 'select-dropdown-show' : '')}>
+                <div className={`select-dropdown ${(open ? 'select-dropdown-show' : '')}`}>
                     {items.map(item =>
                         <div key={item.value} className={`button dropdown-item 
                         select-dropdown-item ${selected === item.value ? 'selected' : ''}`}

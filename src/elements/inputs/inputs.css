@@ -107,6 +107,7 @@ input[type=number] {
     width: auto;
     align-items: center;
     position: relative;
+    cursor: pointer;
 }
 
 .checkbox-container {
@@ -162,15 +163,20 @@ input[type=number] {
 }
 
 .select-dropdown {
-    z-index: 100;
-
-    display: none;
+    z-index: -100;
+    opacity: 0;
     position: absolute;
+    visibility: hidden;
+    transition: opacity .2s, z-index .2s;
 }
 
 .select-dropdown-show {
     display: block;
+    opacity: 1;
     width: 100%;
+    z-index: 100;
+    visibility: visible;
+
 }
 
 .select-element {
