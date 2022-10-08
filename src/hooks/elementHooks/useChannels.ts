@@ -6,7 +6,7 @@ export function useChannels() {
     const {quota} = useTypedSelector(state => state.quota)
     let leftChannels = 0;
 
-    if (quota['max_channel_count']) {
+    if (quota?.name && quota['max_channel_count']) {
         leftChannels = quota['max_channel_count'] - (channels.length ? channels.length : 0)
     }
     const reversedChannels = [...channels].reverse()

@@ -4,6 +4,8 @@ import {Submit} from "../elements/inputs/submit";
 import {Checkbox} from "../elements/inputs/checkbox";
 import {Loading} from "../elements/loading/loading";
 import {useLogin} from "../hooks/elementHooks/useLogin";
+import {routes} from "../routes/routes";
+import {Link} from "react-router-dom";
 
 export const Login = memo(function Login() {
     const {
@@ -22,7 +24,8 @@ export const Login = memo(function Login() {
         requested
     } = useLogin()
 
-    const {LoginHeader, LoginButton, EmailForm, EnterEmail, PasswordForm, EnterPassword, RememberMeForm} = lang
+    const {LoginHeader, LoginButton, EmailForm, EnterEmail,
+        PasswordForm, EnterPassword, RememberMeForm, HaveNotAccountForm, RegisterButton} = lang
 
     return (
         <div className='center'>
@@ -53,6 +56,8 @@ export const Login = memo(function Login() {
                 <p className='error-text'>{errorMessage}</p>
 
                 <Submit classes='success-button' label={requested ? <Loading/> : LoginButton}/>
+                <div className='gap'/>
+                <span className='text'>{HaveNotAccountForm} <Link className='link' to={routes.register}>{RegisterButton}</Link></span>
             </form>
         </div>
     )

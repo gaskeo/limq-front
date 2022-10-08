@@ -1,7 +1,7 @@
 import {dataStates} from "./consts";
 
 export interface User {
-    id: number | null,
+    id: string | null,
     username: string | null,
     email: string | null,
 }
@@ -13,7 +13,7 @@ interface userState {
 }
 
 const defaultState: userState = {
-    user: {id: 0, email: '', username: ''},
+    user: {id: null, email: null, username: null},
     userDataState: dataStates.notRequested
 }
 

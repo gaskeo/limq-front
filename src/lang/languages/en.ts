@@ -136,5 +136,8 @@ export const langDict: LangStruct = {
 
     YourPlanTextR: 'Тариф вашего аккаунта — {planName}. Про квоты и ограничения можете прочитать {docs}. ' +
         'Перейти на Pro версию можно по ссылке в источнике.',
-    InDocsLink: 'в документации'
+    InDocsLink: 'в документации',
+
+    HaveAccountForm: 'Already have account?',
+    HaveNotAccountForm: "Haven't account yet?"
 }

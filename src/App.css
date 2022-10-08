@@ -43,6 +43,8 @@
 
     --icon-color: #000000;
     --icon-hover-color: #6a6a6A;
+
+    --link-color: #1c79c0
 }
 
 [data-theme="dark"] {
@@ -89,6 +91,8 @@
 
     --icon-color: #F6FFF8;
     --icon-hover-color: #bfc0c0;
+
+    --link-color: #5290D3
 }
 
 body {
@@ -114,6 +118,8 @@ body {
     --main-font-family: 'Nunito', sans-serif;
     --code-font-family: 'Noto Sans Mono', monospace;;
     background-color: var(--background-color);
+
+    --link-color: #1c79c0
 }
 
 code {
@@ -165,7 +171,8 @@ a {
 }
 
 .link {
-    text-decoration: underline royalblue;
+    text-decoration: underline;
+    color: var(--link-color)
 }
 
 .no-wrap {
@@ -321,6 +328,7 @@ a {
 @media screen and (min-width: 601px) and (max-width: 800px) {
     .app-form {
         width: 64vw;
+        box-sizing: content-box;
     }
 
     .hide-800 {
@@ -338,8 +346,8 @@ a {
 
 @media screen and (min-width: 801px) {
     .app-form {
-        width: 64vw;
-        max-width: calc(500px + 4rem);
+        width: calc(500px + 4rem);
+        max-width: 50vw;
     }
 
     .settings-text {

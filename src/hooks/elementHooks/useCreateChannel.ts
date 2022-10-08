@@ -1,9 +1,12 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useActions} from "../useActions";
 import {useTypedSelector} from "../useTypedSelector";
 import {ApiRoutes} from "../../store/actionCreators/apiRoutes";
 import {dataStates} from "../../store/reducers/consts";
 import {getErrorDescription} from "../../lang/getServerErrorDescription";
+import {useDispatch} from "react-redux";
+import { PathActionTypes } from "../../store/reducers/pathReducer";
+import {routes} from "../../routes/routes";
 
 
 const maxChannelLength = 64
@@ -41,6 +44,15 @@ export function useCreateChannel() {
     const maxMessageSize = quota['max_message_size'] || 256
     const maxBufferedMessageCount = quota['max_bufferred_message_count'] || 256
     const maxBufferedDataPersistency = quota['buffered_data_persistency'] || 12
+
+    const {user, userDataState} = useTypedSelector(state => state.user)
+    const dispatch = useDispatch()
+    useEffect(() => {
+        if (userDataState === dataStates.received && user.id === '') {
+            dispatch({type: PathActionTypes.deletePath})
+            dispatch({type: PathActionTypes.setPath, payload: routes.login})
+        }
+    }, [user, userDataState])
 
     const [channelName, changeChannelName] = useState('')
     const [errors, changeErrors] = useState({name: ''})

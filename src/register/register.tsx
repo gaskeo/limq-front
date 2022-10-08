@@ -3,6 +3,8 @@ import {Input} from "../elements/inputs/input";
 import {Submit} from "../elements/inputs/submit";
 import {Loading} from "../elements/loading/loading";
 import {useRegister} from "../hooks/elementHooks/useRegister";
+import {routes} from "../routes/routes";
+import {Link} from "react-router-dom";
 
 
 export function Register() {
@@ -36,7 +38,7 @@ export function Register() {
         EnterPassword,
         PasswordAgainForm,
         EnterPasswordAgain,
-        RegisterButton
+        RegisterButton, LoginButton, HaveAccountForm
     } = lang
 
     return (
@@ -77,6 +79,8 @@ export function Register() {
                 <p className='error-text'>{errorMessage}</p>
 
                 <Submit classes='success-button' label={requested ? <Loading/> : RegisterButton}/>
+                <div className='gap'/>
+                <span className='text'>{HaveAccountForm} <Link className='link' to={routes.login}>{LoginButton}</Link></span>
             </form>
         </div>
     )

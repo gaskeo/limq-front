@@ -9,6 +9,9 @@ import {ApiRoutes} from "./apiRoutes";
 import {PathActionTypes} from "../reducers/pathReducer";
 import {routes} from "../../routes/routes";
 import {Quota, quotaAction, QuotaActionTypes} from "../reducers/quotaReducer";
+import {ChannelsActionTypes} from "../reducers/channelsReducer";
+import {KeyActionTypes} from "../reducers/keysReducer";
+import {MixinActionTypes} from "../reducers/mixinsReducer";
 
 export const fetchUser = () => {
     return async (dispatch: Dispatch<userAction | quotaAction>) => {
@@ -17,6 +20,8 @@ export const fetchUser = () => {
             if (response.data['auth']) {
                 dispatch({type: UserActionTypes.setUser, payload: response.data['user']})
                 dispatch({type: QuotaActionTypes.setQuota, payload: response.data['quota']})
+            } else {
+                dispatch({type: UserActionTypes.setUser, payload: {id: '', email: '', username: ''}})
             }
 
             dispatch({type: UserActionTypes.setUserDataState, payload: dataStates.received})
@@ -48,14 +53,18 @@ export const fetchLogin = (email: string, password: string, rememberMe: boolean)
             }
         })
 
-        axios.post<{ auth: boolean, user: User, path: string }>(ApiRoutes.Login, form, {
+        axios.post<{ auth: boolean, user: User, path: string, quota: Quota }>(ApiRoutes.Login, form, {
             headers: {"Content-Type": "multipart/form-data"},
         }).then(response => {
             if (response.data['auth']) {
                 dispatch({type: UserActionTypes.setUser, payload: response.data['user']})
+                dispatch({type: QuotaActionTypes.setQuota, payload: response.data['quota']})
+            } else {
+                dispatch({type: UserActionTypes.setUser, payload: {id: '', email: '', username: ''}})
             }
 
             dispatch({type: UserActionTypes.setUserDataState, payload: dataStates.received})
+            dispatch({type: QuotaActionTypes.setQuotaDataState, payload: dataStates.received})
 
             dispatch({type: PathActionTypes.deletePath})
             dispatch({type: PathActionTypes.setPath, payload: response.data['path']})
@@ -279,9 +288,18 @@ export const fetchLogout = () => {
 
             if (!response.data['auth']) {
                 dispatch({type: UserActionTypes.deleteUser})
+                dispatch({type: UserActionTypes.setUserDataState, payload: dataStates.notRequested})
+                dispatch({type: ChannelsActionTypes.setChannels, payload: []})
+                dispatch({type: ChannelsActionTypes.setChannelsDataState, payload: dataStates.notRequested})
+                dispatch({type: QuotaActionTypes.deleteQuota})
+                dispatch({type: QuotaActionTypes.setQuotaDataState, payload: dataStates.notRequested})
+                dispatch({type: KeyActionTypes.deleteAllKeys})
+                dispatch({type: MixinActionTypes.deleteAllMixins})
+
             }
 
             dispatch({type: PathActionTypes.setPath, payload: routes.index})
+            dispatch({type: PathActionTypes.deletePath})
         } catch (error: AxiosError | any) {
             console.log(error.message)
             dispatch({type: UserActionTypes.setUserDataState, payload: dataStates.error})

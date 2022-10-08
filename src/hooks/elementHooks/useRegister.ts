@@ -1,9 +1,12 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useActions} from "../useActions";
 import {useTypedSelector} from "../useTypedSelector";
 import {ApiRoutes} from "../../store/actionCreators/apiRoutes";
 import {dataStates} from "../../store/reducers/consts";
 import {getErrorDescription} from "../../lang/getServerErrorDescription";
+import {useDispatch} from "react-redux";
+import {PathActionTypes} from "../../store/reducers/pathReducer";
+import {routes} from "../../routes/routes";
 
 export function confirmEmail(email: string): boolean {
     if (!email.includes("@") || !email.includes(".")) {
@@ -74,6 +77,14 @@ export function useRegister() {
 
     const {fetchRegister} = useActions()
 
+    const {user, userDataState} = useTypedSelector(state => state.user)
+    const dispatch = useDispatch()
+    useEffect(() => {
+        if (user.id && user.id.length > 0) {
+            dispatch({type: PathActionTypes.setPath, payload: routes.index})
+        }
+    }, [user, userDataState])
+
     const [email, changeEmail] = useState('');
     const [username, changeUsername] = useState('');
     const [password, changePassword] = useState('')
@@ -89,6 +100,7 @@ export function useRegister() {
     const errorMessage = hasError ? getErrorDescription(lang, registerState.code) : ''
 
     return {
+        user, userDataState,
         submit,
         email,
         lang,

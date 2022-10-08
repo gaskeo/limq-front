@@ -13,10 +13,12 @@ import {ChannelSettings} from "./channelSettings/channelSettings";
 import {UserSettings} from "./userSettings/userSettings";
 import {MainSettings} from "./settings/settings";
 import {useApp} from "./hooks/elementHooks/useApp";
+import {dataStates} from "./store/reducers/consts";
+import {LoadingScreen} from "./elements/loading/loadingScreen";
 
 
 function App() {
-    const {checkRedirect, fetchChannelsFunc, fetchUserFunc, setLang} = useApp()
+    const {checkRedirect, fetchChannelsFunc, fetchUserFunc, setLang, user, userDataState} = useApp()
 
     useEffect(() => {
         fetchUserFunc()
@@ -25,6 +27,8 @@ function App() {
     })
 
     useEffect(checkRedirect)
+
+    if (userDataState === dataStates.requested && user.id === null) return <LoadingScreen/>
 
     return (
         <>

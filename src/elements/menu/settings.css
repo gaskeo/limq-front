@@ -116,6 +116,15 @@
         width: 60%;
         max-width: 800px;
     }
+
+    .settings-block {
+        max-width: calc(500px + 4rem);
+    }
+
+    .settings-block .app-form {
+        max-width: calc(500px + 4rem);
+
+    }
 }
 
 .menu-horizontal {

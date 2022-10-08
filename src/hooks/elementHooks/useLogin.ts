@@ -1,10 +1,13 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useActions} from "../useActions";
 import {useTypedSelector} from "../useTypedSelector";
 import {ApiRoutes} from "../../store/actionCreators/apiRoutes";
 import {dataStates} from "../../store/reducers/consts";
 import {checkPasswordLength, confirmEmail} from "./useRegister";
 import {getErrorDescription} from "../../lang/getServerErrorDescription";
+import {useDispatch} from "react-redux";
+import {PathActionTypes} from "../../store/reducers/pathReducer";
+import {routes} from "../../routes/routes";
 
 export function useLogin() {
     function submit(event: React.FormEvent<HTMLFormElement>) {
@@ -36,6 +39,16 @@ export function useLogin() {
     }
 
     const {fetchLogin} = useActions()
+    const {user, userDataState} = useTypedSelector(state => state.user)
+
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        if (user.id) {
+            dispatch({type: PathActionTypes.deletePath})
+            dispatch({type: PathActionTypes.setPath, payload: routes.index})
+        }
+    }, [user, userDataState])
 
     const [email, changeEmail] = useState('');
     const [password, changePassword] = useState('')
@@ -51,6 +64,8 @@ export function useLogin() {
     const errorMessage = hasError ? getErrorDescription(lang, loginState.code) : ''
 
     return {
+        user,
+        userDataState,
         submit,
         lang,
         email,

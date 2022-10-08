@@ -27,7 +27,6 @@ export function useApp() {
             dispatch({type: FetchActionTypes.deleteFetches})
             Redirect(path, navigate, location)
             dispatch({type: PathActionTypes.deletePath})
-
         }
     }
 
@@ -52,5 +51,5 @@ export function useApp() {
     const navigate = useNavigate();
     const location = useLocation();
 
-    return {pathId, fetchUserFunc, fetchChannelsFunc, checkRedirect, setLang}
+    return {pathId, fetchUserFunc, fetchChannelsFunc, checkRedirect, setLang, user, userDataState}
 }

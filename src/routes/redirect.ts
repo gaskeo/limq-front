@@ -4,7 +4,7 @@ import {routes} from "./routes";
 
 type NeedRedirect = true | false;
 
-export function Redirect(path: string, navigate: NavigateFunction, location: Location):NeedRedirect {
+export function Redirect(path: string, navigate: NavigateFunction, location: Location): NeedRedirect {
     if (!Object.values(routes).includes(path)) {
         return false
     }

@@ -31,8 +31,13 @@
     font-family: var(--main-font-family);
 }
 
-.right {
+.text-right {
     text-align: right;
+}
+
+.right {
+    display: flex;
+    justify-content: right;
 }
 
 .inline {

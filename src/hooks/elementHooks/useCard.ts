@@ -9,7 +9,7 @@ import {MixinTypeStates} from "../../store/reducers/mixinsReducer";
 import {RefObject} from "react";
 
 function copyText(text: string) {
-    navigator.clipboard.writeText(text)
+    return navigator.clipboard.writeText(text)
 }
 
 export function useChannelCard(channel: Channel) {

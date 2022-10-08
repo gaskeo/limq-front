@@ -3,7 +3,7 @@ import {EmailBlock} from "../../userSettings/blocks/emailBlock";
 import {PasswordBlock} from "../../userSettings/blocks/passwordBlock";
 import {useSearchParams} from "react-router-dom";
 import {useTypedSelector} from "../useTypedSelector";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {checkPasswordLength, checkPasswordsMatch, confirmEmail} from "./useRegister";
 import {useActions} from "../useActions";
 import {ApiRoutes} from "../../store/actionCreators/apiRoutes";
@@ -13,6 +13,8 @@ import {getErrorDescription} from "../../lang/getServerErrorDescription";
 import {QuotasBlock} from "../../userSettings/blocks/quotasBlock";
 import {menuInner} from "../../elements/menu/menu";
 import {routes} from "../../routes/routes";
+import {useDispatch} from "react-redux";
+import {PathActionTypes} from "../../store/reducers/pathReducer";
 
 
 const menuTabs = (names: { changeName: menuInner, changeEmail: menuInner, changePassword: menuInner, myQuotas: menuInner }, accountType='') => [
@@ -63,6 +65,15 @@ export function useUserSettings() {
             changeSearchParams({[params.tab]: tab})
         }
     }
+
+    const {user, userDataState} = useTypedSelector(state => state.user)
+    const dispatch = useDispatch()
+    useEffect(() => {
+        if (userDataState === dataStates.received && user.id === '') {
+            dispatch({type: PathActionTypes.deletePath})
+            dispatch({type: PathActionTypes.setPath, payload: routes.login})
+        }
+    }, [user, userDataState])
 
     const [searchParams, changeSearchParams] = useSearchParams()
     const {lang} = useTypedSelector(state => state.lang)

@@ -22,7 +22,7 @@ export function BaseBody() {
                 </div>
             </div>
 
-            <div className='register-main-window'><Register/></div>
+            <div className='register-main-window right width-100'><Register/></div>
         </div>
     )
 }

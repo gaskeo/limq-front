@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useActions} from "../useActions";
 import {useTypedSelector} from "../useTypedSelector";
 import {useParams, useSearchParams} from "react-router-dom";
@@ -11,6 +11,9 @@ import {MixinsContainer} from "../../channelSettings/blocks/mixinsContainer";
 import {MainSettingsBlock} from "../../channelSettings/blocks/mainSettingsBlock";
 import {MixinsSettingsBlock} from "../../channelSettings/blocks/mixinsSettingsBlock";
 import {getErrorDescription} from "../../lang/getServerErrorDescription";
+import {useDispatch} from "react-redux";
+import {PathActionTypes} from "../../store/reducers/pathReducer";
+import {routes} from "../../routes/routes";
 
 const params = {
     tab: 'tab',
@@ -325,7 +328,14 @@ export function useChannelSettings() {
         keys: lang.ChannelSettingsMenuKeys, mixins: lang.ChannelSettingsMenuMixins
     })
 
-
+    const {user, userDataState} = useTypedSelector(state => state.user)
+    const dispatch = useDispatch()
+    useEffect(() => {
+        if (userDataState === dataStates.received && user.id === '') {
+            dispatch({type: PathActionTypes.deletePath})
+            dispatch({type: PathActionTypes.setPath, payload: routes.login})
+        }
+    }, [user, userDataState])
     const {keysData} = useTypedSelector(state => state.keys)
     const {mixinsData} = useTypedSelector(state => state.mixins)
     const activeTab = searchParams.get(params.tab) || ''

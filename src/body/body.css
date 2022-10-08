@@ -3,6 +3,8 @@
     grid-template-columns: 4fr 2fr;
     gap: 1rem;
     grid-template-areas: "A B";
+    justify-content: space-between;
+    max-width: calc(2 * (500px + 4rem) + 2rem);
 }
 
 .body-image {
@@ -56,6 +58,5 @@
 
     .register-main-window {
         max-width: 1000px;
-        width: 50vw;
     }
 }

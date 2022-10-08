@@ -4,6 +4,7 @@ import {RegisterBody} from "./registerBody";
 import {BaseBody} from "./baseBody";
 import './body.css';
 import './channelCard/card.css'
+import {LoadingScreen} from "../elements/loading/loadingScreen";
 
 export function Body() {
     const {user, userDataState} = useTypedSelector(state => state.user)
@@ -11,6 +12,10 @@ export function Body() {
 
     if (userDataState === dataStates.error) {
         return <div>{lang.SomethingWentWrongError}</div>
+    }
+
+    if (userDataState === dataStates.requested) {
+        return <LoadingScreen/>
     }
 
     if (userDataState === dataStates.received && user.id) {

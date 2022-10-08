@@ -1,7 +1,7 @@
 import React from 'react'
 import {dataStates} from "../store/reducers/consts";
 import {routes} from "../routes/routes";
-import {Link} from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 import {User} from "../svg/user";
 import {Settings} from "../svg/settings";
 import {useHeader, useUserButton} from "../hooks/elementHooks/useHeader";
@@ -27,15 +27,35 @@ function UserButton() {
     )
 }
 
+function LoginOrRegisterButton({LoginButton, RegisterButton, onClick}: {
+    LoginButton: string,
+    RegisterButton: string, onClick: (path: string) => () => void
+}) {
+    const location = useLocation()
+    let route, text;
+    if (location.pathname !== routes.login) {
+        route = routes.login
+        text = LoginButton
+    } else {
+        route = routes.register
+        text = RegisterButton
+    }
+    return (
+        <button className='header-element' onClick={onClick(route)}>
+            {text}
+        </button>
+    )
+}
+
 export function Header() {
     const {onClick, user, userDataState, lang, headerImage} = useHeader()
 
-    const {LoginButton} = lang
+    const {LoginButton, RegisterButton} = lang
     const renderUserButton = userDataState === dataStates.received && user.id
     return (
         <header className="app-header">
             <Link to={routes.index} className='lithium-container'>
-                    <img alt='LiMQ' src={headerImage}/>
+                <img alt='LiMQ' src={headerImage}/>
             </Link>
             <div>
                 <div className='horizontal'>
@@ -45,10 +65,12 @@ export function Header() {
                     </Link>
 
                     {
-                        renderUserButton ? <UserButton/> :
-                            <button className='header-element' onClick={onClick(routes.login)}>
-                                {LoginButton}
-                            </button>
+                        renderUserButton ?
+                            <UserButton/> :
+                            <LoginOrRegisterButton LoginButton={LoginButton}
+                                                   RegisterButton={RegisterButton}
+                                                   onClick={onClick}/>
+
                     }
                 </div>
             </div>

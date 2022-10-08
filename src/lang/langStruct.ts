@@ -133,6 +133,9 @@ export interface LangStruct {
     ProMenu: string
     YourPlanTextR: string
     InDocsLink: string
+
+    HaveAccountForm: string
+    HaveNotAccountForm: string
 }
 
 export const defaultLangValue: LangStruct = {
@@ -269,5 +272,8 @@ export const defaultLangValue: LangStruct = {
     FreeMenu: 'FreeMenu',
     ProMenu: 'ProMenu',
     YourPlanTextR: 'YourPlanTextR',
-    InDocsLink: 'InDocsLink'
+    InDocsLink: 'InDocsLink',
+
+    HaveAccountForm: 'HaveAccountForm',
+    HaveNotAccountForm: 'HaveNotAccountForm'
 }
