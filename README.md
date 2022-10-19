@@ -1,6 +1,6 @@
 # LiMQ panel frontend repo
 
-This is a React repository containing all the frontend assets for the LiMQ panel.
+This is a React repository containing all the frontend assets for the [LiMQ panel](https://github.com/gaskeo/limq-panel).
 
 Another assets for LiMQ are: [LiMQ core api](https://github.com/emmitrin/limq), [LiMQ panel](https://github.com/gaskeo/limq-panel)
 
