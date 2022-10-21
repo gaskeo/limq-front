@@ -136,6 +136,9 @@ export interface LangStruct {
 
     HaveAccountForm: string
     HaveNotAccountForm: string
+
+    GetMore: string
+    UsingNOfMChannels2R: string
 }
 
 export const defaultLangValue: LangStruct = {
@@ -275,5 +278,8 @@ export const defaultLangValue: LangStruct = {
     InDocsLink: 'InDocsLink',
 
     HaveAccountForm: 'HaveAccountForm',
-    HaveNotAccountForm: 'HaveNotAccountForm'
+    HaveNotAccountForm: 'HaveNotAccountForm',
+
+    GetMore: 'GetMore',
+    UsingNOfMChannels2R: 'UsingNOfMChannels'
 }

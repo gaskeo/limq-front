@@ -2,23 +2,36 @@ import {Plus} from "../../svg/plus";
 import {routes} from "../../routes/routes";
 import {Link} from "react-router-dom";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
-import {Badge} from "../../elements/badge/badge";
 
 
 interface CreateChannelCardProps {
-    leftChannels: number
+    usedChannels: number
+    availableChannels: number
 }
 
-export function CreateChannelCard({leftChannels}: CreateChannelCardProps) {
+export function CreateChannelCard({usedChannels, availableChannels}: CreateChannelCardProps) {
     const {lang} = useTypedSelector(state => state.lang)
-    if (leftChannels > 0) {
+    if (usedChannels < availableChannels) {
         return (
             <Link to={routes.addChannel} className='card add-channel-card'>
-                <div className='add-channel-card-text'>
-                    <span className='channel-card-add-icon'><Plus/></span>
-                    <h1 className='card-header'>{lang.CreateChannelButton}</h1>
-                    <Badge classes={(leftChannels > 0 ? 'success-button' : 'error-button') +
-                    ' margin-left-4px margin-bottom-4px cursor'}>{leftChannels}</Badge>
+                <div className='flex-column height-100'>
+                    <div className='add-channel-card-text width-100 center'>
+                        <span className='channel-card-add-icon'><Plus/></span>
+                        <h1 className='card-header'>{lang.CreateChannelButton}</h1>
+                        <div className=''/>
+
+                    </div>
+                    <div className='text width-100 center'>
+                        <span>
+                        {lang.UsingNOfMChannels2R.replace('{N}', usedChannels.toString())
+                            .replace('{M}', availableChannels.toString())}
+                        </span>.&nbsp;
+                        <a onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            window.location.href = routes.apiDocsQuotas
+                        }} className='link' href={routes.apiDocsQuotas}>{lang.GetMore}</a>
+                    </div>
                 </div>
             </Link>
         )

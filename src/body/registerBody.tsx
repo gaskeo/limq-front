@@ -5,7 +5,7 @@ import {dataStates} from "../store/reducers/consts";
 import {useChannels} from "../hooks/elementHooks/useChannels";
 
 export function RegisterBody() {
-    const {lang, reversedChannels, channels, channelsDataState, leftChannels} = useChannels()
+    const {lang, reversedChannels, channels, channelsDataState, availableChannels, usedChannels} = useChannels()
 
     return (
         <div>
@@ -13,7 +13,8 @@ export function RegisterBody() {
             <div className='card-container'>
                 {channelsDataState === dataStates.requested && <LoadingChannelCard/>}
                 {channels && reversedChannels.map(channel => <ChannelCard key={channel['channel_id']} channel={channel}/>)}
-                <CreateChannelCard leftChannels={leftChannels}/>
+                {channelsDataState === dataStates.received
+                && <CreateChannelCard availableChannels={availableChannels} usedChannels={usedChannels}/>}
             </div>
         </div>
     )

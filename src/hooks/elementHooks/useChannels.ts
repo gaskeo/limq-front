@@ -4,11 +4,12 @@ export function useChannels() {
     const {channels, channelsDataState} = useTypedSelector(state => state.channels)
     const {lang} = useTypedSelector(state => state.lang)
     const {quota} = useTypedSelector(state => state.quota)
-    let leftChannels = 0;
+    let availableChannels = 0;
 
     if (quota?.name && quota['max_channel_count']) {
-        leftChannels = quota['max_channel_count'] - (channels.length ? channels.length : 0)
+        availableChannels = quota['max_channel_count']
     }
     const reversedChannels = [...channels].reverse()
-    return {lang, reversedChannels, channels, channelsDataState, leftChannels}
+    let usedChannels = channels.length
+    return {lang, reversedChannels, channels, channelsDataState, availableChannels, usedChannels}
 }

@@ -135,3 +135,9 @@
 .small-horizontal-gap {
     width: .5rem;
 }
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}

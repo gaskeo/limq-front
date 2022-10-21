@@ -138,5 +138,8 @@ export const langDict: LangStruct = {
     InDocsLink: 'в документации',
 
     HaveAccountForm: 'Уже есть аккаунт?',
-    HaveNotAccountForm: 'Ещё нет аккаунта?'
+    HaveNotAccountForm: 'Ещё нет аккаунта?',
+
+    GetMore: 'Увеличить лимит',
+    UsingNOfMChannels2R: "Использован {N} из {M} каналов"
 }

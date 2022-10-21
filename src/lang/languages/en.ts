@@ -127,7 +127,6 @@ export const langDict: LangStruct = {
     LearnMoreButton: 'Learn more',
     TrySandbox: 'Try out our web sandbox',
 
-
     Free: 'free',
     Pro: 'Pro',
 
@@ -139,5 +138,7 @@ export const langDict: LangStruct = {
     InDocsLink: 'в документации',
 
     HaveAccountForm: 'Already have account?',
-    HaveNotAccountForm: "Haven't account yet?"
+    HaveNotAccountForm: "Haven't account yet?",
+    GetMore: 'Get more',
+    UsingNOfMChannels2R: 'Using {N} of {M} channels'
 }
