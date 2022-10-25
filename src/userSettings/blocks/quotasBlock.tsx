@@ -6,7 +6,7 @@ export function QuotasBlock() {
 
     return (
         <div>
-            <span className='text settings-text'>{mainText}</span>
+            <span style={{whiteSpace: 'pre-wrap'}} className='text settings-text'>{mainText}</span>
         </div>
     )
 }
