@@ -19,12 +19,15 @@ export function CreateChannel() {
         requested, bufferization, changeBufferization,
         maxBufferedMessageCount, bufferedDataPersistency, changeBufferedDataPersistency,
         endToEndDataEncryption, changeEndToEndDataEncryption, maxMessageSize,
-        maxBufferedDataPersistency, messageSizeKb, bufferedMessageCount, changeMessageSizeKb, changeBufferedMessageCount
+        maxBufferedDataPersistency, messageSizeKb, bufferedMessageCount, changeMessageSizeKb,
+        changeBufferedMessageCount, changeNotBufferMixins, notBufferMixins
     } = useCreateChannel()
 
-    const {CreateChannelButton, CreateChannelHeader, ChannelNameForm, EnterChannelName,
+    const {
+        CreateChannelButton, CreateChannelHeader, ChannelNameForm, EnterChannelName,
         MaxMessageSizeForm, NeedBufferizationForm, MaxBufferedMessageCount, BufferedDataPersistencyForm,
-        EndToEndDataEncryptionForm, UpToPlaceholderR} = lang
+        EndToEndDataEncryptionForm, UpToPlaceholderR, NotBufferMixins
+    } = lang
 
 
     return (
@@ -72,7 +75,16 @@ export function CreateChannel() {
                 </div>
 
                 <p className='error-text'/>
-                <div className='max-width-500 align-left width-100 height-120 half-opacity horizontal na-cursor no-display'>
+
+                <div className='max-width-500 align-left width-100 height-120'>
+                    <Checkbox label={NotBufferMixins} state={notBufferMixins && bufferization}
+                              setState={changeNotBufferMixins}
+                              active={bufferization}/>
+                </div>
+                <p className='error-text'/>
+
+                <div
+                    className='max-width-500 align-left width-100 height-120 half-opacity horizontal na-cursor no-display'>
                     <Checkbox label={EndToEndDataEncryptionForm} state={endToEndDataEncryption && false} active={false}
                               setState={changeEndToEndDataEncryption}/>
                 </div>

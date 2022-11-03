@@ -25,9 +25,9 @@ export function Checkbox({label, onChange, state, setState, active}: checkboxPro
 
     return (
         <>
-            <div className={`checkbox-container ${!checkboxActive && 'input-label-inactive'}`} onClick={_onChange()}>
+            <div className={`checkbox-container ${!checkboxActive && 'input-label-inactive half-opacity'}`} onClick={_onChange()}>
                 <div className={`checkbox ${state ? 'checkbox-checked' : ''}`}/>
-                <span className='input-label'>{label}</span>
+                <span className={`input-label ${!checkboxActive && 'input-label-inactive'}`}>{label}</span>
             </div>
 
         </>

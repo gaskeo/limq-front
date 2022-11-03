@@ -22,6 +22,7 @@ export const langDict: LangStruct = {
     NeedBufferizationForm: 'Enable bufferization',
     MaxBufferedMessageCount: 'Max  messages stored in the buffer',
     BufferedDataPersistencyForm: 'Buffered message TTL (hours)',
+    NotBufferMixins: "Don't buffer mixins",
     EndToEndDataEncryptionForm: 'End-to-end data encryption',
     UpToPlaceholderR: 'Up to {count}',
     ChannelNameTooLong: "Channel name is too long",
@@ -140,5 +141,6 @@ export const langDict: LangStruct = {
     HaveAccountForm: 'Already have account?',
     HaveNotAccountForm: "Haven't account yet?",
     GetMore: 'Get more',
-    UsingNOfMChannels2R: 'Using {N} of {M} channels'
+    UsingNOfMChannels2R: 'Using {N} of {M} channels',
+    UpgradeYourPlan: "Upgrade your plan"
 }

@@ -20,6 +20,7 @@ export interface LangStruct {
     NeedBufferizationForm: string
     MaxBufferedMessageCount: string
     BufferedDataPersistencyForm: string
+    NotBufferMixins: string
     EndToEndDataEncryptionForm: string
     UpToPlaceholderR: string
     ChannelNameTooLong: string
@@ -139,6 +140,7 @@ export interface LangStruct {
 
     GetMore: string
     UsingNOfMChannels2R: string
+    UpgradeYourPlan: string
 }
 
 export const defaultLangValue: LangStruct = {
@@ -163,6 +165,7 @@ export const defaultLangValue: LangStruct = {
     NeedBufferizationForm: 'NeedBufferizationForm',
     MaxBufferedMessageCount: 'MaxBufferedMessageCount',
     BufferedDataPersistencyForm: 'BufferedDataPersistencyForm',
+    NotBufferMixins: 'NotBufferMixins',
     EndToEndDataEncryptionForm: 'EndToEndDataEncryptionForm',
     UpToPlaceholderR: 'UpToPlaceholderR',
     ChannelNameTooLong: 'ChannelNameTooLong',
@@ -281,5 +284,6 @@ export const defaultLangValue: LangStruct = {
     HaveNotAccountForm: 'HaveNotAccountForm',
 
     GetMore: 'GetMore',
-    UsingNOfMChannels2R: 'UsingNOfMChannels'
+    UsingNOfMChannels2R: 'UsingNOfMChannels',
+    UpgradeYourPlan: 'UpgradeYourPlan'
 }

@@ -22,6 +22,7 @@ export const langDict: LangStruct = {
     NeedBufferizationForm: 'Включить буферизацию',
     MaxBufferedMessageCount: 'Максимальное число сообщений в буфере',
     BufferedDataPersistencyForm: 'TTL сообщения (в часах)',
+    NotBufferMixins: 'Не буферизировать миксины',
     EndToEndDataEncryptionForm: 'End-to-end шифрование',
     UpToPlaceholderR: 'До {count}',
     ChannelNameTooLong: 'Название канала слишком длинное',
@@ -141,5 +142,6 @@ export const langDict: LangStruct = {
     HaveNotAccountForm: 'Ещё нет аккаунта?',
 
     GetMore: 'Увеличить лимит',
-    UsingNOfMChannels2R: "Использован {N} из {M} каналов"
+    UsingNOfMChannels2R: "Использован {N} из {M} каналов",
+    UpgradeYourPlan: "Перейти на Pro"
 }

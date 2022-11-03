@@ -27,7 +27,7 @@ export function useCreateChannel() {
         }
 
         fetchCreateChannel(channelName, messageSizeKb, bufferization, bufferedMessageCount,
-            bufferedDataPersistency, endToEndDataEncryption && false)
+            bufferedDataPersistency, notBufferMixins, endToEndDataEncryption && false)
     }
 
     function checkChannelName(name: string) {
@@ -61,6 +61,7 @@ export function useCreateChannel() {
     const [bufferization, changeBufferization] = useState(true);
     const [bufferedMessageCount, changeBufferedMessageCount] = useState(maxBufferedMessageCount)
     const [bufferedDataPersistency, changeBufferedDataPersistency] = useState(maxBufferedDataPersistency)
+    const [notBufferMixins, changeNotBufferMixins] = useState(false)
     const [endToEndDataEncryption, changeEndToEndDataEncryption] = useState(true)
 
     const {states} = useTypedSelector(state => state.fetch)
@@ -91,6 +92,8 @@ export function useCreateChannel() {
         changeEndToEndDataEncryption,
         maxBufferedMessageCount,
         maxMessageSize,
-        maxBufferedDataPersistency
+        maxBufferedDataPersistency,
+        notBufferMixins,
+        changeNotBufferMixins
     }
 }

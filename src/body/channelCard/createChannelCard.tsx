@@ -41,7 +41,7 @@ export function CreateChannelCard({usedChannels, availableChannels}: CreateChann
             <div className='upgrade-plan-card-content'>
                 <span className='text center-text'>{lang.ChannelLimitOver}</span>
                 <div className='gap'/>
-                <button className='button mini-button success-button'>Upgrade your plan</button>
+                <button className='button mini-button success-button'>{lang.UpgradeYourPlan}</button>
             </div>
 
         </Link>
